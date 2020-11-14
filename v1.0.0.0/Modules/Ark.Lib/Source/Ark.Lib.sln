@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30711.63
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ark.Lib", "Ark.Lib\Ark.Lib\Ark.Lib.csproj", "{284E9AED-3004-41AF-8854-2C993FC3064F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ark.Lib.Server", "Ark.Lib.Server\Ark.Lib.Server\Ark.Lib.Server.csproj", "{43AD3F16-B828-43E3-9CF1-388078602E72}"
+	ProjectSection(ProjectDependencies) = postProject
+		{284E9AED-3004-41AF-8854-2C993FC3064F} = {284E9AED-3004-41AF-8854-2C993FC3064F}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ark.Lib.Service", "Ark.Lib.Service\Ark.Lib.Service\Ark.Lib.Service.csproj", "{62A0D179-4F75-4E08-95EB-C81EBDE7BA86}"
+	ProjectSection(ProjectDependencies) = postProject
+		{284E9AED-3004-41AF-8854-2C993FC3064F} = {284E9AED-3004-41AF-8854-2C993FC3064F}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ark.Lib", "Ark.Lib", "{AE3769C2-4812-4FA9-997C-B4D0CA7BCF5E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ark.Lib.Server", "Ark.Lib.Server", "{27F8CD42-F02F-4FCF-93D2-C4C2D5759761}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ark.Lib.Service", "Ark.Lib.Service", "{D5DF00C0-D9CB-4C91-AA86-F33A43ED2106}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{284E9AED-3004-41AF-8854-2C993FC3064F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{284E9AED-3004-41AF-8854-2C993FC3064F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{284E9AED-3004-41AF-8854-2C993FC3064F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{284E9AED-3004-41AF-8854-2C993FC3064F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43AD3F16-B828-43E3-9CF1-388078602E72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43AD3F16-B828-43E3-9CF1-388078602E72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43AD3F16-B828-43E3-9CF1-388078602E72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43AD3F16-B828-43E3-9CF1-388078602E72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62A0D179-4F75-4E08-95EB-C81EBDE7BA86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62A0D179-4F75-4E08-95EB-C81EBDE7BA86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62A0D179-4F75-4E08-95EB-C81EBDE7BA86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62A0D179-4F75-4E08-95EB-C81EBDE7BA86}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{284E9AED-3004-41AF-8854-2C993FC3064F} = {AE3769C2-4812-4FA9-997C-B4D0CA7BCF5E}
+		{43AD3F16-B828-43E3-9CF1-388078602E72} = {27F8CD42-F02F-4FCF-93D2-C4C2D5759761}
+		{62A0D179-4F75-4E08-95EB-C81EBDE7BA86} = {D5DF00C0-D9CB-4C91-AA86-F33A43ED2106}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {79495E35-60E3-45DE-AC19-BB32BBBF82A4}
+	EndGlobalSection
+EndGlobal
