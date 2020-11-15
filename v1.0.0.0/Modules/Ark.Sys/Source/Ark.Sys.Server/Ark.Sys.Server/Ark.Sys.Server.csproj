@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Version>1.0.0.0</Version>
+    <Authors>Isaac Bezerra Saraiva</Authors>
+    <Product>Ark</Product>
+    <Description>Ark System Server</Description>
+    <Copyright>Copyleft (ͻ) 2021</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RepositoryUrl>https://github.com/isaacbezerrasaraiva/Ark</RepositoryUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageOutputPath>$(SolutionDir)..\..\..\Release\.nupkg\</PackageOutputPath>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="appsettings.Development.json" />
+    <Content Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\..\..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="appsettings.Development.json" />
+    <None Include="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ark.Fts" Version="1.0.0" />
+    <PackageReference Include="Ark.Fts.Data" Version="1.0.0" />
+    <PackageReference Include="Ark.Fts.IServer" Version="1.0.0" />
+    <PackageReference Include="Ark.Fts.IService" Version="1.0.0" />
+    <PackageReference Include="Ark.Fts.Server" Version="1.0.0" />
+    <PackageReference Include="Ark.Fwk" Version="1.0.0" />
+    <PackageReference Include="Ark.Fwk.Data" Version="1.0.0" />
+    <PackageReference Include="Ark.Fwk.IServer" Version="1.0.0" />
+    <PackageReference Include="Ark.Fwk.IService" Version="1.0.0" />
+    <PackageReference Include="Ark.Fwk.Server" Version="1.0.0" />
+    <PackageReference Include="Ark.Lib" Version="1.0.0" />
+    <PackageReference Include="Ark.Lib.Server" Version="1.0.0" />
+    <PackageReference Include="Ark.Sys" Version="1.0.0" />
+    <PackageReference Include="Ark.Sys.Data" Version="1.0.0" />
+    <PackageReference Include="Ark.Sys.IServer" Version="1.0.0" />
+    <PackageReference Include="Ark.Sys.IService" Version="1.0.0" />
+    <PackageReference Include="Lazy" Version="1.0.0" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
+    <PostBuildEvent>copy $(SolutionDir)Ark.Sys.Server\Ark.Sys.Server\bin\Debug\netcoreapp3.1\Ark.Sys.Server.dll $(SolutionDir)..\..\..\Release\Bin\</PostBuildEvent>
+  </PropertyGroup>
+
+</Project>
