@@ -37,6 +37,7 @@
     <PackageReference Include="Ark.Lib" Version="1.0.0" />
     <PackageReference Include="Ark.Lib.Server" Version="1.0.0" />
     <PackageReference Include="Lazy" Version="1.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
