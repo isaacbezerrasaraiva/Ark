@@ -15,6 +15,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="LibDynamicXmlAttribute.cs~RF177d3921.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="..\..\..\..\..\..\LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
