@@ -18,6 +18,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+using Lazy;
+
+using Ark.Lib;
+using Ark.Lib.Server;
+
 namespace Ark.Server
 {
     public class Startup
@@ -38,6 +43,12 @@ namespace Ark.Server
             String[] arkServerAssemblyArray = Directory.GetFiles(".\\Bin\\", "*.Server.dll", SearchOption.AllDirectories);
             foreach (String arkServerAssembly in arkServerAssemblyArray)
                 iMvcBuilder.AddApplicationPart(Assembly.LoadFrom(arkServerAssembly));
+
+            // Add global authorization request
+            services.AddMvc(options => { options.Filters.Add(typeof(LibServerAuthorization)); });
+
+            // Add cors default policy
+            services.AddCors(options => { options.AddDefaultPolicy(builder => { }); });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +62,15 @@ namespace Ark.Server
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            // Add Cors to the pipeline
+            app.UseMiddleware<LibServerCors>();
+
+            // Add authentication to the pipeline
+            app.UseMiddleware<LibServerAuthentication>();
+
+            // Enabled cors
+            app.UseCors();
 
             app.UseAuthorization();
 
