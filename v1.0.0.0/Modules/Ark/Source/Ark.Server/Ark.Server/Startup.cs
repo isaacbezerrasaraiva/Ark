@@ -63,8 +63,8 @@ namespace Ark.Server
 
             app.UseRouting();
 
-            // Add Cors to the pipeline
-            app.UseMiddleware<LibServerCors>();
+            // Add Preflight to the pipeline
+            app.UseMiddleware<LibServerPreflight>();
 
             // Add authentication to the pipeline
             app.UseMiddleware<LibServerAuthentication>();
