@@ -1,4 +1,4 @@
-﻿// ILibServerCors.cs
+﻿// ILibServerPreflight.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
@@ -18,7 +18,7 @@ using Ark.Lib;
 
 namespace Ark.Lib.Server
 {
-    public interface ILibServerCors
+    public interface ILibServerPreflight
     {
         void Preflight(HttpContext context);
     }
