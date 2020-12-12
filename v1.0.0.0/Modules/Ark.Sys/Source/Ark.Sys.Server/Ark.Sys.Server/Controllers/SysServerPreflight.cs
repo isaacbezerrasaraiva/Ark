@@ -1,4 +1,4 @@
-﻿// SysServerCors.cs
+﻿// SysServerPreflight.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
@@ -38,14 +38,14 @@ namespace Ark.Sys.Server
 {
     [ApiController]
     [Route("[controller]")]
-    public class SysServerCors : FwkServer, ISysServerCors, ILibServerCors
+    public class SysServerPreflight : FwkServer, ISysServerPreflight, ILibServerPreflight
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public SysServerCors()
+        public SysServerPreflight()
         {
         }
 
@@ -59,11 +59,11 @@ namespace Ark.Sys.Server
         /// <param name="context">The request context</param>
         public void Preflight(HttpContext context)
         {
-            SysDataCorsRequest dataCorsRequest = new SysDataCorsRequest();
+            SysDataPreflightRequest dataPreflightRequest = new SysDataPreflightRequest();
 
-            SysDataCorsResponse dataCorsResponse = (SysDataCorsResponse)InvokeService("Preflight", dataCorsRequest);
+            SysDataPreflightResponse dataPreflightResponse = (SysDataPreflightResponse)InvokeService("Preflight", dataPreflightRequest);
 
-            foreach (KeyValuePair<String, String> header in dataCorsResponse.PreflightResponse.Headers)
+            foreach (KeyValuePair<String, String> header in dataPreflightResponse.Headers)
                 context.Response.Headers.Add(header.Key, header.Value);
 
             context.Response.StatusCode = StatusCodes.Status200OK;

@@ -40,11 +40,6 @@
     <PackageReference Include="Ark.Sys.IService" Version="1.0.0" />
     <PackageReference Include="Lazy" Version="1.0.0" />
     <PackageReference Include="Lazy.Database" Version="1.0.0" />
-    <PackageReference Include="Lazy.Database.Db2" Version="1.0.0" />
-    <PackageReference Include="Lazy.Database.MySql" Version="1.0.0" />
-    <PackageReference Include="Lazy.Database.Oracle" Version="1.0.0" />
-    <PackageReference Include="Lazy.Database.Postgre" Version="1.0.0" />
-    <PackageReference Include="Lazy.Database.SqlServer" Version="1.0.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
   </ItemGroup>
 

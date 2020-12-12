@@ -1,4 +1,4 @@
-﻿// ISysServerCors.cs
+﻿// ISysServerPreflight.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
@@ -24,7 +24,7 @@ using Ark.Sys;
 
 namespace Ark.Sys.IServer
 {
-    public interface ISysServerCors : IFwkServer
+    public interface ISysServerPreflight : IFwkServer
     {
     }
 }

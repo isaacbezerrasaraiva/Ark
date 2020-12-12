@@ -1,4 +1,4 @@
-﻿// SysServantCors.cs
+﻿// SysServantPreflight.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
@@ -28,14 +28,14 @@ using Ark.Sys.IService;
 
 namespace Ark.Sys.Servant
 {
-    public class SysServantCors : FwkServant, ISysServiceCors
+    public class SysServantPreflight : FwkServant, ISysServicePreflight
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public SysServantCors()
+        public SysServantPreflight()
         {
         }
 
@@ -46,11 +46,11 @@ namespace Ark.Sys.Servant
         /// <summary>
         /// Preflight
         /// </summary>
-        /// <param name="dataCorsRequest">The request data</param>
+        /// <param name="dataPreflightRequest">The request data</param>
         /// <returns>The response data</returns>
-        public SysDataCorsResponse Preflight(SysDataCorsRequest dataCorsRequest)
+        public SysDataPreflightResponse Preflight(SysDataPreflightRequest dataPreflightRequest)
         {
-            return (SysDataCorsResponse)InvokeService("Preflight", dataCorsRequest);
+            return (SysDataPreflightResponse)InvokeService("Preflight", dataPreflightRequest);
         }
 
         #endregion Methods

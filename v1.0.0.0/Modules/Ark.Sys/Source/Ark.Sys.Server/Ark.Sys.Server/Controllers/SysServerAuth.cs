@@ -59,34 +59,40 @@ namespace Ark.Sys.Server
         /// <param name="context">The request context</param>
         public void Authenticate(HttpContext context)
         {
-            Object validationInfo = context.Request.Headers["Token"];
+            String headerToken = LazyConvert.ToString(context.Request.Headers["Token"], null);
 
-            if (String.IsNullOrEmpty(validationInfo.ToString()) == false)
+            if (String.IsNullOrEmpty(headerToken) == false)
             {
                 SysDataAuthRequest dataAuthRequest = new SysDataAuthRequest();
                 dataAuthRequest.AuthenticationRequest = new SysAuthenticationRequest();
-                dataAuthRequest.AuthenticationRequest.Token = validationInfo.ToString();
+                dataAuthRequest.AuthenticationRequest.Token = headerToken;
 
                 SysDataAuthResponse dataAuthResponse = (SysDataAuthResponse)InvokeService("Authenticate", dataAuthRequest);
 
-                if (dataAuthResponse.AuthenticationResponse.User != null)
-                    context.Items["User"] = dataAuthResponse.AuthenticationResponse.User;
+                if (dataAuthResponse.AuthenticationResponse.IdDomain > -1 && dataAuthResponse.AuthenticationResponse.IdUser > -1)
+                {
+                    context.Items["IdDomain"] = dataAuthResponse.AuthenticationResponse.IdDomain;
+                    context.Items["IdUser"] = dataAuthResponse.AuthenticationResponse.IdUser;
+                }
             }
             else
             {
-                validationInfo = context.Request.Headers["Credential"];
+                Int32 headerIdDomain = LazyConvert.ToInt32(LazyConvert.ToString(context.Request.Headers["IdDomain"], "-1"));
+                String headerCredential = LazyConvert.ToString(context.Request.Headers["Credential"], null);
 
-                if (String.IsNullOrEmpty(validationInfo.ToString()) == false)
+                if (headerIdDomain > -1 && String.IsNullOrEmpty(headerCredential) == false)
                 {
                     SysDataAuthRequest dataAuthRequest = new SysDataAuthRequest();
                     dataAuthRequest.AuthenticationRequest = new SysAuthenticationRequest();
-                    dataAuthRequest.AuthenticationRequest.Credential = validationInfo.ToString();
+                    dataAuthRequest.AuthenticationRequest.IdDomain = headerIdDomain;
+                    dataAuthRequest.AuthenticationRequest.Credential = headerCredential;
 
                     SysDataAuthResponse dataAuthResponse = (SysDataAuthResponse)InvokeService("Authenticate", dataAuthRequest);
 
-                    if (dataAuthResponse.AuthenticationResponse.User != null)
+                    if (dataAuthResponse.AuthenticationResponse.IdDomain > -1 && dataAuthResponse.AuthenticationResponse.IdUser > -1)
                     {
-                        context.Items["User"] = dataAuthResponse.AuthenticationResponse.User;
+                        context.Items["IdDomain"] = dataAuthResponse.AuthenticationResponse.IdDomain;
+                        context.Items["IdUser"] = dataAuthResponse.AuthenticationResponse.IdUser;
                         context.Response.Headers["Token"] = dataAuthResponse.AuthenticationResponse.Token;
                     }
                 }
@@ -99,9 +105,10 @@ namespace Ark.Sys.Server
         /// <param name="context">The request context</param>
         public void Authorize(AuthorizationFilterContext context)
         {
-            Object user = context.HttpContext.Items["User"];
+            Int32 IdDomain = LazyConvert.ToInt32(context.HttpContext.Items["IdDomain"], -1);
+            Int32 IdUser = LazyConvert.ToInt32(context.HttpContext.Items["IdUser"], -1);
 
-            if (user != null)
+            if (IdDomain > -1 && IdUser > -1)
             {
                 SysDataAuthRequest dataAuthRequest = new SysDataAuthRequest();
                 SysDataAuthResponse dataAuthResponse = (SysDataAuthResponse)InvokeService("Authorize", dataAuthRequest);

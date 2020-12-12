@@ -36,8 +36,11 @@ namespace Ark.Sys
         #endregion Methods
 
         #region Properties
-
+        
         public String Token { get; set; }
+        
+        public Int32 IdDomain { get; set; }
+        
         public String Credential { get; set; }
 
         #endregion Properties
@@ -61,7 +64,10 @@ namespace Ark.Sys
 
         #region Properties
 
-        public String User { get; set; }
+        public Int32 IdDomain { get; set; }
+
+        public Int32 IdUser { get; set; }
+
         public String Token { get; set; }
 
         #endregion Properties
