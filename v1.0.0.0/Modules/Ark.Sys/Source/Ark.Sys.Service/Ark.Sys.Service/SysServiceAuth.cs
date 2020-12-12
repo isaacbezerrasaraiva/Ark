@@ -191,11 +191,11 @@ namespace Ark.Sys.Service
                         Dictionary<String, String> privatePayloadDictionary = new Dictionary<String, String>();
                         Tuple<Dictionary<String, String>, Dictionary<String, String>> tuplePayloadDictionary =
                             new Tuple<Dictionary<String, String>, Dictionary<String, String>>(publicPayloadDictionary, privatePayloadDictionary);
-                        
+
                         publicPayloadDictionary.Add("User", LazyConvert.ToString(dataTableUser.Rows[0]["DisplayName"]));
                         privatePayloadDictionary.Add("IdDomain", LazyConvert.ToString(dataAuthRequest.AuthenticationRequest.IdDomain));
                         privatePayloadDictionary.Add("IdUser", LazyConvert.ToString(dataTableUser.Rows[0]["IdUser"]));
-                        
+
                         #region BeforeEncryptToken
 
                         if (this.PluginList != null)
@@ -225,6 +225,41 @@ namespace Ark.Sys.Service
         /// <param name="dataAuthResponse">The response data</param>
         protected virtual void OnAuthorize(SysDataAuthRequest dataAuthRequest, SysDataAuthResponse dataAuthResponse)
         {
+            dataAuthResponse.AuthorizationResponse = new SysAuthorizationResponse();
+
+            #region Authorization Query
+
+            String sqlAuthorization = @"
+                select 1 
+                from FwkBranchRoleUser 
+	                inner join FwkBranchRoleAction 
+		                on FwkBranchRoleUser.IdDomain = FwkBranchRoleAction.IdDomain 
+                        and FwkBranchRoleUser.IdBranch = FwkBranchRoleAction.IdBranch 
+                        and FwkBranchRoleUser.IdRole = FwkBranchRoleAction.IdRole 
+	                inner join FwkUserContext 
+		                on FwkBranchRoleUser.IdDomain = FwkUserContext.IdDomain 
+                        and FwkBranchRoleUser.IdBranch = FwkUserContext.ValueInt 
+                        and FwkBranchRoleUser.IdUser = FwkUserContext.IdUser 
+                where FwkBranchRoleUser.IdDomain = :IdDomain 
+	                and FwkUserContext.Field = 'IdBranch' 
+                    and FwkBranchRoleUser.IdUser = :IdUser 
+                    and FwkBranchRoleAction.CodModule = :CodModule 
+                    and FwkBranchRoleAction.CodFeature = :CodFeature 
+                    and FwkBranchRoleAction.CodAction = :CodAction ";
+
+            #endregion Authorization Query
+
+            this.Database.OpenConnection();
+
+            dataAuthResponse.AuthorizationResponse.Authorized =
+                this.Database.QueryFind(sqlAuthorization, new Object[] {
+                    dataAuthRequest.AuthorizationRequest.IdDomain,
+                    dataAuthRequest.AuthorizationRequest.IdUser,
+                    dataAuthRequest.AuthorizationRequest.CodModule,
+                    dataAuthRequest.AuthorizationRequest.CodFeature,
+                    dataAuthRequest.AuthorizationRequest.CodAction });
+
+            this.Database.CloseConnection();
         }
 
         /// <summary>

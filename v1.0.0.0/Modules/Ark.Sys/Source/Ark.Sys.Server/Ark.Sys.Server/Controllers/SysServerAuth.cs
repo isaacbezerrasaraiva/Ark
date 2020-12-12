@@ -37,7 +37,7 @@ using Ark.Sys.IService;
 namespace Ark.Sys.Server
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("Ark.Sys/[controller]")]
     public class SysServerAuth : FwkServer, ISysServerAuth, ILibServerAuthentication, ILibServerAuthorization
     {
         #region Variables
@@ -105,13 +105,27 @@ namespace Ark.Sys.Server
         /// <param name="context">The request context</param>
         public void Authorize(AuthorizationFilterContext context)
         {
-            Int32 IdDomain = LazyConvert.ToInt32(context.HttpContext.Items["IdDomain"], -1);
-            Int32 IdUser = LazyConvert.ToInt32(context.HttpContext.Items["IdUser"], -1);
+            Int32 idDomain = LazyConvert.ToInt32(context.HttpContext.Items["IdDomain"], -1);
+            Int32 idUser = LazyConvert.ToInt32(context.HttpContext.Items["IdUser"], -1);
 
-            if (IdDomain > -1 && IdUser > -1)
+            if (idDomain > -1 && idUser > -1)
             {
+                String[] controllerPath = context.HttpContext.Request.Path.Value.Split('/', StringSplitOptions.RemoveEmptyEntries);
+                
                 SysDataAuthRequest dataAuthRequest = new SysDataAuthRequest();
+                dataAuthRequest.AuthorizationRequest = new SysAuthorizationRequest();
+                dataAuthRequest.AuthorizationRequest.IdDomain = idDomain;
+                dataAuthRequest.AuthorizationRequest.IdUser = idUser;
+                dataAuthRequest.AuthorizationRequest.CodModule = controllerPath[0];
+                dataAuthRequest.AuthorizationRequest.CodFeature = controllerPath[1];
+                dataAuthRequest.AuthorizationRequest.CodAction = controllerPath[2];
+
                 SysDataAuthResponse dataAuthResponse = (SysDataAuthResponse)InvokeService("Authorize", dataAuthRequest);
+
+                if (dataAuthResponse.AuthorizationResponse.Authorized == false)
+                {
+                    context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
+                }
             }
             else
             {
