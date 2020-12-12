@@ -7,20 +7,16 @@
 // Created on 2020, November 19
 
 using System;
+using System.IO;
 using System.Xml;
 using System.Data;
 using System.Collections.Generic;
 
 using Lazy;
-//using Lazy.Database;
-//using Lazy.Database.Db2;
-//using Lazy.Database.MySql;
-//using Lazy.Database.Oracle;
-//using Lazy.Database.Postgre;
-//using Lazy.Database.SqlServer;
+using Lazy.Database;
 
 using Ark.Lib;
-//using Ark.Lib.Service;
+using Ark.Lib.Service;
 using Ark.Fwk;
 using Ark.Fwk.Data;
 using Ark.Fwk.IPlugin;
@@ -32,7 +28,8 @@ namespace Ark.Fwk.Service
     {
         #region Variables
 
-        protected List<IFwkPlugin> iPluginList;
+        private LazyDatabase database;
+        private List<IFwkPlugin> iPluginList;
 
         #endregion Variables
 
@@ -40,6 +37,10 @@ namespace Ark.Fwk.Service
 
         public FwkService()
         {
+            this.database = (LazyDatabase)LazyActivator.Local.CreateInstance(Path.Combine(LibDirectory.Root.Bin.Path,
+                LibServiceConfiguration.DynamicXml["Ark.Fwk.Service"]["Database"]["Option"]["Settings"].Attribute["Assembly"]),
+                LibServiceConfiguration.DynamicXml["Ark.Fwk.Service"]["Database"]["Option"]["Settings"].Attribute["Class"], new Object[] {
+                    LibServiceConfiguration.DynamicXml["Ark.Fwk.Service"]["Database"]["Option"]["Settings"]["ConnectionString"].Attribute["Value"] });
         }
 
         #endregion Constructors
@@ -48,6 +49,17 @@ namespace Ark.Fwk.Service
         #endregion Methods
 
         #region Properties
+
+        protected LazyDatabase Database
+        {
+            get { return this.database; }
+        }
+
+        protected List<IFwkPlugin> PluginList
+        {
+            get { return this.iPluginList; }
+        }
+
         #endregion Properties
     }
 }

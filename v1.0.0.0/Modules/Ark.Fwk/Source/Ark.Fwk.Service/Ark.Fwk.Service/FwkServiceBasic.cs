@@ -94,9 +94,9 @@ namespace Ark.Fwk.Service
         {
             #region BeforeLoad
 
-            if (this.iPluginList != null)
+            if (this.PluginList != null)
             {
-                foreach (IFwkPluginBasic iPluginBasic in this.iPluginList)
+                foreach (IFwkPluginBasic iPluginBasic in this.PluginList)
                     iPluginBasic.BeforeLoadEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(dataBasicRequest));
             }
 
@@ -106,9 +106,9 @@ namespace Ark.Fwk.Service
 
             #region AfterLoad
 
-            if (this.iPluginList != null)
+            if (this.PluginList != null)
             {
-                foreach (IFwkPluginBasic iPluginBasic in this.iPluginList)
+                foreach (IFwkPluginBasic iPluginBasic in this.PluginList)
                     iPluginBasic.AfterLoadEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(dataBasicRequest, dataBasicResponse));
             }
 
