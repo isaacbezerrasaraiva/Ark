@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Ark.Server
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("Ark/[controller]")]
     public class Hello : ControllerBase
     {
         [HttpGet]
