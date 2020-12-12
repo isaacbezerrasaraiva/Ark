@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Ark.Fwk.Server
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("Ark.Fwk/[controller]")]
     public class FwkHello : ControllerBase
     {
         [HttpGet]

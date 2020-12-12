@@ -27,7 +27,7 @@ using Ark.Fwk.IService;
 namespace Ark.Fwk.Server
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("Ark.Fwk/[controller]")]
     public class FwkServerBasic : FwkServer, IFwkServerBasic
     {
         #region Variables
