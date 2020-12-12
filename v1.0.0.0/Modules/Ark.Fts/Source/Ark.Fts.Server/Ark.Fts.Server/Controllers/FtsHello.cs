@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Ark.Fts.Server
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("Ark.Fts/[controller]")]
     public class FtsHello : ControllerBase
     {
         [HttpGet]
