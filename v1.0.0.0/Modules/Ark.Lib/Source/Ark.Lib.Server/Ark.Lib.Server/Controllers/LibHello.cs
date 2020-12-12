@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Ark.Lib.Server
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("Ark.Lib/[controller]")]
     public class LibHello : ControllerBase
     {
         [HttpGet]
