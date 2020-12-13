@@ -28,7 +28,7 @@ namespace Ark.Lib.Service
 
         #region Variables
 
-        private static Dictionary<String, LibDatabaseOption> databaseOptionDictionary;
+        private static Dictionary<String, LibServiceDatabaseOption> databaseOptionDictionary;
         private static LibDynamicXml dynamicXml;
 
         #endregion Variables
@@ -47,7 +47,7 @@ namespace Ark.Lib.Service
                 Save();
 
             if (databaseOptionDictionary == null)
-                databaseOptionDictionary = new Dictionary<String, LibDatabaseOption>();
+                databaseOptionDictionary = new Dictionary<String, LibServiceDatabaseOption>();
 
             if (dynamicXml == null)
                 dynamicXml = new LibDynamicXml();
@@ -73,7 +73,7 @@ namespace Ark.Lib.Service
             #region Initialize default values
 
             if (databaseOptionDictionary == null)
-                databaseOptionDictionary = new Dictionary<String, LibDatabaseOption>();
+                databaseOptionDictionary = new Dictionary<String, LibServiceDatabaseOption>();
 
             if (dynamicXml == null)
                 dynamicXml = new LibDynamicXml();
@@ -108,7 +108,7 @@ namespace Ark.Lib.Service
                 XmlNode xmlNodeSettings = xml.ReadNodeChild(xmlNodeOption, "Settings");
                 XmlNode xmlNodeConnectionString = xml.ReadNodeChild(xmlNodeSettings, "ConnectionString");
                 
-                LibDatabaseOption databaseOption = new LibDatabaseOption();
+                LibServiceDatabaseOption databaseOption = new LibServiceDatabaseOption();
                 databaseOption.Alias = xml.ReadNodeAttributeValue(xmlNodeOption, "Alias");
                 databaseOption.Dbms = xml.ReadNodeAttributeValue(xmlNodeSettings, "Dbms");
                 databaseOption.Assembly = xml.ReadNodeAttributeValue(xmlNodeSettings, "Assembly");
@@ -126,7 +126,7 @@ namespace Ark.Lib.Service
         {
             XmlNode xmlNodeDatabase = xml.WriteNode(xmlNodeRoot, "Database");
 
-            foreach (KeyValuePair<String, LibDatabaseOption> databaseOption in databaseOptionDictionary)
+            foreach (KeyValuePair<String, LibServiceDatabaseOption> databaseOption in databaseOptionDictionary)
             {
                 XmlNode xmlNodeOption = xml.WriteNode(xmlNodeDatabase, "Option");
                 xml.WriteNodeAttribute(xmlNodeOption, "Alias", databaseOption.Value.Alias);
@@ -231,7 +231,7 @@ namespace Ark.Lib.Service
 
         #region Properties
 
-        public static Dictionary<String, LibDatabaseOption> DatabaseOptionDictionary
+        public static Dictionary<String, LibServiceDatabaseOption> DatabaseOptions
         {
             get
             {

@@ -1,4 +1,4 @@
-﻿// LibDatabaseOption.cs
+﻿// LibServiceDatabaseOption.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
@@ -13,14 +13,14 @@ using System.Data;
 
 namespace Ark.Lib
 {
-    public class LibDatabaseOption
+    public class LibServiceDatabaseOption
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public LibDatabaseOption()
+        public LibServiceDatabaseOption()
         {
         }
 
