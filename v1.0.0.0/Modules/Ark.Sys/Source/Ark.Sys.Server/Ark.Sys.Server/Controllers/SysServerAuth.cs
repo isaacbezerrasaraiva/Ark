@@ -9,13 +9,11 @@
 using System;
 using System.Xml;
 using System.Data;
-using System.Linq;
 using System.Collections.Generic;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Authorization;
 
 using Lazy;
 
@@ -79,7 +77,7 @@ namespace Ark.Sys.Server
             }
             else
             {
-                Int32 headerIdDomain = LazyConvert.ToInt32(LazyConvert.ToString(context.Request.Headers["IdDomain"], "-1"), -1);
+                Int32 headerIdDomain = LazyConvert.ToInt32(LazyConvert.ToString(context.Request.Headers["IdDomain"], "-1"));
                 String headerCredential = LazyConvert.ToString(context.Request.Headers["Credential"], null);
 
                 if (headerIdDomain > -1 && String.IsNullOrEmpty(headerCredential) == false)
@@ -107,34 +105,31 @@ namespace Ark.Sys.Server
         /// <param name="context">The request context</param>
         public void Authorize(AuthorizationFilterContext context)
         {
-            if (context.ActionDescriptor.EndpointMetadata.OfType<AllowAnonymousAttribute>().ToList().Count == 0)
+            Int32 idDomain = LazyConvert.ToInt32(context.HttpContext.Items["IdDomain"], -1);
+            Int32 idUser = LazyConvert.ToInt32(context.HttpContext.Items["IdUser"], -1);
+
+            if (idDomain > -1 && idUser > -1)
             {
-                Int32 idDomain = LazyConvert.ToInt32(context.HttpContext.Items["IdDomain"], -1);
-                Int32 idUser = LazyConvert.ToInt32(context.HttpContext.Items["IdUser"], -1);
+                String[] controllerPath = context.HttpContext.Request.Path.Value.Split('/', StringSplitOptions.RemoveEmptyEntries);
+                
+                SysDataAuthRequest dataAuthRequest = new SysDataAuthRequest();
+                dataAuthRequest.AuthorizationRequest = new SysAuthorizationRequest();
+                dataAuthRequest.AuthorizationRequest.IdDomain = idDomain;
+                dataAuthRequest.AuthorizationRequest.IdUser = idUser;
+                dataAuthRequest.AuthorizationRequest.CodModule = controllerPath[0];
+                dataAuthRequest.AuthorizationRequest.CodFeature = controllerPath[1];
+                dataAuthRequest.AuthorizationRequest.CodAction = controllerPath[2];
 
-                if (idDomain > -1 && idUser > -1)
-                {
-                    String[] controllerPath = context.HttpContext.Request.Path.Value.Split('/', StringSplitOptions.RemoveEmptyEntries);
+                SysDataAuthResponse dataAuthResponse = (SysDataAuthResponse)InvokeService("Authorize", dataAuthRequest);
 
-                    SysDataAuthRequest dataAuthRequest = new SysDataAuthRequest();
-                    dataAuthRequest.AuthorizationRequest = new SysAuthorizationRequest();
-                    dataAuthRequest.AuthorizationRequest.IdDomain = idDomain;
-                    dataAuthRequest.AuthorizationRequest.IdUser = idUser;
-                    dataAuthRequest.AuthorizationRequest.CodModule = controllerPath[0];
-                    dataAuthRequest.AuthorizationRequest.CodFeature = controllerPath[1];
-                    dataAuthRequest.AuthorizationRequest.CodAction = controllerPath[2];
-
-                    SysDataAuthResponse dataAuthResponse = (SysDataAuthResponse)InvokeService("Authorize", dataAuthRequest);
-
-                    if (dataAuthResponse.AuthorizationResponse.Authorized == false)
-                    {
-                        context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
-                    }
-                }
-                else
+                if (dataAuthResponse.AuthorizationResponse.Authorized == false)
                 {
                     context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
                 }
+            }
+            else
+            {
+                context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
             }
         }
 

@@ -76,9 +76,9 @@ namespace Ark.Sys.Service
         {
             #region BeforePreflight
 
-            if (this.IPlugins != null)
+            if (this.PluginList != null)
             {
-                foreach (ISysPluginPreflight iPluginPreflight in this.IPlugins)
+                foreach (ISysPluginPreflight iPluginPreflight in this.PluginList)
                     iPluginPreflight.BeforePreflightEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(dataPreflightRequest));
             }
 
@@ -88,9 +88,9 @@ namespace Ark.Sys.Service
 
             #region AfterPreflight
 
-            if (this.IPlugins != null)
+            if (this.PluginList != null)
             {
-                foreach (ISysPluginPreflight iPluginPreflight in this.IPlugins)
+                foreach (ISysPluginPreflight iPluginPreflight in this.PluginList)
                     iPluginPreflight.AfterPreflightEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(dataPreflightRequest, dataPreflightResponse));
             }
 
