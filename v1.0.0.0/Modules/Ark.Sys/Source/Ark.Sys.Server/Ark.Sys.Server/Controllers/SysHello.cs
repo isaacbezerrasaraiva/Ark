@@ -11,6 +11,7 @@ using System.Xml;
 using System.Data;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Ark.Sys.Server
 {
@@ -19,6 +20,7 @@ namespace Ark.Sys.Server
     public class SysHello : ControllerBase
     {
         [HttpGet]
+        [AllowAnonymous]
         public String Get()
         {
             return "Hello Ark.Sys.Server!";

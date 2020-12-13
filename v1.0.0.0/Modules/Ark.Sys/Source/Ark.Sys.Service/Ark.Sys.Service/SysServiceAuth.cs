@@ -91,9 +91,9 @@ namespace Ark.Sys.Service
         {
             #region BeforeAuthenticate
 
-            if (this.PluginList != null)
+            if (this.IPlugins != null)
             {
-                foreach (ISysPluginAuth iPluginAuth in this.PluginList)
+                foreach (ISysPluginAuth iPluginAuth in this.IPlugins)
                     iPluginAuth.BeforeAuthenticateEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(dataAuthRequest));
             }
 
@@ -103,9 +103,9 @@ namespace Ark.Sys.Service
 
             #region AfterAuthenticate
 
-            if (this.PluginList != null)
+            if (this.IPlugins != null)
             {
-                foreach (ISysPluginAuth iPluginAuth in this.PluginList)
+                foreach (ISysPluginAuth iPluginAuth in this.IPlugins)
                     iPluginAuth.AfterAuthenticateEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(dataAuthRequest, dataAuthResponse));
             }
 
@@ -121,9 +121,9 @@ namespace Ark.Sys.Service
         {
             #region BeforeAuthorize
 
-            if (this.PluginList != null)
+            if (this.IPlugins != null)
             {
-                foreach (ISysPluginAuth iPluginAuth in this.PluginList)
+                foreach (ISysPluginAuth iPluginAuth in this.IPlugins)
                     iPluginAuth.BeforeAuthorizeEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(dataAuthRequest));
             }
 
@@ -133,9 +133,9 @@ namespace Ark.Sys.Service
 
             #region AfterAuthorize
 
-            if (this.PluginList != null)
+            if (this.IPlugins != null)
             {
-                foreach (ISysPluginAuth iPluginAuth in this.PluginList)
+                foreach (ISysPluginAuth iPluginAuth in this.IPlugins)
                     iPluginAuth.AfterAuthorizeEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(dataAuthRequest, dataAuthResponse));
             }
 
@@ -161,9 +161,9 @@ namespace Ark.Sys.Service
 
                 #region AfterDecryptToken
 
-                if (this.PluginList != null)
+                if (this.IPlugins != null)
                 {
-                    foreach (ISysPluginAuth iPluginAuth in this.PluginList)
+                    foreach (ISysPluginAuth iPluginAuth in this.IPlugins)
                         iPluginAuth.AfterDecryptTokenEventHandler?.Invoke(this, new SysPluginAfterDecryptTokenEventArgs(dataAuthRequest, dataAuthResponse, publicPayloadDictionary, privatePayloadDictionary));
                 }
 
@@ -198,9 +198,9 @@ namespace Ark.Sys.Service
 
                         #region BeforeEncryptToken
 
-                        if (this.PluginList != null)
+                        if (this.IPlugins != null)
                         {
-                            foreach (ISysPluginAuth iPluginAuth in this.PluginList)
+                            foreach (ISysPluginAuth iPluginAuth in this.IPlugins)
                                 iPluginAuth.BeforeEncryptTokenEventHandler?.Invoke(this, new SysPluginBeforeEncryptTokenEventArgs(dataAuthRequest, publicPayloadDictionary, privatePayloadDictionary));
                         }
 
