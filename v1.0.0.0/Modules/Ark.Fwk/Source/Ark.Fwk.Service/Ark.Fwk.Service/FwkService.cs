@@ -37,10 +37,10 @@ namespace Ark.Fwk.Service
 
         public FwkService()
         {
-            this.database = (LazyDatabase)LazyActivator.Local.CreateInstance(Path.Combine(LibDirectory.Root.Bin.Path,
-                LibServiceConfiguration.DynamicXml["Ark.Fwk.Service"]["Database"]["Option"]["Settings"].Attribute["Assembly"]),
-                LibServiceConfiguration.DynamicXml["Ark.Fwk.Service"]["Database"]["Option"]["Settings"].Attribute["Class"], new Object[] {
-                    LibServiceConfiguration.DynamicXml["Ark.Fwk.Service"]["Database"]["Option"]["Settings"]["ConnectionString"].Attribute["Value"] });
+            LibDatabaseOption databaseOption = LibServiceConfiguration.DatabaseOptionDictionary["Default"];
+
+            this.database = (LazyDatabase)LazyActivator.Local.CreateInstance(
+                Path.Combine(LibDirectory.Root.Bin.Path, databaseOption.Assembly), databaseOption.Class, new Object[] { databaseOption.ConnectionString });
         }
 
         #endregion Constructors
