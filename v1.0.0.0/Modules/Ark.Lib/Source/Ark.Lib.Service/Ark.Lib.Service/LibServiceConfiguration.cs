@@ -28,6 +28,7 @@ namespace Ark.Lib.Service
 
         #region Variables
 
+        private static Dictionary<String, LibDatabaseOption> databaseOptionDictionary;
         private static LibDynamicXml dynamicXml;
 
         #endregion Variables
@@ -45,12 +46,23 @@ namespace Ark.Lib.Service
             if (File.Exists(Path.Combine(LibDirectory.Root.Dat.Path, ARK_LIB_SERVICE_XML)) == false)
                 Save();
 
+            if (databaseOptionDictionary == null)
+                databaseOptionDictionary = new Dictionary<String, LibDatabaseOption>();
+
             if (dynamicXml == null)
                 dynamicXml = new LibDynamicXml();
 
             #endregion Initialize configuration file
 
-            LoadDynamicXml();
+            LazyXml xml = new LazyXml();
+
+            xml.Open(Path.Combine(LibDirectory.Root.Dat.Path, ARK_LIB_SERVICE_XML));
+
+            LoadDatabase(xml);
+
+            LoadDynamicXml(xml);
+
+            xml = null;
         }
 
         /// <summary>
@@ -60,23 +72,86 @@ namespace Ark.Lib.Service
         {
             #region Initialize default values
 
+            if (databaseOptionDictionary == null)
+                databaseOptionDictionary = new Dictionary<String, LibDatabaseOption>();
+
             if (dynamicXml == null)
                 dynamicXml = new LibDynamicXml();
 
             #endregion Initialize default values
 
-            SaveDynamicXml();
+            LazyXml xml = new LazyXml();
+
+            xml.New();
+
+            XmlNode xmlNodeRoot = xml.WriteRoot("Ark.Lib.Service");
+
+            SaveDatabase(xml, xmlNodeRoot);
+
+            SaveDynamicXml(xml, xmlNodeRoot);
+
+            xml.Save(Path.Combine(LibDirectory.Root.Dat.Path, ARK_LIB_SERVICE_XML));
+
+            xmlNodeRoot = null;
+            xml = null;
+        }
+
+        /// <summary>
+        /// Load database
+        /// </summary>
+        private static void LoadDatabase(LazyXml xml)
+        {
+            XmlNodeList xmlNodeOptionList = xml.ReadNodeChildList("/Ark.Lib.Service/Database");
+
+            foreach (XmlNode xmlNodeOption in xmlNodeOptionList)
+            {
+                XmlNode xmlNodeSettings = xml.ReadNodeChild(xmlNodeOption, "Settings");
+                XmlNode xmlNodeConnectionString = xml.ReadNodeChild(xmlNodeSettings, "ConnectionString");
+                
+                LibDatabaseOption databaseOption = new LibDatabaseOption();
+                databaseOption.Alias = xml.ReadNodeAttributeValue(xmlNodeOption, "Alias");
+                databaseOption.Dbms = xml.ReadNodeAttributeValue(xmlNodeSettings, "Dbms");
+                databaseOption.Assembly = xml.ReadNodeAttributeValue(xmlNodeSettings, "Assembly");
+                databaseOption.Class = xml.ReadNodeAttributeValue(xmlNodeSettings, "Class");
+                databaseOption.ConnectionString = xml.ReadNodeInnerText(xmlNodeConnectionString);
+
+                databaseOptionDictionary.Add(databaseOption.Alias, databaseOption);
+            }
+        }
+
+        /// <summary>
+        /// Save database
+        /// </summary>
+        private static void SaveDatabase(LazyXml xml, XmlNode xmlNodeRoot)
+        {
+            XmlNode xmlNodeDatabase = xml.WriteNode(xmlNodeRoot, "Database");
+
+            foreach (KeyValuePair<String, LibDatabaseOption> databaseOption in databaseOptionDictionary)
+            {
+                XmlNode xmlNodeOption = xml.WriteNode(xmlNodeDatabase, "Option");
+                xml.WriteNodeAttribute(xmlNodeOption, "Alias", databaseOption.Value.Alias);
+
+                XmlNode xmlNodeSettings = xml.WriteNode(xmlNodeOption, "Settings");
+                xml.WriteNodeAttribute(xmlNodeSettings, "Dbms", databaseOption.Value.Dbms);
+                xml.WriteNodeAttribute(xmlNodeSettings, "Assembly", databaseOption.Value.Assembly);
+                xml.WriteNodeAttribute(xmlNodeSettings, "Class", databaseOption.Value.Class);
+
+                XmlNode xmlNodeConnectionString = xml.WriteNode(xmlNodeSettings, "ConnectionString");
+                xml.WriteNodeInnerText(xmlNodeConnectionString, databaseOption.Value.ConnectionString);
+                
+                xmlNodeConnectionString = null;
+                xmlNodeSettings = null;
+                xmlNodeOption = null;
+            }
+
+            xmlNodeDatabase = null;
         }
 
         /// <summary>
         /// Load dynamic xml
         /// </summary>
-        private static void LoadDynamicXml()
+        private static void LoadDynamicXml(LazyXml xml)
         {
-            LazyXml xml = new LazyXml();
-
-            xml.Open(Path.Combine(LibDirectory.Root.Dat.Path, ARK_LIB_SERVICE_XML));
-
             XmlNodeList xmlNodeModuleList = xml.ReadNodeChildList("/Ark.Lib.Service/DynamicXml");
 
             foreach (XmlNode xmlNodeModule in xmlNodeModuleList)
@@ -89,7 +164,6 @@ namespace Ark.Lib.Service
             }
 
             xmlNodeModuleList = null;
-            xml = null;
         }
 
         /// <summary>
@@ -117,13 +191,8 @@ namespace Ark.Lib.Service
         /// <summary>
         /// Save dynamic xml
         /// </summary>
-        private static void SaveDynamicXml()
+        private static void SaveDynamicXml(LazyXml xml, XmlNode xmlNodeRoot)
         {
-            LazyXml xml = new LazyXml();
-
-            xml.New();
-
-            XmlNode xmlNodeRoot = xml.WriteRoot("Ark.Lib.Service");
             XmlNode xmlNodeDynamicXml = xml.WriteNode(xmlNodeRoot, "DynamicXml");
 
             foreach (KeyValuePair<String, LibDynamicXmlElement> module in dynamicXml.Modules)
@@ -136,11 +205,7 @@ namespace Ark.Lib.Service
                     xml.WriteNodeAttribute(xmlNodeModule, attribute.Key, attribute.Value);
             }
 
-            xml.Save(Path.Combine(LibDirectory.Root.Dat.Path, ARK_LIB_SERVICE_XML));
-
             xmlNodeDynamicXml = null;
-            xmlNodeRoot = null;
-            xml = null;
         }
 
         /// <summary>
@@ -165,6 +230,18 @@ namespace Ark.Lib.Service
         #endregion Methods
 
         #region Properties
+
+        public static Dictionary<String, LibDatabaseOption> DatabaseOptionDictionary
+        {
+            get
+            {
+                if (databaseOptionDictionary == null)
+                    Load();
+
+                return databaseOptionDictionary;
+            }
+            set { databaseOptionDictionary = value; }
+        }
 
         public static LibDynamicXml DynamicXml
         {
