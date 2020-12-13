@@ -11,6 +11,7 @@ using System.Xml;
 using System.Data;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Ark.Fwk.Server
 {
@@ -19,6 +20,7 @@ namespace Ark.Fwk.Server
     public class FwkHello : ControllerBase
     {
         [HttpGet]
+        [AllowAnonymous]
         public String Get()
         {
             return "Hello Ark.Fwk.Server!";

@@ -37,7 +37,7 @@ namespace Ark.Fwk.Service
 
         public FwkService()
         {
-            LibDatabaseOption databaseOption = LibServiceConfiguration.DatabaseOptionDictionary["Default"];
+            LibServiceDatabaseOption databaseOption = LibServiceConfiguration.DatabaseOptions["Default"];
 
             this.database = (LazyDatabase)LazyActivator.Local.CreateInstance(
                 Path.Combine(LibDirectory.Root.Bin.Path, databaseOption.Assembly), databaseOption.Class, new Object[] { databaseOption.ConnectionString });
@@ -55,7 +55,7 @@ namespace Ark.Fwk.Service
             get { return this.database; }
         }
 
-        protected List<IFwkPlugin> PluginList
+        protected List<IFwkPlugin> IPlugins
         {
             get { return this.iPluginList; }
         }
