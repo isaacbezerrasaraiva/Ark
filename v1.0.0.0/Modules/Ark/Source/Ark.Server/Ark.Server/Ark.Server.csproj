@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Version>1.0.0.0</Version>
+    <Version>1.0.0</Version>
     <Authors>Isaac Bezerra Saraiva</Authors>
     <Product>Ark</Product>
     <Description>Ark Server</Description>
@@ -29,10 +29,9 @@
       copy $(SolutionDir)Ark.Server\Ark.Server\bin\Debug\netcoreapp3.1\Ark.Server.dll $(SolutionDir)..\..\..\Release\
       copy $(SolutionDir)Ark.Server\Ark.Server\bin\Debug\netcoreapp3.1\Ark.Server.exe $(SolutionDir)..\..\..\Release\
       copy $(SolutionDir)Ark.Server\Ark.Server\bin\Debug\netcoreapp3.1\Ark.Server.deps.json $(SolutionDir)..\..\..\Release\
-      copy $(SolutionDir)Ark.Server\Ark.Server\bin\Debug\netcoreapp3.1\Ark.Server.runtimeconfig.json $(SolutionDir)..\..\..\Release\
-      copy $(SolutionDir)Ark.Server\Ark.Server\bin\Debug\netcoreapp3.1\Ark.Server.runtimeconfig.dev.json $(SolutionDir)..\..\..\Release\
-      copy $(SolutionDir)Ark.Server\Ark.Server\bin\Debug\netcoreapp3.1\appsettings.json $(SolutionDir)..\..\..\Release\
-      copy $(SolutionDir)Ark.Server\Ark.Server\bin\Debug\netcoreapp3.1\appsettings.Development.json $(SolutionDir)..\..\..\Release\
+      copy $(SolutionDir)Ark.Server\Ark.Server\Ark.Server.runtimeconfig.json $(SolutionDir)..\..\..\Release\
+      copy $(SolutionDir)Ark.Server\Ark.Server\appsettings.json $(SolutionDir)..\..\..\Release\
+      copy $(SolutionDir)Ark.Server\Ark.Server\Web.config $(SolutionDir)..\..\..\Release\
     </PostBuildEvent>
   </PropertyGroup>
 
