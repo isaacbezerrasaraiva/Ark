@@ -39,8 +39,10 @@ namespace Ark.Fwk.Service
         {
             LibServiceDatabaseOption databaseOption = LibServiceConfiguration.DatabaseOptions["Default"];
 
-            this.database = (LazyDatabase)LazyActivator.Local.CreateInstance(
-                Path.Combine(LibDirectory.Root.Bin.Path, databaseOption.Assembly), databaseOption.Class, new Object[] { databaseOption.ConnectionString });
+            String assemblyFolderName = databaseOption.Assembly.Replace(".dll", String.Empty);
+            this.database = (LazyDatabase)LazyActivator.Local.CreateInstance(Path.Combine(
+                LibDirectory.Root.Bin.AssemblyFolder[assemblyFolderName].Version[databaseOption.Version].Lib.NetCoreApp31.Path, databaseOption.Assembly),
+                databaseOption.Class, new Object[] { databaseOption.ConnectionString });
         }
 
         #endregion Constructors

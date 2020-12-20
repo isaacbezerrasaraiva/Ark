@@ -7,6 +7,7 @@
 // Created on 2020, November 19
 
 using System;
+using System.IO;
 using System.Xml;
 using System.Data;
 using System.Reflection;
@@ -31,7 +32,7 @@ namespace Ark.Fwk.Server
     public class FwkServer : ControllerBase, IFwkServer
     {
         #region Variables
-        
+
         private Type typeDataRequest;
         private Type typeDataResponse;
 
@@ -43,31 +44,39 @@ namespace Ark.Fwk.Server
 
         public FwkServer()
         {
+            String assemblyFolderName = String.Empty;
+            String classFullName = String.Empty;
+
             #region Create data types
-            
-            Assembly assembly = Assembly.LoadFrom(LibDirectory.Root.Bin.Path + this.GetType().Namespace.Replace("Server", "Data") + ".dll");
-            
-            this.typeDataRequest = assembly.GetType(this.GetType().FullName.Replace("Server", "Data") + "Request");
-            this.typeDataResponse = assembly.GetType(this.GetType().FullName.Replace("Server", "Data") + "Response");
-            
+
+            assemblyFolderName = this.GetType().Namespace.Replace("Server", "Data");
+            classFullName = this.GetType().FullName.Replace("Server", "Data");
+
+            Assembly assembly = Assembly.LoadFrom(Path.Combine(LibDirectory.Root.Bin.AssemblyFolder[assemblyFolderName].CurrentVersion.Lib.NetCoreApp31.Path, assemblyFolderName + ".dll"));
+
+            this.typeDataRequest = assembly.GetType(classFullName + "Request");
+            this.typeDataResponse = assembly.GetType(classFullName + "Response");
+
             assembly = null;
-            
+
             #endregion Create data types
-            
+
             #region Create service
-            
-            String classFullName = this.GetType().FullName.Replace("Server", "Service");
-            String assemblyPath = LibDirectory.Root.Bin.Path + this.GetType().Namespace.Replace("Server", "Service") + ".dll";
-            
-            this.iService = (IFwkService)LazyActivator.Local.CreateInstance(assemblyPath, classFullName);
-            
+
+            assemblyFolderName = this.GetType().Namespace.Replace("Server", "Service");
+            classFullName = this.GetType().FullName.Replace("Server", "Service");
+
+            this.iService = (IFwkService)LazyActivator.Local.CreateInstance(Path.Combine(
+                LibDirectory.Root.Bin.AssemblyFolder[assemblyFolderName].CurrentVersion.Lib.NetCoreApp31.Path, assemblyFolderName + ".dll"),
+                classFullName);
+
             #endregion Create service
         }
 
         #endregion Constructors
 
         #region Methods
-        
+
         /// <summary>
         /// Invoke the service method
         /// </summary>

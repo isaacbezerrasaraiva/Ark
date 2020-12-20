@@ -7,6 +7,7 @@
 // Created on 2020, November 19
 
 using System;
+using System.IO;
 using System.Xml;
 using System.Data;
 using System.Reflection;
@@ -34,10 +35,12 @@ namespace Ark.Fwk.Servant
         {
             #region Create service
 
+            String assemblyFolderName = this.GetType().Namespace.Replace("Servant", "Service");
             String classFullName = this.GetType().FullName.Replace("Servant", "Service");
-            String assemblyPath = LibDirectory.Root.Bin.Path + this.GetType().Namespace.Replace("Servant", "Service") + ".dll";
 
-            this.iService = (IFwkService)LazyActivator.Local.CreateInstance(assemblyPath, classFullName);
+            this.iService = (IFwkService)LazyActivator.Local.CreateInstance(Path.Combine(
+                LibDirectory.Root.Bin.AssemblyFolder[assemblyFolderName].CurrentVersion.Lib.NetCoreApp31.Path, assemblyFolderName + ".dll"),
+                classFullName);
 
             #endregion Create service
         }
@@ -45,7 +48,7 @@ namespace Ark.Fwk.Servant
         #endregion Constructors
 
         #region Methods
-        
+
         /// <summary>
         /// Invoke the service method
         /// </summary>

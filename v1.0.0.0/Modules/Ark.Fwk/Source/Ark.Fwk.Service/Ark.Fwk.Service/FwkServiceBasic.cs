@@ -7,6 +7,7 @@
 // Created on 2020, November 22
 
 using System;
+using System.IO;
 using System.Xml;
 using System.Data;
 using System.Collections.Generic;
@@ -42,7 +43,7 @@ namespace Ark.Fwk.Service
         #endregion Constructors
 
         #region Methods
-        
+
         /// <summary>
         /// Initialize the service
         /// </summary>
@@ -52,10 +53,12 @@ namespace Ark.Fwk.Service
         {
             #region Create response data
 
+            String assemblyFolderName = this.GetType().Namespace.Replace("Service", "Data");
             String classFullName = this.GetType().FullName.Replace("Service", "Data") + "Response";
-            String assemblyPath = LibDirectory.Root.Bin.Path + this.GetType().Namespace.Replace("Service", "Data") + ".dll";
 
-            FwkDataBasicResponse dataBasicResponse = (FwkDataBasicResponse)LazyActivator.Local.CreateInstance(assemblyPath, classFullName);
+            FwkDataBasicResponse dataBasicResponse = (FwkDataBasicResponse)LazyActivator.Local.CreateInstance(Path.Combine(
+                LibDirectory.Root.Bin.AssemblyFolder[assemblyFolderName].CurrentVersion.Lib.NetCoreApp31.Path, assemblyFolderName + ".dll"),
+                classFullName);
 
             #endregion Create response data
 
@@ -73,10 +76,12 @@ namespace Ark.Fwk.Service
         {
             #region Create response data
 
+            String assemblyFolderName = this.GetType().Namespace.Replace("Service", "Data");
             String classFullName = this.GetType().FullName.Replace("Service", "Data") + "Response";
-            String assemblyPath = LibDirectory.Root.Bin.Path + this.GetType().Namespace.Replace("Service", "Data") + ".dll";
 
-            FwkDataBasicResponse dataBasicResponse = (FwkDataBasicResponse)LazyActivator.Local.CreateInstance(assemblyPath, classFullName);
+            FwkDataBasicResponse dataBasicResponse = (FwkDataBasicResponse)LazyActivator.Local.CreateInstance(Path.Combine(
+                LibDirectory.Root.Bin.AssemblyFolder[assemblyFolderName].CurrentVersion.Lib.NetCoreApp31.Path, assemblyFolderName + ".dll"),
+                classFullName);
 
             #endregion Create response data
 
