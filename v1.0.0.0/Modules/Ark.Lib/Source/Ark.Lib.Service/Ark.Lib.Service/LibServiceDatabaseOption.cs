@@ -39,6 +39,8 @@ namespace Ark.Lib
 
         public String Class { get; set; }
 
+        public String Version { get; set; }
+
         public String ConnectionString { get; set; }
 
         #endregion Properties

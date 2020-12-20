@@ -10,6 +10,7 @@ using System;
 using System.IO;
 using System.Xml;
 using System.Data;
+using System.Collections.Generic;
 
 namespace Ark.Lib
 {
@@ -48,6 +49,9 @@ namespace Ark.Lib
             public static class Bin
             {
                 #region Variables
+
+                private static LibDirectoryAssemblyFolder assemblyFolder;
+
                 #endregion Variables
 
                 #region Methods
@@ -60,10 +64,18 @@ namespace Ark.Lib
                     get { return AppDomain.CurrentDomain.BaseDirectory + "Bin\\"; }
                 }
 
-                #endregion Properties
+                public static LibDirectoryAssemblyFolder AssemblyFolder
+                {
+                    get
+                    {
+                        if (assemblyFolder == null)
+                            assemblyFolder = new LibDirectoryAssemblyFolder(AppDomain.CurrentDomain.BaseDirectory + "Bin\\");
 
-                #region InternalClass
-                #endregion InternalClass
+                        return assemblyFolder;
+                    }
+                }
+
+                #endregion Properties
             }
 
             public static class Dat
@@ -91,5 +103,235 @@ namespace Ark.Lib
         }
 
         #endregion InternalClass
+    }
+
+    public class LibDirectoryAssemblyFolder
+    {
+        #region Variables
+
+        private String path;
+        private Dictionary<String, LibDirectoryAssemblyFolderItem> assemblyFolderItemDictionary;
+
+        #endregion Variables
+
+        #region Constructors
+
+        public LibDirectoryAssemblyFolder(String path)
+        {
+            this.path = path;
+            this.assemblyFolderItemDictionary = new Dictionary<String, LibDirectoryAssemblyFolderItem>();
+        }
+
+        #endregion Constructors
+
+        #region Methods
+        #endregion Methods
+
+        #region Properties
+        #endregion Properties
+
+        #region Indexers
+
+        public LibDirectoryAssemblyFolderItem this[String name]
+        {
+            get
+            {
+                if (this.assemblyFolderItemDictionary.ContainsKey(name) == false)
+                    this.assemblyFolderItemDictionary.Add(name, new LibDirectoryAssemblyFolderItem(this.path + name + "\\"));
+
+                return this.assemblyFolderItemDictionary[name];
+            }
+        }
+
+        #endregion Indexers
+    }
+
+    public class LibDirectoryAssemblyFolderItem
+    {
+        #region Variables
+
+        private String path;
+        private LibDirectoryAssemblyVersion assemblyVersion;
+
+        #endregion Variables
+
+        #region Constructors
+
+        public LibDirectoryAssemblyFolderItem(String path)
+        {
+            this.path = path;
+            this.assemblyVersion = new LibDirectoryAssemblyVersion(this.path);
+        }
+
+        #endregion Constructors
+
+        #region Methods
+        #endregion Methods
+
+        #region Properties
+
+        public String Path
+        {
+            get { return this.path; }
+        }
+
+        public LibDirectoryAssemblyVersion Version
+        {
+            get { return this.assemblyVersion; }
+        }
+
+        public LibDirectoryAssemblyVersionItem CurrentVersion
+        {
+            get { return Version[LibEnvironment.Version.Package]; }
+        }
+
+        #endregion Properties
+    }
+
+    public class LibDirectoryAssemblyVersion
+    {
+        #region Variables
+
+        private String path;
+        private Dictionary<String, LibDirectoryAssemblyVersionItem> assemblyVersionItemDictionary;
+
+        #endregion Variables
+
+        #region Constructors
+
+        public LibDirectoryAssemblyVersion(String path)
+        {
+            this.path = path;
+            this.assemblyVersionItemDictionary = new Dictionary<String, LibDirectoryAssemblyVersionItem>();
+        }
+
+        #endregion Constructors
+
+        #region Methods
+        #endregion Methods
+
+        #region Properties
+        #endregion Properties
+
+        #region Indexers
+
+        public LibDirectoryAssemblyVersionItem this[String value]
+        {
+            get
+            {
+                if (this.assemblyVersionItemDictionary.ContainsKey(value) == false)
+                    this.assemblyVersionItemDictionary.Add(value, new LibDirectoryAssemblyVersionItem(this.path + value + "\\"));
+
+                return this.assemblyVersionItemDictionary[value];
+            }
+        }
+
+        #endregion Indexers
+    }
+
+    public class LibDirectoryAssemblyVersionItem
+    {
+        #region Variables
+
+        private String path;
+        private LibDirectoryAssemblyVersionLib assemblyVersionLib;
+
+        #endregion Variables
+
+        #region Constructors
+
+        public LibDirectoryAssemblyVersionItem(String path)
+        {
+            this.path = path;
+            this.assemblyVersionLib = new LibDirectoryAssemblyVersionLib(this.path + "lib\\");
+        }
+
+        #endregion Constructors
+
+        #region Methods
+        #endregion Methods
+
+        #region Properties
+
+        public String Path
+        {
+            get { return this.path; }
+        }
+
+        public LibDirectoryAssemblyVersionLib Lib
+        {
+            get { return this.assemblyVersionLib; }
+        }
+
+        #endregion Properties
+    }
+
+    public class LibDirectoryAssemblyVersionLib
+    {
+        #region Variables
+
+        private String path;
+        private LibDirectoryAssemblyVersionLibItem netCoreApp31;
+        private LibDirectoryAssemblyVersionLibItem netStandard20;
+
+        #endregion Variables
+
+        #region Constructors
+
+        public LibDirectoryAssemblyVersionLib(String path)
+        {
+            this.path = path;
+            this.netCoreApp31 = new LibDirectoryAssemblyVersionLibItem(path + "netcoreapp3.1\\");
+            this.netStandard20 = new LibDirectoryAssemblyVersionLibItem(path + "netstandard2.0\\");
+        }
+
+        #endregion Constructors
+
+        #region Methods
+        #endregion Methods
+
+        #region Properties
+
+        public LibDirectoryAssemblyVersionLibItem NetCoreApp31
+        {
+            get { return this.netCoreApp31; }
+        }
+
+        public LibDirectoryAssemblyVersionLibItem NetStandard20
+        {
+            get { return this.netStandard20; }
+        }
+
+        #endregion Properties
+    }
+
+    public class LibDirectoryAssemblyVersionLibItem
+    {
+        #region Variables
+
+        private String path;
+
+        #endregion Variables
+
+        #region Constructors
+
+        public LibDirectoryAssemblyVersionLibItem(String path)
+        {
+            this.path = path;
+        }
+
+        #endregion Constructors
+
+        #region Methods
+        #endregion Methods
+
+        #region Properties
+
+        public String Path
+        {
+            get { return this.path; }
+        }
+
+        #endregion Properties
     }
 }

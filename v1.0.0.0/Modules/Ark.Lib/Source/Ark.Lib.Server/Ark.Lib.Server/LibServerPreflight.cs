@@ -38,13 +38,15 @@ namespace Ark.Lib.Server
 
             if (iServerPreflight == null)
             {
-                String preflightAssembly = LibServerConfiguration.DynamicXml["Ark.Lib.Server"]["Security"]["Preflight"].Attribute["Assembly"];
-                String preflightClass = LibServerConfiguration.DynamicXml["Ark.Lib.Server"]["Security"]["Preflight"].Attribute["Class"];
+                String assemblyFolderName = LibServerConfiguration.DynamicXml["Ark.Lib.Server"]["Security"]["Preflight"].Attribute["Assembly"].Replace(".dll", String.Empty);
+                String assemblyFileName = LibServerConfiguration.DynamicXml["Ark.Lib.Server"]["Security"]["Preflight"].Attribute["Assembly"];
+                String classFullName = LibServerConfiguration.DynamicXml["Ark.Lib.Server"]["Security"]["Preflight"].Attribute["Class"];
 
-                if (String.IsNullOrEmpty(preflightAssembly) == false && String.IsNullOrEmpty(preflightClass) == false)
+                if (String.IsNullOrEmpty(assemblyFileName) == false && String.IsNullOrEmpty(classFullName) == false)
                 {
-                    iServerPreflight = (ILibServerPreflight)Activator.CreateInstance(
-                        Assembly.LoadFrom(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Bin", preflightAssembly)).GetType(preflightClass));
+                    iServerPreflight = (ILibServerPreflight)LazyActivator.Local.CreateInstance(Path.Combine(
+                        LibDirectory.Root.Bin.AssemblyFolder[assemblyFolderName].CurrentVersion.Lib.NetCoreApp31.Path, assemblyFileName),
+                        classFullName);
                 }
             }
         }

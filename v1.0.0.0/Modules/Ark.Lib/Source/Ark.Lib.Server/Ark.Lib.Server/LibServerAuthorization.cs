@@ -35,13 +35,15 @@ namespace Ark.Lib.Server
         {
             if (iServerAuthorization == null)
             {
-                String authorizationAssembly = LibServerConfiguration.DynamicXml["Ark.Lib.Server"]["Security"]["Authorization"].Attribute["Assembly"];
-                String authorizationClass = LibServerConfiguration.DynamicXml["Ark.Lib.Server"]["Security"]["Authorization"].Attribute["Class"];
+                String assemblyFolderName = LibServerConfiguration.DynamicXml["Ark.Lib.Server"]["Security"]["Authorization"].Attribute["Assembly"].Replace(".dll", String.Empty);
+                String assemblyFileName = LibServerConfiguration.DynamicXml["Ark.Lib.Server"]["Security"]["Authorization"].Attribute["Assembly"];
+                String classFullName = LibServerConfiguration.DynamicXml["Ark.Lib.Server"]["Security"]["Authorization"].Attribute["Class"];
 
-                if (String.IsNullOrEmpty(authorizationAssembly) == false && String.IsNullOrEmpty(authorizationClass) == false)
+                if (String.IsNullOrEmpty(assemblyFileName) == false && String.IsNullOrEmpty(classFullName) == false)
                 {
-                    iServerAuthorization = (ILibServerAuthorization)Activator.CreateInstance(
-                        Assembly.LoadFrom(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Bin", authorizationAssembly)).GetType(authorizationClass));
+                    iServerAuthorization = (ILibServerAuthorization)LazyActivator.Local.CreateInstance(Path.Combine(
+                        LibDirectory.Root.Bin.AssemblyFolder[assemblyFolderName].CurrentVersion.Lib.NetCoreApp31.Path, assemblyFileName),
+                        classFullName);
                 }
             }
         }

@@ -113,6 +113,7 @@ namespace Ark.Lib.Service
                 databaseOption.Dbms = xml.ReadNodeAttributeValue(xmlNodeSettings, "Dbms");
                 databaseOption.Assembly = xml.ReadNodeAttributeValue(xmlNodeSettings, "Assembly");
                 databaseOption.Class = xml.ReadNodeAttributeValue(xmlNodeSettings, "Class");
+                databaseOption.Version = xml.ReadNodeAttributeValue(xmlNodeSettings, "Version");
                 databaseOption.ConnectionString = xml.ReadNodeInnerText(xmlNodeConnectionString);
 
                 databaseOptionDictionary.Add(databaseOption.Alias, databaseOption);
@@ -135,6 +136,7 @@ namespace Ark.Lib.Service
                 xml.WriteNodeAttribute(xmlNodeSettings, "Dbms", databaseOption.Value.Dbms);
                 xml.WriteNodeAttribute(xmlNodeSettings, "Assembly", databaseOption.Value.Assembly);
                 xml.WriteNodeAttribute(xmlNodeSettings, "Class", databaseOption.Value.Class);
+                xml.WriteNodeAttribute(xmlNodeSettings, "Version", databaseOption.Value.Version);
 
                 XmlNode xmlNodeConnectionString = xml.WriteNode(xmlNodeSettings, "ConnectionString");
                 xml.WriteNodeInnerText(xmlNodeConnectionString, databaseOption.Value.ConnectionString);
