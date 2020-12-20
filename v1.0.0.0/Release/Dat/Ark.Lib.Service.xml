@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Ark.Lib.Service>
+  <Database>
+    <Option Alias="Default">
+      <Settings Dbms="MySQL" Assembly="Lazy.Database.MySql.dll" Class="Lazy.Database.MySql.LazyDatabaseMySql" Version="1.0.0">
+        <ConnectionString>Server=localhost;Database=Ark;Uid=ark;Pwd=ark;</ConnectionString>
+      </Settings>
+    </Option>
+  </Database>
+  <DynamicXml>
+  </DynamicXml>
+</Ark.Lib.Service>

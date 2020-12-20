@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Ark.Lib.Server>
+  <DynamicXml>
+    <Ark.Lib.Server>
+      <Security>
+        <Authentication Assembly="Ark.Sys.Server.dll" Class="Ark.Sys.Server.SysServerAuth" />
+        <Authorization Assembly="Ark.Sys.Server.dll" Class="Ark.Sys.Server.SysServerAuth" />
+      </Security>
+    </Ark.Lib.Server>
+  </DynamicXml>
+</Ark.Lib.Server>
