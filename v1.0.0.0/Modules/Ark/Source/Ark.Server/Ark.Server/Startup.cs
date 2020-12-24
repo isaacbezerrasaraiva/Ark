@@ -40,7 +40,7 @@ namespace Ark.Server
             IMvcBuilder iMvcBuilder = services.AddControllers();
 
             // Add ark modules as part of the application
-            String[] arkServerAssemblyArray = Directory.GetFiles(".\\Bin\\", "*.Server.dll", SearchOption.AllDirectories);
+            String[] arkServerAssemblyArray = Directory.GetFiles(LibDirectory.Root.Bin.Path, "*.Server.dll", SearchOption.AllDirectories);
             foreach (String arkServerAssembly in arkServerAssemblyArray)
                 iMvcBuilder.AddApplicationPart(Assembly.LoadFrom(arkServerAssembly));
 
