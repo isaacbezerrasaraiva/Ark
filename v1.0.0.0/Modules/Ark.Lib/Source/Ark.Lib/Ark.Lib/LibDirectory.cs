@@ -61,7 +61,11 @@ namespace Ark.Lib
 
                 public static String Path
                 {
-                    get { return System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Bin"); }
+                    get
+                    {
+                        /* Must use System.IO.Path.Combine to be compatible on Windows and Linux */
+                        return System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Bin");
+                    }
                 }
 
                 public static LibDirectoryAssemblyFolder AssemblyFolder
