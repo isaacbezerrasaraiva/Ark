@@ -61,7 +61,7 @@ namespace Ark.Lib
 
                 public static String Path
                 {
-                    get { return AppDomain.CurrentDomain.BaseDirectory + "Bin\\"; }
+                    get { return System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Bin"); }
                 }
 
                 public static LibDirectoryAssemblyFolder AssemblyFolder
@@ -69,7 +69,7 @@ namespace Ark.Lib
                     get
                     {
                         if (assemblyFolder == null)
-                            assemblyFolder = new LibDirectoryAssemblyFolder(AppDomain.CurrentDomain.BaseDirectory + "Bin\\");
+                            assemblyFolder = new LibDirectoryAssemblyFolder(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Bin"));
 
                         return assemblyFolder;
                     }
@@ -90,7 +90,7 @@ namespace Ark.Lib
 
                 public static String Path
                 {
-                    get { return AppDomain.CurrentDomain.BaseDirectory + "Dat\\"; }
+                    get { return System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Dat"); }
                 }
 
                 #endregion Properties
@@ -137,7 +137,7 @@ namespace Ark.Lib
             get
             {
                 if (this.assemblyFolderItemDictionary.ContainsKey(name) == false)
-                    this.assemblyFolderItemDictionary.Add(name, new LibDirectoryAssemblyFolderItem(this.path + name + "\\"));
+                    this.assemblyFolderItemDictionary.Add(name, new LibDirectoryAssemblyFolderItem(System.IO.Path.Combine(this.path, name)));
 
                 return this.assemblyFolderItemDictionary[name];
             }
@@ -220,7 +220,7 @@ namespace Ark.Lib
             get
             {
                 if (this.assemblyVersionItemDictionary.ContainsKey(value) == false)
-                    this.assemblyVersionItemDictionary.Add(value, new LibDirectoryAssemblyVersionItem(this.path + value + "\\"));
+                    this.assemblyVersionItemDictionary.Add(value, new LibDirectoryAssemblyVersionItem(System.IO.Path.Combine(this.path, value)));
 
                 return this.assemblyVersionItemDictionary[value];
             }
@@ -243,7 +243,7 @@ namespace Ark.Lib
         public LibDirectoryAssemblyVersionItem(String path)
         {
             this.path = path;
-            this.assemblyVersionLib = new LibDirectoryAssemblyVersionLib(this.path + "lib\\");
+            this.assemblyVersionLib = new LibDirectoryAssemblyVersionLib(System.IO.Path.Combine(this.path, "lib"));
         }
 
         #endregion Constructors
@@ -281,8 +281,8 @@ namespace Ark.Lib
         public LibDirectoryAssemblyVersionLib(String path)
         {
             this.path = path;
-            this.netCoreApp31 = new LibDirectoryAssemblyVersionLibItem(path + "netcoreapp3.1\\");
-            this.netStandard20 = new LibDirectoryAssemblyVersionLibItem(path + "netstandard2.0\\");
+            this.netCoreApp31 = new LibDirectoryAssemblyVersionLibItem(System.IO.Path.Combine(path, "netcoreapp3.1"));
+            this.netStandard20 = new LibDirectoryAssemblyVersionLibItem(System.IO.Path.Combine(path, "netstandard2.0"));
         }
 
         #endregion Constructors
