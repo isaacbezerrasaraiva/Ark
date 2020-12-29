@@ -38,9 +38,9 @@ namespace Ark.Lib.Server
 
             if (iServerPreflight == null)
             {
-                String assemblyFolderName = LibServerConfiguration.DynamicXml["Ark.Lib.Server"]["Security"]["Preflight"].Attribute["Assembly"].Replace(".dll", String.Empty);
-                String assemblyFileName = LibServerConfiguration.DynamicXml["Ark.Lib.Server"]["Security"]["Preflight"].Attribute["Assembly"];
-                String classFullName = LibServerConfiguration.DynamicXml["Ark.Lib.Server"]["Security"]["Preflight"].Attribute["Class"];
+                String assemblyFolderName = LibServerConfiguration.DynamicXml["Ark.Lib"]["Security"]["Preflight"].Attribute["Assembly"].Replace(".dll", String.Empty);
+                String assemblyFileName = LibServerConfiguration.DynamicXml["Ark.Lib"]["Security"]["Preflight"].Attribute["Assembly"];
+                String classFullName = LibServerConfiguration.DynamicXml["Ark.Lib"]["Security"]["Preflight"].Attribute["Class"];
 
                 if (String.IsNullOrEmpty(assemblyFileName) == false && String.IsNullOrEmpty(classFullName) == false)
                 {

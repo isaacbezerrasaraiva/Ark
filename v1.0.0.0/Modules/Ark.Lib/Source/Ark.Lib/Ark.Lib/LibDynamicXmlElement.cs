@@ -17,6 +17,7 @@ namespace Ark.Lib
     {
         #region Variables
 
+        private String text;
         private Dictionary<String, LibDynamicXmlElement> elementDictionary;
 
         #endregion Variables
@@ -26,8 +27,10 @@ namespace Ark.Lib
         public LibDynamicXmlElement(String name)
         {
             this.elementDictionary = new Dictionary<String, LibDynamicXmlElement>();
-            
+
             this.Attribute = new LibDynamicXmlAttribute();
+
+            this.NodeType = XmlNodeType.Element;
 
             this.Name = name;
         }
@@ -40,6 +43,21 @@ namespace Ark.Lib
         #region Properties
 
         public String Name { get; set; }
+
+        public String Text
+        {
+            get
+            {
+                return this.text;
+            }
+            set
+            {
+                this.text = value;
+                this.NodeType = String.IsNullOrEmpty(value) ? XmlNodeType.Element : XmlNodeType.Text;
+            }
+        }
+
+        public XmlNodeType NodeType { get; set; }
 
         public LibDynamicXmlAttribute Attribute { get; set; }
 

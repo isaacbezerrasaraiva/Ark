@@ -39,18 +39,28 @@ namespace Ark.Lib.Server
         /// </summary>
         public static void Load()
         {
+            if (dynamicXml == null)
+                dynamicXml = new LibDynamicXml();
+
             #region Initialize configuration file
 
             // If configuration file not exists will be created a new one with default values
             if (File.Exists(Path.Combine(LibDirectory.Root.Dat.Path, ARK_LIB_SERVER_XML)) == false)
                 Save();
 
-            if (dynamicXml == null)
-                dynamicXml = new LibDynamicXml();
-
             #endregion Initialize configuration file
 
-            LoadDynamicXml();
+            #region Load xml
+
+            LazyXml xml = new LazyXml();
+
+            xml.Open(Path.Combine(LibDirectory.Root.Dat.Path, ARK_LIB_SERVER_XML));
+
+            LoadDynamicXml(xml);
+
+            xml = null;
+
+            #endregion Load xml
         }
 
         /// <summary>
@@ -58,120 +68,86 @@ namespace Ark.Lib.Server
         /// </summary>
         public static void Save()
         {
-            #region Initialize default values
-
             if (dynamicXml == null)
                 dynamicXml = new LibDynamicXml();
 
-            if (dynamicXml["Ark.Lib.Server"]["Security"]["Authentication"].Attribute["Assembly"] == String.Empty)
-                dynamicXml["Ark.Lib.Server"]["Security"]["Authentication"].Attribute["Assembly"] = String.Empty;
+            #region Initialize default values
 
-            if (dynamicXml["Ark.Lib.Server"]["Security"]["Authentication"].Attribute["Class"] == String.Empty)
-                dynamicXml["Ark.Lib.Server"]["Security"]["Authentication"].Attribute["Class"] = String.Empty;
+            #region DynamicXml
 
-            if (dynamicXml["Ark.Lib.Server"]["Security"]["Authorization"].Attribute["Assembly"] == String.Empty)
-                dynamicXml["Ark.Lib.Server"]["Security"]["Authorization"].Attribute["Assembly"] = String.Empty;
+            #region Ark.Lib/Security/Preflight
 
-            if (dynamicXml["Ark.Lib.Server"]["Security"]["Authorization"].Attribute["Class"] == String.Empty)
-                dynamicXml["Ark.Lib.Server"]["Security"]["Authorization"].Attribute["Class"] = String.Empty;
+            if (dynamicXml["Ark.Lib"]["Security"]["Preflight"].Attribute["Assembly"] == String.Empty)
+                dynamicXml["Ark.Lib"]["Security"]["Preflight"].Attribute["Assembly"] = String.Empty;
+
+            if (dynamicXml["Ark.Lib"]["Security"]["Preflight"].Attribute["Class"] == String.Empty)
+                dynamicXml["Ark.Lib"]["Security"]["Preflight"].Attribute["Class"] = String.Empty;
+
+            #endregion Ark.Lib/Security/Preflight
+
+            #region Ark.Lib/Security/Authentication
+
+            if (dynamicXml["Ark.Lib"]["Security"]["Authentication"].Attribute["Assembly"] == String.Empty)
+                dynamicXml["Ark.Lib"]["Security"]["Authentication"].Attribute["Assembly"] = String.Empty;
+
+            if (dynamicXml["Ark.Lib"]["Security"]["Authentication"].Attribute["Class"] == String.Empty)
+                dynamicXml["Ark.Lib"]["Security"]["Authentication"].Attribute["Class"] = String.Empty;
+
+            #endregion Ark.Lib/Security/Authentication
+
+            #region Ark.Lib/Security/Authorization
+
+            if (dynamicXml["Ark.Lib"]["Security"]["Authorization"].Attribute["Assembly"] == String.Empty)
+                dynamicXml["Ark.Lib"]["Security"]["Authorization"].Attribute["Assembly"] = String.Empty;
+
+            if (dynamicXml["Ark.Lib"]["Security"]["Authorization"].Attribute["Class"] == String.Empty)
+                dynamicXml["Ark.Lib"]["Security"]["Authorization"].Attribute["Class"] = String.Empty;
+
+            #endregion Ark.Lib/Security/Authorization
+
+            #endregion DynamicXml
 
             #endregion Initialize default values
 
-            SaveDynamicXml();
-        }
+            #region Save xml
 
-        /// <summary>
-        /// Load dynamic xml
-        /// </summary>
-        private static void LoadDynamicXml()
-        {
-            LazyXml xml = new LazyXml();
-
-            xml.Open(Path.Combine(LibDirectory.Root.Dat.Path, ARK_LIB_SERVER_XML));
-
-            XmlNodeList xmlNodeModuleList = xml.ReadNodeChildList("/Ark.Lib.Server/DynamicXml");
-            
-            foreach (XmlNode xmlNodeModule in xmlNodeModuleList)
-            {
-                LoadDynamicXmlNode(xml, xmlNodeModule, dynamicXml[xmlNodeModule.Name]);
-                
-                XmlAttributeCollection xmlAttributeCollection = xml.ReadNodeAttributeList(xmlNodeModule);
-                foreach (XmlAttribute attribute in xmlAttributeCollection)
-                    dynamicXml[xmlNodeModule.Name].Attribute[attribute.Name] = attribute.Value;
-            }
-
-            xmlNodeModuleList = null;
-            xml = null;
-        }
-
-        /// <summary>
-        /// Load dynamic xml node
-        /// </summary>
-        /// <param name="xml">The xml</param>
-        /// <param name="xmlNode">The xml node</param>
-        /// <param name="element">The dynamic xml element</param>
-        private static void LoadDynamicXmlNode(LazyXml xml, XmlNode xmlNode, LibDynamicXmlElement element)
-        {
-            XmlNodeList xmlNodeElementList = xml.ReadNodeChildList(xmlNode);
-
-            foreach (XmlNode xmlNodeElement in xmlNodeElementList)
-            {
-                LoadDynamicXmlNode(xml, xmlNodeElement, element[xmlNodeElement.Name]);
-
-                XmlAttributeCollection xmlAttributeCollection = xml.ReadNodeAttributeList(xmlNodeElement);
-                foreach (XmlAttribute attribute in xmlAttributeCollection)
-                    element[xmlNodeElement.Name].Attribute[attribute.Name] = attribute.Value;
-            }
-
-            xmlNodeElementList = null;
-        }
-
-        /// <summary>
-        /// Save dynamic xml
-        /// </summary>
-        private static void SaveDynamicXml()
-        {
             LazyXml xml = new LazyXml();
 
             xml.New();
 
             XmlNode xmlNodeRoot = xml.WriteRoot("Ark.Lib.Server");
-            XmlNode xmlNodeDynamicXml = xml.WriteNode(xmlNodeRoot, "DynamicXml");
 
-            foreach (KeyValuePair<String, LibDynamicXmlElement> module in dynamicXml.Modules)
-            {
-                XmlNode xmlNodeModule = xml.WriteNode(xmlNodeDynamicXml, module.Key);
-                
-                SaveDynamicXmlNode(xml, xmlNodeModule, module.Value);
-
-                foreach (KeyValuePair<String, String> attribute in module.Value.Attribute.Collection)
-                    xml.WriteNodeAttribute(xmlNodeModule, attribute.Key, attribute.Value);
-            }
+            SaveDynamicXml(xml, xmlNodeRoot);
 
             xml.Save(Path.Combine(LibDirectory.Root.Dat.Path, ARK_LIB_SERVER_XML));
 
-            xmlNodeDynamicXml = null;
             xmlNodeRoot = null;
             xml = null;
+
+            #endregion Save xml
         }
 
         /// <summary>
-        /// Save dynamic xml node
+        /// Load dynamic xml
         /// </summary>
         /// <param name="xml">The xml</param>
-        /// <param name="xmlNode">The xml node</param>
-        /// <param name="element">The dynamic xml element</param>
-        private static void SaveDynamicXmlNode(LazyXml xml, XmlNode xmlNode, LibDynamicXmlElement element)
+        private static void LoadDynamicXml(LazyXml xml)
         {
-            foreach (KeyValuePair<String, LibDynamicXmlElement> childElement in element.Elements)
-            {
-                XmlNode xmlNodeChildElement = xml.WriteNode(xmlNode, childElement.Key);
-                
-                SaveDynamicXmlNode(xml, xmlNodeChildElement, childElement.Value);
+            dynamicXml.LoadDynamicXml(xml, "/Ark.Lib.Server/DynamicXml");
+        }
 
-                foreach (KeyValuePair<String, String> attribute in childElement.Value.Attribute.Collection)
-                    xml.WriteNodeAttribute(xmlNodeChildElement, attribute.Key, attribute.Value);
-            }
+        /// <summary>
+        /// Save dynamic xml
+        /// </summary>
+        /// <param name="xml">The xml</param>
+        /// <param name="xmlNodeRoot">The xml root node</param>
+        private static void SaveDynamicXml(LazyXml xml, XmlNode xmlNodeRoot)
+        {
+            XmlNode xmlNodeDynamicXml = xml.WriteNode(xmlNodeRoot, "DynamicXml");
+
+            dynamicXml.SaveDynamicXml(xml, xmlNodeDynamicXml);
+
+            xmlNodeDynamicXml = null;
         }
 
         #endregion Methods
