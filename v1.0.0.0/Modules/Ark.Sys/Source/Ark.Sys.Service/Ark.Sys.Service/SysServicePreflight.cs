@@ -12,12 +12,7 @@ using System.Data;
 using System.Collections.Generic;
 
 using Lazy;
-//using Lazy.Database;
-//using Lazy.Database.Db2;
-//using Lazy.Database.MySql;
-//using Lazy.Database.Oracle;
-//using Lazy.Database.Postgre;
-//using Lazy.Database.SqlServer;
+using Lazy.Database;
 
 using Ark.Lib;
 using Ark.Lib.Service;
@@ -104,7 +99,7 @@ namespace Ark.Sys.Service
         /// <param name="dataPreflightResponse">The response data</param>
         protected virtual void OnPreflight(SysDataPreflightRequest dataPreflightRequest, SysDataPreflightResponse dataPreflightResponse)
         {
-            LibDynamicXmlElement dynamicXmlElementPreflight = LibServiceConfiguration.DynamicXml["Ark.Sys.Service"]["Security"]["Preflight"]["Response"]["Headers"];
+            LibDynamicXmlElement dynamicXmlElementPreflight = LibServiceConfiguration.DynamicXml["Ark.Sys"]["Security"]["Preflight"]["Response"]["Headers"];
 
             foreach (KeyValuePair<String, LibDynamicXmlElement> dynamicXmlElementPreflightHeader in dynamicXmlElementPreflight.Elements)
             {

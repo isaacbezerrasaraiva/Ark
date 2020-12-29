@@ -20,7 +20,7 @@ using Ark.Fwk.IServer;
 //using Ark.Fts.Data;
 //using Ark.Fts.IServer;
 using Ark.Sys;
-//using Ark.Sys.Data;
+using Ark.Sys.Data;
 
 namespace Ark.Sys.IServer
 {
