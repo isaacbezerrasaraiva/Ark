@@ -37,12 +37,24 @@ namespace Ark.Fwk.Service
 
         public FwkService()
         {
-            LibServiceDatabaseOption databaseOption = LibServiceConfiguration.DatabaseOptions["Default"];
+            #region Initialize database
 
-            String assemblyFolderName = databaseOption.Assembly.Replace(".dll", String.Empty);
+            String databaseAlias = "Default";
+
+            LibDynamicXmlElement dynXmlElementDatabaseSettings = LibServiceConfiguration.DynamicXml["Ark.Fwk"]["Database"][databaseAlias]["Settings"];
+
+            String databaseDbms = dynXmlElementDatabaseSettings.Attribute["Dbms"];
+            String databaseAssembly = dynXmlElementDatabaseSettings.Attribute["Assembly"];
+            String databaseClass = dynXmlElementDatabaseSettings.Attribute["Class"];
+            String databaseVersion = dynXmlElementDatabaseSettings.Attribute["Version"];
+            String databaseConnectionString = dynXmlElementDatabaseSettings["ConnectionString"].Text;
+            String assemblyFolderName = databaseAssembly.Replace(".dll", String.Empty);
+
             this.database = (LazyDatabase)LazyActivator.Local.CreateInstance(Path.Combine(
-                LibDirectory.Root.Bin.AssemblyFolder[assemblyFolderName].Version[databaseOption.Version].Lib.NetCoreApp31.Path, databaseOption.Assembly),
-                databaseOption.Class, new Object[] { databaseOption.ConnectionString });
+                LibDirectory.Root.Bin.AssemblyFolder[assemblyFolderName].Version[databaseVersion].Lib.NetCoreApp31.Path, databaseAssembly),
+                databaseClass, new Object[] { databaseConnectionString });
+
+            #endregion Initialize database
         }
 
         #endregion Constructors
