@@ -122,7 +122,6 @@ namespace Ark.Fwk.Service
         /// <param name="dataBasicResponse">The response data</param>
         protected virtual void OnLoad(FwkDataBasicRequest dataBasicRequest, FwkDataBasicResponse dataBasicResponse)
         {
-            dataBasicResponse.Test = "Tested";
         }
 
         #endregion Methods

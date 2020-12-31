@@ -54,9 +54,6 @@ namespace Ark.Fwk.Data
         #endregion Methods
 
         #region Properties
-
-        public String Test { get; set; }
-
         #endregion Properties
     }
 }
