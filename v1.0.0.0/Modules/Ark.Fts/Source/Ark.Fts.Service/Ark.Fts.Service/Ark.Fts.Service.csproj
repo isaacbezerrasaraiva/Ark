@@ -35,11 +35,6 @@
     <PackageReference Include="Ark.Lib.Service" Version="1.0.0" />
     <PackageReference Include="Lazy" Version="1.0.0" />
     <PackageReference Include="Lazy.Database" Version="1.0.0" />
-    <PackageReference Include="Lazy.Database.Db2" Version="1.0.0" />
-    <PackageReference Include="Lazy.Database.MySql" Version="1.0.0" />
-    <PackageReference Include="Lazy.Database.Oracle" Version="1.0.0" />
-    <PackageReference Include="Lazy.Database.Postgre" Version="1.0.0" />
-    <PackageReference Include="Lazy.Database.SqlServer" Version="1.0.0" />
   </ItemGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
