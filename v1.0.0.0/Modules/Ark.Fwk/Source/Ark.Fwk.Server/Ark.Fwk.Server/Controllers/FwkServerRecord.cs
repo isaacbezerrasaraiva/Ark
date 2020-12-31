@@ -54,13 +54,13 @@ namespace Ark.Fwk.Server
         {
             return InvokeService("Read", dataRequestString);
         }
-        
+
         /// <summary>
         /// Insert the Record
         /// </summary>
         /// <param name="dataRequestString">The request data string</param>
         /// <returns>The response data string</returns>
-        [HttpGet]
+        [HttpPost]
         [Route("Insert/{dataRequestString}")]
         public String Insert(String dataRequestString)
         {
@@ -72,7 +72,7 @@ namespace Ark.Fwk.Server
         /// </summary>
         /// <param name="dataRequestString">The request data string</param>
         /// <returns>The response data string</returns>
-        [HttpGet]
+        [HttpPut]
         [Route("Update/{dataRequestString}")]
         public String Update(String dataRequestString)
         {
@@ -84,7 +84,7 @@ namespace Ark.Fwk.Server
         /// </summary>
         /// <param name="dataRequestString">The request data string</param>
         /// <returns>The response data string</returns>
-        [HttpGet]
+        [HttpPost][HttpPut]
         [Route("Upsert/{dataRequestString}")]
         public String Upsert(String dataRequestString)
         {
@@ -96,7 +96,7 @@ namespace Ark.Fwk.Server
         /// </summary>
         /// <param name="dataRequestString">The request data string</param>
         /// <returns>The response data string</returns>
-        [HttpGet]
+        [HttpDelete]
         [Route("Delete/{dataRequestString}")]
         public String Delete(String dataRequestString)
         {
