@@ -26,7 +26,10 @@
   </ItemGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
-    <PostBuildEvent>xcopy /y $(SolutionDir)Ark.Lib\Ark.Lib\bin\Debug\netcoreapp3.1\Ark.Lib.dll $(SolutionDir)..\..\..\Release\Bin\Ark.Lib\1.0.0\lib\netcoreapp3.1\</PostBuildEvent>
+    <PostBuildEvent>
+      xcopy /y $(SolutionDir)Ark.Lib\Ark.Lib\bin\Debug\netcoreapp3.1\Ark.Lib.dll $(SolutionDir)..\..\..\Release\Bin\Ark.Lib\1.0.0\lib\netcoreapp3.1\
+      xcopy /y $(SolutionDir)Ark.Lib\Ark.Lib\bin\Debug\netcoreapp3.1\Ark.Lib.dll %SystemDrive%%HomePath%\.nuget\Packages\ark.lib\1.0.0\lib\netcoreapp3.1\
+    </PostBuildEvent>
   </PropertyGroup>
 
 </Project>
