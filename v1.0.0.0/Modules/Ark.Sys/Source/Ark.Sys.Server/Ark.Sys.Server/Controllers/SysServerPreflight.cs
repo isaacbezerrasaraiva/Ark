@@ -65,7 +65,7 @@ namespace Ark.Sys.Server
 
             SysDataPreflightResponse dataPreflightResponse = (SysDataPreflightResponse)InvokeService("Preflight", dataPreflightRequest, context);
 
-            foreach (KeyValuePair<String, String> header in dataPreflightResponse.Headers)
+            foreach (KeyValuePair<String, String> header in dataPreflightResponse.Content.HttpResponseHeaders)
                 context.Response.Headers.Add(header.Key, header.Value);
 
             context.Response.StatusCode = StatusCodes.Status200OK;

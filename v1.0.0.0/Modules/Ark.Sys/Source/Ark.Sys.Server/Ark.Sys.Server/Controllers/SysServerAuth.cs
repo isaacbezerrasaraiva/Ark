@@ -68,15 +68,15 @@ namespace Ark.Sys.Server
             if (String.IsNullOrEmpty(headerToken) == false)
             {
                 SysDataAuthRequest dataAuthRequest = new SysDataAuthRequest();
-                dataAuthRequest.AuthenticationRequest = new SysAuthenticationRequest();
-                dataAuthRequest.AuthenticationRequest.Token = headerToken;
+                dataAuthRequest.Content.AuthenticationRequest = new SysAuthenticationRequest();
+                dataAuthRequest.Content.AuthenticationRequest.Token = headerToken;
 
                 SysDataAuthResponse dataAuthResponse = (SysDataAuthResponse)InvokeService("Authenticate", dataAuthRequest, context);
 
-                if (dataAuthResponse.AuthenticationResponse.IdDomain > -1 && dataAuthResponse.AuthenticationResponse.IdUser > -1)
+                if (dataAuthResponse.Content.AuthenticationResponse.IdDomain > -1 && dataAuthResponse.Content.AuthenticationResponse.IdUser > -1)
                 {
-                    context.Items["IdDomain"] = dataAuthResponse.AuthenticationResponse.IdDomain;
-                    context.Items["IdUser"] = dataAuthResponse.AuthenticationResponse.IdUser;
+                    context.Items["IdDomain"] = dataAuthResponse.Content.AuthenticationResponse.IdDomain;
+                    context.Items["IdUser"] = dataAuthResponse.Content.AuthenticationResponse.IdUser;
                 }
             }
             else
@@ -87,17 +87,17 @@ namespace Ark.Sys.Server
                 if (headerIdDomain > -1 && String.IsNullOrEmpty(headerCredential) == false)
                 {
                     SysDataAuthRequest dataAuthRequest = new SysDataAuthRequest();
-                    dataAuthRequest.AuthenticationRequest = new SysAuthenticationRequest();
-                    dataAuthRequest.AuthenticationRequest.IdDomain = headerIdDomain;
-                    dataAuthRequest.AuthenticationRequest.Credential = headerCredential;
+                    dataAuthRequest.Content.AuthenticationRequest = new SysAuthenticationRequest();
+                    dataAuthRequest.Content.AuthenticationRequest.IdDomain = headerIdDomain;
+                    dataAuthRequest.Content.AuthenticationRequest.Credential = headerCredential;
 
                     SysDataAuthResponse dataAuthResponse = (SysDataAuthResponse)InvokeService("Authenticate", dataAuthRequest, context);
 
-                    if (dataAuthResponse.AuthenticationResponse.IdDomain > -1 && dataAuthResponse.AuthenticationResponse.IdUser > -1)
+                    if (dataAuthResponse.Content.AuthenticationResponse.IdDomain > -1 && dataAuthResponse.Content.AuthenticationResponse.IdUser > -1)
                     {
-                        context.Items["IdDomain"] = dataAuthResponse.AuthenticationResponse.IdDomain;
-                        context.Items["IdUser"] = dataAuthResponse.AuthenticationResponse.IdUser;
-                        context.Response.Headers["Token"] = dataAuthResponse.AuthenticationResponse.Token;
+                        context.Items["IdDomain"] = dataAuthResponse.Content.AuthenticationResponse.IdDomain;
+                        context.Items["IdUser"] = dataAuthResponse.Content.AuthenticationResponse.IdUser;
+                        context.Response.Headers["Token"] = dataAuthResponse.Content.AuthenticationResponse.Token;
                     }
                 }
             }
@@ -119,16 +119,16 @@ namespace Ark.Sys.Server
                     String[] controllerPath = context.HttpContext.Request.Path.Value.Split('/', StringSplitOptions.RemoveEmptyEntries);
 
                     SysDataAuthRequest dataAuthRequest = new SysDataAuthRequest();
-                    dataAuthRequest.AuthorizationRequest = new SysAuthorizationRequest();
-                    dataAuthRequest.AuthorizationRequest.IdDomain = idDomain;
-                    dataAuthRequest.AuthorizationRequest.IdUser = idUser;
-                    dataAuthRequest.AuthorizationRequest.CodModule = controllerPath[0];
-                    dataAuthRequest.AuthorizationRequest.CodFeature = controllerPath[1];
-                    dataAuthRequest.AuthorizationRequest.CodAction = controllerPath[2];
+                    dataAuthRequest.Content.AuthorizationRequest = new SysAuthorizationRequest();
+                    dataAuthRequest.Content.AuthorizationRequest.IdDomain = idDomain;
+                    dataAuthRequest.Content.AuthorizationRequest.IdUser = idUser;
+                    dataAuthRequest.Content.AuthorizationRequest.CodModule = controllerPath[0];
+                    dataAuthRequest.Content.AuthorizationRequest.CodFeature = controllerPath[1];
+                    dataAuthRequest.Content.AuthorizationRequest.CodAction = controllerPath[2];
 
                     SysDataAuthResponse dataAuthResponse = (SysDataAuthResponse)InvokeService("Authorize", dataAuthRequest, context.HttpContext);
 
-                    if (dataAuthResponse.AuthorizationResponse.Authorized == false)
+                    if (dataAuthResponse.Content.AuthorizationResponse.Authorized == false)
                     {
                         context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
                     }

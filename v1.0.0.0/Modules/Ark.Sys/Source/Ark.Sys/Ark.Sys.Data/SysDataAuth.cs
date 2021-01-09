@@ -31,6 +31,61 @@ namespace Ark.Sys.Data
 
         public SysDataAuthRequest()
         {
+            this.header = new SysDataAuthRequestHeader();
+            this.content = new SysDataAuthRequestContent();
+        }
+
+        #endregion Constructors
+
+        #region Methods
+        #endregion Methods
+
+        #region Properties
+
+        public new SysDataAuthRequestHeader Header
+        {
+            get { return (SysDataAuthRequestHeader)this.header; }
+            set { this.header = value; }
+        }
+
+        public new SysDataAuthRequestContent Content
+        {
+            get { return (SysDataAuthRequestContent)this.content; }
+            set { this.content = value; }
+        }
+
+        #endregion Properties
+    }
+
+    public class SysDataAuthRequestHeader : FwkDataRequestHeader
+    {
+        #region Variables
+        #endregion Variables
+
+        #region Constructors
+
+        public SysDataAuthRequestHeader()
+        {
+        }
+
+        #endregion Constructors
+
+        #region Methods
+        #endregion Methods
+
+        #region Properties
+        #endregion Properties
+    }
+
+    public class SysDataAuthRequestContent : FwkDataRequestContent
+    {
+        #region Variables
+        #endregion Variables
+
+        #region Constructors
+
+        public SysDataAuthRequestContent()
+        {
         }
 
         #endregion Constructors
@@ -55,6 +110,61 @@ namespace Ark.Sys.Data
         #region Constructors
 
         public SysDataAuthResponse()
+        {
+            this.header = new SysDataAuthResponseHeader();
+            this.content = new SysDataAuthResponseContent();
+        }
+
+        #endregion Constructors
+
+        #region Methods
+        #endregion Methods
+
+        #region Properties
+
+        public new SysDataAuthResponseHeader Header
+        {
+            get { return (SysDataAuthResponseHeader)this.header; }
+            set { this.header = value; }
+        }
+
+        public new SysDataAuthResponseContent Content
+        {
+            get { return (SysDataAuthResponseContent)this.content; }
+            set { this.content = value; }
+        }
+
+        #endregion Properties
+    }
+
+    public class SysDataAuthResponseHeader : FwkDataResponseHeader
+    {
+        #region Variables
+        #endregion Variables
+
+        #region Constructors
+
+        public SysDataAuthResponseHeader()
+        {
+        }
+
+        #endregion Constructors
+
+        #region Methods
+        #endregion Methods
+
+        #region Properties
+        #endregion Properties
+    }
+
+    public class SysDataAuthResponseContent : FwkDataResponseContent
+    {
+        #region Variables
+        #endregion Variables
+
+        #region Constructors
+
+        public SysDataAuthResponseContent()
         {
         }
 

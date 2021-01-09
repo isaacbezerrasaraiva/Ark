@@ -31,6 +31,61 @@ namespace Ark.Sys.Data
 
         public SysDataPreflightRequest()
         {
+            this.header = new SysDataPreflightRequestHeader();
+            this.content = new SysDataPreflightRequestContent();
+        }
+
+        #endregion Constructors
+
+        #region Methods
+        #endregion Methods
+
+        #region Properties
+
+        public new SysDataPreflightRequestHeader Header
+        {
+            get { return (SysDataPreflightRequestHeader)this.header; }
+            set { this.header = value; }
+        }
+
+        public new SysDataPreflightRequestContent Content
+        {
+            get { return (SysDataPreflightRequestContent)this.content; }
+            set { this.content = value; }
+        }
+
+        #endregion Properties
+    }
+
+    public class SysDataPreflightRequestHeader : FwkDataRequestHeader
+    {
+        #region Variables
+        #endregion Variables
+
+        #region Constructors
+
+        public SysDataPreflightRequestHeader()
+        {
+        }
+
+        #endregion Constructors
+
+        #region Methods
+        #endregion Methods
+
+        #region Properties
+        #endregion Properties
+    }
+
+    public class SysDataPreflightRequestContent : FwkDataRequestContent
+    {
+        #region Variables
+        #endregion Variables
+
+        #region Constructors
+
+        public SysDataPreflightRequestContent()
+        {
         }
 
         #endregion Constructors
@@ -51,7 +106,8 @@ namespace Ark.Sys.Data
 
         public SysDataPreflightResponse()
         {
-            this.Headers = new Dictionary<String, String>();
+            this.header = new SysDataPreflightResponseHeader();
+            this.content = new SysDataPreflightResponseContent();
         }
 
         #endregion Constructors
@@ -61,7 +117,61 @@ namespace Ark.Sys.Data
 
         #region Properties
 
-        public Dictionary<String, String> Headers;
+        public new SysDataPreflightResponseHeader Header
+        {
+            get { return (SysDataPreflightResponseHeader)this.header; }
+            set { this.header = value; }
+        }
+
+        public new SysDataPreflightResponseContent Content
+        {
+            get { return (SysDataPreflightResponseContent)this.content; }
+            set { this.content = value; }
+        }
+
+        #endregion Properties
+    }
+
+    public class SysDataPreflightResponseHeader : FwkDataResponseHeader
+    {
+        #region Variables
+        #endregion Variables
+
+        #region Constructors
+
+        public SysDataPreflightResponseHeader()
+        {
+        }
+
+        #endregion Constructors
+
+        #region Methods
+        #endregion Methods
+
+        #region Properties
+        #endregion Properties
+    }
+
+    public class SysDataPreflightResponseContent : FwkDataResponseContent
+    {
+        #region Variables
+        #endregion Variables
+
+        #region Constructors
+
+        public SysDataPreflightResponseContent()
+        {
+            this.HttpResponseHeaders = new Dictionary<String, String>();
+        }
+
+        #endregion Constructors
+
+        #region Methods
+        #endregion Methods
+
+        #region Properties
+
+        public Dictionary<String, String> HttpResponseHeaders;
 
         #endregion Properties
     }

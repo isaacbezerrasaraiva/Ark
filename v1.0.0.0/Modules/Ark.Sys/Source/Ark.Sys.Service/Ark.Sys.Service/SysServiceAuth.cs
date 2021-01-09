@@ -150,13 +150,13 @@ namespace Ark.Sys.Service
         /// <param name="dataAuthResponse">The response data</param>
         protected virtual void OnAuthenticate(SysDataAuthRequest dataAuthRequest, SysDataAuthResponse dataAuthResponse)
         {
-            dataAuthResponse.AuthenticationResponse = new SysAuthenticationResponse();
-            dataAuthResponse.AuthenticationResponse.IdDomain = -1;
-            dataAuthResponse.AuthenticationResponse.IdUser = -1;
+            dataAuthResponse.Content.AuthenticationResponse = new SysAuthenticationResponse();
+            dataAuthResponse.Content.AuthenticationResponse.IdDomain = -1;
+            dataAuthResponse.Content.AuthenticationResponse.IdUser = -1;
 
-            if (dataAuthRequest.AuthenticationRequest.Token != null)
+            if (dataAuthRequest.Content.AuthenticationRequest.Token != null)
             {
-                Tuple<Dictionary<String, String>, Dictionary<String, String>> tuplePayloadDictionary = DecryptTokenJWT(dataAuthRequest.AuthenticationRequest.Token);
+                Tuple<Dictionary<String, String>, Dictionary<String, String>> tuplePayloadDictionary = DecryptTokenJWT(dataAuthRequest.Content.AuthenticationRequest.Token);
                 Dictionary<String, String> publicPayloadDictionary = tuplePayloadDictionary.Item1;
                 Dictionary<String, String> privatePayloadDictionary = tuplePayloadDictionary.Item2;
 
@@ -170,19 +170,19 @@ namespace Ark.Sys.Service
 
                 #endregion AfterDecryptToken
 
-                dataAuthResponse.AuthenticationResponse.IdDomain = LazyConvert.ToInt32(privatePayloadDictionary["IdDomain"]);
-                dataAuthResponse.AuthenticationResponse.IdUser = LazyConvert.ToInt32(privatePayloadDictionary["IdUser"]);
+                dataAuthResponse.Content.AuthenticationResponse.IdDomain = LazyConvert.ToInt32(privatePayloadDictionary["IdDomain"]);
+                dataAuthResponse.Content.AuthenticationResponse.IdUser = LazyConvert.ToInt32(privatePayloadDictionary["IdUser"]);
             }
-            else if (dataAuthRequest.AuthenticationRequest.Credential != null)
+            else if (dataAuthRequest.Content.AuthenticationRequest.Credential != null)
             {
-                String[] credentialArray = dataAuthRequest.AuthenticationRequest.Credential.Split(';');
+                String[] credentialArray = dataAuthRequest.Content.AuthenticationRequest.Credential.Split(';');
 
                 #region Authenticate on database
 
                 this.Database.OpenConnection();
 
                 String sql = "select IdUser, Password, DisplayName from FwkUser where IdDomain = :IdDomain and Username = :Username";
-                DataTable dataTableUser = this.Database.QueryTable(sql, "FwkUser", new Object[] { dataAuthRequest.AuthenticationRequest.IdDomain, credentialArray[0] });
+                DataTable dataTableUser = this.Database.QueryTable(sql, "FwkUser", new Object[] { dataAuthRequest.Content.AuthenticationRequest.IdDomain, credentialArray[0] });
 
                 if (dataTableUser.Rows.Count > 0)
                 {
@@ -194,7 +194,7 @@ namespace Ark.Sys.Service
                             new Tuple<Dictionary<String, String>, Dictionary<String, String>>(publicPayloadDictionary, privatePayloadDictionary);
 
                         publicPayloadDictionary.Add("User", LazyConvert.ToString(dataTableUser.Rows[0]["DisplayName"]));
-                        privatePayloadDictionary.Add("IdDomain", LazyConvert.ToString(dataAuthRequest.AuthenticationRequest.IdDomain));
+                        privatePayloadDictionary.Add("IdDomain", LazyConvert.ToString(dataAuthRequest.Content.AuthenticationRequest.IdDomain));
                         privatePayloadDictionary.Add("IdUser", LazyConvert.ToString(dataTableUser.Rows[0]["IdUser"]));
 
                         #region BeforeEncryptToken
@@ -207,9 +207,9 @@ namespace Ark.Sys.Service
 
                         #endregion BeforeEncryptToken
 
-                        dataAuthResponse.AuthenticationResponse.IdDomain = dataAuthRequest.AuthenticationRequest.IdDomain;
-                        dataAuthResponse.AuthenticationResponse.IdUser = LazyConvert.ToInt32(dataTableUser.Rows[0]["IdUser"]);
-                        dataAuthResponse.AuthenticationResponse.Token = EncryptTokenJWT(tuplePayloadDictionary);
+                        dataAuthResponse.Content.AuthenticationResponse.IdDomain = dataAuthRequest.Content.AuthenticationRequest.IdDomain;
+                        dataAuthResponse.Content.AuthenticationResponse.IdUser = LazyConvert.ToInt32(dataTableUser.Rows[0]["IdUser"]);
+                        dataAuthResponse.Content.AuthenticationResponse.Token = EncryptTokenJWT(tuplePayloadDictionary);
                     }
                 }
 
@@ -226,7 +226,7 @@ namespace Ark.Sys.Service
         /// <param name="dataAuthResponse">The response data</param>
         protected virtual void OnAuthorize(SysDataAuthRequest dataAuthRequest, SysDataAuthResponse dataAuthResponse)
         {
-            dataAuthResponse.AuthorizationResponse = new SysAuthorizationResponse();
+            dataAuthResponse.Content.AuthorizationResponse = new SysAuthorizationResponse();
 
             #region Authorization Query
 
@@ -252,13 +252,13 @@ namespace Ark.Sys.Service
 
             this.Database.OpenConnection();
 
-            dataAuthResponse.AuthorizationResponse.Authorized =
+            dataAuthResponse.Content.AuthorizationResponse.Authorized =
                 this.Database.QueryFind(sqlAuthorization, new Object[] {
-                    dataAuthRequest.AuthorizationRequest.IdDomain,
-                    dataAuthRequest.AuthorizationRequest.IdUser,
-                    dataAuthRequest.AuthorizationRequest.CodModule,
-                    dataAuthRequest.AuthorizationRequest.CodFeature,
-                    dataAuthRequest.AuthorizationRequest.CodAction });
+                    dataAuthRequest.Content.AuthorizationRequest.IdDomain,
+                    dataAuthRequest.Content.AuthorizationRequest.IdUser,
+                    dataAuthRequest.Content.AuthorizationRequest.CodModule,
+                    dataAuthRequest.Content.AuthorizationRequest.CodFeature,
+                    dataAuthRequest.Content.AuthorizationRequest.CodAction });
 
             this.Database.CloseConnection();
         }
@@ -371,7 +371,7 @@ namespace Ark.Sys.Service
         /// </summary>
         private void ValidateSecrets()
         {
-            if (String.IsNullOrEmpty(LibServiceConfiguration.DynamicXml["Ark.Sys"]["Security"]["Secrets"]["SecretKey"].Text) == true || 
+            if (String.IsNullOrEmpty(LibServiceConfiguration.DynamicXml["Ark.Sys"]["Security"]["Secrets"]["SecretKey"].Text) == true ||
                 String.IsNullOrEmpty(LibServiceConfiguration.DynamicXml["Ark.Sys"]["Security"]["Secrets"]["SecretVector"].Text) == true)
             {
                 LibServiceConfiguration.DynamicXml["Ark.Sys"]["Security"]["Secrets"]["SecretKey"].Text = Guid.NewGuid().ToString().Replace("-", String.Empty);

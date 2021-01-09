@@ -104,7 +104,7 @@ namespace Ark.Sys.Service
 
             foreach (KeyValuePair<String, LibDynamicXmlElement> dynamicXmlElementPreflightHeader in dynamicXmlElementPreflight.Elements)
             {
-                dataPreflightResponse.Headers.Add(
+                dataPreflightResponse.Content.HttpResponseHeaders.Add(
                     dynamicXmlElementPreflightHeader.Value.Attribute["HeaderKey"],
                     dynamicXmlElementPreflightHeader.Value.Attribute["HeaderValue"]);
             }
