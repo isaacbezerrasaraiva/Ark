@@ -215,11 +215,11 @@ namespace Ark.Fwk.Service
         /// <param name="dataViewRequest">The request data</param>
         private void InternalBeforeRead(FwkDataViewRequest dataViewRequest)
         {
-            if (dataViewRequest.ParentKey == null)
-                dataViewRequest.ParentKey = new Dictionary<String, Object>();
+            if (dataViewRequest.Content.ParentKey == null)
+                dataViewRequest.Content.ParentKey = new Dictionary<String, Object>();
 
-            if (dataViewRequest.ParentKey.ContainsKey("IdDomain") == false)
-                dataViewRequest.ParentKey.Add("IdDomain", this.Environment.Domain.IdDomain);
+            if (dataViewRequest.Content.ParentKey.ContainsKey("IdDomain") == false)
+                dataViewRequest.Content.ParentKey.Add("IdDomain", this.Environment.Domain.IdDomain);
         }
 
         #endregion Methods

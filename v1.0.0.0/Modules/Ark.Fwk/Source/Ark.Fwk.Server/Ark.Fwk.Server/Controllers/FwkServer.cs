@@ -73,12 +73,35 @@ namespace Ark.Fwk.Server
         /// <returns>The service method response data string</returns>
         protected String InvokeService(String methodName, String dataRequestString, HttpContext context)
         {
-            CreateService(CreateEnvironment(context));
+            context.Response.ContentType = "application/json";
 
-            MethodInfo methodInfo = this.iService.GetType().GetMethod(methodName);
-            Object dataRequest = JsonConvert.DeserializeObject(dataRequestString, this.DataRequestType, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
-            Object dataResponse = methodInfo.Invoke(this.iService, new Object[] { dataRequest });
-            return (String)JsonConvert.SerializeObject(dataResponse, this.DataResponseType, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+            try
+            {
+                CreateService(CreateEnvironment(context));
+
+                MethodInfo methodInfo = this.iService.GetType().GetMethod(methodName);
+                FwkDataRequest dataRequest = (FwkDataRequest)JsonConvert.DeserializeObject(dataRequestString, this.DataRequestType);
+                FwkDataResponse dataResponse = (FwkDataResponse)methodInfo.Invoke(this.iService, new Object[] { dataRequest });
+
+                if (String.IsNullOrEmpty(dataResponse.Header.StatusCode) == true)
+                {
+                    dataResponse.Header.StatusCode = LazyDecorator.GetCustomAttributeFromEnumValue(FwkHeaderStatus.Success).Code;
+                    dataResponse.Header.StatusName = LazyDecorator.GetCustomAttributeFromEnumValue(FwkHeaderStatus.Success).Name;
+                    dataResponse.Header.StatusMessage = (String)LazyDecorator.GetCustomAttributeFromEnumValue(FwkHeaderStatus.Success).Data;
+                }
+
+                return (String)JsonConvert.SerializeObject(dataResponse, this.DataResponseType, null);
+            }
+            catch (Exception exp)
+            {
+                FwkDataResponse dataResponse = (FwkDataResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
+
+                dataResponse.Header.StatusCode = LazyDecorator.GetCustomAttributeFromEnumValue(FwkHeaderStatus.Error).Code;
+                dataResponse.Header.StatusName = LazyDecorator.GetCustomAttributeFromEnumValue(FwkHeaderStatus.Error).Name;
+                dataResponse.Header.StatusMessage = exp.GetBaseException().Message;
+
+                return (String)JsonConvert.SerializeObject(dataResponse, this.DataResponseType, null);
+            }
         }
 
         /// <summary>
@@ -101,10 +124,32 @@ namespace Ark.Fwk.Server
         /// <returns>The service method response data</returns>
         protected FwkDataResponse InvokeService(String methodName, FwkDataRequest dataRequest, HttpContext context)
         {
-            CreateService(CreateEnvironment(context));
+            try
+            {
+                CreateService(CreateEnvironment(context));
 
-            MethodInfo methodInfo = this.iService.GetType().GetMethod(methodName);
-            return (FwkDataResponse)methodInfo.Invoke(this.iService, new Object[] { dataRequest });
+                MethodInfo methodInfo = this.iService.GetType().GetMethod(methodName);
+                FwkDataResponse dataResponse = (FwkDataResponse)methodInfo.Invoke(this.iService, new Object[] { dataRequest });
+
+                if (String.IsNullOrEmpty(dataResponse.Header.StatusCode) == true)
+                {
+                    dataResponse.Header.StatusCode = LazyDecorator.GetCustomAttributeFromEnumValue(FwkHeaderStatus.Success).Code;
+                    dataResponse.Header.StatusName = LazyDecorator.GetCustomAttributeFromEnumValue(FwkHeaderStatus.Success).Name;
+                    dataResponse.Header.StatusMessage = (String)LazyDecorator.GetCustomAttributeFromEnumValue(FwkHeaderStatus.Success).Data;
+                }
+
+                return dataResponse;
+            }
+            catch (Exception exp)
+            {
+                FwkDataResponse dataResponse = (FwkDataResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
+
+                dataResponse.Header.StatusCode = LazyDecorator.GetCustomAttributeFromEnumValue(FwkHeaderStatus.Error).Code;
+                dataResponse.Header.StatusName = LazyDecorator.GetCustomAttributeFromEnumValue(FwkHeaderStatus.Error).Name;
+                dataResponse.Header.StatusMessage = exp.GetBaseException().Message;
+
+                return dataResponse;
+            }
         }
 
         /// <summary>

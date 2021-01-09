@@ -30,7 +30,10 @@
   </ItemGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
-    <PostBuildEvent>xcopy /y $(SolutionDir)Ark.Fwk.Service\Ark.Fwk.Servant\bin\Debug\netcoreapp3.1\Ark.Fwk.Servant.dll $(SolutionDir)..\..\..\Release\Bin\Ark.Fwk.Servant\1.0.0\lib\netcoreapp3.1\</PostBuildEvent>
+    <PostBuildEvent>
+      xcopy /y $(SolutionDir)Ark.Fwk.Service\Ark.Fwk.Servant\bin\Debug\netcoreapp3.1\Ark.Fwk.Servant.dll $(SolutionDir)..\..\..\Release\Bin\Ark.Fwk.Servant\1.0.0\lib\netcoreapp3.1\
+      xcopy /y $(SolutionDir)Ark.Fwk.Service\Ark.Fwk.Servant\bin\Debug\netcoreapp3.1\Ark.Fwk.Servant.dll %SystemDrive%%HomePath%\.nuget\Packages\ark.fwk.servant\1.0.0\lib\netcoreapp3.1\
+    </PostBuildEvent>
   </PropertyGroup>
 
 </Project>

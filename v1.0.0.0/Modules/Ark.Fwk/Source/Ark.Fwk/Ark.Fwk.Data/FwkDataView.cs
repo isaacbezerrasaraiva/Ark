@@ -32,6 +32,64 @@ namespace Ark.Fwk.Data
 
         public FwkDataViewRequest()
         {
+            if (this.GetType() == typeof(FwkDataViewRequest))
+            {
+                this.header = new FwkDataViewRequestHeader();
+                this.content = new FwkDataViewRequestContent();
+            }
+        }
+
+        #endregion Constructors
+
+        #region Methods
+        #endregion Methods
+
+        #region Properties
+
+        public new FwkDataViewRequestHeader Header
+        {
+            get { return (FwkDataViewRequestHeader)this.header; }
+            set { this.header = value; }
+        }
+
+        public new FwkDataViewRequestContent Content
+        {
+            get { return (FwkDataViewRequestContent)this.content; }
+            set { this.content = value; }
+        }
+
+        #endregion Properties
+    }
+
+    public class FwkDataViewRequestHeader : FwkDataBasicRequestHeader
+    {
+        #region Variables
+        #endregion Variables
+
+        #region Constructors
+
+        public FwkDataViewRequestHeader()
+        {
+        }
+
+        #endregion Constructors
+
+        #region Methods
+        #endregion Methods
+
+        #region Properties
+        #endregion Properties
+    }
+
+    public class FwkDataViewRequestContent : FwkDataBasicRequestContent
+    {
+        #region Variables
+        #endregion Variables
+
+        #region Constructors
+
+        public FwkDataViewRequestContent()
+        {
         }
 
         #endregion Constructors
@@ -54,6 +112,64 @@ namespace Ark.Fwk.Data
         #region Constructors
 
         public FwkDataViewResponse()
+        {
+            if (this.GetType() == typeof(FwkDataViewResponse))
+            {
+                this.header = new FwkDataViewResponseHeader();
+                this.content = new FwkDataViewResponseContent();
+            }
+        }
+
+        #endregion Constructors
+
+        #region Methods
+        #endregion Methods
+
+        #region Properties
+
+        public new FwkDataViewResponseHeader Header
+        {
+            get { return (FwkDataViewResponseHeader)this.header; }
+            set { this.header = value; }
+        }
+
+        public new FwkDataViewResponseContent Content
+        {
+            get { return (FwkDataViewResponseContent)this.content; }
+            set { this.content = value; }
+        }
+
+        #endregion Properties
+    }
+
+    public class FwkDataViewResponseHeader : FwkDataBasicResponseHeader
+    {
+        #region Variables
+        #endregion Variables
+
+        #region Constructors
+
+        public FwkDataViewResponseHeader()
+        {
+        }
+
+        #endregion Constructors
+
+        #region Methods
+        #endregion Methods
+
+        #region Properties
+        #endregion Properties
+    }
+
+    public class FwkDataViewResponseContent : FwkDataBasicResponseContent
+    {
+        #region Variables
+        #endregion Variables
+
+        #region Constructors
+
+        public FwkDataViewResponseContent()
         {
         }
 

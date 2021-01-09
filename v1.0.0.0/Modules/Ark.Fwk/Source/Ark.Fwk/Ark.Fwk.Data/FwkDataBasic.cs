@@ -26,6 +26,64 @@ namespace Ark.Fwk.Data
 
         public FwkDataBasicRequest()
         {
+            if (this.GetType() == typeof(FwkDataBasicRequest))
+            {
+                this.header = new FwkDataBasicRequestHeader();
+                this.content = new FwkDataBasicRequestContent();
+            }
+        }
+
+        #endregion Constructors
+
+        #region Methods
+        #endregion Methods
+
+        #region Properties
+
+        public new FwkDataBasicRequestHeader Header
+        {
+            get { return (FwkDataBasicRequestHeader)this.header; }
+            set { this.header = value; }
+        }
+
+        public new FwkDataBasicRequestContent Content
+        {
+            get { return (FwkDataBasicRequestContent)this.content; }
+            set { this.content = value; }
+        }
+
+        #endregion Properties
+    }
+
+    public class FwkDataBasicRequestHeader : FwkDataRequestHeader
+    {
+        #region Variables
+        #endregion Variables
+
+        #region Constructors
+
+        public FwkDataBasicRequestHeader()
+        {
+        }
+
+        #endregion Constructors
+
+        #region Methods
+        #endregion Methods
+
+        #region Properties
+        #endregion Properties
+    }
+
+    public class FwkDataBasicRequestContent : FwkDataRequestContent
+    {
+        #region Variables
+        #endregion Variables
+
+        #region Constructors
+
+        public FwkDataBasicRequestContent()
+        {
         }
 
         #endregion Constructors
@@ -45,6 +103,64 @@ namespace Ark.Fwk.Data
         #region Constructors
 
         public FwkDataBasicResponse()
+        {
+            if (this.GetType() == typeof(FwkDataBasicResponse))
+            {
+                this.header = new FwkDataBasicResponseHeader();
+                this.content = new FwkDataBasicResponseContent();
+            }
+        }
+
+        #endregion Constructors
+
+        #region Methods
+        #endregion Methods
+
+        #region Properties
+
+        public new FwkDataBasicResponseHeader Header
+        {
+            get { return (FwkDataBasicResponseHeader)this.header; }
+            set { this.header = value; }
+        }
+
+        public new FwkDataBasicResponseContent Content
+        {
+            get { return (FwkDataBasicResponseContent)this.content; }
+            set { this.content = value; }
+        }
+
+        #endregion Properties
+    }
+
+    public class FwkDataBasicResponseHeader : FwkDataResponseHeader
+    {
+        #region Variables
+        #endregion Variables
+
+        #region Constructors
+
+        public FwkDataBasicResponseHeader()
+        {
+        }
+
+        #endregion Constructors
+
+        #region Methods
+        #endregion Methods
+
+        #region Properties
+        #endregion Properties
+    }
+
+    public class FwkDataBasicResponseContent : FwkDataResponseContent
+    {
+        #region Variables
+        #endregion Variables
+
+        #region Constructors
+
+        public FwkDataBasicResponseContent()
         {
         }
 
