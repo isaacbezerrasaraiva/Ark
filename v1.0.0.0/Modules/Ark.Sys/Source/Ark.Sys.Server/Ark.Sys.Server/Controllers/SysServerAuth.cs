@@ -49,6 +49,8 @@ namespace Ark.Sys.Server
 
         public SysServerAuth()
         {
+            this.DataRequestType = typeof(SysDataAuthRequest);
+            this.DataResponseType = typeof(SysDataAuthResponse);
         }
 
         #endregion Constructors
@@ -69,7 +71,7 @@ namespace Ark.Sys.Server
                 dataAuthRequest.AuthenticationRequest = new SysAuthenticationRequest();
                 dataAuthRequest.AuthenticationRequest.Token = headerToken;
 
-                SysDataAuthResponse dataAuthResponse = (SysDataAuthResponse)InvokeService("Authenticate", dataAuthRequest);
+                SysDataAuthResponse dataAuthResponse = (SysDataAuthResponse)InvokeService("Authenticate", dataAuthRequest, context);
 
                 if (dataAuthResponse.AuthenticationResponse.IdDomain > -1 && dataAuthResponse.AuthenticationResponse.IdUser > -1)
                 {
@@ -89,7 +91,7 @@ namespace Ark.Sys.Server
                     dataAuthRequest.AuthenticationRequest.IdDomain = headerIdDomain;
                     dataAuthRequest.AuthenticationRequest.Credential = headerCredential;
 
-                    SysDataAuthResponse dataAuthResponse = (SysDataAuthResponse)InvokeService("Authenticate", dataAuthRequest);
+                    SysDataAuthResponse dataAuthResponse = (SysDataAuthResponse)InvokeService("Authenticate", dataAuthRequest, context);
 
                     if (dataAuthResponse.AuthenticationResponse.IdDomain > -1 && dataAuthResponse.AuthenticationResponse.IdUser > -1)
                     {
@@ -124,7 +126,7 @@ namespace Ark.Sys.Server
                     dataAuthRequest.AuthorizationRequest.CodFeature = controllerPath[1];
                     dataAuthRequest.AuthorizationRequest.CodAction = controllerPath[2];
 
-                    SysDataAuthResponse dataAuthResponse = (SysDataAuthResponse)InvokeService("Authorize", dataAuthRequest);
+                    SysDataAuthResponse dataAuthResponse = (SysDataAuthResponse)InvokeService("Authorize", dataAuthRequest, context.HttpContext);
 
                     if (dataAuthResponse.AuthorizationResponse.Authorized == false)
                     {

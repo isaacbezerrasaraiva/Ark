@@ -35,7 +35,8 @@ namespace Ark.Sys.Servant
 
         #region Constructors
 
-        public SysServantAuth()
+        public SysServantAuth(FwkEnvironment environment)
+            : base(environment)
         {
         }
 

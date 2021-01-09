@@ -46,7 +46,8 @@ namespace Ark.Sys.Service
 
         #region Constructors
 
-        public SysServiceAuth()
+        public SysServiceAuth(FwkEnvironment environment)
+            : base(environment)
         {
         }
 
@@ -238,7 +239,7 @@ namespace Ark.Sys.Service
                         and FwkBranchRoleUser.IdRole = FwkBranchRoleAction.IdRole 
 	                inner join FwkUserContext 
 		                on FwkBranchRoleUser.IdDomain = FwkUserContext.IdDomain 
-                        and FwkBranchRoleUser.IdBranch = FwkUserContext.ValueInt 
+                        and FwkBranchRoleUser.IdBranch = FwkUserContext.ValueInt16 
                         and FwkBranchRoleUser.IdUser = FwkUserContext.IdUser 
                 where FwkBranchRoleUser.IdDomain = :IdDomain 
 	                and FwkUserContext.Field = 'IdBranch' 

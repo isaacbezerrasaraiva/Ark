@@ -40,7 +40,8 @@ namespace Ark.Sys.Service
 
         #region Constructors
 
-        public SysServicePreflight()
+        public SysServicePreflight(FwkEnvironment environment)
+            : base(environment)
         {
         }
 

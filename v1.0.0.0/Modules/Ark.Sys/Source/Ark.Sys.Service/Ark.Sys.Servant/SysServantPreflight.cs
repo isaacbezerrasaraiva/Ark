@@ -35,7 +35,8 @@ namespace Ark.Sys.Servant
 
         #region Constructors
 
-        public SysServantPreflight()
+        public SysServantPreflight(FwkEnvironment environment)
+            : base(environment)
         {
         }
 

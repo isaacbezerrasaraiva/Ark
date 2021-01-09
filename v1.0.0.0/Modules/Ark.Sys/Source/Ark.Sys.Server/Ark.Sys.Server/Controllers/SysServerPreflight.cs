@@ -47,6 +47,8 @@ namespace Ark.Sys.Server
 
         public SysServerPreflight()
         {
+            this.DataRequestType = typeof(SysDataPreflightRequest);
+            this.DataResponseType = typeof(SysDataPreflightResponse);
         }
 
         #endregion Constructors
@@ -61,7 +63,7 @@ namespace Ark.Sys.Server
         {
             SysDataPreflightRequest dataPreflightRequest = new SysDataPreflightRequest();
 
-            SysDataPreflightResponse dataPreflightResponse = (SysDataPreflightResponse)InvokeService("Preflight", dataPreflightRequest);
+            SysDataPreflightResponse dataPreflightResponse = (SysDataPreflightResponse)InvokeService("Preflight", dataPreflightRequest, context);
 
             foreach (KeyValuePair<String, String> header in dataPreflightResponse.Headers)
                 context.Response.Headers.Add(header.Key, header.Value);
