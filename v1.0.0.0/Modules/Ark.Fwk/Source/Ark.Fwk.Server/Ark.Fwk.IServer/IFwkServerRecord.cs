@@ -24,6 +24,8 @@ namespace Ark.Fwk.IServer
 
         String Insert(String dataRequestString);
 
+        String Indate(String dataRequestString);
+
         String Update(String dataRequestString);
 
         String Upsert(String dataRequestString);

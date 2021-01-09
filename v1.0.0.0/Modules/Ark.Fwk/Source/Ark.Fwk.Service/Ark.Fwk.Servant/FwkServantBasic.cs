@@ -27,14 +27,15 @@ namespace Ark.Fwk.Servant
 
         #region Constructors
 
-        public FwkServantBasic()
+        public FwkServantBasic(FwkEnvironment environment)
+            : base(environment)
         {
         }
 
         #endregion Constructors
 
         #region Methods
-        
+
         /// <summary>
         /// Initialize the service
         /// </summary>

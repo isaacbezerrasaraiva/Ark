@@ -31,7 +31,8 @@ namespace Ark.Fwk.Service
 
         #region Constructors
 
-        public FwkServiceView()
+        public FwkServiceView(FwkEnvironment environment)
+            : base(environment)
         {
         }
 
@@ -58,11 +59,15 @@ namespace Ark.Fwk.Service
             #endregion Create response data
             
             FwkDataViewRequest dataViewRequest = (FwkDataViewRequest)dataBasicRequest;
-            
+
+            this.Database.OpenConnection();
+
             PerformLoad(dataViewRequest, dataViewResponse);
             PerformFormat(dataViewRequest, dataViewResponse);
             PerformRead(dataViewRequest, dataViewResponse);
-            
+
+            this.Database.CloseConnection();
+
             return dataViewResponse;
         }
 
@@ -84,7 +89,11 @@ namespace Ark.Fwk.Service
 
             #endregion Create response data
 
+            this.Database.OpenConnection();
+
             PerformFormat(dataViewRequest, dataViewResponse);
+
+            this.Database.CloseConnection();
 
             return dataViewResponse;
         }
@@ -107,7 +116,11 @@ namespace Ark.Fwk.Service
 
             #endregion Create response data
 
+            this.Database.OpenConnection();
+
             PerformRead(dataViewRequest, dataViewResponse);
+
+            this.Database.CloseConnection();
 
             return dataViewResponse;
         }
@@ -149,6 +162,12 @@ namespace Ark.Fwk.Service
         /// <param name="dataViewResponse">The response data</param>
         protected void PerformRead(FwkDataViewRequest dataViewRequest, FwkDataViewResponse dataViewResponse)
         {
+            #region Internal BeforeRead
+
+            InternalBeforeRead(dataViewRequest);
+
+            #endregion Internal BeforeRead
+
             #region BeforeRead
 
             if (this.IPlugins != null)
@@ -188,6 +207,19 @@ namespace Ark.Fwk.Service
         /// <param name="dataViewResponse">The response data</param>
         protected virtual void OnRead(FwkDataViewRequest dataViewRequest, FwkDataViewResponse dataViewResponse)
         {
+        }
+
+        /// <summary>
+        /// Internal BeforeRead
+        /// </summary>
+        /// <param name="dataViewRequest">The request data</param>
+        private void InternalBeforeRead(FwkDataViewRequest dataViewRequest)
+        {
+            if (dataViewRequest.ParentKey == null)
+                dataViewRequest.ParentKey = new Dictionary<String, Object>();
+
+            if (dataViewRequest.ParentKey.ContainsKey("IdDomain") == false)
+                dataViewRequest.ParentKey.Add("IdDomain", this.Environment.Domain.IdDomain);
         }
 
         #endregion Methods

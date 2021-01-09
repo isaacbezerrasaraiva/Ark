@@ -9,8 +9,14 @@
 using System;
 using System.Xml;
 using System.Data;
+using System.Collections.Generic;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 
 using Lazy;
+using Lazy.Json;
 
 using Ark.Lib;
 using Ark.Fwk;
@@ -34,6 +40,9 @@ namespace Ark.Fwk.Data
         #endregion Methods
 
         #region Properties
+
+        public Dictionary<String, Object> ParentKey { get; set; }
+
         #endregion Properties
     }
 
@@ -54,6 +63,10 @@ namespace Ark.Fwk.Data
         #endregion Methods
 
         #region Properties
+
+        [JsonConverter(typeof(LazyJsonConverterDataSet))]
+        public DataSet DataSet { get; set; }
+
         #endregion Properties
     }
 }

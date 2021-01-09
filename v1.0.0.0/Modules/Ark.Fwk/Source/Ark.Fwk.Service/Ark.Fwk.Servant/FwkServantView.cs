@@ -27,7 +27,8 @@ namespace Ark.Fwk.Servant
 
         #region Constructors
 
-        public FwkServantView()
+        public FwkServantView(FwkEnvironment environment)
+            : base(environment)
         {
         }
 

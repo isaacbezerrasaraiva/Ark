@@ -37,6 +37,11 @@ namespace Ark.Fwk.Server
 
         public FwkServerBasic()
         {
+            if (this.GetType() == typeof(FwkServerBasic))
+            {
+                this.DataRequestType = typeof(FwkDataBasicRequest);
+                this.DataResponseType = typeof(FwkDataBasicResponse);
+            }
         }
 
         #endregion Constructors
@@ -48,9 +53,9 @@ namespace Ark.Fwk.Server
         /// </summary>
         /// <param name="dataRequestString">The request data string</param>
         /// <returns>The response data string</returns>
-        [HttpGet]
-        [Route("Init/{dataRequestString}")]
-        public String Init(String dataRequestString)
+        [HttpPost]
+        [Route("Init")]
+        public String Init([FromBody] String dataRequestString)
         {
             return InvokeService("Init", dataRequestString);
         }

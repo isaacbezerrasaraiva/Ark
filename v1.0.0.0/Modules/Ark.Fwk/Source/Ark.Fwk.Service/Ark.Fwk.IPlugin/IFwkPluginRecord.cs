@@ -29,6 +29,9 @@ namespace Ark.Fwk.IPlugin
         FwkPluginBeforeEventHandler BeforeInsertEventHandler { get; }
         FwkPluginAfterEventHandler AfterInsertEventHandler { get; }
 
+        FwkPluginBeforeEventHandler BeforeIndateEventHandler { get; }
+        FwkPluginAfterEventHandler AfterIndateEventHandler { get; }
+
         FwkPluginBeforeEventHandler BeforeUpdateEventHandler { get; }
         FwkPluginAfterEventHandler AfterUpdateEventHandler { get; }
 

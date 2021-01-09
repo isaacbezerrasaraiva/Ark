@@ -27,7 +27,8 @@ namespace Ark.Fwk.Servant
 
         #region Constructors
 
-        public FwkServantRecord()
+        public FwkServantRecord(FwkEnvironment environment)
+            : base(environment)
         {
         }
 
@@ -63,6 +64,16 @@ namespace Ark.Fwk.Servant
         public FwkDataRecordResponse Insert(FwkDataRecordRequest dataRecordRequest)
         {
             return (FwkDataRecordResponse)InvokeService("Insert", dataRecordRequest);
+        }
+
+        /// <summary>
+        /// Indate the Record
+        /// </summary>
+        /// <param name="dataRecordRequest">The request data</param>
+        /// <returns>The response data</returns>
+        public FwkDataRecordResponse Indate(FwkDataRecordRequest dataRecordRequest)
+        {
+            return (FwkDataRecordResponse)InvokeService("Indate", dataRecordRequest);
         }
 
         /// <summary>

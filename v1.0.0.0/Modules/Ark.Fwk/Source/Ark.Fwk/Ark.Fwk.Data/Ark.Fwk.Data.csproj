@@ -13,7 +13,7 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageOutputPath>$(SolutionDir)..\..\..\Release\.nupkg\</PackageOutputPath>
   </PropertyGroup>
-
+  
   <ItemGroup>
     <None Include="..\..\..\..\..\..\LICENSE">
       <Pack>True</Pack>
@@ -25,6 +25,8 @@
     <PackageReference Include="Ark.Fwk" Version="1.0.0" />
     <PackageReference Include="Ark.Lib" Version="1.0.0" />
     <PackageReference Include="Lazy" Version="1.0.0" />
+    <PackageReference Include="Lazy.Json" Version="1.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">

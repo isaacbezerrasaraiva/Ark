@@ -31,7 +31,7 @@ namespace Ark.Fwk.Servant
 
         #region Constructors
 
-        public FwkServant()
+        public FwkServant(FwkEnvironment environment)
         {
             #region Create service
 
@@ -40,7 +40,7 @@ namespace Ark.Fwk.Servant
 
             this.iService = (IFwkService)LazyActivator.Local.CreateInstance(Path.Combine(
                 LibDirectory.Root.Bin.AssemblyFolder[assemblyFolderName].CurrentVersion.Lib.NetCoreApp31.Path, assemblyFolderName + ".dll"),
-                classFullName);
+                classFullName, new Object[] { environment });
 
             #endregion Create service
         }

@@ -57,7 +57,8 @@ create table FwkUserContext
 	IdDomain smallint,
     IdUser integer,
     Field varchar(32),
-    ValueInt integer,
+    ValueInt16 integer,
+    ValueInt32 integer,
     ValueString varchar(64),
     constraint Pk_FwkUserContext primary key (IdDomain, IdUser, Field)
 );
@@ -117,7 +118,7 @@ create table FwkBranchRoleAction
 
 
 
--- Constraints section ----------------------------------------------------------------------------------------------------------------------
+-- Add constraints section ------------------------------------------------------------------------------------------------------------------
 -- ------------------------------------------------------------------------------------------------------------------------------------------
 
 alter table FwkDomain 
@@ -170,14 +171,28 @@ alter table FwkBranchRoleAction
 -- ------------------------------------------------------------------------------------------------------------------------------------------
 
 insert into FwkDomain (IdDomain, CodDomain, Name) values (1, 'DMN', 'Domínio');
-insert into FwkModule (IdDomain, CodModule, Description) values (1, 'Ark.Fwk', 'Ark Framework');
-insert into FwkFeature (IdDomain, CodModule, CodFeature, CodModuleBase, CodFeatureBase) values (1, 'Ark.Fwk', 'FwkServer', null, null);
-insert into FwkFeature (IdDomain, CodModule, CodFeature, CodModuleBase, CodFeatureBase) values (1, 'Ark.Fwk', 'FwkServerBasic', 'Ark.Fwk', 'FwkServer');
-insert into FwkFeatureAction (IdDomain, CodModule, CodFeature, CodAction, Description) values (1, 'Ark.Fwk', 'FwkServerBasic', 'Init', 'Initialize');
 insert into FwkUser (IdDomain, IdUser, Username, Password, DisplayName) values (1, 1, 'admin', 'admin', 'Admin');
 insert into FwkRole (IdDomain, IdRole, Name) values (1, 1, 'Admin');
 insert into FwkBranch (IdDomain, IdBranch, CodBranch, Name) values (1, 1, 'BCH', 'Branch');
 insert into FwkBranchUser (IdDomain, IdBranch, IdUser) values (1, 1, 1);
-insert into FwkUserContext (IdDomain, IdUser, Field, ValueInt) values (1, 1, 'IdBranch', 1);
+insert into FwkUserContext (IdDomain, IdUser, Field, ValueInt16) values (1, 1, 'IdBranch', 1);
 insert into FwkBranchRole (IdDomain, IdBranch, IdRole) values (1, 1, 1);
 insert into FwkBranchRoleUser (IdDomain, IdBranch, IdRole, IdUser) values (1, 1, 1, 1);
+
+insert into FwkModule (IdDomain, CodModule, Description) values (1, 'Ark.Fwk', 'Ark Framework');
+
+insert into FwkFeature (IdDomain, CodModule, CodFeature, CodModuleBase, CodFeatureBase) values (1, 'Ark.Fwk', 'FwkServer', null, null);
+
+insert into FwkFeature (IdDomain, CodModule, CodFeature, CodModuleBase, CodFeatureBase) values (1, 'Ark.Fwk', 'FwkServerBasic', 'Ark.Fwk', 'FwkServer');
+insert into FwkFeatureAction (IdDomain, CodModule, CodFeature, CodAction, Description) values (1, 'Ark.Fwk', 'FwkServerBasic', 'Init', 'Initialize');
+
+insert into FwkFeature (IdDomain, CodModule, CodFeature, CodModuleBase, CodFeatureBase) values (1, 'Ark.Fwk', 'FwkServerView', 'Ark.Fwk', 'FwkServerBasic');
+insert into FwkFeatureAction (IdDomain, CodModule, CodFeature, CodAction, Description) values (1, 'Ark.Fwk', 'FwkServerView', 'Read', 'Read view');
+
+insert into FwkFeature (IdDomain, CodModule, CodFeature, CodModuleBase, CodFeatureBase) values (1, 'Ark.Fwk', 'FwkServerRecord', 'Ark.Fwk', 'FwkServerBasic');
+insert into FwkFeatureAction (IdDomain, CodModule, CodFeature, CodAction, Description) values (1, 'Ark.Fwk', 'FwkServerRecord', 'Read', 'Read record');
+insert into FwkFeatureAction (IdDomain, CodModule, CodFeature, CodAction, Description) values (1, 'Ark.Fwk', 'FwkServerRecord', 'Insert', 'Insert record');
+insert into FwkFeatureAction (IdDomain, CodModule, CodFeature, CodAction, Description) values (1, 'Ark.Fwk', 'FwkServerRecord', 'Indate', 'Indate record');
+insert into FwkFeatureAction (IdDomain, CodModule, CodFeature, CodAction, Description) values (1, 'Ark.Fwk', 'FwkServerRecord', 'Update', 'Update record');
+insert into FwkFeatureAction (IdDomain, CodModule, CodFeature, CodAction, Description) values (1, 'Ark.Fwk', 'FwkServerRecord', 'Upsert', 'Upsert record');
+insert into FwkFeatureAction (IdDomain, CodModule, CodFeature, CodAction, Description) values (1, 'Ark.Fwk', 'FwkServerRecord', 'Delete', 'Delete record');

@@ -31,7 +31,8 @@ namespace Ark.Fwk.Service
 
         #region Constructors
 
-        public FwkServiceRecord()
+        public FwkServiceRecord(FwkEnvironment environment)
+            : base(environment)
         {
         }
 
@@ -58,11 +59,15 @@ namespace Ark.Fwk.Service
             #endregion Create response data
 
             FwkDataRecordRequest dataRecordRequest = (FwkDataRecordRequest)dataBasicRequest;
-            
+
+            this.Database.OpenConnection();
+
             PerformLoad(dataRecordRequest, dataRecordResponse);
             PerformFormat(dataRecordRequest, dataRecordResponse);
             PerformRead(dataRecordRequest, dataRecordResponse);
-            
+
+            this.Database.CloseConnection();
+
             return dataRecordResponse;
         }
 
@@ -84,7 +89,11 @@ namespace Ark.Fwk.Service
 
             #endregion Create response data
 
+            this.Database.OpenConnection();
+
             PerformFormat(dataRecordRequest, dataRecordResponse);
+
+            this.Database.CloseConnection();
 
             return dataRecordResponse;
         }
@@ -107,7 +116,11 @@ namespace Ark.Fwk.Service
 
             #endregion Create response data
 
+            this.Database.OpenConnection();
+
             PerformRead(dataRecordRequest, dataRecordResponse);
+
+            this.Database.CloseConnection();
 
             return dataRecordResponse;
         }
@@ -130,7 +143,38 @@ namespace Ark.Fwk.Service
 
             #endregion Create response data
 
+            this.Database.OpenConnection();
+
             PerformInsert(dataRecordRequest, dataRecordResponse);
+
+            this.Database.CloseConnection();
+
+            return dataRecordResponse;
+        }
+
+        /// <summary>
+        /// Indate the Record
+        /// </summary>
+        /// <param name="dataRecordRequest">The request data</param>
+        /// <returns>The response data</returns>
+        public FwkDataRecordResponse Indate(FwkDataRecordRequest dataRecordRequest)
+        {
+            #region Create response data
+
+            String assemblyFolderName = this.GetType().Namespace.Replace("Service", "Data");
+            String classFullName = this.GetType().FullName.Replace("Service", "Data") + "Response";
+
+            FwkDataRecordResponse dataRecordResponse = (FwkDataRecordResponse)LazyActivator.Local.CreateInstance(Path.Combine(
+                LibDirectory.Root.Bin.AssemblyFolder[assemblyFolderName].CurrentVersion.Lib.NetCoreApp31.Path, assemblyFolderName + ".dll"),
+                classFullName);
+
+            #endregion Create response data
+
+            this.Database.OpenConnection();
+
+            PerformIndate(dataRecordRequest, dataRecordResponse);
+
+            this.Database.CloseConnection();
 
             return dataRecordResponse;
         }
@@ -153,7 +197,11 @@ namespace Ark.Fwk.Service
 
             #endregion Create response data
 
+            this.Database.OpenConnection();
+
             PerformUpdate(dataRecordRequest, dataRecordResponse);
+
+            this.Database.CloseConnection();
 
             return dataRecordResponse;
         }
@@ -176,7 +224,11 @@ namespace Ark.Fwk.Service
 
             #endregion Create response data
 
+            this.Database.OpenConnection();
+
             PerformUpsert(dataRecordRequest, dataRecordResponse);
+
+            this.Database.CloseConnection();
 
             return dataRecordResponse;
         }
@@ -199,7 +251,11 @@ namespace Ark.Fwk.Service
 
             #endregion Create response data
 
+            this.Database.OpenConnection();
+
             PerformDelete(dataRecordRequest, dataRecordResponse);
+
+            this.Database.CloseConnection();
 
             return dataRecordResponse;
         }
@@ -292,6 +348,36 @@ namespace Ark.Fwk.Service
             }
 
             #endregion AfterInsert
+        }
+
+        /// <summary>
+        /// Perform indate Record
+        /// </summary>
+        /// <param name="dataRecordRequest">The request data</param>
+        /// <param name="dataRecordResponse">The response data</param>
+        protected void PerformIndate(FwkDataRecordRequest dataRecordRequest, FwkDataRecordResponse dataRecordResponse)
+        {
+            #region BeforeIndate
+
+            if (this.IPlugins != null)
+            {
+                foreach (IFwkPluginRecord iPluginRecord in this.IPlugins)
+                    iPluginRecord.BeforeIndateEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(dataRecordRequest));
+            }
+
+            #endregion BeforeIndate
+
+            OnIndate(dataRecordRequest, dataRecordResponse);
+
+            #region AfterIndate
+
+            if (this.IPlugins != null)
+            {
+                foreach (IFwkPluginRecord iPluginRecord in this.IPlugins)
+                    iPluginRecord.AfterIndateEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(dataRecordRequest, dataRecordResponse));
+            }
+
+            #endregion AfterIndate
         }
 
         /// <summary>
@@ -408,6 +494,15 @@ namespace Ark.Fwk.Service
         /// <param name="dataRecordRequest">The request data</param>
         /// <param name="dataRecordResponse">The response data</param>
         protected virtual void OnInsert(FwkDataRecordRequest dataRecordRequest, FwkDataRecordResponse dataRecordResponse)
+        {
+        }
+
+        /// <summary>
+        /// Indate the Record
+        /// </summary>
+        /// <param name="dataRecordRequest">The request data</param>
+        /// <param name="dataRecordResponse">The response data</param>
+        protected virtual void OnIndate(FwkDataRecordRequest dataRecordRequest, FwkDataRecordResponse dataRecordResponse)
         {
         }
 

@@ -26,6 +26,8 @@ namespace Ark.Fwk.IService
 
         FwkDataRecordResponse Insert(FwkDataRecordRequest dataRecordRequest);
 
+        FwkDataRecordResponse Indate(FwkDataRecordRequest dataRecordRequest);
+
         FwkDataRecordResponse Update(FwkDataRecordRequest dataRecordRequest);
 
         FwkDataRecordResponse Upsert(FwkDataRecordRequest dataRecordRequest);

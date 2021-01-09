@@ -37,6 +37,11 @@ namespace Ark.Fwk.Server
 
         public FwkServerRecord()
         {
+            if (this.GetType() == typeof(FwkServerRecord))
+            {
+                this.DataRequestType = typeof(FwkDataRecordRequest);
+                this.DataResponseType = typeof(FwkDataRecordResponse);
+            }
         }
 
         #endregion Constructors
@@ -48,9 +53,9 @@ namespace Ark.Fwk.Server
         /// </summary>
         /// <param name="dataRequestString">The request data string</param>
         /// <returns>The response data string</returns>
-        [HttpGet]
-        [Route("Read/{dataRequestString}")]
-        public String Read(String dataRequestString)
+        [HttpPost]
+        [Route("Read")]
+        public String Read([FromBody] String dataRequestString)
         {
             return InvokeService("Read", dataRequestString);
         }
@@ -60,11 +65,23 @@ namespace Ark.Fwk.Server
         /// </summary>
         /// <param name="dataRequestString">The request data string</param>
         /// <returns>The response data string</returns>
-        [HttpPost]
-        [Route("Insert/{dataRequestString}")]
-        public String Insert(String dataRequestString)
+        [HttpPut]
+        [Route("Insert")]
+        public String Insert([FromBody] String dataRequestString)
         {
             return InvokeService("Insert", dataRequestString);
+        }
+
+        /// <summary>
+        /// Indate the Record
+        /// </summary>
+        /// <param name="dataRequestString">The request data string</param>
+        /// <returns>The response data string</returns>
+        [HttpPut]
+        [Route("Indate")]
+        public String Indate([FromBody] String dataRequestString)
+        {
+            return InvokeService("Indate", dataRequestString);
         }
 
         /// <summary>
@@ -73,8 +90,8 @@ namespace Ark.Fwk.Server
         /// <param name="dataRequestString">The request data string</param>
         /// <returns>The response data string</returns>
         [HttpPut]
-        [Route("Update/{dataRequestString}")]
-        public String Update(String dataRequestString)
+        [Route("Update")]
+        public String Update([FromBody] String dataRequestString)
         {
             return InvokeService("Update", dataRequestString);
         }
@@ -84,9 +101,9 @@ namespace Ark.Fwk.Server
         /// </summary>
         /// <param name="dataRequestString">The request data string</param>
         /// <returns>The response data string</returns>
-        [HttpPost][HttpPut]
-        [Route("Upsert/{dataRequestString}")]
-        public String Upsert(String dataRequestString)
+        [HttpPut]
+        [Route("Upsert")]
+        public String Upsert([FromBody] String dataRequestString)
         {
             return InvokeService("Upsert", dataRequestString);
         }
@@ -97,8 +114,8 @@ namespace Ark.Fwk.Server
         /// <param name="dataRequestString">The request data string</param>
         /// <returns>The response data string</returns>
         [HttpDelete]
-        [Route("Delete/{dataRequestString}")]
-        public String Delete(String dataRequestString)
+        [Route("Delete")]
+        public String Delete([FromBody] String dataRequestString)
         {
             return InvokeService("Delete", dataRequestString);
         }

@@ -13,6 +13,7 @@ using System.Data;
 using System.Reflection;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 using Newtonsoft.Json;
 
@@ -33,9 +34,6 @@ namespace Ark.Fwk.Server
     {
         #region Variables
 
-        private Type typeDataRequest;
-        private Type typeDataResponse;
-
         private IFwkService iService;
 
         #endregion Variables
@@ -44,33 +42,11 @@ namespace Ark.Fwk.Server
 
         public FwkServer()
         {
-            String assemblyFolderName = String.Empty;
-            String classFullName = String.Empty;
-
-            #region Create data types
-
-            assemblyFolderName = this.GetType().Namespace.Replace("Server", "Data");
-            classFullName = this.GetType().FullName.Replace("Server", "Data");
-
-            Assembly assembly = Assembly.LoadFrom(Path.Combine(LibDirectory.Root.Bin.AssemblyFolder[assemblyFolderName].CurrentVersion.Lib.NetCoreApp31.Path, assemblyFolderName + ".dll"));
-
-            this.typeDataRequest = assembly.GetType(classFullName + "Request");
-            this.typeDataResponse = assembly.GetType(classFullName + "Response");
-
-            assembly = null;
-
-            #endregion Create data types
-
-            #region Create service
-
-            assemblyFolderName = this.GetType().Namespace.Replace("Server", "Service");
-            classFullName = this.GetType().FullName.Replace("Server", "Service");
-
-            this.iService = (IFwkService)LazyActivator.Local.CreateInstance(Path.Combine(
-                LibDirectory.Root.Bin.AssemblyFolder[assemblyFolderName].CurrentVersion.Lib.NetCoreApp31.Path, assemblyFolderName + ".dll"),
-                classFullName);
-
-            #endregion Create service
+            if (this.GetType() == typeof(FwkServer))
+            {
+                this.DataRequestType = typeof(FwkDataRequest);
+                this.DataResponseType = typeof(FwkDataResponse);
+            }
         }
 
         #endregion Constructors
@@ -85,10 +61,24 @@ namespace Ark.Fwk.Server
         /// <returns>The service method response data string</returns>
         protected String InvokeService(String methodName, String dataRequestString)
         {
+            return InvokeService(methodName, dataRequestString, this.HttpContext);
+        }
+
+        /// <summary>
+        /// Invoke the service method
+        /// </summary>
+        /// <param name="methodName">The service method name</param>
+        /// <param name="dataRequestString">The service method request data string</param>
+        /// <param name="context">The http context</param>
+        /// <returns>The service method response data string</returns>
+        protected String InvokeService(String methodName, String dataRequestString, HttpContext context)
+        {
+            CreateService(CreateEnvironment(context));
+
             MethodInfo methodInfo = this.iService.GetType().GetMethod(methodName);
-            Object dataRequest = JsonConvert.DeserializeObject(dataRequestString, this.typeDataRequest);
+            Object dataRequest = JsonConvert.DeserializeObject(dataRequestString, this.DataRequestType, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
             Object dataResponse = methodInfo.Invoke(this.iService, new Object[] { dataRequest });
-            return (String)JsonConvert.SerializeObject(dataResponse, this.typeDataResponse, null);
+            return (String)JsonConvert.SerializeObject(dataResponse, this.DataResponseType, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
         }
 
         /// <summary>
@@ -99,13 +89,76 @@ namespace Ark.Fwk.Server
         /// <returns>The service method response data</returns>
         protected FwkDataResponse InvokeService(String methodName, FwkDataRequest dataRequest)
         {
+            return InvokeService(methodName, dataRequest, this.HttpContext);
+        }
+
+        /// <summary>
+        /// Invoke the service method
+        /// </summary>
+        /// <param name="methodName">The service method name</param>
+        /// <param name="dataRequest">The service method request data</param>
+        /// <param name="context">The http context</param>
+        /// <returns>The service method response data</returns>
+        protected FwkDataResponse InvokeService(String methodName, FwkDataRequest dataRequest, HttpContext context)
+        {
+            CreateService(CreateEnvironment(context));
+
             MethodInfo methodInfo = this.iService.GetType().GetMethod(methodName);
             return (FwkDataResponse)methodInfo.Invoke(this.iService, new Object[] { dataRequest });
+        }
+
+        /// <summary>
+        /// Create environment
+        /// </summary>
+        /// <param name="context"></param>
+        private FwkEnvironment CreateEnvironment(HttpContext context)
+        {
+            FwkEnvironment environment = new FwkEnvironment();
+
+            if (context.Items.ContainsKey("IdDomain") == true)
+            {
+                environment.Domain = new FwkDomain();
+                environment.Domain.IdDomain = LazyConvert.ToInt16(context.Items["IdDomain"]);
+
+                if (context.Items.ContainsKey("IdUser") == true)
+                {
+                    environment.User = new FwkUser();
+                    environment.User.IdDomain = environment.Domain.IdDomain;
+                    environment.User.IdUser = LazyConvert.ToInt32(context.Items["IdUser"]);
+
+                    environment.UserContext = new FwkUserContext();
+                    environment.UserContext["IdDomain"].ValueInt16 = environment.Domain.IdDomain;
+                }
+            }
+
+            return environment;
+        }
+
+        /// <summary>
+        /// Create service
+        /// </summary>
+        /// <param name="context">The http context</param>
+        private void CreateService(FwkEnvironment environment)
+        {
+            String assemblyFolderName = String.Empty;
+            String classFullName = String.Empty;
+
+            assemblyFolderName = this.GetType().Namespace.Replace("Server", "Service");
+            classFullName = this.GetType().FullName.Replace("Server", "Service");
+
+            this.iService = (IFwkService)LazyActivator.Local.CreateInstance(Path.Combine(
+                LibDirectory.Root.Bin.AssemblyFolder[assemblyFolderName].CurrentVersion.Lib.NetCoreApp31.Path, assemblyFolderName + ".dll"),
+                classFullName, new Object[] { environment });
         }
 
         #endregion Methods
 
         #region Properties
+
+        protected Type DataRequestType { get; set; }
+
+        protected Type DataResponseType { get; set; }
+
         #endregion Properties
     }
 }

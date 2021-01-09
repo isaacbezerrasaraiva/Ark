@@ -29,14 +29,17 @@ namespace Ark.Fwk.Service
         #region Variables
 
         private LazyDatabase database;
+        private FwkEnvironment environment;
         private List<IFwkPlugin> iPluginList;
 
         #endregion Variables
 
         #region Constructors
 
-        public FwkService()
+        public FwkService(FwkEnvironment environment)
         {
+            this.environment = environment;
+
             #region Initialize database
 
             String databaseAlias = "Default";
@@ -55,6 +58,65 @@ namespace Ark.Fwk.Service
                 databaseClass, new Object[] { databaseConnectionString });
 
             #endregion Initialize database
+
+            #region Initialize environment
+
+            String sql = null;
+            DataTable dataTable = null;
+            
+            if (this.environment.Domain != null)
+            {
+                this.database.OpenConnection();
+
+                #region Initialize domain
+
+                sql = "select CodDomain, Name from FwkDomain where IdDomain = :IdDomain";
+                dataTable = this.database.QueryTable(sql, "FwkDomain", new Object[] { this.environment.Domain.IdDomain });
+
+                if (dataTable.Rows.Count > 0)
+                {
+                    this.environment.Domain.CodDomain = LazyConvert.ToString(dataTable.Rows[0]["CodDomain"]);
+                    this.environment.Domain.Name = LazyConvert.ToString(dataTable.Rows[0]["Name"]);
+                }
+
+                #endregion Initialize domain
+
+                if (this.environment.User != null)
+                {
+                    #region Initialize user
+
+                    sql = "select Username, DisplayName from FwkUser where IdDomain = :IdDomain and IdUser = :IdUser";
+                    dataTable = this.database.QueryTable(sql, "FwkUser", new Object[] { this.environment.User.IdDomain, this.environment.User.IdUser });
+
+                    if (dataTable.Rows.Count > 0)
+                    {
+                        this.environment.User.Username = LazyConvert.ToString(dataTable.Rows[0]["Username"]);
+                        this.environment.User.DisplayName = LazyConvert.ToString(dataTable.Rows[0]["DisplayName"]);
+                    }
+
+                    #endregion Initialize user
+
+                    #region Initialize user context
+
+                    sql = "select Field, ValueInt16, ValueInt32, ValueString from FwkUserContext where IdDomain = :IdDomain and IdUser = :IdUser";
+                    dataTable = this.database.QueryTable(sql, "FwkUserContext", new Object[] { this.environment.User.IdDomain, this.environment.User.IdUser });
+
+                    foreach (DataRow dataRow in dataTable.Rows)
+                    {
+                        String field = LazyConvert.ToString(dataRow["Field"]);
+
+                        this.environment.UserContext[field].ValueInt16 = LazyConvert.ToInt16(dataRow["ValueInt16"], 0);
+                        this.environment.UserContext[field].ValueInt32 = LazyConvert.ToInt32(dataRow["ValueInt32"], 0);
+                        this.environment.UserContext[field].ValueString = LazyConvert.ToString(dataRow["ValueString"], null);
+                    }
+
+                    #endregion Initialize user context
+                }
+
+                this.database.CloseConnection();
+            }
+
+            #endregion Initialize environment
         }
 
         #endregion Constructors
@@ -67,6 +129,11 @@ namespace Ark.Fwk.Service
         protected LazyDatabase Database
         {
             get { return this.database; }
+        }
+
+        protected FwkEnvironment Environment
+        {
+            get { return this.environment; }
         }
 
         protected List<IFwkPlugin> IPlugins

@@ -31,7 +31,8 @@ namespace Ark.Fwk.Service
 
         #region Constructors
 
-        public FwkServiceBasic()
+        public FwkServiceBasic(FwkEnvironment environment)
+            : base(environment)
         {
         }
 
@@ -57,7 +58,11 @@ namespace Ark.Fwk.Service
 
             #endregion Create response data
 
+            this.Database.OpenConnection();
+
             PerformLoad(dataBasicRequest, dataBasicResponse);
+
+            this.Database.CloseConnection();
 
             return dataBasicResponse;
         }
@@ -80,7 +85,11 @@ namespace Ark.Fwk.Service
 
             #endregion Create response data
 
+            this.Database.OpenConnection();
+
             PerformLoad(dataBasicRequest, dataBasicResponse);
+
+            this.Database.CloseConnection();
 
             return dataBasicResponse;
         }
