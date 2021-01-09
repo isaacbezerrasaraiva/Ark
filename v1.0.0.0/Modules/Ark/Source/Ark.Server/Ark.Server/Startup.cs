@@ -43,9 +43,16 @@ namespace Ark.Server
             String[] arkServerAssemblyArray = Directory.GetFiles(LibDirectory.Root.Bin.Path, "*.Server.dll", SearchOption.AllDirectories);
             foreach (String arkServerAssembly in arkServerAssemblyArray)
                 iMvcBuilder.AddApplicationPart(Assembly.LoadFrom(arkServerAssembly));
+            
+            // Add Mvc options
+            services.AddMvc(options =>
+            {
+                // Add Filters
+                options.Filters.Add(typeof(LibServerAuthorization));
 
-            // Add global authorization request
-            services.AddMvc(options => { options.Filters.Add(typeof(LibServerAuthorization)); });
+                // Add InputFormatters
+                options.InputFormatters.Insert(0, new LibServerInputFormatter());
+            });
 
             // Add cors default policy
             services.AddCors(options => { options.AddDefaultPolicy(builder => { }); });
