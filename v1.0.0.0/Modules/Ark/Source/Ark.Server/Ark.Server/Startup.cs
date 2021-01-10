@@ -52,6 +52,9 @@ namespace Ark.Server
 
                 // Add InputFormatters
                 options.InputFormatters.Insert(0, new LibServerInputFormatter());
+
+                // Add OutputFormatters
+                options.OutputFormatters.Insert(0, new LibServerOutputFormatter());
             });
 
             // Add cors default policy
