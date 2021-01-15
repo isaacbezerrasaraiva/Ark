@@ -21,8 +21,8 @@
           </Response>
         </Preflight>
         <Secrets>
-          <SecretKey></SecretKey>
-          <SecretVector></SecretVector>
+          <SecretKey>dbd0f29eda7046af8c4686b05ff37e26</SecretKey>
+          <SecretVector>9cf5bfa09c864f49</SecretVector>
         </Secrets>
       </Security>
     </Ark.Sys>
