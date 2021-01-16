@@ -85,7 +85,7 @@ namespace Ark.Fts.Service
             if (this.IPlugins != null)
             {
                 foreach (IFtsIncrementPlugin iIncrementPlugin in this.IPlugins)
-                    iIncrementPlugin.BeforeNextEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(incrementDataRequest));
+                    iIncrementPlugin.NextPluginBeforeEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(incrementDataRequest));
             }
 
             #endregion BeforeNext
@@ -97,7 +97,7 @@ namespace Ark.Fts.Service
             if (this.IPlugins != null)
             {
                 foreach (IFtsIncrementPlugin iIncrementPlugin in this.IPlugins)
-                    iIncrementPlugin.AfterNextEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(incrementDataRequest, incrementDataResponse));
+                    iIncrementPlugin.NextPluginAfterEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(incrementDataRequest, incrementDataResponse));
             }
 
             #endregion AfterNext

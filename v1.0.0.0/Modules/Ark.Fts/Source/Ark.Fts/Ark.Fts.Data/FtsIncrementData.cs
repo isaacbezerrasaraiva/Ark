@@ -28,7 +28,7 @@ namespace Ark.Fts.Data
 
         public FtsIncrementDataRequest()
         {
-            this.header = new FtsIncrementDataRequestHeader();
+            this.scope = new FtsIncrementDataRequestScope();
             this.content = new FtsIncrementDataRequestContent();
         }
 
@@ -39,10 +39,10 @@ namespace Ark.Fts.Data
 
         #region Properties
 
-        public new FtsIncrementDataRequestHeader Header
+        public new FtsIncrementDataRequestScope Scope
         {
-            get { return (FtsIncrementDataRequestHeader)this.header; }
-            set { this.header = value; }
+            get { return (FtsIncrementDataRequestScope)this.scope; }
+            set { this.scope = value; }
         }
 
         public new FtsIncrementDataRequestContent Content
@@ -54,14 +54,14 @@ namespace Ark.Fts.Data
         #endregion Properties
     }
 
-    public class FtsIncrementDataRequestHeader : FwkDataRequestHeader
+    public class FtsIncrementDataRequestScope : FwkDataRequestScope
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public FtsIncrementDataRequestHeader()
+        public FtsIncrementDataRequestScope()
         {
         }
 
@@ -116,7 +116,7 @@ namespace Ark.Fts.Data
 
         public FtsIncrementDataResponse()
         {
-            this.header = new FtsIncrementDataResponseHeader();
+            this.scope = new FtsIncrementDataResponseScope();
             this.content = new FtsIncrementDataResponseContent();
         }
 
@@ -127,10 +127,10 @@ namespace Ark.Fts.Data
 
         #region Properties
 
-        public new FtsIncrementDataResponseHeader Header
+        public new FtsIncrementDataResponseScope Scope
         {
-            get { return (FtsIncrementDataResponseHeader)this.header; }
-            set { this.header = value; }
+            get { return (FtsIncrementDataResponseScope)this.scope; }
+            set { this.scope = value; }
         }
 
         public new FtsIncrementDataResponseContent Content
@@ -142,14 +142,14 @@ namespace Ark.Fts.Data
         #endregion Properties
     }
 
-    public class FtsIncrementDataResponseHeader : FwkDataResponseHeader
+    public class FtsIncrementDataResponseScope : FwkDataResponseScope
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public FtsIncrementDataResponseHeader()
+        public FtsIncrementDataResponseScope()
         {
         }
 

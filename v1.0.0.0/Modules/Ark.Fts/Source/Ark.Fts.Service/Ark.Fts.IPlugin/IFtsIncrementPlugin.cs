@@ -23,7 +23,7 @@ namespace Ark.Fts.IPlugin
 {
     public interface IFtsIncrementPlugin : IFwkPlugin
     {
-        FwkPluginBeforeEventHandler BeforeNextEventHandler { get; }
-        FwkPluginAfterEventHandler AfterNextEventHandler { get; }
+        FwkPluginBeforeEventHandler NextPluginBeforeEventHandler { get; }
+        FwkPluginAfterEventHandler NextPluginAfterEventHandler { get; }
     }
 }
