@@ -100,6 +100,28 @@ namespace Ark.Lib
                 #endregion Properties
 
                 #region InternalClass
+                
+                public static class Language
+                {
+                    #region Variables
+                    #endregion Variables
+
+                    #region Methods
+                    #endregion Methods
+
+                    #region Properties
+
+                    public static String Path
+                    {
+                        get { return System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Dat", "Languages"); }
+                    }
+
+                    #endregion Properties
+
+                    #region InternalClass
+                    #endregion InternalClass
+                }
+                
                 #endregion InternalClass
             }
 
