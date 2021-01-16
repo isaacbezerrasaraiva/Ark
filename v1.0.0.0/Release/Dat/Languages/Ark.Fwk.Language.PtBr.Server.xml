@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Ark.Fwk.Language.PtBr.Server>
+  <Captions>
+    <FwkCaptionSuccess>Sucesso</FwkCaptionSuccess>
+  </Captions>
+  <Messages>
+    <FwkMessageSuccess>Processo executado com sucesso!</FwkMessageSuccess>
+  </Messages>
+  <Exceptions>
+  </Exceptions>
+</Ark.Fwk.Language.PtBr.Server>

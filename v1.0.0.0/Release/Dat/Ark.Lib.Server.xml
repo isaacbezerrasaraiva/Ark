@@ -3,9 +3,9 @@
   <DynamicXml>
     <Ark.Lib>
       <Security>
-        <Preflight Assembly="Ark.Sys.Server.dll" Class="Ark.Sys.Server.SysServerPreflight" />
-        <Authentication Assembly="Ark.Sys.Server.dll" Class="Ark.Sys.Server.SysServerAuth" />
-        <Authorization Assembly="Ark.Sys.Server.dll" Class="Ark.Sys.Server.SysServerAuth" />
+        <Preflight Assembly="Ark.Sys.Server.dll" Class="Ark.Sys.Server.SysPreflightServer" />
+        <Authentication Assembly="Ark.Sys.Server.dll" Class="Ark.Sys.Server.SysAuthServer" />
+        <Authorization Assembly="Ark.Sys.Server.dll" Class="Ark.Sys.Server.SysAuthServer" />
       </Security>
     </Ark.Lib>
   </DynamicXml>

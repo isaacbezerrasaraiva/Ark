@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Ark.Lib>
+  <DynamicXml>
+    <Ark.Lib>
+      <Globalization>
+        <Culture Code="EnUs" />
+      </Globalization>
+    </Ark.Lib>
+  </DynamicXml>
+</Ark.Lib>
