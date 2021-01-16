@@ -21,7 +21,7 @@ namespace Ark.Lib
     {
         #region Consts
 
-        private const string ARK_LIB_XML = "Ark.Lib.Configuration.xml";
+        private const string ARK_LIB_XML = "Ark.Lib.xml";
 
         #endregion Consts
 
