@@ -21,7 +21,7 @@ namespace Ark.Fwk.Data
     {
         #region Variables
 
-        protected FwkDataRequestHeader header;
+        protected FwkDataRequestScope scope;
         protected FwkDataRequestContent content;
 
         #endregion Variables
@@ -32,7 +32,7 @@ namespace Ark.Fwk.Data
         {
             if (this.GetType() == typeof(FwkDataRequest))
             {
-                this.header = new FwkDataRequestHeader();
+                this.scope = new FwkDataRequestScope();
                 this.content = new FwkDataRequestContent();
             }
         }
@@ -44,10 +44,10 @@ namespace Ark.Fwk.Data
 
         #region Properties
 
-        public FwkDataRequestHeader Header
+        public FwkDataRequestScope Scope
         {
-            get { return this.header; }
-            set { this.header = value; }
+            get { return this.scope; }
+            set { this.scope = value; }
         }
 
         public FwkDataRequestContent Content
@@ -59,14 +59,14 @@ namespace Ark.Fwk.Data
         #endregion Properties
     }
 
-    public class FwkDataRequestHeader
+    public class FwkDataRequestScope
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public FwkDataRequestHeader()
+        public FwkDataRequestScope()
         {
         }
 
@@ -103,7 +103,7 @@ namespace Ark.Fwk.Data
     {
         #region Variables
 
-        protected FwkDataResponseHeader header;
+        protected FwkDataResponseScope scope;
         protected FwkDataResponseContent content;
 
         #endregion Variables
@@ -114,7 +114,7 @@ namespace Ark.Fwk.Data
         {
             if (this.GetType() == typeof(FwkDataResponse))
             {
-                this.header = new FwkDataResponseHeader();
+                this.scope = new FwkDataResponseScope();
                 this.content = new FwkDataResponseContent();
             }
         }
@@ -126,10 +126,10 @@ namespace Ark.Fwk.Data
 
         #region Properties
 
-        public FwkDataResponseHeader Header
+        public FwkDataResponseScope Scope
         {
-            get { return this.header; }
-            set { this.header = value; }
+            get { return this.scope; }
+            set { this.scope = value; }
         }
 
         public FwkDataResponseContent Content
@@ -141,14 +141,14 @@ namespace Ark.Fwk.Data
         #endregion Properties
     }
 
-    public class FwkDataResponseHeader
+    public class FwkDataResponseScope
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public FwkDataResponseHeader()
+        public FwkDataResponseScope()
         {
         }
 
@@ -162,6 +162,8 @@ namespace Ark.Fwk.Data
         public String StatusCode { get; set; }
 
         public String StatusName { get; set; }
+
+        public String StatusCaption { get; set; }
 
         public String StatusMessage { get; set; }
 

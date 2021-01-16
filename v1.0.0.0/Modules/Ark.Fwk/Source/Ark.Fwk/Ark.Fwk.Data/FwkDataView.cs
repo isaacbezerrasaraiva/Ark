@@ -34,7 +34,7 @@ namespace Ark.Fwk.Data
         {
             if (this.GetType() == typeof(FwkDataViewRequest))
             {
-                this.header = new FwkDataViewRequestHeader();
+                this.scope = new FwkDataViewRequestScope();
                 this.content = new FwkDataViewRequestContent();
             }
         }
@@ -46,10 +46,10 @@ namespace Ark.Fwk.Data
 
         #region Properties
 
-        public new FwkDataViewRequestHeader Header
+        public new FwkDataViewRequestScope Scope
         {
-            get { return (FwkDataViewRequestHeader)this.header; }
-            set { this.header = value; }
+            get { return (FwkDataViewRequestScope)this.scope; }
+            set { this.scope = value; }
         }
 
         public new FwkDataViewRequestContent Content
@@ -61,14 +61,14 @@ namespace Ark.Fwk.Data
         #endregion Properties
     }
 
-    public class FwkDataViewRequestHeader : FwkDataBasicRequestHeader
+    public class FwkDataViewRequestScope : FwkDataBasicRequestScope
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public FwkDataViewRequestHeader()
+        public FwkDataViewRequestScope()
         {
         }
 
@@ -99,7 +99,8 @@ namespace Ark.Fwk.Data
 
         #region Properties
 
-        public Dictionary<String, Object> ParentKey { get; set; }
+        [JsonConverter(typeof(LazyJsonConverterDataSet))]
+        public DataSet DataSet { get; set; }
 
         #endregion Properties
     }
@@ -115,7 +116,7 @@ namespace Ark.Fwk.Data
         {
             if (this.GetType() == typeof(FwkDataViewResponse))
             {
-                this.header = new FwkDataViewResponseHeader();
+                this.scope = new FwkDataViewResponseScope();
                 this.content = new FwkDataViewResponseContent();
             }
         }
@@ -127,10 +128,10 @@ namespace Ark.Fwk.Data
 
         #region Properties
 
-        public new FwkDataViewResponseHeader Header
+        public new FwkDataViewResponseScope Scope
         {
-            get { return (FwkDataViewResponseHeader)this.header; }
-            set { this.header = value; }
+            get { return (FwkDataViewResponseScope)this.scope; }
+            set { this.scope = value; }
         }
 
         public new FwkDataViewResponseContent Content
@@ -142,14 +143,14 @@ namespace Ark.Fwk.Data
         #endregion Properties
     }
 
-    public class FwkDataViewResponseHeader : FwkDataBasicResponseHeader
+    public class FwkDataViewResponseScope : FwkDataBasicResponseScope
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public FwkDataViewResponseHeader()
+        public FwkDataViewResponseScope()
         {
         }
 

@@ -20,25 +20,25 @@ namespace Ark.Fwk.IPlugin
 {
     public interface IFwkPluginRecord : IFwkPluginBasic
     {
-        FwkPluginBeforeEventHandler BeforeFormatEventHandler { get; }
-        FwkPluginAfterEventHandler AfterFormatEventHandler { get; }
+        FwkPluginBeforeEventHandler FormatPluginBeforeEventHandler { get; }
+        FwkPluginAfterEventHandler FormatPluginAfterEventHandler { get; }
         
-        FwkPluginBeforeEventHandler BeforeReadEventHandler { get; }
-        FwkPluginAfterEventHandler AfterReadEventHandler { get; }
+        FwkPluginBeforeEventHandler ReadPluginBeforeEventHandler { get; }
+        FwkPluginAfterEventHandler ReadPluginAfterEventHandler { get; }
 
-        FwkPluginBeforeEventHandler BeforeInsertEventHandler { get; }
-        FwkPluginAfterEventHandler AfterInsertEventHandler { get; }
+        FwkPluginBeforeEventHandler InsertPluginBeforeEventHandler { get; }
+        FwkPluginAfterEventHandler InsertPluginAfterEventHandler { get; }
 
-        FwkPluginBeforeEventHandler BeforeIndateEventHandler { get; }
-        FwkPluginAfterEventHandler AfterIndateEventHandler { get; }
+        FwkPluginBeforeEventHandler IndatePluginBeforeEventHandler { get; }
+        FwkPluginAfterEventHandler IndatePluginAfterEventHandler { get; }
 
-        FwkPluginBeforeEventHandler BeforeUpdateEventHandler { get; }
-        FwkPluginAfterEventHandler AfterUpdateEventHandler { get; }
+        FwkPluginBeforeEventHandler UpdatePluginBeforeEventHandler { get; }
+        FwkPluginAfterEventHandler UpdatePluginAfterEventHandler { get; }
 
-        FwkPluginBeforeEventHandler BeforeUpsertEventHandler { get; }
-        FwkPluginAfterEventHandler AfterUpsertEventHandler { get; }
+        FwkPluginBeforeEventHandler UpsertPluginBeforeEventHandler { get; }
+        FwkPluginAfterEventHandler UpsertPluginAfterEventHandler { get; }
 
-        FwkPluginBeforeEventHandler BeforeDeleteEventHandler { get; }
-        FwkPluginAfterEventHandler AfterDeleteEventHandler { get; }
+        FwkPluginBeforeEventHandler DeletePluginBeforeEventHandler { get; }
+        FwkPluginAfterEventHandler DeletePluginAfterEventHandler { get; }
     }
 }

@@ -20,7 +20,7 @@ namespace Ark.Fwk.IPlugin
 {
     public interface IFwkPluginBasic : IFwkPlugin
     {
-        FwkPluginBeforeEventHandler BeforeLoadEventHandler { get; }
-        FwkPluginAfterEventHandler AfterLoadEventHandler { get; }
+        FwkPluginBeforeEventHandler LoadPluginBeforeEventHandler { get; }
+        FwkPluginAfterEventHandler LoadPluginAfterEventHandler { get; }
     }
 }

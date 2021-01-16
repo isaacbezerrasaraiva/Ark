@@ -33,9 +33,6 @@ namespace Ark.Fwk.Server
     public class FwkServer : ControllerBase, IFwkServer
     {
         #region Variables
-
-        private IFwkService iService;
-
         #endregion Variables
 
         #region Constructors
@@ -73,32 +70,48 @@ namespace Ark.Fwk.Server
         /// <returns>The service method response data string</returns>
         protected String InvokeService(String methodName, String dataRequestString, HttpContext context)
         {
-            context.Response.ContentType = "application/json";
+            context.Response.ContentType = "application/json;charset=utf-8";
 
+            FwkEnvironment environment = CreateEnvironment(context);
+            
             try
             {
-                CreateService(CreateEnvironment(context));
-
-                MethodInfo methodInfo = this.iService.GetType().GetMethod(methodName);
+                IFwkService iService = CreateService(environment);
+                
+                MethodInfo methodInfo = iService.GetType().GetMethod(methodName);
                 FwkDataRequest dataRequest = (FwkDataRequest)JsonConvert.DeserializeObject(dataRequestString, this.DataRequestType);
-                FwkDataResponse dataResponse = (FwkDataResponse)methodInfo.Invoke(this.iService, new Object[] { dataRequest });
+                FwkDataResponse dataResponse = (FwkDataResponse)methodInfo.Invoke(iService, new Object[] { dataRequest });
+                
+                #region Write response scope success
+                
+                if (String.IsNullOrEmpty(dataResponse.Scope.StatusCode) == true)
+                    dataResponse.Scope.StatusCode = LazyDecorator.GetCustomAttributeFromEnumValue(FwkScopeStatus.Success).Code;
+                
+                if (String.IsNullOrEmpty(dataResponse.Scope.StatusName) == true)
+                    dataResponse.Scope.StatusName = LazyDecorator.GetCustomAttributeFromEnumValue(FwkScopeStatus.Success).Name;
 
-                if (String.IsNullOrEmpty(dataResponse.Header.StatusCode) == true)
-                {
-                    dataResponse.Header.StatusCode = LazyDecorator.GetCustomAttributeFromEnumValue(FwkHeaderStatus.Success).Code;
-                    dataResponse.Header.StatusName = LazyDecorator.GetCustomAttributeFromEnumValue(FwkHeaderStatus.Success).Name;
-                    dataResponse.Header.StatusMessage = (String)LazyDecorator.GetCustomAttributeFromEnumValue(FwkHeaderStatus.Success).Data;
-                }
+                if (String.IsNullOrEmpty(dataResponse.Scope.StatusCaption) == true)
+                    dataResponse.Scope.StatusCaption = LibGlobalization.GetTranslation(Properties.ResourcesServer.FwkCaptionSuccess, environment.Culture);
+
+                if (String.IsNullOrEmpty(dataResponse.Scope.StatusMessage) == true)
+                    dataResponse.Scope.StatusMessage = LibGlobalization.GetTranslation(Properties.ResourcesServer.FwkMessageSuccess, environment.Culture);
+
+                #endregion Write response scope success
 
                 return (String)JsonConvert.SerializeObject(dataResponse, this.DataResponseType, null);
             }
             catch (Exception exp)
             {
                 FwkDataResponse dataResponse = (FwkDataResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
-
-                dataResponse.Header.StatusCode = LazyDecorator.GetCustomAttributeFromEnumValue(FwkHeaderStatus.Error).Code;
-                dataResponse.Header.StatusName = LazyDecorator.GetCustomAttributeFromEnumValue(FwkHeaderStatus.Error).Name;
-                dataResponse.Header.StatusMessage = exp.GetBaseException().Message;
+                
+                #region Write response scope error
+                
+                dataResponse.Scope.StatusCode = LazyDecorator.GetCustomAttributeFromEnumValue(FwkScopeStatus.Error).Code;
+                dataResponse.Scope.StatusName = LazyDecorator.GetCustomAttributeFromEnumValue(FwkScopeStatus.Error).Name;
+                dataResponse.Scope.StatusCaption = LibException.GetExceptionCaption(exp, environment.Culture);
+                dataResponse.Scope.StatusMessage = LibException.GetExceptionMessage(exp, environment.Culture);
+                
+                #endregion Write response scope error
 
                 return (String)JsonConvert.SerializeObject(dataResponse, this.DataResponseType, null);
             }
@@ -124,19 +137,30 @@ namespace Ark.Fwk.Server
         /// <returns>The service method response data</returns>
         protected FwkDataResponse InvokeService(String methodName, FwkDataRequest dataRequest, HttpContext context)
         {
+            FwkEnvironment environment = CreateEnvironment(context);
+
             try
             {
-                CreateService(CreateEnvironment(context));
+                IFwkService iService = CreateService(environment);
 
-                MethodInfo methodInfo = this.iService.GetType().GetMethod(methodName);
-                FwkDataResponse dataResponse = (FwkDataResponse)methodInfo.Invoke(this.iService, new Object[] { dataRequest });
+                MethodInfo methodInfo = iService.GetType().GetMethod(methodName);
+                FwkDataResponse dataResponse = (FwkDataResponse)methodInfo.Invoke(iService, new Object[] { dataRequest });
 
-                if (String.IsNullOrEmpty(dataResponse.Header.StatusCode) == true)
-                {
-                    dataResponse.Header.StatusCode = LazyDecorator.GetCustomAttributeFromEnumValue(FwkHeaderStatus.Success).Code;
-                    dataResponse.Header.StatusName = LazyDecorator.GetCustomAttributeFromEnumValue(FwkHeaderStatus.Success).Name;
-                    dataResponse.Header.StatusMessage = (String)LazyDecorator.GetCustomAttributeFromEnumValue(FwkHeaderStatus.Success).Data;
-                }
+                #region Write response scope success
+
+                if (String.IsNullOrEmpty(dataResponse.Scope.StatusCode) == true)
+                    dataResponse.Scope.StatusCode = LazyDecorator.GetCustomAttributeFromEnumValue(FwkScopeStatus.Success).Code;
+
+                if (String.IsNullOrEmpty(dataResponse.Scope.StatusName) == true)
+                    dataResponse.Scope.StatusName = LazyDecorator.GetCustomAttributeFromEnumValue(FwkScopeStatus.Success).Name;
+
+                if (String.IsNullOrEmpty(dataResponse.Scope.StatusCaption) == true)
+                    dataResponse.Scope.StatusCaption = LibGlobalization.GetTranslation(Properties.ResourcesServer.FwkCaptionSuccess, environment.Culture);
+
+                if (String.IsNullOrEmpty(dataResponse.Scope.StatusMessage) == true)
+                    dataResponse.Scope.StatusMessage = LibGlobalization.GetTranslation(Properties.ResourcesServer.FwkMessageSuccess, environment.Culture);
+
+                #endregion Write response scope success
 
                 return dataResponse;
             }
@@ -144,9 +168,14 @@ namespace Ark.Fwk.Server
             {
                 FwkDataResponse dataResponse = (FwkDataResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
-                dataResponse.Header.StatusCode = LazyDecorator.GetCustomAttributeFromEnumValue(FwkHeaderStatus.Error).Code;
-                dataResponse.Header.StatusName = LazyDecorator.GetCustomAttributeFromEnumValue(FwkHeaderStatus.Error).Name;
-                dataResponse.Header.StatusMessage = exp.GetBaseException().Message;
+                #region Write response scope error
+
+                dataResponse.Scope.StatusCode = LazyDecorator.GetCustomAttributeFromEnumValue(FwkScopeStatus.Error).Code;
+                dataResponse.Scope.StatusName = LazyDecorator.GetCustomAttributeFromEnumValue(FwkScopeStatus.Error).Name;
+                dataResponse.Scope.StatusCaption = LibException.GetExceptionCaption(exp, environment.Culture);
+                dataResponse.Scope.StatusMessage = LibException.GetExceptionMessage(exp, environment.Culture);
+
+                #endregion Write response scope error
 
                 return dataResponse;
             }
@@ -160,6 +189,9 @@ namespace Ark.Fwk.Server
         {
             FwkEnvironment environment = new FwkEnvironment();
 
+            try { environment.Culture = new LibCulture(context.Request.Headers["Language"].ToString()); }
+            catch { environment.Culture = LibGlobalization.Culture; }
+            
             if (context.Items.ContainsKey("IdDomain") == true)
             {
                 environment.Domain = new FwkDomain();
@@ -182,8 +214,9 @@ namespace Ark.Fwk.Server
         /// <summary>
         /// Create service
         /// </summary>
-        /// <param name="context">The http context</param>
-        private void CreateService(FwkEnvironment environment)
+        /// <param name="environment">The service environment</param>
+        /// <returns>The service</returns>
+        private IFwkService CreateService(FwkEnvironment environment)
         {
             String assemblyFolderName = String.Empty;
             String classFullName = String.Empty;
@@ -191,7 +224,7 @@ namespace Ark.Fwk.Server
             assemblyFolderName = this.GetType().Namespace.Replace("Server", "Service");
             classFullName = this.GetType().FullName.Replace("Server", "Service");
 
-            this.iService = (IFwkService)LazyActivator.Local.CreateInstance(Path.Combine(
+            return (IFwkService)LazyActivator.Local.CreateInstance(Path.Combine(
                 LibDirectory.Root.Bin.AssemblyFolder[assemblyFolderName].CurrentVersion.Lib.NetCoreApp31.Path, assemblyFolderName + ".dll"),
                 classFullName, new Object[] { environment });
         }

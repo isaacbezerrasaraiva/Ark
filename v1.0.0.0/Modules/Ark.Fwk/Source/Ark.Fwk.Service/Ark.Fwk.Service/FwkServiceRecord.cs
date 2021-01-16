@@ -272,7 +272,7 @@ namespace Ark.Fwk.Service
             if (this.IPlugins != null)
             {
                 foreach (IFwkPluginRecord iPluginRecord in this.IPlugins)
-                    iPluginRecord.BeforeFormatEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(dataRecordRequest));
+                    iPluginRecord.FormatPluginBeforeEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(dataRecordRequest));
             }
 
             #endregion BeforeFormat
@@ -284,7 +284,7 @@ namespace Ark.Fwk.Service
             if (this.IPlugins != null)
             {
                 foreach (IFwkPluginRecord iPluginRecord in this.IPlugins)
-                    iPluginRecord.AfterFormatEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(dataRecordRequest, dataRecordResponse));
+                    iPluginRecord.FormatPluginAfterEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(dataRecordRequest, dataRecordResponse));
             }
 
             #endregion AfterFormat
@@ -302,7 +302,7 @@ namespace Ark.Fwk.Service
             if (this.IPlugins != null)
             {
                 foreach (IFwkPluginRecord iPluginRecord in this.IPlugins)
-                    iPluginRecord.BeforeReadEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(dataRecordRequest));
+                    iPluginRecord.ReadPluginBeforeEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(dataRecordRequest));
             }
 
             #endregion BeforeRead
@@ -314,7 +314,7 @@ namespace Ark.Fwk.Service
             if (this.IPlugins != null)
             {
                 foreach (IFwkPluginRecord iPluginRecord in this.IPlugins)
-                    iPluginRecord.AfterReadEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(dataRecordRequest, dataRecordResponse));
+                    iPluginRecord.ReadPluginAfterEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(dataRecordRequest, dataRecordResponse));
             }
 
             #endregion AfterRead
@@ -332,7 +332,7 @@ namespace Ark.Fwk.Service
             if (this.IPlugins != null)
             {
                 foreach (IFwkPluginRecord iPluginRecord in this.IPlugins)
-                    iPluginRecord.BeforeInsertEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(dataRecordRequest));
+                    iPluginRecord.InsertPluginBeforeEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(dataRecordRequest));
             }
 
             #endregion BeforeInsert
@@ -344,7 +344,7 @@ namespace Ark.Fwk.Service
             if (this.IPlugins != null)
             {
                 foreach (IFwkPluginRecord iPluginRecord in this.IPlugins)
-                    iPluginRecord.AfterInsertEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(dataRecordRequest, dataRecordResponse));
+                    iPluginRecord.InsertPluginAfterEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(dataRecordRequest, dataRecordResponse));
             }
 
             #endregion AfterInsert
@@ -362,7 +362,7 @@ namespace Ark.Fwk.Service
             if (this.IPlugins != null)
             {
                 foreach (IFwkPluginRecord iPluginRecord in this.IPlugins)
-                    iPluginRecord.BeforeIndateEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(dataRecordRequest));
+                    iPluginRecord.IndatePluginBeforeEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(dataRecordRequest));
             }
 
             #endregion BeforeIndate
@@ -374,7 +374,7 @@ namespace Ark.Fwk.Service
             if (this.IPlugins != null)
             {
                 foreach (IFwkPluginRecord iPluginRecord in this.IPlugins)
-                    iPluginRecord.AfterIndateEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(dataRecordRequest, dataRecordResponse));
+                    iPluginRecord.IndatePluginAfterEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(dataRecordRequest, dataRecordResponse));
             }
 
             #endregion AfterIndate
@@ -392,7 +392,7 @@ namespace Ark.Fwk.Service
             if (this.IPlugins != null)
             {
                 foreach (IFwkPluginRecord iPluginRecord in this.IPlugins)
-                    iPluginRecord.BeforeUpdateEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(dataRecordRequest));
+                    iPluginRecord.UpdatePluginBeforeEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(dataRecordRequest));
             }
 
             #endregion BeforeUpdate
@@ -404,7 +404,7 @@ namespace Ark.Fwk.Service
             if (this.IPlugins != null)
             {
                 foreach (IFwkPluginRecord iPluginRecord in this.IPlugins)
-                    iPluginRecord.AfterUpdateEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(dataRecordRequest, dataRecordResponse));
+                    iPluginRecord.UpdatePluginAfterEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(dataRecordRequest, dataRecordResponse));
             }
 
             #endregion AfterUpdate
@@ -422,7 +422,7 @@ namespace Ark.Fwk.Service
             if (this.IPlugins != null)
             {
                 foreach (IFwkPluginRecord iPluginRecord in this.IPlugins)
-                    iPluginRecord.BeforeUpsertEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(dataRecordRequest));
+                    iPluginRecord.UpsertPluginBeforeEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(dataRecordRequest));
             }
 
             #endregion BeforeUpsert
@@ -434,7 +434,7 @@ namespace Ark.Fwk.Service
             if (this.IPlugins != null)
             {
                 foreach (IFwkPluginRecord iPluginRecord in this.IPlugins)
-                    iPluginRecord.AfterUpsertEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(dataRecordRequest, dataRecordResponse));
+                    iPluginRecord.UpsertPluginAfterEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(dataRecordRequest, dataRecordResponse));
             }
 
             #endregion AfterUpsert
@@ -452,7 +452,7 @@ namespace Ark.Fwk.Service
             if (this.IPlugins != null)
             {
                 foreach (IFwkPluginRecord iPluginRecord in this.IPlugins)
-                    iPluginRecord.BeforeDeleteEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(dataRecordRequest));
+                    iPluginRecord.DeletePluginBeforeEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(dataRecordRequest));
             }
 
             #endregion BeforeDelete
@@ -464,7 +464,7 @@ namespace Ark.Fwk.Service
             if (this.IPlugins != null)
             {
                 foreach (IFwkPluginRecord iPluginRecord in this.IPlugins)
-                    iPluginRecord.AfterDeleteEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(dataRecordRequest, dataRecordResponse));
+                    iPluginRecord.DeletePluginAfterEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(dataRecordRequest, dataRecordResponse));
             }
 
             #endregion AfterDelete

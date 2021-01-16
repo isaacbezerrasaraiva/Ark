@@ -34,7 +34,7 @@ namespace Ark.Fwk.Data
         {
             if (this.GetType() == typeof(FwkDataRecordRequest))
             {
-                this.header = new FwkDataRecordRequestHeader();
+                this.scope = new FwkDataRecordRequestScope();
                 this.content = new FwkDataRecordRequestContent();
             }
         }
@@ -46,10 +46,10 @@ namespace Ark.Fwk.Data
 
         #region Properties
 
-        public new FwkDataRecordRequestHeader Header
+        public new FwkDataRecordRequestScope Scope
         {
-            get { return (FwkDataRecordRequestHeader)this.header; }
-            set { this.header = value; }
+            get { return (FwkDataRecordRequestScope)this.scope; }
+            set { this.scope = value; }
         }
 
         public new FwkDataRecordRequestContent Content
@@ -61,14 +61,14 @@ namespace Ark.Fwk.Data
         #endregion Properties
     }
 
-    public class FwkDataRecordRequestHeader : FwkDataBasicRequestHeader
+    public class FwkDataRecordRequestScope : FwkDataBasicRequestScope
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public FwkDataRecordRequestHeader()
+        public FwkDataRecordRequestScope()
         {
         }
 
@@ -78,6 +78,9 @@ namespace Ark.Fwk.Data
         #endregion Methods
 
         #region Properties
+
+        public Boolean ReturnRecords { get; set; }
+
         #endregion Properties
     }
 
@@ -116,7 +119,7 @@ namespace Ark.Fwk.Data
         {
             if (this.GetType() == typeof(FwkDataRecordResponse))
             {
-                this.header = new FwkDataRecordResponseHeader();
+                this.scope = new FwkDataRecordResponseScope();
                 this.content = new FwkDataRecordResponseContent();
             }
         }
@@ -128,10 +131,10 @@ namespace Ark.Fwk.Data
 
         #region Properties
 
-        public new FwkDataRecordResponseHeader Header
+        public new FwkDataRecordResponseScope Scope
         {
-            get { return (FwkDataRecordResponseHeader)this.header; }
-            set { this.header = value; }
+            get { return (FwkDataRecordResponseScope)this.scope; }
+            set { this.scope = value; }
         }
 
         public new FwkDataRecordResponseContent Content
@@ -143,14 +146,14 @@ namespace Ark.Fwk.Data
         #endregion Properties
     }
 
-    public class FwkDataRecordResponseHeader : FwkDataBasicResponseHeader
+    public class FwkDataRecordResponseScope : FwkDataBasicResponseScope
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public FwkDataRecordResponseHeader()
+        public FwkDataRecordResponseScope()
         {
         }
 
@@ -160,6 +163,9 @@ namespace Ark.Fwk.Data
         #endregion Methods
 
         #region Properties
+
+        public Int32? RecordsAffected { get; set; }
+
         #endregion Properties
     }
 
@@ -183,8 +189,6 @@ namespace Ark.Fwk.Data
 
         [JsonConverter(typeof(LazyJsonConverterDataSet))]
         public DataSet DataSet { get; set; }
-
-        public Int32? RowsAffected { get; set; }
 
         #endregion Properties
     }

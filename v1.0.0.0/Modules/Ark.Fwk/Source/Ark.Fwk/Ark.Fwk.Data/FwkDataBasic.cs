@@ -28,7 +28,7 @@ namespace Ark.Fwk.Data
         {
             if (this.GetType() == typeof(FwkDataBasicRequest))
             {
-                this.header = new FwkDataBasicRequestHeader();
+                this.scope = new FwkDataBasicRequestScope();
                 this.content = new FwkDataBasicRequestContent();
             }
         }
@@ -40,10 +40,10 @@ namespace Ark.Fwk.Data
 
         #region Properties
 
-        public new FwkDataBasicRequestHeader Header
+        public new FwkDataBasicRequestScope Scope
         {
-            get { return (FwkDataBasicRequestHeader)this.header; }
-            set { this.header = value; }
+            get { return (FwkDataBasicRequestScope)this.scope; }
+            set { this.scope = value; }
         }
 
         public new FwkDataBasicRequestContent Content
@@ -55,14 +55,14 @@ namespace Ark.Fwk.Data
         #endregion Properties
     }
 
-    public class FwkDataBasicRequestHeader : FwkDataRequestHeader
+    public class FwkDataBasicRequestScope : FwkDataRequestScope
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public FwkDataBasicRequestHeader()
+        public FwkDataBasicRequestScope()
         {
         }
 
@@ -106,7 +106,7 @@ namespace Ark.Fwk.Data
         {
             if (this.GetType() == typeof(FwkDataBasicResponse))
             {
-                this.header = new FwkDataBasicResponseHeader();
+                this.scope = new FwkDataBasicResponseScope();
                 this.content = new FwkDataBasicResponseContent();
             }
         }
@@ -118,10 +118,10 @@ namespace Ark.Fwk.Data
 
         #region Properties
 
-        public new FwkDataBasicResponseHeader Header
+        public new FwkDataBasicResponseScope Scope
         {
-            get { return (FwkDataBasicResponseHeader)this.header; }
-            set { this.header = value; }
+            get { return (FwkDataBasicResponseScope)this.scope; }
+            set { this.scope = value; }
         }
 
         public new FwkDataBasicResponseContent Content
@@ -133,14 +133,14 @@ namespace Ark.Fwk.Data
         #endregion Properties
     }
 
-    public class FwkDataBasicResponseHeader : FwkDataResponseHeader
+    public class FwkDataBasicResponseScope : FwkDataResponseScope
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public FwkDataBasicResponseHeader()
+        public FwkDataBasicResponseScope()
         {
         }
 

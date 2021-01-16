@@ -137,7 +137,7 @@ namespace Ark.Fwk.Service
             if (this.IPlugins != null)
             {
                 foreach (IFwkPluginView iPluginView in this.IPlugins)
-                    iPluginView.BeforeFormatEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(dataViewRequest));
+                    iPluginView.FormatPluginBeforeEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(dataViewRequest));
             }
 
             #endregion BeforeFormat
@@ -149,7 +149,7 @@ namespace Ark.Fwk.Service
             if (this.IPlugins != null)
             {
                 foreach (IFwkPluginView iPluginView in this.IPlugins)
-                    iPluginView.AfterFormatEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(dataViewRequest, dataViewResponse));
+                    iPluginView.FormatPluginAfterEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(dataViewRequest, dataViewResponse));
             }
 
             #endregion AfterFormat
@@ -173,7 +173,7 @@ namespace Ark.Fwk.Service
             if (this.IPlugins != null)
             {
                 foreach (IFwkPluginView iPluginView in this.IPlugins)
-                    iPluginView.BeforeReadEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(dataViewRequest));
+                    iPluginView.ReadPluginBeforeEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(dataViewRequest));
             }
 
             #endregion BeforeRead
@@ -185,7 +185,7 @@ namespace Ark.Fwk.Service
             if (this.IPlugins != null)
             {
                 foreach (IFwkPluginView iPluginView in this.IPlugins)
-                    iPluginView.AfterReadEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(dataViewRequest, dataViewResponse));
+                    iPluginView.ReadPluginAfterEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(dataViewRequest, dataViewResponse));
             }
 
             #endregion AfterRead
@@ -215,11 +215,25 @@ namespace Ark.Fwk.Service
         /// <param name="dataViewRequest">The request data</param>
         private void InternalBeforeRead(FwkDataViewRequest dataViewRequest)
         {
-            if (dataViewRequest.Content.ParentKey == null)
-                dataViewRequest.Content.ParentKey = new Dictionary<String, Object>();
+            if (dataViewRequest.Content.DataSet != null && dataViewRequest.Content.DataSet.Tables != null)
+            {
+                foreach (DataTable dataTable in dataViewRequest.Content.DataSet.Tables)
+                {
+                    if (dataTable.Columns.Contains("IdDomain") == false)
+                    {
+                        dataTable.Columns.Add("IdDomain", typeof(Int16));
+                        dataTable.Columns["IdDomain"].SetOrdinal(0);
+                    }
 
-            if (dataViewRequest.Content.ParentKey.ContainsKey("IdDomain") == false)
-                dataViewRequest.Content.ParentKey.Add("IdDomain", this.Environment.Domain.IdDomain);
+                    foreach (DataRow dataRow in dataTable.Rows)
+                    {
+                        if (String.IsNullOrEmpty(LazyConvert.ToString(dataRow["IdDomain"])) == true)
+                            dataRow["IdDomain"] = this.Environment.Domain.IdDomain;
+                    }
+                }
+
+                dataViewRequest.Content.DataSet.AcceptChanges();
+            }
         }
 
         #endregion Methods

@@ -40,6 +40,8 @@ namespace Ark.Fwk
 
         public FwkUserContext UserContext { get; set; }
 
+        public LibCulture Culture { get; set; }
+
         #endregion Properties
     }
 }

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Ark.Fwk.Language.EnUs.Server>
+  <Captions>
+    <FwkCaptionSuccess>Success</FwkCaptionSuccess>
+  </Captions>
+  <Messages>
+    <FwkMessageSuccess>Process executed successfully!</FwkMessageSuccess>
+  </Messages>
+  <Exceptions>
+  </Exceptions>
+</Ark.Fwk.Language.EnUs.Server>
