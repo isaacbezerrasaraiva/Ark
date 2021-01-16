@@ -1,4 +1,4 @@
-﻿// SysDataPreflight.cs
+﻿// SysPreflightData.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
@@ -16,23 +16,23 @@ using Lazy;
 using Ark.Lib;
 using Ark.Fwk;
 using Ark.Fwk.Data;
-//using Ark.Fts;
-//using Ark.Fts.Data;
+using Ark.Fts;
+using Ark.Fts.Data;
 using Ark.Sys;
 
 namespace Ark.Sys.Data
 {
-    public class SysDataPreflightRequest : FwkDataRequest
+    public class SysPreflightDataRequest : FwkDataRequest
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public SysDataPreflightRequest()
+        public SysPreflightDataRequest()
         {
-            this.header = new SysDataPreflightRequestHeader();
-            this.content = new SysDataPreflightRequestContent();
+            this.scope = new SysPreflightDataRequestScope();
+            this.content = new SysPreflightDataRequestContent();
         }
 
         #endregion Constructors
@@ -42,29 +42,29 @@ namespace Ark.Sys.Data
 
         #region Properties
 
-        public new SysDataPreflightRequestHeader Header
+        public new SysPreflightDataRequestScope Scope
         {
-            get { return (SysDataPreflightRequestHeader)this.header; }
-            set { this.header = value; }
+            get { return (SysPreflightDataRequestScope)this.scope; }
+            set { this.scope = value; }
         }
 
-        public new SysDataPreflightRequestContent Content
+        public new SysPreflightDataRequestContent Content
         {
-            get { return (SysDataPreflightRequestContent)this.content; }
+            get { return (SysPreflightDataRequestContent)this.content; }
             set { this.content = value; }
         }
 
         #endregion Properties
     }
 
-    public class SysDataPreflightRequestHeader : FwkDataRequestHeader
+    public class SysPreflightDataRequestScope : FwkDataRequestScope
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public SysDataPreflightRequestHeader()
+        public SysPreflightDataRequestScope()
         {
         }
 
@@ -77,14 +77,14 @@ namespace Ark.Sys.Data
         #endregion Properties
     }
 
-    public class SysDataPreflightRequestContent : FwkDataRequestContent
+    public class SysPreflightDataRequestContent : FwkDataRequestContent
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public SysDataPreflightRequestContent()
+        public SysPreflightDataRequestContent()
         {
         }
 
@@ -97,17 +97,17 @@ namespace Ark.Sys.Data
         #endregion Properties
     }
 
-    public class SysDataPreflightResponse : FwkDataResponse
+    public class SysPreflightDataResponse : FwkDataResponse
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public SysDataPreflightResponse()
+        public SysPreflightDataResponse()
         {
-            this.header = new SysDataPreflightResponseHeader();
-            this.content = new SysDataPreflightResponseContent();
+            this.scope = new SysPreflightDataResponseScope();
+            this.content = new SysPreflightDataResponseContent();
         }
 
         #endregion Constructors
@@ -117,29 +117,29 @@ namespace Ark.Sys.Data
 
         #region Properties
 
-        public new SysDataPreflightResponseHeader Header
+        public new SysPreflightDataResponseScope Scope
         {
-            get { return (SysDataPreflightResponseHeader)this.header; }
-            set { this.header = value; }
+            get { return (SysPreflightDataResponseScope)this.scope; }
+            set { this.scope = value; }
         }
 
-        public new SysDataPreflightResponseContent Content
+        public new SysPreflightDataResponseContent Content
         {
-            get { return (SysDataPreflightResponseContent)this.content; }
+            get { return (SysPreflightDataResponseContent)this.content; }
             set { this.content = value; }
         }
 
         #endregion Properties
     }
 
-    public class SysDataPreflightResponseHeader : FwkDataResponseHeader
+    public class SysPreflightDataResponseScope : FwkDataResponseScope
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public SysDataPreflightResponseHeader()
+        public SysPreflightDataResponseScope()
         {
         }
 
@@ -152,14 +152,14 @@ namespace Ark.Sys.Data
         #endregion Properties
     }
 
-    public class SysDataPreflightResponseContent : FwkDataResponseContent
+    public class SysPreflightDataResponseContent : FwkDataResponseContent
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public SysDataPreflightResponseContent()
+        public SysPreflightDataResponseContent()
         {
             this.HttpResponseHeaders = new Dictionary<String, String>();
         }

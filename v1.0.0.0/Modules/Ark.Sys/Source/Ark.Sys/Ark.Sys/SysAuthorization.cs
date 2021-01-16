@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using Lazy;
 
 using Ark.Lib;
-//using Ark.Fwk;
+using Ark.Fwk;
 //using Ark.Fts;
 
 namespace Ark.Sys

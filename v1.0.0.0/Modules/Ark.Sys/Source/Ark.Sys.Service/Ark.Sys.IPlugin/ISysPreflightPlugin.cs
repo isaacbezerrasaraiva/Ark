@@ -1,4 +1,4 @@
-﻿// ISysServicePreflight.cs
+﻿// ISysPreflightPlugin.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
@@ -15,17 +15,18 @@ using Lazy;
 using Ark.Lib;
 using Ark.Fwk;
 using Ark.Fwk.Data;
-using Ark.Fwk.IService;
-//using Ark.Fts;
-//using Ark.Fts.Data;
-//using Ark.Fts.IService;
+using Ark.Fwk.IPlugin;
+using Ark.Fts;
+using Ark.Fts.Data;
+using Ark.Fts.IPlugin;
 using Ark.Sys;
 using Ark.Sys.Data;
 
-namespace Ark.Sys.IService
+namespace Ark.Sys.IPlugin
 {
-    public interface ISysServicePreflight : IFwkService
+    public interface ISysPreflightPlugin : IFwkPlugin
     {
-        SysDataPreflightResponse Preflight(SysDataPreflightRequest dataPreflightRequest);
+        FwkPluginBeforeEventHandler PreflightPluginBeforeEventHandler { get; }
+        FwkPluginAfterEventHandler PreflightPluginAfterEventHandler { get; }
     }
 }

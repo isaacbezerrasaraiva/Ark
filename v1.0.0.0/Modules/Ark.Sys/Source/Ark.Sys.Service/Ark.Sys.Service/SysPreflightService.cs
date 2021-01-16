@@ -1,4 +1,4 @@
-﻿// SysServicePreflight.cs
+﻿// SysPreflightService.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
@@ -21,11 +21,11 @@ using Ark.Fwk.Data;
 using Ark.Fwk.IPlugin;
 using Ark.Fwk.IService;
 using Ark.Fwk.Service;
-//using Ark.Fts;
-//using Ark.Fts.Data;
-//using Ark.Fts.IPlugin;
-//using Ark.Fts.IService;
-//using Ark.Fts.Service;
+using Ark.Fts;
+using Ark.Fts.Data;
+using Ark.Fts.IPlugin;
+using Ark.Fts.IService;
+using Ark.Fts.Service;
 using Ark.Sys;
 using Ark.Sys.Data;
 using Ark.Sys.IPlugin;
@@ -33,14 +33,14 @@ using Ark.Sys.IService;
 
 namespace Ark.Sys.Service
 {
-    public class SysServicePreflight : FwkService, ISysServicePreflight
+    public class SysPreflightService : FwkService, ISysPreflightService
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public SysServicePreflight(FwkEnvironment environment)
+        public SysPreflightService(FwkEnvironment environment)
             : base(environment)
         {
         }
@@ -52,42 +52,42 @@ namespace Ark.Sys.Service
         /// <summary>
         /// Preflight
         /// </summary>
-        /// <param name="dataPreflightRequest">The request data</param>
+        /// <param name="preflightDataRequest">The request data</param>
         /// <returns>The response data</returns>
-        public SysDataPreflightResponse Preflight(SysDataPreflightRequest dataPreflightRequest)
+        public SysPreflightDataResponse Preflight(SysPreflightDataRequest preflightDataRequest)
         {
-            SysDataPreflightResponse dataPreflightResponse = new SysDataPreflightResponse();
+            SysPreflightDataResponse preflightDataResponse = new SysPreflightDataResponse();
 
-            PerformPreflight(dataPreflightRequest, dataPreflightResponse);
+            PerformPreflight(preflightDataRequest, preflightDataResponse);
 
-            return dataPreflightResponse;
+            return preflightDataResponse;
         }
 
         /// <summary>
         /// Perform service preflight
         /// </summary>
-        /// <param name="dataPreflightRequest">The request data</param>
-        /// <param name="dataPreflightResponse">The response data</param>
-        protected void PerformPreflight(SysDataPreflightRequest dataPreflightRequest, SysDataPreflightResponse dataPreflightResponse)
+        /// <param name="preflightDataRequest">The request data</param>
+        /// <param name="preflightDataResponse">The response data</param>
+        protected void PerformPreflight(SysPreflightDataRequest preflightDataRequest, SysPreflightDataResponse preflightDataResponse)
         {
             #region BeforePreflight
 
             if (this.IPlugins != null)
             {
-                foreach (ISysPluginPreflight iPluginPreflight in this.IPlugins)
-                    iPluginPreflight.BeforePreflightEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(dataPreflightRequest));
+                foreach (ISysPreflightPlugin iPreflightPlugin in this.IPlugins)
+                    iPreflightPlugin.PreflightPluginBeforeEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(preflightDataRequest));
             }
 
             #endregion BeforePreflight
 
-            OnPreflight(dataPreflightRequest, dataPreflightResponse);
+            OnPreflight(preflightDataRequest, preflightDataResponse);
 
             #region AfterPreflight
 
             if (this.IPlugins != null)
             {
-                foreach (ISysPluginPreflight iPluginPreflight in this.IPlugins)
-                    iPluginPreflight.AfterPreflightEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(dataPreflightRequest, dataPreflightResponse));
+                foreach (ISysPreflightPlugin iPreflightPlugin in this.IPlugins)
+                    iPreflightPlugin.PreflightPluginAfterEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(preflightDataRequest, preflightDataResponse));
             }
 
             #endregion AfterPreflight
@@ -96,15 +96,15 @@ namespace Ark.Sys.Service
         /// <summary>
         /// Preflight
         /// </summary>
-        /// <param name="dataPreflightRequest">The request data</param>
-        /// <param name="dataPreflightResponse">The response data</param>
-        protected virtual void OnPreflight(SysDataPreflightRequest dataPreflightRequest, SysDataPreflightResponse dataPreflightResponse)
+        /// <param name="preflightDataRequest">The request data</param>
+        /// <param name="preflightDataResponse">The response data</param>
+        protected virtual void OnPreflight(SysPreflightDataRequest preflightDataRequest, SysPreflightDataResponse preflightDataResponse)
         {
             LibDynamicXmlElement dynamicXmlElementPreflight = LibServiceConfiguration.DynamicXml["Ark.Sys"]["Security"]["Preflight"]["Response"]["Headers"];
 
             foreach (KeyValuePair<String, LibDynamicXmlElement> dynamicXmlElementPreflightHeader in dynamicXmlElementPreflight.Elements)
             {
-                dataPreflightResponse.Content.HttpResponseHeaders.Add(
+                preflightDataResponse.Content.HttpResponseHeaders.Add(
                     dynamicXmlElementPreflightHeader.Value.Attribute["HeaderKey"],
                     dynamicXmlElementPreflightHeader.Value.Attribute["HeaderValue"]);
             }

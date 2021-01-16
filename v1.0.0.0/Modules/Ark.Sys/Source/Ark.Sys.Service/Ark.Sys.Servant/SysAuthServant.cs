@@ -1,4 +1,4 @@
-﻿// SysServantAuth.cs
+﻿// SysAuthServant.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
@@ -18,24 +18,24 @@ using Ark.Fwk;
 using Ark.Fwk.Data;
 using Ark.Fwk.IService;
 using Ark.Fwk.Servant;
-//using Ark.Fts;
-//using Ark.Fts.Data;
-//using Ark.Fts.IService;
-//using Ark.Fts.Servant;
+using Ark.Fts;
+using Ark.Fts.Data;
+using Ark.Fts.IService;
+using Ark.Fts.Servant;
 using Ark.Sys;
 using Ark.Sys.Data;
 using Ark.Sys.IService;
 
 namespace Ark.Sys.Servant
 {
-    public class SysServantAuth : FwkServant, ISysServiceAuth
+    public class SysAuthServant : FwkServant, ISysAuthService
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public SysServantAuth(FwkEnvironment environment)
+        public SysAuthServant(FwkEnvironment environment)
             : base(environment)
         {
         }
@@ -47,21 +47,21 @@ namespace Ark.Sys.Servant
         /// <summary>
         /// Authenticate
         /// </summary>
-        /// <param name="dataAuthRequest">The request data</param>
+        /// <param name="authDataRequest">The request data</param>
         /// <returns>The response data</returns>
-        public SysDataAuthResponse Authenticate(SysDataAuthRequest dataAuthRequest)
+        public SysAuthDataResponse Authenticate(SysAuthDataRequest authDataRequest)
         {
-            return (SysDataAuthResponse)InvokeService("Authenticate", dataAuthRequest);
+            return (SysAuthDataResponse)InvokeService("Authenticate", authDataRequest);
         }
 
         /// <summary>
         /// Authorize
         /// </summary>
-        /// <param name="dataAuthRequest">The request data</param>
+        /// <param name="authDataRequest">The request data</param>
         /// <returns>The response data</returns>
-        public SysDataAuthResponse Authorize(SysDataAuthRequest dataAuthRequest)
+        public SysAuthDataResponse Authorize(SysAuthDataRequest authDataRequest)
         {
-            return (SysDataAuthResponse)InvokeService("Authorize", dataAuthRequest);
+            return (SysAuthDataResponse)InvokeService("Authorize", authDataRequest);
         }
 
         #endregion Methods

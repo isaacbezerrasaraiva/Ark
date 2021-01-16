@@ -1,4 +1,4 @@
-﻿// SysServiceAuth.cs
+﻿// SysAuthService.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
@@ -27,11 +27,11 @@ using Ark.Fwk.Data;
 using Ark.Fwk.IPlugin;
 using Ark.Fwk.IService;
 using Ark.Fwk.Service;
-//using Ark.Fts;
-//using Ark.Fts.Data;
-//using Ark.Fts.IPlugin;
-//using Ark.Fts.IService;
-//using Ark.Fts.Service;
+using Ark.Fts;
+using Ark.Fts.Data;
+using Ark.Fts.IPlugin;
+using Ark.Fts.IService;
+using Ark.Fts.Service;
 using Ark.Sys;
 using Ark.Sys.Data;
 using Ark.Sys.IPlugin;
@@ -39,14 +39,14 @@ using Ark.Sys.IService;
 
 namespace Ark.Sys.Service
 {
-    public class SysServiceAuth : FwkService, ISysServiceAuth
+    public class SysAuthService : FwkService, ISysAuthService
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public SysServiceAuth(FwkEnvironment environment)
+        public SysAuthService(FwkEnvironment environment)
             : base(environment)
         {
         }
@@ -58,56 +58,56 @@ namespace Ark.Sys.Service
         /// <summary>
         /// Authenticate
         /// </summary>
-        /// <param name="dataAuthRequest">The request data</param>
+        /// <param name="authDataRequest">The request data</param>
         /// <returns>The response data</returns>
-        public SysDataAuthResponse Authenticate(SysDataAuthRequest dataAuthRequest)
+        public SysAuthDataResponse Authenticate(SysAuthDataRequest authDataRequest)
         {
-            SysDataAuthResponse dataAuthResponse = new SysDataAuthResponse();
+            SysAuthDataResponse authDataResponse = new SysAuthDataResponse();
 
-            PerformAuthenticate(dataAuthRequest, dataAuthResponse);
+            PerformAuthenticate(authDataRequest, authDataResponse);
 
-            return dataAuthResponse;
+            return authDataResponse;
         }
 
         /// <summary>
         /// Authorize
         /// </summary>
-        /// <param name="dataAuthRequest">The request data</param>
+        /// <param name="authDataRequest">The request data</param>
         /// <returns>The response data</returns>
-        public SysDataAuthResponse Authorize(SysDataAuthRequest dataAuthRequest)
+        public SysAuthDataResponse Authorize(SysAuthDataRequest authDataRequest)
         {
-            SysDataAuthResponse dataAuthResponse = new SysDataAuthResponse();
+            SysAuthDataResponse authDataResponse = new SysAuthDataResponse();
 
-            PerformAuthorize(dataAuthRequest, dataAuthResponse);
+            PerformAuthorize(authDataRequest, authDataResponse);
 
-            return dataAuthResponse;
+            return authDataResponse;
         }
 
         /// <summary>
         /// Perform service authentication
         /// </summary>
-        /// <param name="dataAuthRequest">The request data</param>
-        /// <param name="dataAuthResponse">The response data</param>
-        protected void PerformAuthenticate(SysDataAuthRequest dataAuthRequest, SysDataAuthResponse dataAuthResponse)
+        /// <param name="authDataRequest">The request data</param>
+        /// <param name="authDataResponse">The response data</param>
+        protected void PerformAuthenticate(SysAuthDataRequest authDataRequest, SysAuthDataResponse authDataResponse)
         {
             #region BeforeAuthenticate
 
             if (this.IPlugins != null)
             {
-                foreach (ISysPluginAuth iPluginAuth in this.IPlugins)
-                    iPluginAuth.BeforeAuthenticateEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(dataAuthRequest));
+                foreach (ISysAuthPlugin iAuthPlugin in this.IPlugins)
+                    iAuthPlugin.AuthenticatePluginBeforeEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(authDataRequest));
             }
 
             #endregion BeforeAuthenticate
 
-            OnAuthenticate(dataAuthRequest, dataAuthResponse);
+            OnAuthenticate(authDataRequest, authDataResponse);
 
             #region AfterAuthenticate
 
             if (this.IPlugins != null)
             {
-                foreach (ISysPluginAuth iPluginAuth in this.IPlugins)
-                    iPluginAuth.AfterAuthenticateEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(dataAuthRequest, dataAuthResponse));
+                foreach (ISysAuthPlugin iAuthPlugin in this.IPlugins)
+                    iAuthPlugin.AuthenticatePluginAfterEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(authDataRequest, authDataResponse));
             }
 
             #endregion AfterAuthenticate
@@ -116,28 +116,28 @@ namespace Ark.Sys.Service
         /// <summary>
         /// Perform service authorization
         /// </summary>
-        /// <param name="dataAuthRequest">The request data</param>
-        /// <param name="dataAuthResponse">The response data</param>
-        protected void PerformAuthorize(SysDataAuthRequest dataAuthRequest, SysDataAuthResponse dataAuthResponse)
+        /// <param name="authDataRequest">The request data</param>
+        /// <param name="authDataResponse">The response data</param>
+        protected void PerformAuthorize(SysAuthDataRequest authDataRequest, SysAuthDataResponse authDataResponse)
         {
             #region BeforeAuthorize
 
             if (this.IPlugins != null)
             {
-                foreach (ISysPluginAuth iPluginAuth in this.IPlugins)
-                    iPluginAuth.BeforeAuthorizeEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(dataAuthRequest));
+                foreach (ISysAuthPlugin iAuthPlugin in this.IPlugins)
+                    iAuthPlugin.AuthorizePluginBeforeEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(authDataRequest));
             }
 
             #endregion BeforeAuthorize
 
-            OnAuthorize(dataAuthRequest, dataAuthResponse);
+            OnAuthorize(authDataRequest, authDataResponse);
 
             #region AfterAuthorize
 
             if (this.IPlugins != null)
             {
-                foreach (ISysPluginAuth iPluginAuth in this.IPlugins)
-                    iPluginAuth.AfterAuthorizeEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(dataAuthRequest, dataAuthResponse));
+                foreach (ISysAuthPlugin iAuthPlugin in this.IPlugins)
+                    iAuthPlugin.AuthorizePluginAfterEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(authDataRequest, authDataResponse));
             }
 
             #endregion AfterAuthorize
@@ -146,17 +146,17 @@ namespace Ark.Sys.Service
         /// <summary>
         /// Authenticate
         /// </summary>
-        /// <param name="dataAuthRequest">The request data</param>
-        /// <param name="dataAuthResponse">The response data</param>
-        protected virtual void OnAuthenticate(SysDataAuthRequest dataAuthRequest, SysDataAuthResponse dataAuthResponse)
+        /// <param name="authDataRequest">The request data</param>
+        /// <param name="authDataResponse">The response data</param>
+        protected virtual void OnAuthenticate(SysAuthDataRequest authDataRequest, SysAuthDataResponse authDataResponse)
         {
-            dataAuthResponse.Content.AuthenticationResponse = new SysAuthenticationResponse();
-            dataAuthResponse.Content.AuthenticationResponse.IdDomain = -1;
-            dataAuthResponse.Content.AuthenticationResponse.IdUser = -1;
+            authDataResponse.Content.AuthenticationResponse = new SysAuthenticationResponse();
+            authDataResponse.Content.AuthenticationResponse.IdDomain = -1;
+            authDataResponse.Content.AuthenticationResponse.IdUser = -1;
 
-            if (dataAuthRequest.Content.AuthenticationRequest.Token != null)
+            if (authDataRequest.Content.AuthenticationRequest.Token != null)
             {
-                Tuple<Dictionary<String, String>, Dictionary<String, String>> tuplePayloadDictionary = DecryptTokenJWT(dataAuthRequest.Content.AuthenticationRequest.Token);
+                Tuple<Dictionary<String, String>, Dictionary<String, String>> tuplePayloadDictionary = DecryptTokenJWT(authDataRequest.Content.AuthenticationRequest.Token);
                 Dictionary<String, String> publicPayloadDictionary = tuplePayloadDictionary.Item1;
                 Dictionary<String, String> privatePayloadDictionary = tuplePayloadDictionary.Item2;
 
@@ -164,25 +164,25 @@ namespace Ark.Sys.Service
 
                 if (this.IPlugins != null)
                 {
-                    foreach (ISysPluginAuth iPluginAuth in this.IPlugins)
-                        iPluginAuth.AfterDecryptTokenEventHandler?.Invoke(this, new SysPluginAfterDecryptTokenEventArgs(dataAuthRequest, dataAuthResponse, publicPayloadDictionary, privatePayloadDictionary));
+                    foreach (ISysAuthPlugin iAuthPlugin in this.IPlugins)
+                        iAuthPlugin.DecryptTokenPluginAfterEventHandler?.Invoke(this, new SysDecryptTokenPluginAfterEventArgs(authDataRequest, authDataResponse, publicPayloadDictionary, privatePayloadDictionary));
                 }
 
                 #endregion AfterDecryptToken
 
-                dataAuthResponse.Content.AuthenticationResponse.IdDomain = LazyConvert.ToInt32(privatePayloadDictionary["IdDomain"]);
-                dataAuthResponse.Content.AuthenticationResponse.IdUser = LazyConvert.ToInt32(privatePayloadDictionary["IdUser"]);
+                authDataResponse.Content.AuthenticationResponse.IdDomain = LazyConvert.ToInt32(privatePayloadDictionary["IdDomain"]);
+                authDataResponse.Content.AuthenticationResponse.IdUser = LazyConvert.ToInt32(privatePayloadDictionary["IdUser"]);
             }
-            else if (dataAuthRequest.Content.AuthenticationRequest.Credential != null)
+            else if (authDataRequest.Content.AuthenticationRequest.Credential != null)
             {
-                String[] credentialArray = dataAuthRequest.Content.AuthenticationRequest.Credential.Split(';');
+                String[] credentialArray = authDataRequest.Content.AuthenticationRequest.Credential.Split(';');
 
                 #region Authenticate on database
 
                 this.Database.OpenConnection();
 
                 String sql = "select IdUser, Password, DisplayName from FwkUser where IdDomain = :IdDomain and Username = :Username";
-                DataTable dataTableUser = this.Database.QueryTable(sql, "FwkUser", new Object[] { dataAuthRequest.Content.AuthenticationRequest.IdDomain, credentialArray[0] });
+                DataTable dataTableUser = this.Database.QueryTable(sql, "FwkUser", new Object[] { authDataRequest.Content.AuthenticationRequest.IdDomain, credentialArray[0] });
 
                 if (dataTableUser.Rows.Count > 0)
                 {
@@ -194,22 +194,22 @@ namespace Ark.Sys.Service
                             new Tuple<Dictionary<String, String>, Dictionary<String, String>>(publicPayloadDictionary, privatePayloadDictionary);
 
                         publicPayloadDictionary.Add("User", LazyConvert.ToString(dataTableUser.Rows[0]["DisplayName"]));
-                        privatePayloadDictionary.Add("IdDomain", LazyConvert.ToString(dataAuthRequest.Content.AuthenticationRequest.IdDomain));
+                        privatePayloadDictionary.Add("IdDomain", LazyConvert.ToString(authDataRequest.Content.AuthenticationRequest.IdDomain));
                         privatePayloadDictionary.Add("IdUser", LazyConvert.ToString(dataTableUser.Rows[0]["IdUser"]));
 
                         #region BeforeEncryptToken
 
                         if (this.IPlugins != null)
                         {
-                            foreach (ISysPluginAuth iPluginAuth in this.IPlugins)
-                                iPluginAuth.BeforeEncryptTokenEventHandler?.Invoke(this, new SysPluginBeforeEncryptTokenEventArgs(dataAuthRequest, publicPayloadDictionary, privatePayloadDictionary));
+                            foreach (ISysAuthPlugin iAuthPlugin in this.IPlugins)
+                                iAuthPlugin.EncryptTokenPluginBeforeEventHandler?.Invoke(this, new SysEncryptTokenPluginBeforeEventArgs(authDataRequest, publicPayloadDictionary, privatePayloadDictionary));
                         }
 
                         #endregion BeforeEncryptToken
 
-                        dataAuthResponse.Content.AuthenticationResponse.IdDomain = dataAuthRequest.Content.AuthenticationRequest.IdDomain;
-                        dataAuthResponse.Content.AuthenticationResponse.IdUser = LazyConvert.ToInt32(dataTableUser.Rows[0]["IdUser"]);
-                        dataAuthResponse.Content.AuthenticationResponse.Token = EncryptTokenJWT(tuplePayloadDictionary);
+                        authDataResponse.Content.AuthenticationResponse.IdDomain = authDataRequest.Content.AuthenticationRequest.IdDomain;
+                        authDataResponse.Content.AuthenticationResponse.IdUser = LazyConvert.ToInt32(dataTableUser.Rows[0]["IdUser"]);
+                        authDataResponse.Content.AuthenticationResponse.Token = EncryptTokenJWT(tuplePayloadDictionary);
                     }
                 }
 
@@ -222,11 +222,11 @@ namespace Ark.Sys.Service
         /// <summary>
         /// Authorize
         /// </summary>
-        /// <param name="dataAuthRequest">The request data</param>
-        /// <param name="dataAuthResponse">The response data</param>
-        protected virtual void OnAuthorize(SysDataAuthRequest dataAuthRequest, SysDataAuthResponse dataAuthResponse)
+        /// <param name="authDataRequest">The request data</param>
+        /// <param name="authDataResponse">The response data</param>
+        protected virtual void OnAuthorize(SysAuthDataRequest authDataRequest, SysAuthDataResponse authDataResponse)
         {
-            dataAuthResponse.Content.AuthorizationResponse = new SysAuthorizationResponse();
+            authDataResponse.Content.AuthorizationResponse = new SysAuthorizationResponse();
 
             #region Authorization Query
 
@@ -252,13 +252,13 @@ namespace Ark.Sys.Service
 
             this.Database.OpenConnection();
 
-            dataAuthResponse.Content.AuthorizationResponse.Authorized =
+            authDataResponse.Content.AuthorizationResponse.Authorized =
                 this.Database.QueryFind(sqlAuthorization, new Object[] {
-                    dataAuthRequest.Content.AuthorizationRequest.IdDomain,
-                    dataAuthRequest.Content.AuthorizationRequest.IdUser,
-                    dataAuthRequest.Content.AuthorizationRequest.CodModule,
-                    dataAuthRequest.Content.AuthorizationRequest.CodFeature,
-                    dataAuthRequest.Content.AuthorizationRequest.CodAction });
+                    authDataRequest.Content.AuthorizationRequest.IdDomain,
+                    authDataRequest.Content.AuthorizationRequest.IdUser,
+                    authDataRequest.Content.AuthorizationRequest.CodModule,
+                    authDataRequest.Content.AuthorizationRequest.CodFeature,
+                    authDataRequest.Content.AuthorizationRequest.CodAction });
 
             this.Database.CloseConnection();
         }

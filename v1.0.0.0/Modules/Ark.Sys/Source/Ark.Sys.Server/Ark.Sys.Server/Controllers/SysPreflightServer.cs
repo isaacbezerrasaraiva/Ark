@@ -1,4 +1,4 @@
-﻿// SysServerPreflight.cs
+﻿// SysPreflightServer.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
@@ -25,9 +25,9 @@ using Ark.Fwk.IServer;
 using Ark.Fwk.IService;
 using Ark.Fwk.Server;
 using Ark.Fts;
-//using Ark.Fts.Data;
-//using Ark.Fts.IServer;
-//using Ark.Fts.IService;
+using Ark.Fts.Data;
+using Ark.Fts.IServer;
+using Ark.Fts.IService;
 using Ark.Fts.Server;
 using Ark.Sys;
 using Ark.Sys.Data;
@@ -38,17 +38,17 @@ namespace Ark.Sys.Server
 {
     [ApiController]
     [Route("Ark.Sys/[controller]")]
-    public class SysServerPreflight : FwkServer, ISysServerPreflight, ILibServerPreflight
+    public class SysPreflightServer : FwkServer, ISysPreflightServer, ILibServerPreflight
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public SysServerPreflight()
+        public SysPreflightServer()
         {
-            this.DataRequestType = typeof(SysDataPreflightRequest);
-            this.DataResponseType = typeof(SysDataPreflightResponse);
+            this.DataRequestType = typeof(SysPreflightDataRequest);
+            this.DataResponseType = typeof(SysPreflightDataResponse);
         }
 
         #endregion Constructors
@@ -61,11 +61,11 @@ namespace Ark.Sys.Server
         /// <param name="context">The request context</param>
         public void Preflight(HttpContext context)
         {
-            SysDataPreflightRequest dataPreflightRequest = new SysDataPreflightRequest();
+            SysPreflightDataRequest preflightDataRequest = new SysPreflightDataRequest();
 
-            SysDataPreflightResponse dataPreflightResponse = (SysDataPreflightResponse)InvokeService("Preflight", dataPreflightRequest, context);
+            SysPreflightDataResponse preflightDataResponse = (SysPreflightDataResponse)InvokeService("Preflight", preflightDataRequest, context);
 
-            foreach (KeyValuePair<String, String> header in dataPreflightResponse.Content.HttpResponseHeaders)
+            foreach (KeyValuePair<String, String> header in preflightDataResponse.Content.HttpResponseHeaders)
                 context.Response.Headers.Add(header.Key, header.Value);
 
             context.Response.StatusCode = StatusCodes.Status200OK;

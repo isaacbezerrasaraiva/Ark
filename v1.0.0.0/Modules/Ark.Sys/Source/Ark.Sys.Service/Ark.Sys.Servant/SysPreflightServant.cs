@@ -1,4 +1,4 @@
-﻿// SysServantPreflight.cs
+﻿// SysPreflightServant.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
@@ -18,24 +18,24 @@ using Ark.Fwk;
 using Ark.Fwk.Data;
 using Ark.Fwk.IService;
 using Ark.Fwk.Servant;
-//using Ark.Fts;
-//using Ark.Fts.Data;
-//using Ark.Fts.IService;
-//using Ark.Fts.Servant;
+using Ark.Fts;
+using Ark.Fts.Data;
+using Ark.Fts.IService;
+using Ark.Fts.Servant;
 using Ark.Sys;
 using Ark.Sys.Data;
 using Ark.Sys.IService;
 
 namespace Ark.Sys.Servant
 {
-    public class SysServantPreflight : FwkServant, ISysServicePreflight
+    public class SysPreflightServant : FwkServant, ISysPreflightService
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public SysServantPreflight(FwkEnvironment environment)
+        public SysPreflightServant(FwkEnvironment environment)
             : base(environment)
         {
         }
@@ -47,11 +47,11 @@ namespace Ark.Sys.Servant
         /// <summary>
         /// Preflight
         /// </summary>
-        /// <param name="dataPreflightRequest">The request data</param>
+        /// <param name="preflightDataRequest">The request data</param>
         /// <returns>The response data</returns>
-        public SysDataPreflightResponse Preflight(SysDataPreflightRequest dataPreflightRequest)
+        public SysPreflightDataResponse Preflight(SysPreflightDataRequest preflightDataRequest)
         {
-            return (SysDataPreflightResponse)InvokeService("Preflight", dataPreflightRequest);
+            return (SysPreflightDataResponse)InvokeService("Preflight", preflightDataRequest);
         }
 
         #endregion Methods
