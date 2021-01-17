@@ -359,7 +359,7 @@ namespace Ark.Sys.Service
             JwtSecurityTokenHandler jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
             SecurityTokenDescriptor securityTokenDescriptor = new SecurityTokenDescriptor();
             securityTokenDescriptor.Subject = new ClaimsIdentity(new[] { new Claim("public", publicPayload), new Claim("private", privatePayload) });
-            securityTokenDescriptor.Expires = DateTime.Now.AddDays(7);
+            securityTokenDescriptor.Expires = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59);
             securityTokenDescriptor.SigningCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256Signature);
 
             SecurityToken securityToken = jwtSecurityTokenHandler.CreateToken(securityTokenDescriptor);
