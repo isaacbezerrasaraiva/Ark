@@ -189,22 +189,49 @@ namespace Ark.Fwk.Server
         {
             FwkEnvironment environment = new FwkEnvironment();
 
-            try { environment.Culture = new LibCulture(context.Request.Headers["Language"].ToString()); }
-            catch { environment.Culture = LibGlobalization.Culture; }
-            
+            #region Initialize culture
+
+            String culture = null;
+            if (context.Request.Headers.ContainsKey("Culture") == true)
+                culture = LazyConvert.ToString(context.Request.Headers["Culture"], null);
+
+            if (culture == null)
+            {
+                environment.Culture = LibGlobalization.Culture;
+            }
+            else
+            {
+                try { environment.Culture = new LibCulture(culture); }
+                catch { environment.Culture = LibGlobalization.Culture; }
+            }
+
+            #endregion Initialize culture
+
             if (context.Items.ContainsKey("IdDomain") == true)
             {
+                #region Initialize domain
+
                 environment.Domain = new FwkDomain();
                 environment.Domain.IdDomain = LazyConvert.ToInt16(context.Items["IdDomain"]);
 
+                #endregion Initialize domain
+
                 if (context.Items.ContainsKey("IdUser") == true)
                 {
+                    #region Initialize user
+
                     environment.User = new FwkUser();
                     environment.User.IdDomain = environment.Domain.IdDomain;
                     environment.User.IdUser = LazyConvert.ToInt32(context.Items["IdUser"]);
 
+                    #endregion Initialize user
+
+                    #region Initialize user context
+
                     environment.UserContext = new FwkUserContext();
                     environment.UserContext["IdDomain"].ValueInt16 = environment.Domain.IdDomain;
+
+                    #endregion Initialize user context
                 }
             }
 

@@ -33,14 +33,14 @@ namespace Ark.Fwk
         #endregion Methods
 
         #region Properties
+        
+        public LibCulture Culture { get; set; }
 
         public FwkDomain Domain { get; set; }
 
         public FwkUser User { get; set; }
 
         public FwkUserContext UserContext { get; set; }
-
-        public LibCulture Culture { get; set; }
 
         #endregion Properties
     }
