@@ -36,8 +36,6 @@ using Ark.Sys.IService;
 
 namespace Ark.Sys.Server
 {
-    [ApiController]
-    [Route("Ark.Sys/[controller]")]
     public class SysPreflightServer : FwkServer, ISysPreflightServer, ILibServerPreflight
     {
         #region Variables

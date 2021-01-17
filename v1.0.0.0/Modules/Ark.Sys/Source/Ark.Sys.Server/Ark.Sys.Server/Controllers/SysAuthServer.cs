@@ -38,8 +38,6 @@ using Ark.Sys.IService;
 
 namespace Ark.Sys.Server
 {
-    [ApiController]
-    [Route("Ark.Sys/[controller]")]
     public class SysAuthServer : FwkServer, ISysAuthServer, ILibServerAuthentication, ILibServerAuthorization
     {
         #region Variables
@@ -73,10 +71,13 @@ namespace Ark.Sys.Server
 
                 SysAuthDataResponse authDataResponse = (SysAuthDataResponse)InvokeService("Authenticate", authDataRequest, context);
 
-                if (authDataResponse.Content.AuthenticationResponse.IdDomain > -1 && authDataResponse.Content.AuthenticationResponse.IdUser > -1)
+                if (authDataResponse.Scope.StatusCode == LazyDecorator.GetCustomAttributeFromEnumValue(FwkScopeStatus.Success).Code)
                 {
-                    context.Items["IdDomain"] = authDataResponse.Content.AuthenticationResponse.IdDomain;
-                    context.Items["IdUser"] = authDataResponse.Content.AuthenticationResponse.IdUser;
+                    if (authDataResponse.Content.AuthenticationResponse.IdDomain > -1 && authDataResponse.Content.AuthenticationResponse.IdUser > -1)
+                    {
+                        context.Items["IdDomain"] = authDataResponse.Content.AuthenticationResponse.IdDomain;
+                        context.Items["IdUser"] = authDataResponse.Content.AuthenticationResponse.IdUser;
+                    }
                 }
             }
             else
@@ -93,11 +94,14 @@ namespace Ark.Sys.Server
 
                     SysAuthDataResponse authDataResponse = (SysAuthDataResponse)InvokeService("Authenticate", authDataRequest, context);
 
-                    if (authDataResponse.Content.AuthenticationResponse.IdDomain > -1 && authDataResponse.Content.AuthenticationResponse.IdUser > -1)
+                    if (authDataResponse.Scope.StatusCode == LazyDecorator.GetCustomAttributeFromEnumValue(FwkScopeStatus.Success).Code)
                     {
-                        context.Items["IdDomain"] = authDataResponse.Content.AuthenticationResponse.IdDomain;
-                        context.Items["IdUser"] = authDataResponse.Content.AuthenticationResponse.IdUser;
-                        context.Response.Headers["Token"] = authDataResponse.Content.AuthenticationResponse.Token;
+                        if (authDataResponse.Content.AuthenticationResponse.IdDomain > -1 && authDataResponse.Content.AuthenticationResponse.IdUser > -1)
+                        {
+                            context.Items["IdDomain"] = authDataResponse.Content.AuthenticationResponse.IdDomain;
+                            context.Items["IdUser"] = authDataResponse.Content.AuthenticationResponse.IdUser;
+                            context.Response.Headers["Token"] = authDataResponse.Content.AuthenticationResponse.Token;
+                        }
                     }
                 }
             }
