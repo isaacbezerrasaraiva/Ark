@@ -23,6 +23,9 @@ namespace Ark.Fts.IPlugin
 {
     public interface IFtsIncrementPlugin : IFwkPlugin
     {
+        FwkPluginBeforeEventHandler ValidateNextPluginBeforeEventHandler { get; }
+        FwkPluginAfterEventHandler ValidateNextPluginAfterEventHandler { get; }
+
         FwkPluginBeforeEventHandler NextPluginBeforeEventHandler { get; }
         FwkPluginAfterEventHandler NextPluginAfterEventHandler { get; }
     }

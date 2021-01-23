@@ -9,6 +9,7 @@
 using System;
 using System.Xml;
 using System.Data;
+using System.Collections.Generic;
 
 using Lazy;
 
@@ -92,15 +93,15 @@ namespace Ark.Fts.Data
 
         #region Properties
 
+        public Int16 IdTable { get; set; }
+
         public String TableName { get; set; }
 
-        public String IncrementTableName { get; set; }
+        public String ControllerTableName { get; set; }
 
-        public String[] IncrementKeyFields { get; set; }
+        public Dictionary<String,Object> ControllerTableKeyFields { get; set; }
 
-        public Object[] IncrementKeyValues { get; set; }
-
-        public String IncrementField { get; set; }
+        public String ControllerTableField { get; set; }
 
         public Int32 Range { get; set; }
 

@@ -47,7 +47,19 @@ namespace Ark.Fts.Server
         #endregion Constructors
 
         #region Methods
-        
+
+        [HttpPost]
+        [Route("ValidateNext")]
+        /// <summary>
+        /// Validate generate next ids
+        /// </summary>
+        /// <param name="incrementDataRequestString">The increment request data string</param>
+        /// <returns>The increment response data string</returns>
+        public String ValidateNext([FromBody] String incrementDataRequestString)
+        {
+            return InvokeService("ValidateNext", incrementDataRequestString);
+        }
+
         [HttpPost]
         [Route("Next")]
         /// <summary>

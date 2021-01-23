@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Ark.Fts.Language.EnUs.Service>
+  <Captions>
+    <FtsCaptionRequiredFieldInvalid>Required field invalid!</FtsCaptionRequiredFieldInvalid>
+    <FtsCaptionRequiredFieldMissing>Required field missing!</FtsCaptionRequiredFieldMissing>
+    <FtsCaptionTableNotFound>Table not found!</FtsCaptionTableNotFound>
+  </Captions>
+  <Messages>
+  </Messages>
+  <Exceptions>
+    <FtsExceptionIncrementControllerTableFieldNullOrEmpty>The controller table increment field cannot be null or empty!</FtsExceptionIncrementControllerTableFieldNullOrEmpty>
+    <FtsExceptionIncrementControllerTableKeyFieldsIdDomainInvalid>The controller table key field 'IdDomain' is not valid!</FtsExceptionIncrementControllerTableKeyFieldsIdDomainInvalid>
+    <FtsExceptionIncrementControllerTableKeyFieldsIdDomainMissing>The controller table key field 'IdDomain' was not informed!</FtsExceptionIncrementControllerTableKeyFieldsIdDomainMissing>
+    <FtsExceptionIncrementControllerTableKeyFieldsNullOrZeroLenght>The controller table key fields cannot be null or zero lenght!</FtsExceptionIncrementControllerTableKeyFieldsNullOrZeroLenght>
+    <FtsExceptionIncrementControllerTableNameFacilitiesStruct>The controller table name informed '{0}', is based on Facilities Structure, so the increment table name is required!</FtsExceptionIncrementControllerTableNameFacilitiesStruct>
+    <FtsExceptionIncrementControllerTableNameNullOrEmpty>The controller table name cannot be null or empty!</FtsExceptionIncrementControllerTableNameNullOrEmpty>
+    <FtsExceptionIncrementRangeLowerThanOne>The increment range cannot be lower than one!</FtsExceptionIncrementRangeLowerThanOne>
+    <FtsExceptionIncrementTableNameNotFound>The increment table informed '{0}' was not found on FtsIncrementTable!</FtsExceptionIncrementTableNameNotFound>
+  </Exceptions>
+</Ark.Fts.Language.EnUs.Service>

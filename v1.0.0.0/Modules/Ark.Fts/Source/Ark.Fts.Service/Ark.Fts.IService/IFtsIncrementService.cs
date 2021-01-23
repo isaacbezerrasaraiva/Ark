@@ -23,11 +23,8 @@ namespace Ark.Fts.IService
 {
     public interface IFtsIncrementService : IFwkService
     {
-        /// <summary>
-        /// Generate next ids
-        /// </summary>
-        /// <param name="incrementDataRequest">The increment request data</param>
-        /// <returns>The increment response data</returns>
+        FtsIncrementDataResponse ValidateNext(FtsIncrementDataRequest incrementDataRequest);
+
         FtsIncrementDataResponse Next(FtsIncrementDataRequest incrementDataRequest);
     }
 }

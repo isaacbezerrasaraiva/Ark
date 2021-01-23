@@ -41,6 +41,16 @@ namespace Ark.Fts.Servant
         #region Methods
 
         /// <summary>
+        /// Validate generate next ids
+        /// </summary>
+        /// <param name="incrementDataRequest">The increment request data</param>
+        /// <returns>The increment response data</returns>
+        public FtsIncrementDataResponse ValidateNext(FtsIncrementDataRequest incrementDataRequest)
+        {
+            return (FtsIncrementDataResponse)InvokeService("ValidateNext", incrementDataRequest);
+        }
+
+        /// <summary>
         /// Generate next ids
         /// </summary>
         /// <param name="incrementDataRequest">The increment request data</param>

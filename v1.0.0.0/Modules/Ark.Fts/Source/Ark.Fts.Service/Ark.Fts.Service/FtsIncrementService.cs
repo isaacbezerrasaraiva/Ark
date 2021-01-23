@@ -47,25 +47,35 @@ namespace Ark.Fts.Service
         #region Methods
 
         /// <summary>
-        /// Generate next ids
+        /// Validate generate next ids
         /// </summary>
-        /// <param name="incrementDataRequest">The increment request data</param>
-        /// <returns>The increment response data</returns>
-        public FtsIncrementDataResponse Next(FtsIncrementDataRequest incrementDataRequest)
+        /// <param name="incrementDataRequest">The request data</param>
+        /// <returns>The response data</returns>
+        public FtsIncrementDataResponse ValidateNext(FtsIncrementDataRequest incrementDataRequest)
         {
-            #region Create response data
-
-            String assemblyFolderName = this.GetType().Namespace.Replace("Service", "Data");
-            String classFullName = this.GetType().FullName.Replace("Service", "Data") + "Response";
-
-            FtsIncrementDataResponse incrementDataResponse = (FtsIncrementDataResponse)LazyActivator.Local.CreateInstance(Path.Combine(
-                LibDirectory.Root.Bin.AssemblyFolder[assemblyFolderName].CurrentVersion.Lib.NetCoreApp31.Path, assemblyFolderName + ".dll"),
-                classFullName);
-
-            #endregion Create response data
+            FtsIncrementDataResponse incrementDataResponse = (FtsIncrementDataResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
             this.Database.OpenConnection();
 
+            PerformValidateNext(incrementDataRequest, incrementDataResponse);
+
+            this.Database.CloseConnection();
+
+            return incrementDataResponse;
+        }
+
+        /// <summary>
+        /// Generate next ids
+        /// </summary>
+        /// <param name="incrementDataRequest">The request data</param>
+        /// <returns>The response data</returns>
+        public FtsIncrementDataResponse Next(FtsIncrementDataRequest incrementDataRequest)
+        {
+            FtsIncrementDataResponse incrementDataResponse = (FtsIncrementDataResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
+
+            this.Database.OpenConnection();
+
+            PerformValidateNext(incrementDataRequest, incrementDataResponse);
             PerformNext(incrementDataRequest, incrementDataResponse);
 
             this.Database.CloseConnection();
@@ -74,25 +84,61 @@ namespace Ark.Fts.Service
         }
 
         /// <summary>
-        /// Perform generate next ids
+        /// Perform validate generate next ids
         /// </summary>
-        /// <param name="incrementDataRequest">The increment request data</param>
-        /// <param name="incrementDataResponse">The increment response data</param>
-        protected void PerformNext(FtsIncrementDataRequest incrementDataRequest, FtsIncrementDataResponse incrementDataResponse)
+        /// <param name="incrementDataRequest">The request data</param>
+        /// <param name="incrementDataResponse">The response data</param>
+        protected void PerformValidateNext(FtsIncrementDataRequest incrementDataRequest, FtsIncrementDataResponse incrementDataResponse)
         {
-            #region BeforeNext
+            BeforePerformValidateNext(incrementDataRequest, incrementDataResponse);
+
+            #region Before OnValidateNext plugins
 
             if (this.IPlugins != null)
             {
                 foreach (IFtsIncrementPlugin iIncrementPlugin in this.IPlugins)
-                    iIncrementPlugin.NextPluginBeforeEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(incrementDataRequest));
+                    iIncrementPlugin.ValidateNextPluginBeforeEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(incrementDataRequest, incrementDataResponse));
             }
 
-            #endregion BeforeNext
+            #endregion Before OnValidateNext plugins
+
+            OnValidateNext(incrementDataRequest, incrementDataResponse);
+
+            #region After OnValidateNext plugins
+
+            if (this.IPlugins != null)
+            {
+                foreach (IFtsIncrementPlugin iIncrementPlugin in this.IPlugins)
+                    iIncrementPlugin.ValidateNextPluginAfterEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(incrementDataRequest, incrementDataResponse));
+            }
+
+            #endregion After OnValidateNext plugins
+
+            AfterPerformValidateNext(incrementDataRequest, incrementDataResponse);
+        }
+
+        /// <summary>
+        /// Perform generate next ids
+        /// </summary>
+        /// <param name="incrementDataRequest">The request data</param>
+        /// <param name="incrementDataResponse">The response data</param>
+        protected void PerformNext(FtsIncrementDataRequest incrementDataRequest, FtsIncrementDataResponse incrementDataResponse)
+        {
+            BeforePerformNext(incrementDataRequest, incrementDataResponse);
+
+            #region Before OnNext plugins
+
+            if (this.IPlugins != null)
+            {
+                foreach (IFtsIncrementPlugin iIncrementPlugin in this.IPlugins)
+                    iIncrementPlugin.NextPluginBeforeEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(incrementDataRequest, incrementDataResponse));
+            }
+
+            #endregion Before OnNext plugins
 
             OnNext(incrementDataRequest, incrementDataResponse);
 
-            #region AfterNext
+            #region After OnNext plugins
 
             if (this.IPlugins != null)
             {
@@ -100,37 +146,124 @@ namespace Ark.Fts.Service
                     iIncrementPlugin.NextPluginAfterEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(incrementDataRequest, incrementDataResponse));
             }
 
-            #endregion AfterNext
+            #endregion After OnNext plugins
+
+            AfterPerformNext(incrementDataRequest, incrementDataResponse);
         }
 
         /// <summary>
-        /// Generate next ids
+        /// On validate generate next ids
         /// </summary>
-        /// <param name="incrementDataRequest">The increment request data</param>
-        /// <param name="incrementDataResponse">The increment response data</param>
-        private void OnNext(FtsIncrementDataRequest incrementDataRequest, FtsIncrementDataResponse incrementDataResponse)
+        /// <param name="incrementDataRequest">The request data</param>
+        /// <param name="incrementDataResponse">The response data</param>
+        protected virtual void OnValidateNext(FtsIncrementDataRequest incrementDataRequest, FtsIncrementDataResponse incrementDataResponse)
+        {
+            if (String.IsNullOrEmpty(incrementDataRequest.Content.ControllerTableName) == true)
+                throw new LibException(Properties.FtsResourcesService.FtsExceptionIncrementControllerTableNameNullOrEmpty, Properties.FtsResourcesService.FtsCaptionRequiredFieldMissing);
+
+            if (incrementDataRequest.Content.ControllerTableKeyFields == null || incrementDataRequest.Content.ControllerTableKeyFields.Count == 0)
+                throw new LibException(Properties.FtsResourcesService.FtsExceptionIncrementControllerTableKeyFieldsNullOrZeroLenght, Properties.FtsResourcesService.FtsCaptionRequiredFieldMissing);
+
+            if (incrementDataRequest.Content.ControllerTableKeyFields.ContainsKey("IdDomain") == false)
+                throw new LibException(Properties.FtsResourcesService.FtsExceptionIncrementControllerTableKeyFieldsIdDomainMissing, Properties.FtsResourcesService.FtsCaptionRequiredFieldMissing);
+
+            if (LazyConvert.ToInt16(incrementDataRequest.Content.ControllerTableKeyFields["IdDomain"], -1) != this.Environment.Domain.IdDomain)
+                throw new LibException(Properties.FtsResourcesService.FtsExceptionIncrementControllerTableKeyFieldsIdDomainInvalid, Properties.FtsResourcesService.FtsCaptionRequiredFieldInvalid);
+
+            if (String.IsNullOrEmpty(incrementDataRequest.Content.ControllerTableField) == true)
+                throw new LibException(Properties.FtsResourcesService.FtsExceptionIncrementControllerTableFieldNullOrEmpty, Properties.FtsResourcesService.FtsCaptionRequiredFieldMissing);
+
+            if (incrementDataRequest.Content.Range < 1)
+                throw new LibException(Properties.FtsResourcesService.FtsExceptionIncrementRangeLowerThanOne, Properties.FtsResourcesService.FtsCaptionRequiredFieldInvalid);
+
+            if (String.IsNullOrEmpty(incrementDataRequest.Content.TableName) == false)
+            {
+                String sql = "select IdTable from FtsIncrementTable where TableName = :TableName";
+                incrementDataRequest.Content.IdTable = LazyConvert.ToInt16(this.Database.QueryValue(
+                    sql, new Object[] { incrementDataRequest.Content.TableName }, new String[] { "TableName" }), -1);
+
+                if (incrementDataRequest.Content.IdTable == -1)
+                    throw new LibException(Properties.FtsResourcesService.FtsExceptionIncrementTableNameNotFound, new Object[] { incrementDataRequest.Content.TableName }, Properties.FtsResourcesService.FtsCaptionTableNotFound);
+            }
+            else
+            {
+                String sql = "select 1 from FtsIncrementControllerTable where ControllerTableName = :ControllerTableName";
+                Boolean isFacilitiesTableStructure = this.Database.QueryFind(sql, new Object[] { incrementDataRequest.Content.ControllerTableName }, new String[] { "ControllerTableName" });
+
+                if (isFacilitiesTableStructure == true)
+                    throw new LibException(Properties.FtsResourcesService.FtsExceptionIncrementControllerTableNameFacilitiesStruct, new Object[] { incrementDataRequest.Content.ControllerTableName }, Properties.FtsResourcesService.FtsCaptionRequiredFieldInvalid);
+            }
+        }
+
+        /// <summary>
+        /// On generate next ids
+        /// </summary>
+        /// <param name="incrementDataRequest">The request data</param>
+        /// <param name="incrementDataResponse">The response data</param>
+        protected virtual void OnNext(FtsIncrementDataRequest incrementDataRequest, FtsIncrementDataResponse incrementDataResponse)
         {
             if (String.IsNullOrEmpty(incrementDataRequest.Content.TableName) == false)
             {
-                String sql = "select IdTable from FtsIncrement where TableName = :TableName";
-                Int16 idTable = LazyConvert.ToInt16(this.Database.QueryValue(sql, new Object[] { incrementDataRequest.Content.TableName }, new String[] { "TableName" }));
-
-                String[] keyFields = new String[incrementDataRequest.Content.IncrementKeyFields.Length + 1];
+                String[] keyFields = new String[incrementDataRequest.Content.ControllerTableKeyFields.Count + 1];
                 keyFields[0] = "IdTable";
-                incrementDataRequest.Content.IncrementKeyFields.CopyTo(keyFields, 1);
+                incrementDataRequest.Content.ControllerTableKeyFields.Keys.ToArray<String>().CopyTo(keyFields, 1);
 
-                Object[] keyValues = new Object[incrementDataRequest.Content.IncrementKeyValues.Length + 1];
-                keyValues[0] = idTable;
-                incrementDataRequest.Content.IncrementKeyValues.CopyTo(keyValues, 1);
+                Object[] keyValues = new Object[incrementDataRequest.Content.ControllerTableKeyFields.Count + 1];
+                keyValues[0] = incrementDataRequest.Content.IdTable;
+                incrementDataRequest.Content.ControllerTableKeyFields.Values.ToArray<Object>().CopyTo(keyValues, 1);
 
                 incrementDataResponse.Content.Ids = this.Database.IncrementRange(
-                    incrementDataRequest.Content.IncrementTableName, keyFields, keyValues, incrementDataRequest.Content.IncrementField, incrementDataRequest.Content.Range);
+                    incrementDataRequest.Content.ControllerTableName, 
+                    keyFields, 
+                    keyValues, 
+                    incrementDataRequest.Content.ControllerTableField, 
+                    incrementDataRequest.Content.Range);
             }
             else
             {
                 incrementDataResponse.Content.Ids = this.Database.IncrementRange(
-                    incrementDataRequest.Content.IncrementTableName, incrementDataRequest.Content.IncrementKeyFields, incrementDataRequest.Content.IncrementKeyValues, incrementDataRequest.Content.IncrementField, incrementDataRequest.Content.Range);
+                    incrementDataRequest.Content.ControllerTableName, 
+                    incrementDataRequest.Content.ControllerTableKeyFields.Keys.ToArray<String>(), 
+                    incrementDataRequest.Content.ControllerTableKeyFields.Values.ToArray<Object>(), 
+                    incrementDataRequest.Content.ControllerTableField, 
+                    incrementDataRequest.Content.Range);
             }
+        }
+
+        /// <summary>
+        /// Before perform validate generate next ids
+        /// </summary>
+        /// <param name="incrementDataRequest">The request data</param>
+        /// <param name="incrementDataResponse">The response data</param>
+        private void BeforePerformValidateNext(FtsIncrementDataRequest incrementDataRequest, FtsIncrementDataResponse incrementDataResponse)
+        {
+        }
+
+        /// <summary>
+        /// After perform validate generate next ids
+        /// </summary>
+        /// <param name="incrementDataRequest">The request data</param>
+        /// <param name="incrementDataResponse">The response data</param>
+        private void AfterPerformValidateNext(FtsIncrementDataRequest incrementDataRequest, FtsIncrementDataResponse incrementDataResponse)
+        {
+        }
+
+        /// <summary>
+        /// Before perform generate next ids
+        /// </summary>
+        /// <param name="incrementDataRequest">The request data</param>
+        /// <param name="incrementDataResponse">The response data</param>
+        private void BeforePerformNext(FtsIncrementDataRequest incrementDataRequest, FtsIncrementDataResponse incrementDataResponse)
+        {
+        }
+
+        /// <summary>
+        /// After perform generate next ids
+        /// </summary>
+        /// <param name="incrementDataRequest">The request data</param>
+        /// <param name="incrementDataResponse">The response data</param>
+        private void AfterPerformNext(FtsIncrementDataRequest incrementDataRequest, FtsIncrementDataResponse incrementDataResponse)
+        {
         }
 
         #endregion Methods

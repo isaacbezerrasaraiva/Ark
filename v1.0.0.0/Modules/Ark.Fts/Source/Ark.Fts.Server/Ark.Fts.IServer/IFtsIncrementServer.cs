@@ -23,11 +23,8 @@ namespace Ark.Fts.IServer
 {
     public interface IFtsIncrementServer : IFwkServer
     {
-        /// <summary>
-        /// Generate next ids
-        /// </summary>
-        /// <param name="incrementDataRequestString">The increment request data string</param>
-        /// <returns>The increment response data string</returns>
+        String ValidateNext(String incrementDataRequestString);
+
         String Next(String incrementDataRequestString);
     }
 }
