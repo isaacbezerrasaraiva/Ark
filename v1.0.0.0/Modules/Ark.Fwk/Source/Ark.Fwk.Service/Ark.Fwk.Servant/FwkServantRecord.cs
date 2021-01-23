@@ -45,7 +45,67 @@ namespace Ark.Fwk.Servant
         {
             return (FwkDataRecordResponse)InvokeService("Format", dataRecordRequest);
         }
+        
+        /// <summary>
+        /// Validate Read the Record
+        /// </summary>
+        /// <param name="dataRecordRequest">The request data</param>
+        /// <returns>The response data</returns>
+        public FwkDataRecordResponse ValidateRead(FwkDataRecordRequest dataRecordRequest)
+        {
+            return (FwkDataRecordResponse)InvokeService("ValidateRead", dataRecordRequest);
+        }
 
+        /// <summary>
+        /// Validate Insert the Record
+        /// </summary>
+        /// <param name="dataRecordRequest">The request data</param>
+        /// <returns>The response data</returns>
+        public FwkDataRecordResponse ValidateInsert(FwkDataRecordRequest dataRecordRequest)
+        {
+            return (FwkDataRecordResponse)InvokeService("ValidateInsert", dataRecordRequest);
+        }
+
+        /// <summary>
+        /// Validate Indate the Record
+        /// </summary>
+        /// <param name="dataRecordRequest">The request data</param>
+        /// <returns>The response data</returns>
+        public FwkDataRecordResponse ValidateIndate(FwkDataRecordRequest dataRecordRequest)
+        {
+            return (FwkDataRecordResponse)InvokeService("ValidateIndate", dataRecordRequest);
+        }
+
+        /// <summary>
+        /// Validate Update the Record
+        /// </summary>
+        /// <param name="dataRecordRequest">The request data</param>
+        /// <returns>The response data</returns>
+        public FwkDataRecordResponse ValidateUpdate(FwkDataRecordRequest dataRecordRequest)
+        {
+            return (FwkDataRecordResponse)InvokeService("ValidateUpdate", dataRecordRequest);
+        }
+
+        /// <summary>
+        /// Validate Upsert the Record
+        /// </summary>
+        /// <param name="dataRecordRequest">The request data</param>
+        /// <returns>The response data</returns>
+        public FwkDataRecordResponse ValidateUpsert(FwkDataRecordRequest dataRecordRequest)
+        {
+            return (FwkDataRecordResponse)InvokeService("ValidateUpsert", dataRecordRequest);
+        }
+
+        /// <summary>
+        /// Validate Delete the Record
+        /// </summary>
+        /// <param name="dataRecordRequest">The request data</param>
+        /// <returns>The response data</returns>
+        public FwkDataRecordResponse ValidateDelete(FwkDataRecordRequest dataRecordRequest)
+        {
+            return (FwkDataRecordResponse)InvokeService("ValidateDelete", dataRecordRequest);
+        }
+        
         /// <summary>
         /// Read the Record
         /// </summary>

@@ -35,17 +35,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Properties\ResourcesServer.Designer.cs">
+    <Compile Update="Properties\FwkResourcesServer.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>ResourcesServer.resx</DependentUpon>
+      <DependentUpon>FwkResourcesServer.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Properties\ResourcesServer.resx">
+    <EmbeddedResource Update="Properties\FwkResourcesServer.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ResourcesServer.Designer.cs</LastGenOutput>
+      <LastGenOutput>FwkResourcesServer.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

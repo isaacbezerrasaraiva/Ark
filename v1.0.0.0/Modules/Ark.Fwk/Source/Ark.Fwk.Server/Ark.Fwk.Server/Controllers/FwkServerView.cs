@@ -47,14 +47,26 @@ namespace Ark.Fwk.Server
         #endregion Constructors
 
         #region Methods
-        
+
+        [HttpPost]
+        [Route("ValidateRead")]
+        /// <summary>
+        /// Validate read the view
+        /// </summary>
+        /// <param name="dataRequestString">The request data string</param>
+        /// <returns>The response data string</returns>
+        public String ValidateRead([FromBody] String dataRequestString)
+        {
+            return InvokeService("ValidateRead", dataRequestString);
+        }
+
+        [HttpPost]
+        [Route("Read")]
         /// <summary>
         /// Read the view
         /// </summary>
         /// <param name="dataRequestString">The request data string</param>
         /// <returns>The response data string</returns>
-        [HttpPost]
-        [Route("Read")]
         public String Read([FromBody] String dataRequestString)
         {
             return InvokeService("Read", dataRequestString);

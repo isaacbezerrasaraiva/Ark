@@ -22,6 +22,18 @@ namespace Ark.Fwk.IService
     {
         FwkDataRecordResponse Format(FwkDataRecordRequest dataRecordRequest);
 
+        FwkDataRecordResponse ValidateRead(FwkDataRecordRequest dataRecordRequest);
+
+        FwkDataRecordResponse ValidateInsert(FwkDataRecordRequest dataRecordRequest);
+
+        FwkDataRecordResponse ValidateIndate(FwkDataRecordRequest dataRecordRequest);
+
+        FwkDataRecordResponse ValidateUpdate(FwkDataRecordRequest dataRecordRequest);
+
+        FwkDataRecordResponse ValidateUpsert(FwkDataRecordRequest dataRecordRequest);
+
+        FwkDataRecordResponse ValidateDelete(FwkDataRecordRequest dataRecordRequest);
+
         FwkDataRecordResponse Read(FwkDataRecordRequest dataRecordRequest);
 
         FwkDataRecordResponse Insert(FwkDataRecordRequest dataRecordRequest);

@@ -47,14 +47,14 @@ namespace Ark.Fwk.Server
         #endregion Constructors
 
         #region Methods
-        
+
+        [HttpPost]
+        [Route("Init")]
         /// <summary>
         /// Initialize the service
         /// </summary>
         /// <param name="dataRequestString">The request data string</param>
         /// <returns>The response data string</returns>
-        [HttpPost]
-        [Route("Init")]
         public String Init([FromBody] String dataRequestString)
         {
             return InvokeService("Init", dataRequestString);

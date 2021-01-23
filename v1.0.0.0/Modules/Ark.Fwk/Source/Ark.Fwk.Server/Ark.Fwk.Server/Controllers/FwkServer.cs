@@ -91,10 +91,10 @@ namespace Ark.Fwk.Server
                     dataResponse.Scope.StatusName = LazyDecorator.GetCustomAttributeFromEnumValue(FwkScopeStatus.Success).Name;
 
                 if (String.IsNullOrEmpty(dataResponse.Scope.StatusCaption) == true)
-                    dataResponse.Scope.StatusCaption = LibGlobalization.GetTranslation(Properties.ResourcesServer.FwkCaptionSuccess, environment.Culture);
+                    dataResponse.Scope.StatusCaption = LibGlobalization.GetTranslation(Properties.FwkResourcesServer.FwkCaptionSuccess, environment.Culture);
 
                 if (String.IsNullOrEmpty(dataResponse.Scope.StatusMessage) == true)
-                    dataResponse.Scope.StatusMessage = LibGlobalization.GetTranslation(Properties.ResourcesServer.FwkMessageSuccess, environment.Culture);
+                    dataResponse.Scope.StatusMessage = LibGlobalization.GetTranslation(Properties.FwkResourcesServer.FwkMessageSuccess, environment.Culture);
 
                 #endregion Write response scope success
 
@@ -108,8 +108,8 @@ namespace Ark.Fwk.Server
                 
                 dataResponse.Scope.StatusCode = LazyDecorator.GetCustomAttributeFromEnumValue(FwkScopeStatus.Error).Code;
                 dataResponse.Scope.StatusName = LazyDecorator.GetCustomAttributeFromEnumValue(FwkScopeStatus.Error).Name;
-                dataResponse.Scope.StatusCaption = LibException.GetExceptionCaption(exp, environment.Culture);
-                dataResponse.Scope.StatusMessage = LibException.GetExceptionMessage(exp, environment.Culture);
+                dataResponse.Scope.StatusCaption = LibException.GetExceptionCaption(exp.InnerException == null ? exp : exp.InnerException, environment.Culture);
+                dataResponse.Scope.StatusMessage = LibException.GetExceptionMessage(exp.InnerException == null ? exp : exp.InnerException, environment.Culture);
                 
                 #endregion Write response scope error
 
@@ -155,10 +155,10 @@ namespace Ark.Fwk.Server
                     dataResponse.Scope.StatusName = LazyDecorator.GetCustomAttributeFromEnumValue(FwkScopeStatus.Success).Name;
 
                 if (String.IsNullOrEmpty(dataResponse.Scope.StatusCaption) == true)
-                    dataResponse.Scope.StatusCaption = LibGlobalization.GetTranslation(Properties.ResourcesServer.FwkCaptionSuccess, environment.Culture);
+                    dataResponse.Scope.StatusCaption = LibGlobalization.GetTranslation(Properties.FwkResourcesServer.FwkCaptionSuccess, environment.Culture);
 
                 if (String.IsNullOrEmpty(dataResponse.Scope.StatusMessage) == true)
-                    dataResponse.Scope.StatusMessage = LibGlobalization.GetTranslation(Properties.ResourcesServer.FwkMessageSuccess, environment.Culture);
+                    dataResponse.Scope.StatusMessage = LibGlobalization.GetTranslation(Properties.FwkResourcesServer.FwkMessageSuccess, environment.Culture);
 
                 #endregion Write response scope success
 
@@ -172,8 +172,8 @@ namespace Ark.Fwk.Server
 
                 dataResponse.Scope.StatusCode = LazyDecorator.GetCustomAttributeFromEnumValue(FwkScopeStatus.Error).Code;
                 dataResponse.Scope.StatusName = LazyDecorator.GetCustomAttributeFromEnumValue(FwkScopeStatus.Error).Name;
-                dataResponse.Scope.StatusCaption = LibException.GetExceptionCaption(exp, environment.Culture);
-                dataResponse.Scope.StatusMessage = LibException.GetExceptionMessage(exp, environment.Culture);
+                dataResponse.Scope.StatusCaption = LibException.GetExceptionCaption(exp.InnerException == null ? exp : exp.InnerException, environment.Culture);
+                dataResponse.Scope.StatusMessage = LibException.GetExceptionMessage(exp.InnerException == null ? exp : exp.InnerException, environment.Culture);
 
                 #endregion Write response scope error
 

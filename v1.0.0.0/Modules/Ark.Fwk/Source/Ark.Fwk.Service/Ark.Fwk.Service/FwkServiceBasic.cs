@@ -39,7 +39,7 @@ namespace Ark.Fwk.Service
         #endregion Constructors
 
         #region Methods
-
+        
         /// <summary>
         /// Initialize the service
         /// </summary>
@@ -47,16 +47,7 @@ namespace Ark.Fwk.Service
         /// <returns>The response data</returns>
         public virtual FwkDataBasicResponse Init(FwkDataBasicRequest dataBasicRequest)
         {
-            #region Create response data
-
-            String assemblyFolderName = this.GetType().Namespace.Replace("Service", "Data");
-            String classFullName = this.GetType().FullName.Replace("Service", "Data") + "Response";
-
-            FwkDataBasicResponse dataBasicResponse = (FwkDataBasicResponse)LazyActivator.Local.CreateInstance(Path.Combine(
-                LibDirectory.Root.Bin.AssemblyFolder[assemblyFolderName].CurrentVersion.Lib.NetCoreApp31.Path, assemblyFolderName + ".dll"),
-                classFullName);
-
-            #endregion Create response data
+            FwkDataBasicResponse dataBasicResponse = (FwkDataBasicResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
             this.Database.OpenConnection();
 
@@ -66,7 +57,7 @@ namespace Ark.Fwk.Service
 
             return dataBasicResponse;
         }
-
+        
         /// <summary>
         /// Load the service
         /// </summary>
@@ -74,16 +65,7 @@ namespace Ark.Fwk.Service
         /// <returns>The response data</returns>
         public FwkDataBasicResponse Load(FwkDataBasicRequest dataBasicRequest)
         {
-            #region Create response data
-
-            String assemblyFolderName = this.GetType().Namespace.Replace("Service", "Data");
-            String classFullName = this.GetType().FullName.Replace("Service", "Data") + "Response";
-
-            FwkDataBasicResponse dataBasicResponse = (FwkDataBasicResponse)LazyActivator.Local.CreateInstance(Path.Combine(
-                LibDirectory.Root.Bin.AssemblyFolder[assemblyFolderName].CurrentVersion.Lib.NetCoreApp31.Path, assemblyFolderName + ".dll"),
-                classFullName);
-
-            #endregion Create response data
+            FwkDataBasicResponse dataBasicResponse = (FwkDataBasicResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
             this.Database.OpenConnection();
 
@@ -101,35 +83,57 @@ namespace Ark.Fwk.Service
         /// <param name="dataBasicResponse">The response data</param>
         protected void PerformLoad(FwkDataBasicRequest dataBasicRequest, FwkDataBasicResponse dataBasicResponse)
         {
-            #region BeforeLoad
+            BeforePerformLoad(dataBasicRequest, dataBasicResponse);
+
+            #region Before OnLoad plugins
 
             if (this.IPlugins != null)
             {
                 foreach (IFwkPluginBasic iPluginBasic in this.IPlugins)
-                    iPluginBasic.LoadPluginBeforeEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(dataBasicRequest));
+                    iPluginBasic.LoadPluginBasicBeforeEventHandler?.Invoke(this, new FwkPluginBasicBeforeEventArgs(dataBasicRequest, dataBasicResponse));
             }
 
-            #endregion BeforeLoad
+            #endregion Before OnLoad plugins
 
             OnLoad(dataBasicRequest, dataBasicResponse);
 
-            #region AfterLoad
+            #region After OnLoad plugins
 
             if (this.IPlugins != null)
             {
                 foreach (IFwkPluginBasic iPluginBasic in this.IPlugins)
-                    iPluginBasic.LoadPluginAfterEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(dataBasicRequest, dataBasicResponse));
+                    iPluginBasic.LoadPluginBasicAfterEventHandler?.Invoke(this, new FwkPluginBasicAfterEventArgs(dataBasicRequest, dataBasicResponse));
             }
 
-            #endregion AfterLoad
+            #endregion After OnLoad plugins
+
+            AfterPerformLoad(dataBasicRequest, dataBasicResponse);
         }
 
         /// <summary>
-        /// Load the service
+        /// On service load
         /// </summary>
         /// <param name="dataBasicRequest">The request data</param>
         /// <param name="dataBasicResponse">The response data</param>
         protected virtual void OnLoad(FwkDataBasicRequest dataBasicRequest, FwkDataBasicResponse dataBasicResponse)
+        {
+        }
+
+        /// <summary>
+        /// Before perform service load
+        /// </summary>
+        /// <param name="dataBasicRequest">The request data</param>
+        /// <param name="dataBasicResponse">The response data</param>
+        private void BeforePerformLoad(FwkDataBasicRequest dataBasicRequest, FwkDataBasicResponse dataBasicResponse)
+        {
+        }
+
+        /// <summary>
+        /// After perform service load
+        /// </summary>
+        /// <param name="dataBasicRequest">The request data</param>
+        /// <param name="dataBasicResponse">The response data</param>
+        private void AfterPerformLoad(FwkDataBasicRequest dataBasicRequest, FwkDataBasicResponse dataBasicResponse)
         {
         }
 

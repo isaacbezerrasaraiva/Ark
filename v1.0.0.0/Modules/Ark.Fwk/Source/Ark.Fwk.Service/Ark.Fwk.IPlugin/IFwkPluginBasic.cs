@@ -20,7 +20,43 @@ namespace Ark.Fwk.IPlugin
 {
     public interface IFwkPluginBasic : IFwkPlugin
     {
-        FwkPluginBeforeEventHandler LoadPluginBeforeEventHandler { get; }
-        FwkPluginAfterEventHandler LoadPluginAfterEventHandler { get; }
+        FwkPluginBasicBeforeEventHandler LoadPluginBasicBeforeEventHandler { get; }
+        FwkPluginBasicAfterEventHandler LoadPluginBasicAfterEventHandler { get; }
     }
+
+    #region EventArgs
+
+    public class FwkPluginBasicBeforeEventArgs : FwkPluginBeforeEventArgs
+    {
+        public FwkPluginBasicBeforeEventArgs()
+        {
+        }
+
+        public FwkPluginBasicBeforeEventArgs(FwkDataBasicRequest dataBasicRequest, FwkDataBasicResponse dataBasicResponse)
+            : base(dataBasicRequest, dataBasicResponse)
+        {
+        }
+    }
+
+    public class FwkPluginBasicAfterEventArgs : FwkPluginAfterEventArgs
+    {
+        public FwkPluginBasicAfterEventArgs()
+        {
+        }
+
+        public FwkPluginBasicAfterEventArgs(FwkDataBasicRequest dataBasicRequest, FwkDataBasicResponse dataBasicResponse)
+            : base(dataBasicRequest, dataBasicResponse)
+        {
+        }
+    }
+
+    #endregion EventArgs
+
+    #region EventHandlers
+
+    public delegate void FwkPluginBasicBeforeEventHandler(Object sender, FwkPluginBasicBeforeEventArgs args);
+
+    public delegate void FwkPluginBasicAfterEventHandler(Object sender, FwkPluginBasicAfterEventArgs args);
+
+    #endregion EventHandlers
 }

@@ -47,6 +47,16 @@ namespace Ark.Fwk.Servant
         }
 
         /// <summary>
+        /// Validate read the view
+        /// </summary>
+        /// <param name="dataViewRequest">The request data</param>
+        /// <returns>The response data</returns>
+        public FwkDataViewResponse ValidateRead(FwkDataViewRequest dataViewRequest)
+        {
+            return (FwkDataViewResponse)InvokeService("ValidateRead", dataViewRequest);
+        }
+
+        /// <summary>
         /// Read the view
         /// </summary>
         /// <param name="dataViewRequest">The request data</param>

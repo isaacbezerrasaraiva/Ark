@@ -30,12 +30,14 @@ namespace Ark.Fwk.IPlugin
         {
         }
 
-        public FwkPluginBeforeEventArgs(FwkDataRequest dataRequest)
+        public FwkPluginBeforeEventArgs(FwkDataRequest dataRequest, FwkDataResponse dataResponse)
         {
             this.DataRequest = dataRequest;
+            this.DataResponse = dataResponse;
         }
 
         public FwkDataRequest DataRequest { get; set; }
+        public FwkDataResponse DataResponse { get; set; }
     }
 
     public class FwkPluginAfterEventArgs : EventArgs

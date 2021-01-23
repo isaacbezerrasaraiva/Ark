@@ -20,16 +20,28 @@ namespace Ark.Fwk.IServer
 {
     public interface IFwkServerRecord : IFwkServerBasic
     {
+        String ValidateRead(String dataRequestString);
+        
+        String ValidateInsert(String dataRequestString);
+        
+        String ValidateIndate(String dataRequestString);
+        
+        String ValidateUpdate(String dataRequestString);
+        
+        String ValidateUpsert(String dataRequestString);
+        
+        String ValidateDelete(String dataRequestString);
+        
         String Read(String dataRequestString);
-
+        
         String Insert(String dataRequestString);
-
+        
         String Indate(String dataRequestString);
-
+        
         String Update(String dataRequestString);
-
+        
         String Upsert(String dataRequestString);
-
+        
         String Delete(String dataRequestString);
     }
 }

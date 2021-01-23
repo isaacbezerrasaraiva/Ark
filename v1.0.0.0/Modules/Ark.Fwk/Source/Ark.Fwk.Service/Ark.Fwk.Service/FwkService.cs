@@ -31,6 +31,7 @@ namespace Ark.Fwk.Service
         private LazyDatabase database;
         private FwkEnvironment environment;
         private List<IFwkPlugin> iPluginList;
+        private Type dataResponseType;
 
         #endregion Variables
 
@@ -63,7 +64,7 @@ namespace Ark.Fwk.Service
 
             String sql = null;
             DataTable dataTable = null;
-            
+
             if (this.environment.Domain != null)
             {
                 this.database.OpenConnection();
@@ -117,6 +118,17 @@ namespace Ark.Fwk.Service
             }
 
             #endregion Initialize environment
+
+            #region Initialize data response type
+
+            assemblyFolderName = this.GetType().Namespace.Replace("Service", "Data");
+            String classFullName = this.GetType().FullName.Replace("Service", "Data") + "Response";
+
+            this.dataResponseType = LazyActivator.Local.GetType(Path.Combine(
+                LibDirectory.Root.Bin.AssemblyFolder[assemblyFolderName].CurrentVersion.Lib.NetCoreApp31.Path, assemblyFolderName + ".dll"),
+                classFullName);
+
+            #endregion Initialize data response type
         }
 
         #endregion Constructors
@@ -139,6 +151,11 @@ namespace Ark.Fwk.Service
         protected List<IFwkPlugin> IPlugins
         {
             get { return this.iPluginList; }
+        }
+
+        protected Type DataResponseType
+        {
+            get { return this.dataResponseType; }
         }
 
         #endregion Properties

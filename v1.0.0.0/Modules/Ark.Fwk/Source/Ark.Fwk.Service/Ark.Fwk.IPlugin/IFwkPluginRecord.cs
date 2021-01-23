@@ -20,25 +20,79 @@ namespace Ark.Fwk.IPlugin
 {
     public interface IFwkPluginRecord : IFwkPluginBasic
     {
-        FwkPluginBeforeEventHandler FormatPluginBeforeEventHandler { get; }
-        FwkPluginAfterEventHandler FormatPluginAfterEventHandler { get; }
-        
-        FwkPluginBeforeEventHandler ReadPluginBeforeEventHandler { get; }
-        FwkPluginAfterEventHandler ReadPluginAfterEventHandler { get; }
+        FwkPluginRecordBeforeEventHandler FormatPluginRecordBeforeEventHandler { get; }
+        FwkPluginRecordAfterEventHandler FormatPluginRecordAfterEventHandler { get; }
 
-        FwkPluginBeforeEventHandler InsertPluginBeforeEventHandler { get; }
-        FwkPluginAfterEventHandler InsertPluginAfterEventHandler { get; }
+        FwkPluginRecordBeforeEventHandler ValidateReadPluginRecordBeforeEventHandler { get; }
+        FwkPluginRecordAfterEventHandler ValidateReadPluginRecordAfterEventHandler { get; }
 
-        FwkPluginBeforeEventHandler IndatePluginBeforeEventHandler { get; }
-        FwkPluginAfterEventHandler IndatePluginAfterEventHandler { get; }
+        FwkPluginRecordBeforeEventHandler ValidateInsertPluginRecordBeforeEventHandler { get; }
+        FwkPluginRecordAfterEventHandler ValidateInsertPluginRecordAfterEventHandler { get; }
 
-        FwkPluginBeforeEventHandler UpdatePluginBeforeEventHandler { get; }
-        FwkPluginAfterEventHandler UpdatePluginAfterEventHandler { get; }
+        FwkPluginRecordBeforeEventHandler ValidateIndatePluginRecordBeforeEventHandler { get; }
+        FwkPluginRecordAfterEventHandler ValidateIndatePluginRecordAfterEventHandler { get; }
 
-        FwkPluginBeforeEventHandler UpsertPluginBeforeEventHandler { get; }
-        FwkPluginAfterEventHandler UpsertPluginAfterEventHandler { get; }
+        FwkPluginRecordBeforeEventHandler ValidateUpdatePluginRecordBeforeEventHandler { get; }
+        FwkPluginRecordAfterEventHandler ValidateUpdatePluginRecordAfterEventHandler { get; }
 
-        FwkPluginBeforeEventHandler DeletePluginBeforeEventHandler { get; }
-        FwkPluginAfterEventHandler DeletePluginAfterEventHandler { get; }
+        FwkPluginRecordBeforeEventHandler ValidateUpsertPluginRecordBeforeEventHandler { get; }
+        FwkPluginRecordAfterEventHandler ValidateUpsertPluginRecordAfterEventHandler { get; }
+
+        FwkPluginRecordBeforeEventHandler ValidateDeletePluginRecordBeforeEventHandler { get; }
+        FwkPluginRecordAfterEventHandler ValidateDeletePluginRecordAfterEventHandler { get; }
+
+        FwkPluginRecordBeforeEventHandler ReadPluginRecordBeforeEventHandler { get; }
+        FwkPluginRecordAfterEventHandler ReadPluginRecordAfterEventHandler { get; }
+
+        FwkPluginRecordBeforeEventHandler InsertPluginRecordBeforeEventHandler { get; }
+        FwkPluginRecordAfterEventHandler InsertPluginRecordAfterEventHandler { get; }
+
+        FwkPluginRecordBeforeEventHandler IndatePluginRecordBeforeEventHandler { get; }
+        FwkPluginRecordAfterEventHandler IndatePluginRecordAfterEventHandler { get; }
+
+        FwkPluginRecordBeforeEventHandler UpdatePluginRecordBeforeEventHandler { get; }
+        FwkPluginRecordAfterEventHandler UpdatePluginRecordAfterEventHandler { get; }
+
+        FwkPluginRecordBeforeEventHandler UpsertPluginRecordBeforeEventHandler { get; }
+        FwkPluginRecordAfterEventHandler UpsertPluginRecordAfterEventHandler { get; }
+
+        FwkPluginRecordBeforeEventHandler DeletePluginRecordBeforeEventHandler { get; }
+        FwkPluginRecordAfterEventHandler DeletePluginRecordAfterEventHandler { get; }
     }
+
+    #region EventArgs
+
+    public class FwkPluginRecordBeforeEventArgs : FwkPluginBasicBeforeEventArgs
+    {
+        public FwkPluginRecordBeforeEventArgs()
+        {
+        }
+
+        public FwkPluginRecordBeforeEventArgs(FwkDataRecordRequest dataRecordRequest, FwkDataRecordResponse dataRecordResponse)
+            : base(dataRecordRequest, dataRecordResponse)
+        {
+        }
+    }
+
+    public class FwkPluginRecordAfterEventArgs : FwkPluginBasicAfterEventArgs
+    {
+        public FwkPluginRecordAfterEventArgs()
+        {
+        }
+
+        public FwkPluginRecordAfterEventArgs(FwkDataRecordRequest dataRecordRequest, FwkDataRecordResponse dataRecordResponse)
+            : base(dataRecordRequest, dataRecordResponse)
+        {
+        }
+    }
+
+    #endregion EventArgs
+
+    #region EventHandlers
+
+    public delegate void FwkPluginRecordBeforeEventHandler(Object sender, FwkPluginRecordBeforeEventArgs args);
+
+    public delegate void FwkPluginRecordAfterEventHandler(Object sender, FwkPluginRecordAfterEventArgs args);
+
+    #endregion EventHandlers
 }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Ark.Fwk.Server.Properties {
+namespace Ark.Fwk.Service.Properties {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Ark.Fwk.Server.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ResourcesServer {
+    public class FwkResourcesService {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ResourcesServer() {
+        internal FwkResourcesService() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Ark.Fwk.Server.Properties {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ark.Fwk.Server.Properties.ResourcesServer", typeof(ResourcesServer).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ark.Fwk.Service.Properties.FwkResourcesService", typeof(FwkResourcesService).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,24 +57,6 @@ namespace Ark.Fwk.Server.Properties {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Fwk.Language.{0}.Server/Captions/FwkCaptionSuccess.
-        /// </summary>
-        public static string FwkCaptionSuccess {
-            get {
-                return ResourceManager.GetString("FwkCaptionSuccess", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Fwk.Language.{0}.Server/Messages/FwkMessageSuccess.
-        /// </summary>
-        public static string FwkMessageSuccess {
-            get {
-                return ResourceManager.GetString("FwkMessageSuccess", resourceCulture);
             }
         }
     }

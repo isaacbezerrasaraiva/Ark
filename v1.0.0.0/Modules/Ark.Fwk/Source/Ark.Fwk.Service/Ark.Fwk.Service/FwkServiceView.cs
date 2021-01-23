@@ -47,23 +47,14 @@ namespace Ark.Fwk.Service
         /// <returns>The response data</returns>
         public override FwkDataBasicResponse Init(FwkDataBasicRequest dataBasicRequest)
         {
-            #region Create response data
-
-            String assemblyFolderName = this.GetType().Namespace.Replace("Service", "Data");
-            String classFullName = this.GetType().FullName.Replace("Service", "Data") + "Response";
-
-            FwkDataViewResponse dataViewResponse = (FwkDataViewResponse)LazyActivator.Local.CreateInstance(Path.Combine(
-                LibDirectory.Root.Bin.AssemblyFolder[assemblyFolderName].CurrentVersion.Lib.NetCoreApp31.Path, assemblyFolderName + ".dll"),
-                classFullName);
-
-            #endregion Create response data
-            
             FwkDataViewRequest dataViewRequest = (FwkDataViewRequest)dataBasicRequest;
+            FwkDataViewResponse dataViewResponse = (FwkDataViewResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
             this.Database.OpenConnection();
 
             PerformLoad(dataViewRequest, dataViewResponse);
             PerformFormat(dataViewRequest, dataViewResponse);
+            PerformValidateRead(dataViewRequest, dataViewResponse);
             PerformRead(dataViewRequest, dataViewResponse);
 
             this.Database.CloseConnection();
@@ -72,22 +63,13 @@ namespace Ark.Fwk.Service
         }
 
         /// <summary>
-        /// Format the view
+        /// Format the service
         /// </summary>
         /// <param name="dataViewRequest">The request data</param>
         /// <returns>The response data</returns>
         public FwkDataViewResponse Format(FwkDataViewRequest dataViewRequest)
         {
-            #region Create response data
-
-            String assemblyFolderName = this.GetType().Namespace.Replace("Service", "Data");
-            String classFullName = this.GetType().FullName.Replace("Service", "Data") + "Response";
-
-            FwkDataViewResponse dataViewResponse = (FwkDataViewResponse)LazyActivator.Local.CreateInstance(Path.Combine(
-                LibDirectory.Root.Bin.AssemblyFolder[assemblyFolderName].CurrentVersion.Lib.NetCoreApp31.Path, assemblyFolderName + ".dll"),
-                classFullName);
-
-            #endregion Create response data
+            FwkDataViewResponse dataViewResponse = (FwkDataViewResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
             this.Database.OpenConnection();
 
@@ -99,25 +81,37 @@ namespace Ark.Fwk.Service
         }
 
         /// <summary>
-        /// Read the view
+        /// Validate read the service
+        /// </summary>
+        /// <param name="dataViewRequest">The request data</param>
+        /// <returns>The response data</returns>
+        public FwkDataViewResponse ValidateRead(FwkDataViewRequest dataViewRequest)
+        {
+            FwkDataViewResponse dataViewResponse = (FwkDataViewResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
+
+            this.Database.OpenConnection();
+
+            PerformFormat(dataViewRequest, dataViewResponse);
+            PerformValidateRead(dataViewRequest, dataViewResponse);
+
+            this.Database.CloseConnection();
+
+            return dataViewResponse;
+        }
+
+        /// <summary>
+        /// Read the service
         /// </summary>
         /// <param name="dataViewRequest">The request data</param>
         /// <returns>The response data</returns>
         public FwkDataViewResponse Read(FwkDataViewRequest dataViewRequest)
         {
-            #region Create response data
-
-            String assemblyFolderName = this.GetType().Namespace.Replace("Service", "Data");
-            String classFullName = this.GetType().FullName.Replace("Service", "Data") + "Response";
-
-            FwkDataViewResponse dataViewResponse = (FwkDataViewResponse)LazyActivator.Local.CreateInstance(Path.Combine(
-                LibDirectory.Root.Bin.AssemblyFolder[assemblyFolderName].CurrentVersion.Lib.NetCoreApp31.Path, assemblyFolderName + ".dll"),
-                classFullName);
-
-            #endregion Create response data
+            FwkDataViewResponse dataViewResponse = (FwkDataViewResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
             this.Database.OpenConnection();
 
+            PerformFormat(dataViewRequest, dataViewResponse);
+            PerformValidateRead(dataViewRequest, dataViewResponse);
             PerformRead(dataViewRequest, dataViewResponse);
 
             this.Database.CloseConnection();
@@ -126,73 +120,109 @@ namespace Ark.Fwk.Service
         }
 
         /// <summary>
-        /// Perform format view
+        /// Perform service format
         /// </summary>
         /// <param name="dataViewRequest">The request data</param>
         /// <param name="dataViewResponse">The response data</param>
         protected void PerformFormat(FwkDataViewRequest dataViewRequest, FwkDataViewResponse dataViewResponse)
         {
-            #region BeforeFormat
+            BeforePerformFormat(dataViewRequest, dataViewResponse);
+
+            #region Before OnFormat plugins
 
             if (this.IPlugins != null)
             {
                 foreach (IFwkPluginView iPluginView in this.IPlugins)
-                    iPluginView.FormatPluginBeforeEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(dataViewRequest));
+                    iPluginView.FormatPluginViewBeforeEventHandler?.Invoke(this, new FwkPluginViewBeforeEventArgs(dataViewRequest, dataViewResponse));
             }
 
-            #endregion BeforeFormat
+            #endregion Before OnFormat plugins
 
             OnFormat(dataViewRequest, dataViewResponse);
 
-            #region AfterFormat
+            #region After OnFormat plugins
 
             if (this.IPlugins != null)
             {
                 foreach (IFwkPluginView iPluginView in this.IPlugins)
-                    iPluginView.FormatPluginAfterEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(dataViewRequest, dataViewResponse));
+                    iPluginView.FormatPluginViewAfterEventHandler?.Invoke(this, new FwkPluginViewAfterEventArgs(dataViewRequest, dataViewResponse));
             }
 
-            #endregion AfterFormat
+            #endregion After OnFormat plugins
+
+            AfterPerformFormat(dataViewRequest, dataViewResponse);
         }
 
         /// <summary>
-        /// Perform read view
+        /// Perform service validate read
+        /// </summary>
+        /// <param name="dataViewRequest">The request data</param>
+        /// <param name="dataViewResponse">The response data</param>
+        protected void PerformValidateRead(FwkDataViewRequest dataViewRequest, FwkDataViewResponse dataViewResponse)
+        {
+            BeforePerformValidateRead(dataViewRequest, dataViewResponse);
+
+            #region Before OnValidateRead plugins
+
+            if (this.IPlugins != null)
+            {
+                foreach (IFwkPluginView iPluginView in this.IPlugins)
+                    iPluginView.ValidateReadPluginViewBeforeEventHandler?.Invoke(this, new FwkPluginViewBeforeEventArgs(dataViewRequest, dataViewResponse));
+            }
+
+            #endregion Before OnValidateRead plugins
+
+            OnValidateRead(dataViewRequest, dataViewResponse);
+
+            #region After OnValidateRead plugins
+
+            if (this.IPlugins != null)
+            {
+                foreach (IFwkPluginView iPluginView in this.IPlugins)
+                    iPluginView.ValidateReadPluginViewAfterEventHandler?.Invoke(this, new FwkPluginViewAfterEventArgs(dataViewRequest, dataViewResponse));
+            }
+
+            #endregion After OnValidateRead plugins
+
+            AfterPerformValidateRead(dataViewRequest, dataViewResponse);
+        }
+
+        /// <summary>
+        /// Perform service read
         /// </summary>
         /// <param name="dataViewRequest">The request data</param>
         /// <param name="dataViewResponse">The response data</param>
         protected void PerformRead(FwkDataViewRequest dataViewRequest, FwkDataViewResponse dataViewResponse)
         {
-            #region Internal BeforeRead
+            BeforePerformRead(dataViewRequest, dataViewResponse);
 
-            InternalBeforeRead(dataViewRequest);
-
-            #endregion Internal BeforeRead
-
-            #region BeforeRead
+            #region Before OnRead plugins
 
             if (this.IPlugins != null)
             {
                 foreach (IFwkPluginView iPluginView in this.IPlugins)
-                    iPluginView.ReadPluginBeforeEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(dataViewRequest));
+                    iPluginView.ReadPluginViewBeforeEventHandler?.Invoke(this, new FwkPluginViewBeforeEventArgs(dataViewRequest, dataViewResponse));
             }
 
-            #endregion BeforeRead
+            #endregion Before OnRead plugins
 
             OnRead(dataViewRequest, dataViewResponse);
 
-            #region AfterRead
+            #region After OnRead plugins
 
             if (this.IPlugins != null)
             {
                 foreach (IFwkPluginView iPluginView in this.IPlugins)
-                    iPluginView.ReadPluginAfterEventHandler?.Invoke(this, new FwkPluginAfterEventArgs(dataViewRequest, dataViewResponse));
+                    iPluginView.ReadPluginViewAfterEventHandler?.Invoke(this, new FwkPluginViewAfterEventArgs(dataViewRequest, dataViewResponse));
             }
 
-            #endregion AfterRead
+            #endregion After OnRead plugins
+
+            AfterPerformRead(dataViewRequest, dataViewResponse);
         }
 
         /// <summary>
-        /// Format the view
+        /// On service format
         /// </summary>
         /// <param name="dataViewRequest">The request data</param>
         /// <param name="dataViewResponse">The response data</param>
@@ -201,7 +231,16 @@ namespace Ark.Fwk.Service
         }
 
         /// <summary>
-        /// Read the view
+        /// On service validate read
+        /// </summary>
+        /// <param name="dataViewRequest">The request data</param>
+        /// <param name="dataViewResponse">The response data</param>
+        protected virtual void OnValidateRead(FwkDataViewRequest dataViewRequest, FwkDataViewResponse dataViewResponse)
+        {
+        }
+
+        /// <summary>
+        /// On service read
         /// </summary>
         /// <param name="dataViewRequest">The request data</param>
         /// <param name="dataViewResponse">The response data</param>
@@ -210,30 +249,57 @@ namespace Ark.Fwk.Service
         }
 
         /// <summary>
-        /// Internal BeforeRead
+        /// Before perform service format
         /// </summary>
         /// <param name="dataViewRequest">The request data</param>
-        private void InternalBeforeRead(FwkDataViewRequest dataViewRequest)
+        /// <param name="dataViewResponse">The response data</param>
+        private void BeforePerformFormat(FwkDataViewRequest dataViewRequest, FwkDataViewResponse dataViewResponse)
         {
-            if (dataViewRequest.Content.DataSet != null && dataViewRequest.Content.DataSet.Tables != null)
-            {
-                foreach (DataTable dataTable in dataViewRequest.Content.DataSet.Tables)
-                {
-                    if (dataTable.Columns.Contains("IdDomain") == false)
-                    {
-                        dataTable.Columns.Add("IdDomain", typeof(Int16));
-                        dataTable.Columns["IdDomain"].SetOrdinal(0);
-                    }
+        }
 
-                    foreach (DataRow dataRow in dataTable.Rows)
-                    {
-                        if (String.IsNullOrEmpty(LazyConvert.ToString(dataRow["IdDomain"])) == true)
-                            dataRow["IdDomain"] = this.Environment.Domain.IdDomain;
-                    }
-                }
+        /// <summary>
+        /// After perform service format
+        /// </summary>
+        /// <param name="dataViewRequest">The request data</param>
+        /// <param name="dataViewResponse">The response data</param>
+        private void AfterPerformFormat(FwkDataViewRequest dataViewRequest, FwkDataViewResponse dataViewResponse)
+        {
+        }
 
-                dataViewRequest.Content.DataSet.AcceptChanges();
-            }
+        /// <summary>
+        /// Before perform service validate read
+        /// </summary>
+        /// <param name="dataViewRequest">The request data</param>
+        /// <param name="dataViewResponse">The response data</param>
+        private void BeforePerformValidateRead(FwkDataViewRequest dataViewRequest, FwkDataViewResponse dataViewResponse)
+        {
+        }
+
+        /// <summary>
+        /// After perform service validate read
+        /// </summary>
+        /// <param name="dataViewRequest">The request data</param>
+        /// <param name="dataViewResponse">The response data</param>
+        private void AfterPerformValidateRead(FwkDataViewRequest dataViewRequest, FwkDataViewResponse dataViewResponse)
+        {
+        }
+
+        /// <summary>
+        /// Before perform service read
+        /// </summary>
+        /// <param name="dataViewRequest">The request data</param>
+        /// <param name="dataViewResponse">The response data</param>
+        private void BeforePerformRead(FwkDataViewRequest dataViewRequest, FwkDataViewResponse dataViewResponse)
+        {
+        }
+
+        /// <summary>
+        /// After perform service read
+        /// </summary>
+        /// <param name="dataViewRequest">The request data</param>
+        /// <param name="dataViewResponse">The response data</param>
+        private void AfterPerformRead(FwkDataViewRequest dataViewRequest, FwkDataViewResponse dataViewResponse)
+        {
         }
 
         #endregion Methods

@@ -22,6 +22,8 @@ namespace Ark.Fwk.IService
     {
         FwkDataViewResponse Format(FwkDataViewRequest dataViewRequest);
 
+        FwkDataViewResponse ValidateRead(FwkDataViewRequest dataViewRequest);
+
         FwkDataViewResponse Read(FwkDataViewRequest dataViewRequest);
     }
 }

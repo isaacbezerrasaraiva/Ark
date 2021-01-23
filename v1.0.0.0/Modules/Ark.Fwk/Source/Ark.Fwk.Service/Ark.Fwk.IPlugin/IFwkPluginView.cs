@@ -20,10 +20,49 @@ namespace Ark.Fwk.IPlugin
 {
     public interface IFwkPluginView : IFwkPluginBasic
     {
-        FwkPluginBeforeEventHandler FormatPluginBeforeEventHandler { get; }
-        FwkPluginAfterEventHandler FormatPluginAfterEventHandler { get; }
+        FwkPluginViewBeforeEventHandler FormatPluginViewBeforeEventHandler { get; }
+        FwkPluginViewAfterEventHandler FormatPluginViewAfterEventHandler { get; }
 
-        FwkPluginBeforeEventHandler ReadPluginBeforeEventHandler { get; }
-        FwkPluginAfterEventHandler ReadPluginAfterEventHandler { get; }
+        FwkPluginViewBeforeEventHandler ValidateReadPluginViewBeforeEventHandler { get; }
+        FwkPluginViewAfterEventHandler ValidateReadPluginViewAfterEventHandler { get; }
+
+        FwkPluginViewBeforeEventHandler ReadPluginViewBeforeEventHandler { get; }
+        FwkPluginViewAfterEventHandler ReadPluginViewAfterEventHandler { get; }
     }
+
+    #region EventArgs
+
+    public class FwkPluginViewBeforeEventArgs : FwkPluginBasicBeforeEventArgs
+    {
+        public FwkPluginViewBeforeEventArgs()
+        {
+        }
+
+        public FwkPluginViewBeforeEventArgs(FwkDataViewRequest dataViewRequest, FwkDataViewResponse dataViewResponse)
+            : base(dataViewRequest, dataViewResponse)
+        {
+        }
+    }
+
+    public class FwkPluginViewAfterEventArgs : FwkPluginBasicAfterEventArgs
+    {
+        public FwkPluginViewAfterEventArgs()
+        {
+        }
+
+        public FwkPluginViewAfterEventArgs(FwkDataViewRequest dataViewRequest, FwkDataViewResponse dataViewResponse)
+            : base(dataViewRequest, dataViewResponse)
+        {
+        }
+    }
+
+    #endregion EventArgs
+
+    #region EventHandlers
+
+    public delegate void FwkPluginViewBeforeEventHandler(Object sender, FwkPluginViewBeforeEventArgs args);
+
+    public delegate void FwkPluginViewAfterEventHandler(Object sender, FwkPluginViewAfterEventArgs args);
+
+    #endregion EventHandlers
 }
