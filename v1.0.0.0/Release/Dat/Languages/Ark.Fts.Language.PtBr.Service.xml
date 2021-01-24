@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Ark.Fts.Language.PtBr.Service>
+  <Captions>
+    <FtsCaptionRequiredFieldInvalid>Campo obrigatório inválido!</FtsCaptionRequiredFieldInvalid>
+    <FtsCaptionRequiredFieldMissing>Campo obrigatório ausente!</FtsCaptionRequiredFieldMissing>
+    <FtsCaptionTableNotFound>Tabela não encontrada!</FtsCaptionTableNotFound>
+  </Captions>
+  <Messages>
+  </Messages>
+  <Exceptions>
+    <FtsExceptionIncrementControllerTableFieldNullOrEmpty>O campo de incremento da tabela controladora não pode ser nulo ou vazio!</FtsExceptionIncrementControllerTableFieldNullOrEmpty>
+    <FtsExceptionIncrementControllerTableKeyFieldsIdDomainInvalid>O campo chave 'IdDomain' da tabela controladora é inválido</FtsExceptionIncrementControllerTableKeyFieldsIdDomainInvalid>
+    <FtsExceptionIncrementControllerTableKeyFieldsIdDomainMissing>O campo chave 'IdDomain' da tabela controladora não foi informado!</FtsExceptionIncrementControllerTableKeyFieldsIdDomainMissing>
+    <FtsExceptionIncrementControllerTableKeyFieldsNullOrZeroLenght>Os campos chaves da tabela controladora não pode ser nulo ou vazio!</FtsExceptionIncrementControllerTableKeyFieldsNullOrZeroLenght>
+    <FtsExceptionIncrementControllerTableNameFacilitiesStruct>O nome da tabela de controle informada '{0}', é baseada na estrutura do Facilities, então o nome da tabela de incremento é obrigatório!</FtsExceptionIncrementControllerTableNameFacilitiesStruct>
+    <FtsExceptionIncrementControllerTableNameNullOrEmpty>O nome da tabela controladora não pode ser nulo ou vazio!</FtsExceptionIncrementControllerTableNameNullOrEmpty>
+    <FtsExceptionIncrementRangeLowerThanOne>A quantidade de incrementos não pode ser menor do que um!</FtsExceptionIncrementRangeLowerThanOne>
+    <FtsExceptionIncrementTableNameNotFound>A tabela de incremento informada '{0}' não foi encontrada na FtsIncrementTable!</FtsExceptionIncrementTableNameNotFound>
+  </Exceptions>
+</Ark.Fts.Language.PtBr.Service>
