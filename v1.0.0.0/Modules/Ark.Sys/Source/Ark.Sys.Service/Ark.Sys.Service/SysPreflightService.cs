@@ -75,7 +75,7 @@ namespace Ark.Sys.Service
             if (this.IPlugins != null)
             {
                 foreach (ISysPreflightPlugin iPreflightPlugin in this.IPlugins)
-                    iPreflightPlugin.PreflightPluginBeforeEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(preflightDataRequest));
+                    iPreflightPlugin.PreflightPluginBeforeEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(preflightDataRequest, preflightDataResponse));
             }
 
             #endregion BeforePreflight

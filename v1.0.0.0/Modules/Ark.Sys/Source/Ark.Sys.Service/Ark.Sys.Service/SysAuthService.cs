@@ -95,7 +95,7 @@ namespace Ark.Sys.Service
             if (this.IPlugins != null)
             {
                 foreach (ISysAuthPlugin iAuthPlugin in this.IPlugins)
-                    iAuthPlugin.AuthenticatePluginBeforeEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(authDataRequest));
+                    iAuthPlugin.AuthenticatePluginBeforeEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(authDataRequest, authDataResponse));
             }
 
             #endregion BeforeAuthenticate
@@ -125,7 +125,7 @@ namespace Ark.Sys.Service
             if (this.IPlugins != null)
             {
                 foreach (ISysAuthPlugin iAuthPlugin in this.IPlugins)
-                    iAuthPlugin.AuthorizePluginBeforeEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(authDataRequest));
+                    iAuthPlugin.AuthorizePluginBeforeEventHandler?.Invoke(this, new FwkPluginBeforeEventArgs(authDataRequest, authDataResponse));
             }
 
             #endregion BeforeAuthorize
@@ -160,16 +160,6 @@ namespace Ark.Sys.Service
                 Dictionary<String, String> publicPayloadDictionary = tuplePayloadDictionary.Item1;
                 Dictionary<String, String> privatePayloadDictionary = tuplePayloadDictionary.Item2;
 
-                #region AfterDecryptToken
-
-                if (this.IPlugins != null)
-                {
-                    foreach (ISysAuthPlugin iAuthPlugin in this.IPlugins)
-                        iAuthPlugin.DecryptTokenPluginAfterEventHandler?.Invoke(this, new SysDecryptTokenPluginAfterEventArgs(authDataRequest, authDataResponse, publicPayloadDictionary, privatePayloadDictionary));
-                }
-
-                #endregion AfterDecryptToken
-
                 authDataResponse.Content.AuthenticationResponse.IdDomain = LazyConvert.ToInt32(privatePayloadDictionary["IdDomain"]);
                 authDataResponse.Content.AuthenticationResponse.IdUser = LazyConvert.ToInt32(privatePayloadDictionary["IdUser"]);
             }
@@ -196,16 +186,6 @@ namespace Ark.Sys.Service
                         publicPayloadDictionary.Add("User", LazyConvert.ToString(dataTableUser.Rows[0]["DisplayName"]));
                         privatePayloadDictionary.Add("IdDomain", LazyConvert.ToString(authDataRequest.Content.AuthenticationRequest.IdDomain));
                         privatePayloadDictionary.Add("IdUser", LazyConvert.ToString(dataTableUser.Rows[0]["IdUser"]));
-
-                        #region BeforeEncryptToken
-
-                        if (this.IPlugins != null)
-                        {
-                            foreach (ISysAuthPlugin iAuthPlugin in this.IPlugins)
-                                iAuthPlugin.EncryptTokenPluginBeforeEventHandler?.Invoke(this, new SysEncryptTokenPluginBeforeEventArgs(authDataRequest, publicPayloadDictionary, privatePayloadDictionary));
-                        }
-
-                        #endregion BeforeEncryptToken
 
                         authDataResponse.Content.AuthenticationResponse.IdDomain = authDataRequest.Content.AuthenticationRequest.IdDomain;
                         authDataResponse.Content.AuthenticationResponse.IdUser = LazyConvert.ToInt32(dataTableUser.Rows[0]["IdUser"]);
