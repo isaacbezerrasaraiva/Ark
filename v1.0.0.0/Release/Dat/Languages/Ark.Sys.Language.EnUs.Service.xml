@@ -1,17 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Ark.Sys.Language.EnUs.Service>
   <Captions>
-    <SysCaptionDataTableMissing>DataTable not found</SysCaptionDataTableMissing>
-    <SysCaptionDataTableMissingField>Campo obrigatório não informado</SysCaptionDataTableMissingField>
-    <SysCaptionDataTableMissingRow>DataTable without records</SysCaptionDataTableMissingRow>
+    <SysCaptionIdDomain>Domain Id</SysCaptionIdDomain>
+    <SysCaptionIdRole>Role Id</SysCaptionIdRole>
+    <SysCaptionName>Name</SysCaptionName>
   </Captions>
   <Messages>
   </Messages>
   <Exceptions>
-    <SysExceptionDataTableRoleMissing>The Role DataTable (FwkRole) was not informed on DataSet!</SysExceptionDataTableRoleMissing>
-    <SysExceptionDataTableRoleMissingFieldIdDomain>The required field IdDomain was not informed on Role DataTable (FwkRole)!</SysExceptionDataTableRoleMissingFieldIdDomain>
-    <SysExceptionDataTableRoleMissingFieldIdRole>The required field IdRole was not informed on Role DataTable (FwkRole)!</SysExceptionDataTableRoleMissingFieldIdRole>
-    <SysExceptionDataTableRoleMissingFieldName>The required field Name was not informed on Role DataTable (FwkRole)!</SysExceptionDataTableRoleMissingFieldName>
-    <SysExceptionDataTableRoleMissingRows>No one records was informed on Role DataTable (FwkRole)!</SysExceptionDataTableRoleMissingRows>
   </Exceptions>
 </Ark.Sys.Language.EnUs.Service>

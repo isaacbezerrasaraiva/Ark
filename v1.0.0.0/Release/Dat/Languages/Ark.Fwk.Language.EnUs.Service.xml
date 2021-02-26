@@ -1,9 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Ark.Fwk.Language.EnUs.Service>
   <Captions>
+    <FwkCaptionDuplicatedData>Duplicated data</FwkCaptionDuplicatedData>
+    <FwkCaptionInvalidData>Invalid data</FwkCaptionInvalidData>
+    <FwkCaptionMissingData>Missing data</FwkCaptionMissingData>
+    <FwkCaptionMissingProperty>Missing property</FwkCaptionMissingProperty>
+    <FwkCaptionNotFound>Not found</FwkCaptionNotFound>
   </Captions>
   <Messages>
   </Messages>
   <Exceptions>
+    <FwkExceptionRecordDataSetMissing>The DataSet of the request content was not informed!</FwkExceptionRecordDataSetMissing>
+    <FwkExceptionRecordDataTableEmpty>The DataTable '{0}' records was not informed!</FwkExceptionRecordDataTableEmpty>
+    <FwkExceptionRecordDataTableMissing>The DataTable '{0}' was not informed!</FwkExceptionRecordDataTableMissing>
+    <FwkExceptionRecordKeyFieldEmpty>The key field '{0}' value was not informed!</FwkExceptionRecordKeyFieldEmpty>
+    <FwkExceptionRecordKeyFieldMissing>The key field '{0}' was not informed!</FwkExceptionRecordKeyFieldMissing>
+    <FwkExceptionRecordNonEditableFieldModified>The field '{0}' cannot be modified!</FwkExceptionRecordNonEditableFieldModified>
+    <FwkExceptionRecordOriginalKeyNotFound>The record with original key [{0}] was not found!</FwkExceptionRecordOriginalKeyNotFound>
+    <FwkExceptionRecordRequiredFieldEmpty>The required field '{0}' value was not informed!</FwkExceptionRecordRequiredFieldEmpty>
+    <FwkExceptionRecordUniqueFieldDuplicatedDatabase>The unique fields '{0}' informed values '{1}' already exists!</FwkExceptionRecordUniqueFieldDuplicatedDatabase>
+    <FwkExceptionRecordUniqueFieldDuplicatedRequest>The unique fields '{0}' informed values are duplicated!</FwkExceptionRecordUniqueFieldDuplicatedRequest>
   </Exceptions>
 </Ark.Fwk.Language.EnUs.Service>

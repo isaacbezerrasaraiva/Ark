@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Ark.Fwk.Language.EnUs>
+  <Captions>
+  </Captions>
+  <Messages>
+  </Messages>
+  <Exceptions>
+    <FwkExceptionRecordFieldValidationAllowedValues>The allowed values for field '{0}' are '{1}'!</FwkExceptionRecordFieldValidationAllowedValues>
+  </Exceptions>
+</Ark.Fwk.Language.EnUs>

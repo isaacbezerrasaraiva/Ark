@@ -1,17 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Ark.Sys.Language.PtBr.Service>
   <Captions>
-    <SysCaptionDataTableMissing>DataTable não encontrado</SysCaptionDataTableMissing>
-    <SysCaptionDataTableMissingField>Campo obrigatório não informado</SysCaptionDataTableMissingField>
-    <SysCaptionDataTableMissingRow>DataTable sem registros</SysCaptionDataTableMissingRow>
+    <SysCaptionIdDomain>Id. Domínio</SysCaptionIdDomain>
+    <SysCaptionIdRole>Id. Papel</SysCaptionIdRole>
+    <SysCaptionName>Nome</SysCaptionName>
   </Captions>
   <Messages>
   </Messages>
   <Exceptions>
-    <SysExceptionDataTableRoleMissing>O DataTable de Papéis (FwkRole) não foi informado no DataSet!</SysExceptionDataTableRoleMissing>
-    <SysExceptionDataTableRoleMissingFieldIdDomain>O campo obrigatório IdDomain não foi informado no DataTable de Papéis (FwkRole)!</SysExceptionDataTableRoleMissingFieldIdDomain>
-    <SysExceptionDataTableRoleMissingFieldIdRole>O campo obrigatório IdRole não foi informado no DataTable de Papéis (FwkRole)!</SysExceptionDataTableRoleMissingFieldIdRole>
-    <SysExceptionDataTableRoleMissingFieldName>O campo obrigatório Name não foi informado no DataTable de Papéis (FwkRole)!</SysExceptionDataTableRoleMissingFieldName>
-    <SysExceptionDataTableRoleMissingRows>Nenhum registro foi informado do DataTable de Papéis (FwkRole)!</SysExceptionDataTableRoleMissingRows>
   </Exceptions>
 </Ark.Sys.Language.PtBr.Service>
