@@ -27,11 +27,12 @@ namespace Ark.Lib.Server
         public LibServerInputFormatter()
         {
             SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/json"));
+            
         }
         
         public override Boolean CanRead(InputFormatterContext context)
         {
-            if (String.IsNullOrEmpty(context.HttpContext.Request.ContentType) || context.HttpContext.Request.ContentType == "application/json")
+            if (String.IsNullOrEmpty(context.HttpContext.Request.ContentType) || context.HttpContext.Request.ContentType.ToLower() == "application/json;charset=utf-8")
                 return true;
             
             return false;
@@ -39,9 +40,9 @@ namespace Ark.Lib.Server
         
         public override async Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context)
         {
-            if (String.IsNullOrEmpty(context.HttpContext.Request.ContentType) || context.HttpContext.Request.ContentType == "application/json")
+            if (String.IsNullOrEmpty(context.HttpContext.Request.ContentType) || context.HttpContext.Request.ContentType.ToLower() == "application/json;charset=utf-8")
             {
-                using (StreamReader streamReader = new StreamReader(context.HttpContext.Request.Body))
+                using (StreamReader streamReader = new StreamReader(context.HttpContext.Request.Body, System.Text.Encoding.UTF8))
                 {
                     String content = await streamReader.ReadToEndAsync();
                     return await InputFormatterResult.SuccessAsync(content);

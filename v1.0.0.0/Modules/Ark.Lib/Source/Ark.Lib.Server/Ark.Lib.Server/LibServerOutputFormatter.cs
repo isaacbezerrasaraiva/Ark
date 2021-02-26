@@ -31,7 +31,7 @@ namespace Ark.Lib.Server
         
         public override Boolean CanWriteResult(OutputFormatterCanWriteContext context)
         {
-            if (String.IsNullOrEmpty(context.HttpContext.Request.ContentType) || context.HttpContext.Request.ContentType == "application/json")
+            if (String.IsNullOrEmpty(context.HttpContext.Request.ContentType) || context.HttpContext.Request.ContentType.ToLower() == "application/json;charset=utf-8")
                 return true;
             
             return false;
