@@ -117,28 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="SysCaptionDataTableMissing" xml:space="preserve">
-    <value>/Ark.Sys.Language.{0}.Service/Captions/SysCaptionDataTableMissing</value>
+  <data name="SysCaptionIdDomain" xml:space="preserve">
+    <value>/Ark.Sys.Language.{0}.Service/Captions/SysCaptionIdDomain</value>
+    <comment>Domain Id</comment>
   </data>
-  <data name="SysCaptionDataTableMissingField" xml:space="preserve">
-    <value>/Ark.Sys.Language.{0}.Service/Captions/SysCaptionDataTableMissingField</value>
+  <data name="SysCaptionIdRole" xml:space="preserve">
+    <value>/Ark.Sys.Language.{0}.Service/Captions/SysCaptionIdRole</value>
+    <comment>Role Id</comment>
   </data>
-  <data name="SysCaptionDataTableMissingRow" xml:space="preserve">
-    <value>/Ark.Sys.Language.{0}.Service/Captions/SysCaptionDataTableMissingRow</value>
-  </data>
-  <data name="SysExceptionDataTableRoleMissing" xml:space="preserve">
-    <value>/Ark.Sys.Language.{0}.Service/Exceptions/SysExceptionDataTableRoleMissing</value>
-  </data>
-  <data name="SysExceptionDataTableRoleMissingFieldIdDomain" xml:space="preserve">
-    <value>/Ark.Sys.Language.{0}.Service/Exceptions/SysExceptionDataTableRoleMissingFieldIdDomain</value>
-  </data>
-  <data name="SysExceptionDataTableRoleMissingFieldIdRole" xml:space="preserve">
-    <value>/Ark.Sys.Language.{0}.Service/Exceptions/SysExceptionDataTableRoleMissingFieldIdRole</value>
-  </data>
-  <data name="SysExceptionDataTableRoleMissingFieldName" xml:space="preserve">
-    <value>/Ark.Sys.Language.{0}.Service/Exceptions/SysExceptionDataTableRoleMissingFieldName</value>
-  </data>
-  <data name="SysExceptionDataTableRoleMissingRows" xml:space="preserve">
-    <value>/Ark.Sys.Language.{0}.Service/Exceptions/SysExceptionDataTableRoleMissingRows</value>
+  <data name="SysCaptionName" xml:space="preserve">
+    <value>/Ark.Sys.Language.{0}.Service/Captions/SysCaptionName</value>
+    <comment>Name</comment>
   </data>
 </root>

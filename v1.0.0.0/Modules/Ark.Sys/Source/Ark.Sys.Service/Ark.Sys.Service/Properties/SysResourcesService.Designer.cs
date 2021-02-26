@@ -61,74 +61,29 @@ namespace Ark.Sys.Service.Properties {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Service/Captions/SysCaptionDataTableMissing.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Service/Captions/SysCaptionIdDomain.
         /// </summary>
-        public static string SysCaptionDataTableMissing {
+        public static string SysCaptionIdDomain {
             get {
-                return ResourceManager.GetString("SysCaptionDataTableMissing", resourceCulture);
+                return ResourceManager.GetString("SysCaptionIdDomain", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Service/Captions/SysCaptionDataTableMissingField.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Service/Captions/SysCaptionIdRole.
         /// </summary>
-        public static string SysCaptionDataTableMissingField {
+        public static string SysCaptionIdRole {
             get {
-                return ResourceManager.GetString("SysCaptionDataTableMissingField", resourceCulture);
+                return ResourceManager.GetString("SysCaptionIdRole", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Service/Captions/SysCaptionDataTableMissingRow.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Service/Captions/SysCaptionName.
         /// </summary>
-        public static string SysCaptionDataTableMissingRow {
+        public static string SysCaptionName {
             get {
-                return ResourceManager.GetString("SysCaptionDataTableMissingRow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Service/Exceptions/SysExceptionDataTableRoleMissing.
-        /// </summary>
-        public static string SysExceptionDataTableRoleMissing {
-            get {
-                return ResourceManager.GetString("SysExceptionDataTableRoleMissing", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Service/Exceptions/SysExceptionDataTableRoleMissingFieldIdDomain.
-        /// </summary>
-        public static string SysExceptionDataTableRoleMissingFieldIdDomain {
-            get {
-                return ResourceManager.GetString("SysExceptionDataTableRoleMissingFieldIdDomain", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Service/Exceptions/SysExceptionDataTableRoleMissingFieldIdRole.
-        /// </summary>
-        public static string SysExceptionDataTableRoleMissingFieldIdRole {
-            get {
-                return ResourceManager.GetString("SysExceptionDataTableRoleMissingFieldIdRole", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Service/Exceptions/SysExceptionDataTableRoleMissingFieldName.
-        /// </summary>
-        public static string SysExceptionDataTableRoleMissingFieldName {
-            get {
-                return ResourceManager.GetString("SysExceptionDataTableRoleMissingFieldName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Service/Exceptions/SysExceptionDataTableRoleMissingRows.
-        /// </summary>
-        public static string SysExceptionDataTableRoleMissingRows {
-            get {
-                return ResourceManager.GetString("SysExceptionDataTableRoleMissingRows", resourceCulture);
+                return ResourceManager.GetString("SysCaptionName", resourceCulture);
             }
         }
     }

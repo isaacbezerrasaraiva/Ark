@@ -66,7 +66,22 @@ namespace Ark.Sys.Service
         /// <param name="dataRecordResponse">The response data</param>
         protected override void OnFormat(FwkDataRecordRequest dataRecordRequest, FwkDataRecordResponse dataRecordResponse)
         {
-            base.OnFormat(dataRecordRequest, dataRecordResponse);
+            dataRecordResponse.Content.Format.SetTable("FwkRole");
+
+            dataRecordResponse.Content.Format.SetField("IdDomain");
+            dataRecordResponse.Content.Format.SetFieldAttributes(typeof(Int16), LibGlobalization.GetTranslation(Properties.SysResourcesService.SysCaptionIdDomain, this.Environment.Culture),
+                nullable: FwkBooleanEnum.False, editable: FwkBooleanEnum.False, visible: FwkBooleanEnum.False, constraint: FwkConstraintEnum.ParentKey);
+            dataRecordResponse.Content.Format.SetFieldValidation(new FwkFormatRecordFieldValidationAllowedValues(this.Environment.Culture, new Object[] { this.Environment.Domain.IdDomain }));
+
+            dataRecordResponse.Content.Format.SetField("IdRole");
+            dataRecordResponse.Content.Format.SetFieldAttributes(typeof(Int16), LibGlobalization.GetTranslation(Properties.SysResourcesService.SysCaptionIdRole, this.Environment.Culture),
+                nullable: FwkBooleanEnum.False, editable: FwkBooleanEnum.False, visible: FwkBooleanEnum.False, constraint: FwkConstraintEnum.IncrementKey);
+
+            dataRecordResponse.Content.Format.SetField("Name");
+            dataRecordResponse.Content.Format.SetFieldAttributes(typeof(String), LibGlobalization.GetTranslation(Properties.SysResourcesService.SysCaptionName, this.Environment.Culture),
+                nullable: FwkBooleanEnum.False, editable: FwkBooleanEnum.True, visible: FwkBooleanEnum.True, constraint: FwkConstraintEnum.UniqueKey,
+                uniqueKeys: new String[] { "IdDomain", "Name" });
+            dataRecordResponse.Content.Format.SetFieldTransformation(new FwkFormatRecordFieldTransformationTruncate(32));
         }
 
         /// <summary>
@@ -76,17 +91,6 @@ namespace Ark.Sys.Service
         /// <param name="dataRecordResponse">The response data</param>
         protected override void OnValidateRead(FwkDataRecordRequest dataRecordRequest, FwkDataRecordResponse dataRecordResponse)
         {
-            if (dataRecordRequest.Content.DataSet.Tables.Contains("FwkRole") == false)
-                throw new LibException(Properties.SysResourcesService.SysExceptionDataTableRoleMissing, Properties.SysResourcesService.SysCaptionDataTableMissing);
-
-            if (dataRecordRequest.Content.DataSet.Tables["FwkRole"].Rows.Count == 0)
-                throw new LibException(Properties.SysResourcesService.SysExceptionDataTableRoleMissingRows, Properties.SysResourcesService.SysCaptionDataTableMissingRow);
-
-            if (dataRecordRequest.Content.DataSet.Tables["FwkRole"].Columns.Contains("IdDomain") == false)
-                throw new LibException(Properties.SysResourcesService.SysExceptionDataTableRoleMissingFieldIdDomain, Properties.SysResourcesService.SysCaptionDataTableMissingField);
-
-            if (dataRecordRequest.Content.DataSet.Tables["FwkRole"].Columns.Contains("IdRole") == false)
-                throw new LibException(Properties.SysResourcesService.SysExceptionDataTableRoleMissingFieldIdRole, Properties.SysResourcesService.SysCaptionDataTableMissingField);
         }
 
         /// <summary>
@@ -96,17 +100,6 @@ namespace Ark.Sys.Service
         /// <param name="dataRecordResponse">The response data</param>
         protected override void OnValidateInsert(FwkDataRecordRequest dataRecordRequest, FwkDataRecordResponse dataRecordResponse)
         {
-            if (dataRecordRequest.Content.DataSet.Tables.Contains("FwkRole") == false)
-                throw new LibException(Properties.SysResourcesService.SysExceptionDataTableRoleMissing, Properties.SysResourcesService.SysCaptionDataTableMissing);
-
-            if (dataRecordRequest.Content.DataSet.Tables["FwkRole"].Rows.Count == 0)
-                throw new LibException(Properties.SysResourcesService.SysExceptionDataTableRoleMissingRows, Properties.SysResourcesService.SysCaptionDataTableMissingRow);
-
-            if (dataRecordRequest.Content.DataSet.Tables["FwkRole"].Columns.Contains("IdDomain") == false)
-                throw new LibException(Properties.SysResourcesService.SysExceptionDataTableRoleMissingFieldIdDomain, Properties.SysResourcesService.SysCaptionDataTableMissingField);
-
-            if (dataRecordRequest.Content.DataSet.Tables["FwkRole"].Columns.Contains("Name") == false)
-                throw new LibException(Properties.SysResourcesService.SysExceptionDataTableRoleMissingFieldName, Properties.SysResourcesService.SysCaptionDataTableMissingField);
         }
 
         /// <summary>
@@ -116,20 +109,6 @@ namespace Ark.Sys.Service
         /// <param name="dataRecordResponse">The response data</param>
         protected override void OnValidateIndate(FwkDataRecordRequest dataRecordRequest, FwkDataRecordResponse dataRecordResponse)
         {
-            if (dataRecordRequest.Content.DataSet.Tables.Contains("FwkRole") == false)
-                throw new LibException(Properties.SysResourcesService.SysExceptionDataTableRoleMissing, Properties.SysResourcesService.SysCaptionDataTableMissing);
-
-            if (dataRecordRequest.Content.DataSet.Tables["FwkRole"].Rows.Count == 0)
-                throw new LibException(Properties.SysResourcesService.SysExceptionDataTableRoleMissingRows, Properties.SysResourcesService.SysCaptionDataTableMissingRow);
-
-            if (dataRecordRequest.Content.DataSet.Tables["FwkRole"].Columns.Contains("IdDomain") == false)
-                throw new LibException(Properties.SysResourcesService.SysExceptionDataTableRoleMissingFieldIdDomain, Properties.SysResourcesService.SysCaptionDataTableMissingField);
-
-            if (dataRecordRequest.Content.DataSet.Tables["FwkRole"].Columns.Contains("IdRole") == false)
-                throw new LibException(Properties.SysResourcesService.SysExceptionDataTableRoleMissingFieldIdRole, Properties.SysResourcesService.SysCaptionDataTableMissingField);
-
-            if (dataRecordRequest.Content.DataSet.Tables["FwkRole"].Columns.Contains("Name") == false)
-                throw new LibException(Properties.SysResourcesService.SysExceptionDataTableRoleMissingFieldName, Properties.SysResourcesService.SysCaptionDataTableMissingField);
         }
 
         /// <summary>
@@ -139,20 +118,6 @@ namespace Ark.Sys.Service
         /// <param name="dataRecordResponse">The response data</param>
         protected override void OnValidateUpdate(FwkDataRecordRequest dataRecordRequest, FwkDataRecordResponse dataRecordResponse)
         {
-            if (dataRecordRequest.Content.DataSet.Tables.Contains("FwkRole") == false)
-                throw new LibException(Properties.SysResourcesService.SysExceptionDataTableRoleMissing, Properties.SysResourcesService.SysCaptionDataTableMissing);
-
-            if (dataRecordRequest.Content.DataSet.Tables["FwkRole"].Rows.Count == 0)
-                throw new LibException(Properties.SysResourcesService.SysExceptionDataTableRoleMissingRows, Properties.SysResourcesService.SysCaptionDataTableMissingRow);
-
-            if (dataRecordRequest.Content.DataSet.Tables["FwkRole"].Columns.Contains("IdDomain") == false)
-                throw new LibException(Properties.SysResourcesService.SysExceptionDataTableRoleMissingFieldIdDomain, Properties.SysResourcesService.SysCaptionDataTableMissingField);
-
-            if (dataRecordRequest.Content.DataSet.Tables["FwkRole"].Columns.Contains("IdRole") == false)
-                throw new LibException(Properties.SysResourcesService.SysExceptionDataTableRoleMissingFieldIdRole, Properties.SysResourcesService.SysCaptionDataTableMissingField);
-
-            if (dataRecordRequest.Content.DataSet.Tables["FwkRole"].Columns.Contains("Name") == false)
-                throw new LibException(Properties.SysResourcesService.SysExceptionDataTableRoleMissingFieldName, Properties.SysResourcesService.SysCaptionDataTableMissingField);
         }
 
         /// <summary>
@@ -162,20 +127,6 @@ namespace Ark.Sys.Service
         /// <param name="dataRecordResponse">The response data</param>
         protected override void OnValidateUpsert(FwkDataRecordRequest dataRecordRequest, FwkDataRecordResponse dataRecordResponse)
         {
-            if (dataRecordRequest.Content.DataSet.Tables.Contains("FwkRole") == false)
-                throw new LibException(Properties.SysResourcesService.SysExceptionDataTableRoleMissing, Properties.SysResourcesService.SysCaptionDataTableMissing);
-
-            if (dataRecordRequest.Content.DataSet.Tables["FwkRole"].Rows.Count == 0)
-                throw new LibException(Properties.SysResourcesService.SysExceptionDataTableRoleMissingRows, Properties.SysResourcesService.SysCaptionDataTableMissingRow);
-
-            if (dataRecordRequest.Content.DataSet.Tables["FwkRole"].Columns.Contains("IdDomain") == false)
-                throw new LibException(Properties.SysResourcesService.SysExceptionDataTableRoleMissingFieldIdDomain, Properties.SysResourcesService.SysCaptionDataTableMissingField);
-
-            if (dataRecordRequest.Content.DataSet.Tables["FwkRole"].Columns.Contains("IdRole") == false)
-                throw new LibException(Properties.SysResourcesService.SysExceptionDataTableRoleMissingFieldIdRole, Properties.SysResourcesService.SysCaptionDataTableMissingField);
-
-            if (dataRecordRequest.Content.DataSet.Tables["FwkRole"].Columns.Contains("Name") == false)
-                throw new LibException(Properties.SysResourcesService.SysExceptionDataTableRoleMissingFieldName, Properties.SysResourcesService.SysCaptionDataTableMissingField);
         }
 
         /// <summary>
@@ -185,17 +136,6 @@ namespace Ark.Sys.Service
         /// <param name="dataRecordResponse">The response data</param>
         protected override void OnValidateDelete(FwkDataRecordRequest dataRecordRequest, FwkDataRecordResponse dataRecordResponse)
         {
-            if (dataRecordRequest.Content.DataSet.Tables.Contains("FwkRole") == false)
-                throw new LibException(Properties.SysResourcesService.SysExceptionDataTableRoleMissing, Properties.SysResourcesService.SysCaptionDataTableMissing);
-
-            if (dataRecordRequest.Content.DataSet.Tables["FwkRole"].Rows.Count == 0)
-                throw new LibException(Properties.SysResourcesService.SysExceptionDataTableRoleMissingRows, Properties.SysResourcesService.SysCaptionDataTableMissingRow);
-
-            if (dataRecordRequest.Content.DataSet.Tables["FwkRole"].Columns.Contains("IdDomain") == false)
-                throw new LibException(Properties.SysResourcesService.SysExceptionDataTableRoleMissingFieldIdDomain, Properties.SysResourcesService.SysCaptionDataTableMissingField);
-
-            if (dataRecordRequest.Content.DataSet.Tables["FwkRole"].Columns.Contains("IdRole") == false)
-                throw new LibException(Properties.SysResourcesService.SysExceptionDataTableRoleMissingFieldIdRole, Properties.SysResourcesService.SysCaptionDataTableMissingField);
         }
 
         /// <summary>
