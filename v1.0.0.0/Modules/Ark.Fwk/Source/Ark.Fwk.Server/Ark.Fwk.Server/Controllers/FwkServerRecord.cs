@@ -12,6 +12,7 @@ using System.Data;
 using System.Reflection;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 using Newtonsoft.Json;
 
@@ -47,6 +48,18 @@ namespace Ark.Fwk.Server
         #endregion Constructors
 
         #region Methods
+
+        [HttpPost]
+        [Route("Format")]
+        /// <summary>
+        /// Format the record
+        /// </summary>
+        /// <param name="dataRequestString">The request data string</param>
+        /// <returns>The response data string</returns>
+        public String Format([FromBody] String dataRequestString)
+        {
+            return InvokeService("Format", dataRequestString);
+        }
 
         [HttpPost]
         [Route("ValidateRead")]

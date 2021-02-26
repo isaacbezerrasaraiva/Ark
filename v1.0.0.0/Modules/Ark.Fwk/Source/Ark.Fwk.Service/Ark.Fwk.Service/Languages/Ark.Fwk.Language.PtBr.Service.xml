@@ -1,9 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Ark.Fwk.Language.PtBr.Service>
   <Captions>
+    <FwkCaptionDuplicatedData>Dado duplicado</FwkCaptionDuplicatedData>
+    <FwkCaptionInvalidData>Dado inválido</FwkCaptionInvalidData>
+    <FwkCaptionMissingData>Dado ausente</FwkCaptionMissingData>
+    <FwkCaptionMissingProperty>Propriedade ausente</FwkCaptionMissingProperty>
+    <FwkCaptionNotFound>Não encontrado</FwkCaptionNotFound>
   </Captions>
   <Messages>
   </Messages>
   <Exceptions>
+    <FwkExceptionRecordDataSetMissing>O DataSet do conteúdo da requisição não foi informado!</FwkExceptionRecordDataSetMissing>
+    <FwkExceptionRecordDataTableEmpty>Os registros do DataTable '{0}' não foram informados!</FwkExceptionRecordDataTableEmpty>
+    <FwkExceptionRecordDataTableMissing>O DataTable '{0}' não foi informado!</FwkExceptionRecordDataTableMissing>
+    <FwkExceptionRecordKeyFieldEmpty>O valor do campo chave '{0}' não foi informado!</FwkExceptionRecordKeyFieldEmpty>
+    <FwkExceptionRecordKeyFieldMissing>O campo chave '{0}' não foi informado!</FwkExceptionRecordKeyFieldMissing>
+    <FwkExceptionRecordNonEditableFieldModified>O campo '{0}' não pode ser modificado!</FwkExceptionRecordNonEditableFieldModified>
+    <FwkExceptionRecordOriginalKeyNotFound>O registro com chave original [{0}] não foi encontrado!</FwkExceptionRecordOriginalKeyNotFound>
+    <FwkExceptionRecordRequiredFieldEmpty>O valor do campo requerido '{0}' não foi informado!</FwkExceptionRecordRequiredFieldEmpty>
+    <FwkExceptionRecordUniqueFieldDuplicatedDatabase>Os valores dos campos únicos '{0}' informados '{1}' já existem!</FwkExceptionRecordUniqueFieldDuplicatedDatabase>
+    <FwkExceptionRecordUniqueFieldDuplicatedRequest>Os valores dos campos únicos '{0}' informados estão duplicados!</FwkExceptionRecordUniqueFieldDuplicatedRequest>
   </Exceptions>
 </Ark.Fwk.Language.PtBr.Service>

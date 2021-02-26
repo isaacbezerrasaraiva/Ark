@@ -24,12 +24,29 @@
   <ItemGroup>
     <PackageReference Include="Ark.Lib" Version="1.0.0" />
     <PackageReference Include="Lazy" Version="1.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\FwkResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FwkResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\FwkResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FwkResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
     <PostBuildEvent>
       xcopy /y $(SolutionDir)Ark.Fwk\Ark.Fwk\bin\Debug\netcoreapp3.1\Ark.Fwk.dll $(SolutionDir)..\..\..\Release\Bin\Ark.Fwk\1.0.0\lib\netcoreapp3.1\
       xcopy /y $(SolutionDir)Ark.Fwk\Ark.Fwk\bin\Debug\netcoreapp3.1\Ark.Fwk.dll %SystemDrive%%HomePath%\.nuget\Packages\ark.fwk\1.0.0\lib\netcoreapp3.1\
+      xcopy /y $(SolutionDir)Ark.Fwk\Ark.Fwk\Languages\* $(SolutionDir)..\..\..\Release\Dat\Languages\
     </PostBuildEvent>
   </PropertyGroup>
 

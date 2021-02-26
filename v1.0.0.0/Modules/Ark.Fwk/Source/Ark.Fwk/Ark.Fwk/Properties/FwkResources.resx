@@ -117,64 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="FwkCaptionDuplicatedData" xml:space="preserve">
-    <value>/Ark.Fwk.Language.{0}.Service/Captions/FwkCaptionDuplicatedData</value>
-    <comment>Duplicated data</comment>
-  </data>
-  <data name="FwkCaptionInvalidData" xml:space="preserve">
-    <value>/Ark.Fwk.Language.{0}.Service/Captions/FwkCaptionInvalidData</value>
-    <comment>Invalid data</comment>
-  </data>
-  <data name="FwkCaptionMissingData" xml:space="preserve">
-    <value>/Ark.Fwk.Language.{0}.Service/Captions/FwkCaptionMissingData</value>
-    <comment>Missing data</comment>
-  </data>
-  <data name="FwkCaptionMissingProperty" xml:space="preserve">
-    <value>/Ark.Fwk.Language.{0}.Service/Captions/FwkCaptionMissingProperty</value>
-    <comment>Missing property</comment>
-  </data>
-  <data name="FwkCaptionNotFound" xml:space="preserve">
-    <value>/Ark.Fwk.Language.{0}.Service/Captions/FwkCaptionNotFound</value>
-    <comment>Not found</comment>
-  </data>
-  <data name="FwkExceptionRecordDataSetMissing" xml:space="preserve">
-    <value>/Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionRecordDataSetMissing</value>
-    <comment>The DataSet of the request content was not informed!</comment>
-  </data>
-  <data name="FwkExceptionRecordDataTableEmpty" xml:space="preserve">
-    <value>/Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionRecordDataTableEmpty</value>
-    <comment>The DataTable '{0}' records was not informed!</comment>
-  </data>
-  <data name="FwkExceptionRecordDataTableMissing" xml:space="preserve">
-    <value>/Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionRecordDataTableMissing</value>
-    <comment>The DataTable '{0}' was not informed!</comment>
-  </data>
-  <data name="FwkExceptionRecordKeyFieldEmpty" xml:space="preserve">
-    <value>/Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionRecordKeyFieldEmpty</value>
-    <comment>The key field '{0}' value was not informed!</comment>
-  </data>
-  <data name="FwkExceptionRecordKeyFieldMissing" xml:space="preserve">
-    <value>/Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionRecordKeyFieldMissing</value>
-    <comment>The key field '{0}' was not informed!</comment>
-  </data>
-  <data name="FwkExceptionRecordNonEditableFieldModified" xml:space="preserve">
-    <value>/Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionRecordNonEditableFieldModified</value>
-    <comment>The field '{0}' cannot be modified!</comment>
-  </data>
-  <data name="FwkExceptionRecordOriginalKeyNotFound" xml:space="preserve">
-    <value>/Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionRecordOriginalKeyNotFound</value>
-    <comment>The record with original key [{0}] was not found!</comment>
-  </data>
-  <data name="FwkExceptionRecordRequiredFieldEmpty" xml:space="preserve">
-    <value>/Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionRecordRequiredFieldEmpty</value>
-    <comment>The required field '{0}' value was not informed!</comment>
-  </data>
-  <data name="FwkExceptionRecordUniqueFieldDuplicatedDatabase" xml:space="preserve">
-    <value>/Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionRecordUniqueFieldDuplicatedDatabase</value>
-    <comment>The unique fields '{0}' informed values '{1}' are duplicated!</comment>
-  </data>
-  <data name="FwkExceptionRecordUniqueFieldDuplicatedRequest" xml:space="preserve">
-    <value>/Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionRecordUniqueFieldDuplicatedRequest</value>
-    <comment>The unique fields '{0}' informed values are duplicated!</comment>
+  <data name="FwkExceptionRecordFieldValidationAllowedValues" xml:space="preserve">
+    <value>/Ark.Fwk.Language.{0}/Exceptions/FwkExceptionRecordFieldValidationAllowedValues</value>
+    <comment>The allowed values for field '{0}' are '{1}'!</comment>
   </data>
 </root>

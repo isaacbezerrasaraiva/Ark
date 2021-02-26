@@ -191,6 +191,7 @@ insert into FwkFeatureAction (IdDomain, CodModule, CodFeature, CodAction, Descri
 insert into FwkFeatureAction (IdDomain, CodModule, CodFeature, CodAction, Description) values (1, 'Ark.Fwk', 'FwkServerView', 'Read', 'Read view');
 
 insert into FwkFeature (IdDomain, CodModule, CodFeature, CodModuleBase, CodFeatureBase) values (1, 'Ark.Fwk', 'FwkServerRecord', 'Ark.Fwk', 'FwkServerBasic');
+insert into FwkFeatureAction (IdDomain, CodModule, CodFeature, CodAction, Description) values (1, 'Ark.Fwk', 'FwkServerRecord', 'Format', 'Format the record');
 insert into FwkFeatureAction (IdDomain, CodModule, CodFeature, CodAction, Description) values (1, 'Ark.Fwk', 'FwkServerRecord', 'ValidateRead', 'Validate read record');
 insert into FwkFeatureAction (IdDomain, CodModule, CodFeature, CodAction, Description) values (1, 'Ark.Fwk', 'FwkServerRecord', 'ValidateInsert', 'Validate insert record');
 insert into FwkFeatureAction (IdDomain, CodModule, CodFeature, CodAction, Description) values (1, 'Ark.Fwk', 'FwkServerRecord', 'ValidateIndate', 'Validate indate record');

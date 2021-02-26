@@ -59,5 +59,140 @@ namespace Ark.Fwk.Service.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Fwk.Language.{0}.Service/Captions/FwkCaptionDuplicatedData.
+        /// </summary>
+        public static string FwkCaptionDuplicatedData {
+            get {
+                return ResourceManager.GetString("FwkCaptionDuplicatedData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Fwk.Language.{0}.Service/Captions/FwkCaptionInvalidData.
+        /// </summary>
+        public static string FwkCaptionInvalidData {
+            get {
+                return ResourceManager.GetString("FwkCaptionInvalidData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Fwk.Language.{0}.Service/Captions/FwkCaptionMissingData.
+        /// </summary>
+        public static string FwkCaptionMissingData {
+            get {
+                return ResourceManager.GetString("FwkCaptionMissingData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Fwk.Language.{0}.Service/Captions/FwkCaptionMissingProperty.
+        /// </summary>
+        public static string FwkCaptionMissingProperty {
+            get {
+                return ResourceManager.GetString("FwkCaptionMissingProperty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Fwk.Language.{0}.Service/Captions/FwkCaptionNotFound.
+        /// </summary>
+        public static string FwkCaptionNotFound {
+            get {
+                return ResourceManager.GetString("FwkCaptionNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionRecordDataSetMissing.
+        /// </summary>
+        public static string FwkExceptionRecordDataSetMissing {
+            get {
+                return ResourceManager.GetString("FwkExceptionRecordDataSetMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionRecordDataTableEmpty.
+        /// </summary>
+        public static string FwkExceptionRecordDataTableEmpty {
+            get {
+                return ResourceManager.GetString("FwkExceptionRecordDataTableEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionRecordDataTableMissing.
+        /// </summary>
+        public static string FwkExceptionRecordDataTableMissing {
+            get {
+                return ResourceManager.GetString("FwkExceptionRecordDataTableMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionRecordKeyFieldEmpty.
+        /// </summary>
+        public static string FwkExceptionRecordKeyFieldEmpty {
+            get {
+                return ResourceManager.GetString("FwkExceptionRecordKeyFieldEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionRecordKeyFieldMissing.
+        /// </summary>
+        public static string FwkExceptionRecordKeyFieldMissing {
+            get {
+                return ResourceManager.GetString("FwkExceptionRecordKeyFieldMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionRecordNonEditableFieldModified.
+        /// </summary>
+        public static string FwkExceptionRecordNonEditableFieldModified {
+            get {
+                return ResourceManager.GetString("FwkExceptionRecordNonEditableFieldModified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionRecordOriginalKeyNotFound.
+        /// </summary>
+        public static string FwkExceptionRecordOriginalKeyNotFound {
+            get {
+                return ResourceManager.GetString("FwkExceptionRecordOriginalKeyNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionRecordRequiredFieldEmpty.
+        /// </summary>
+        public static string FwkExceptionRecordRequiredFieldEmpty {
+            get {
+                return ResourceManager.GetString("FwkExceptionRecordRequiredFieldEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionRecordUniqueFieldDuplicatedDatabase.
+        /// </summary>
+        public static string FwkExceptionRecordUniqueFieldDuplicatedDatabase {
+            get {
+                return ResourceManager.GetString("FwkExceptionRecordUniqueFieldDuplicatedDatabase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionRecordUniqueFieldDuplicatedRequest.
+        /// </summary>
+        public static string FwkExceptionRecordUniqueFieldDuplicatedRequest {
+            get {
+                return ResourceManager.GetString("FwkExceptionRecordUniqueFieldDuplicatedRequest", resourceCulture);
+            }
+        }
     }
 }

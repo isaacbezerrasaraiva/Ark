@@ -187,6 +187,8 @@ namespace Ark.Fwk.Data
 
         #region Properties
 
+        public FwkFormatRecord Format { get; set; }
+
         [JsonConverter(typeof(LazyJsonConverterDataSet))]
         public DataSet DataSet { get; set; }
 
