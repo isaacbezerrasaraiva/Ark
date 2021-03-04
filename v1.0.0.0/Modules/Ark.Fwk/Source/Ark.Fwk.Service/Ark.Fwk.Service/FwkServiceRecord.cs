@@ -2193,6 +2193,7 @@ namespace Ark.Fwk.Service
         /// <param name="dataRecordResponse">The response data</param>
         private void AfterPerformUpsert(FwkDataRecordRequest dataRecordRequest, FwkDataRecordResponse dataRecordResponse)
         {
+            dataRecordResponse.Content.Format = null;
         }
 
         /// <summary>
