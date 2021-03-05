@@ -204,7 +204,7 @@ namespace Ark.Sys.Service
         {
             DataTable dataTableRole = dataRecordRequest.Content.DataSet.Tables["FwkRole"];
             dataTableRole.PrimaryKey = new DataColumn[] { dataTableRole.Columns["IdDomain"], dataTableRole.Columns["IdRole"] };
-            dataRecordResponse.Scope.RecordsAffected = this.Database.IndateAll("FwkRole", dataTableRole);
+            dataRecordResponse.Scope.RecordsAffected = this.Database.IndateAll("FwkRole", dataTableRole, DataRowState.Added | DataRowState.Modified);
 
             dataTableRole.AcceptChanges();
             dataTableRole = this.Database.SelectAll("FwkRole", dataTableRole);
@@ -240,7 +240,7 @@ namespace Ark.Sys.Service
         {
             DataTable dataTableRole = dataRecordRequest.Content.DataSet.Tables["FwkRole"];
             dataTableRole.PrimaryKey = new DataColumn[] { dataTableRole.Columns["IdDomain"], dataTableRole.Columns["IdRole"] };
-            dataRecordResponse.Scope.RecordsAffected = this.Database.UpsertAll("FwkRole", dataTableRole);
+            dataRecordResponse.Scope.RecordsAffected = this.Database.UpsertAll("FwkRole", dataTableRole, DataRowState.Added | DataRowState.Modified);
 
             dataTableRole.AcceptChanges();
             dataTableRole = this.Database.SelectAll("FwkRole", dataTableRole);
