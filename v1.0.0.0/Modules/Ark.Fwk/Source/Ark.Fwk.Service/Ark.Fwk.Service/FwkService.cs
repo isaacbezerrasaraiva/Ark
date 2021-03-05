@@ -28,6 +28,7 @@ namespace Ark.Fwk.Service
     {
         #region Variables
 
+        private String operation;
         private LazyDatabase database;
         private FwkEnvironment environment;
         private List<IFwkPlugin> iPluginList;
@@ -137,6 +138,12 @@ namespace Ark.Fwk.Service
         #endregion Methods
 
         #region Properties
+
+        protected String Operation
+        {
+            get { return this.operation; }
+            set { this.operation = value; }
+        }
 
         protected LazyDatabase Database
         {

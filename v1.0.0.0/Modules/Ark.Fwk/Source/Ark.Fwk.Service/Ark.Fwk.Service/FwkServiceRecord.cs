@@ -47,6 +47,8 @@ namespace Ark.Fwk.Service
         /// <returns>The response data</returns>
         public override FwkDataBasicResponse Init(FwkDataBasicRequest dataBasicRequest)
         {
+            this.Operation = "Init";
+
             FwkDataRecordRequest dataRecordRequest = (FwkDataRecordRequest)dataBasicRequest;
             FwkDataRecordResponse dataRecordResponse = (FwkDataRecordResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
@@ -69,6 +71,8 @@ namespace Ark.Fwk.Service
         /// <returns>The response data</returns>
         public FwkDataRecordResponse Format(FwkDataRecordRequest dataRecordRequest)
         {
+            this.Operation = "Format";
+
             FwkDataRecordResponse dataRecordResponse = (FwkDataRecordResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
             this.Database.OpenConnection();
@@ -87,6 +91,8 @@ namespace Ark.Fwk.Service
         /// <returns>The response data</returns>
         public FwkDataRecordResponse ValidateRead(FwkDataRecordRequest dataRecordRequest)
         {
+            this.Operation = "ValidateRead";
+
             FwkDataRecordResponse dataRecordResponse = (FwkDataRecordResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
             this.Database.OpenConnection();
@@ -106,6 +112,8 @@ namespace Ark.Fwk.Service
         /// <returns>The response data</returns>
         public FwkDataRecordResponse ValidateInsert(FwkDataRecordRequest dataRecordRequest)
         {
+            this.Operation = "ValidateInsert";
+
             FwkDataRecordResponse dataRecordResponse = (FwkDataRecordResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
             this.Database.OpenConnection();
@@ -125,6 +133,8 @@ namespace Ark.Fwk.Service
         /// <returns>The response data</returns>
         public FwkDataRecordResponse ValidateIndate(FwkDataRecordRequest dataRecordRequest)
         {
+            this.Operation = "ValidateIndate";
+
             FwkDataRecordResponse dataRecordResponse = (FwkDataRecordResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
             this.Database.OpenConnection();
@@ -144,6 +154,8 @@ namespace Ark.Fwk.Service
         /// <returns>The response data</returns>
         public FwkDataRecordResponse ValidateUpdate(FwkDataRecordRequest dataRecordRequest)
         {
+            this.Operation = "ValidateUpdate";
+
             FwkDataRecordResponse dataRecordResponse = (FwkDataRecordResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
             this.Database.OpenConnection();
@@ -163,6 +175,8 @@ namespace Ark.Fwk.Service
         /// <returns>The response data</returns>
         public FwkDataRecordResponse ValidateUpsert(FwkDataRecordRequest dataRecordRequest)
         {
+            this.Operation = "ValidateUpsert";
+
             FwkDataRecordResponse dataRecordResponse = (FwkDataRecordResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
             this.Database.OpenConnection();
@@ -182,6 +196,8 @@ namespace Ark.Fwk.Service
         /// <returns>The response data</returns>
         public FwkDataRecordResponse ValidateDelete(FwkDataRecordRequest dataRecordRequest)
         {
+            this.Operation = "ValidateDelete";
+
             FwkDataRecordResponse dataRecordResponse = (FwkDataRecordResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
             this.Database.OpenConnection();
@@ -201,6 +217,8 @@ namespace Ark.Fwk.Service
         /// <returns>The response data</returns>
         public FwkDataRecordResponse Read(FwkDataRecordRequest dataRecordRequest)
         {
+            this.Operation = "Read";
+
             FwkDataRecordResponse dataRecordResponse = (FwkDataRecordResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
             this.Database.OpenConnection();
@@ -221,6 +239,8 @@ namespace Ark.Fwk.Service
         /// <returns>The response data</returns>
         public FwkDataRecordResponse Insert(FwkDataRecordRequest dataRecordRequest)
         {
+            this.Operation = "Insert";
+
             FwkDataRecordResponse dataRecordResponse = (FwkDataRecordResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
             this.Database.OpenConnection();
@@ -241,6 +261,8 @@ namespace Ark.Fwk.Service
         /// <returns>The response data</returns>
         public FwkDataRecordResponse Indate(FwkDataRecordRequest dataRecordRequest)
         {
+            this.Operation = "Indate";
+
             FwkDataRecordResponse dataRecordResponse = (FwkDataRecordResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
             this.Database.OpenConnection();
@@ -261,6 +283,8 @@ namespace Ark.Fwk.Service
         /// <returns>The response data</returns>
         public FwkDataRecordResponse Update(FwkDataRecordRequest dataRecordRequest)
         {
+            this.Operation = "Update";
+
             FwkDataRecordResponse dataRecordResponse = (FwkDataRecordResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
             this.Database.OpenConnection();
@@ -281,6 +305,8 @@ namespace Ark.Fwk.Service
         /// <returns>The response data</returns>
         public FwkDataRecordResponse Upsert(FwkDataRecordRequest dataRecordRequest)
         {
+            this.Operation = "Upsert";
+
             FwkDataRecordResponse dataRecordResponse = (FwkDataRecordResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
             this.Database.OpenConnection();
@@ -301,6 +327,8 @@ namespace Ark.Fwk.Service
         /// <returns>The response data</returns>
         public FwkDataRecordResponse Delete(FwkDataRecordRequest dataRecordRequest)
         {
+            this.Operation = "Delete";
+
             FwkDataRecordResponse dataRecordResponse = (FwkDataRecordResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
             this.Database.OpenConnection();
@@ -2486,6 +2514,8 @@ namespace Ark.Fwk.Service
         /// <param name="dataRecordResponse">The response data</param>
         private void AfterPerformRead(FwkDataRecordRequest dataRecordRequest, FwkDataRecordResponse dataRecordResponse)
         {
+            if (this.Operation != "Init")
+                dataRecordResponse.Content.Format = null;
         }
 
         /// <summary>

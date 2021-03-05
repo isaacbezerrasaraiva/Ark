@@ -47,6 +47,8 @@ namespace Ark.Fwk.Service
         /// <returns>The response data</returns>
         public override FwkDataBasicResponse Init(FwkDataBasicRequest dataBasicRequest)
         {
+            this.Operation = "Init";
+
             FwkDataViewRequest dataViewRequest = (FwkDataViewRequest)dataBasicRequest;
             FwkDataViewResponse dataViewResponse = (FwkDataViewResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
@@ -69,6 +71,8 @@ namespace Ark.Fwk.Service
         /// <returns>The response data</returns>
         public FwkDataViewResponse Format(FwkDataViewRequest dataViewRequest)
         {
+            this.Operation = "Format";
+
             FwkDataViewResponse dataViewResponse = (FwkDataViewResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
             this.Database.OpenConnection();
@@ -87,6 +91,8 @@ namespace Ark.Fwk.Service
         /// <returns>The response data</returns>
         public FwkDataViewResponse ValidateRead(FwkDataViewRequest dataViewRequest)
         {
+            this.Operation = "ValidateRead";
+
             FwkDataViewResponse dataViewResponse = (FwkDataViewResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
             this.Database.OpenConnection();
@@ -106,6 +112,8 @@ namespace Ark.Fwk.Service
         /// <returns>The response data</returns>
         public FwkDataViewResponse Read(FwkDataViewRequest dataViewRequest)
         {
+            this.Operation = "Read";
+
             FwkDataViewResponse dataViewResponse = (FwkDataViewResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
             this.Database.OpenConnection();

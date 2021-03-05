@@ -47,6 +47,8 @@ namespace Ark.Fwk.Service
         /// <returns>The response data</returns>
         public virtual FwkDataBasicResponse Init(FwkDataBasicRequest dataBasicRequest)
         {
+            this.Operation = "Init";
+
             FwkDataBasicResponse dataBasicResponse = (FwkDataBasicResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
             this.Database.OpenConnection();
@@ -65,6 +67,8 @@ namespace Ark.Fwk.Service
         /// <returns>The response data</returns>
         public FwkDataBasicResponse Load(FwkDataBasicRequest dataBasicRequest)
         {
+            this.Operation = "Load";
+
             FwkDataBasicResponse dataBasicResponse = (FwkDataBasicResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
             this.Database.OpenConnection();
