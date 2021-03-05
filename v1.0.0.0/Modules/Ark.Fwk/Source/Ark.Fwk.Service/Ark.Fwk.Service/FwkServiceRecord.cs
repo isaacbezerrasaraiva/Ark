@@ -1228,6 +1228,363 @@ namespace Ark.Fwk.Service
         /// <param name="dataRecordResponse">The response data</param>
         private void BeforePerformValidateIndate(FwkDataRecordRequest dataRecordRequest, FwkDataRecordResponse dataRecordResponse)
         {
+            if (dataRecordResponse.Content.Format != null)
+            {
+                #region Validate required DataSet
+
+                if (dataRecordRequest.Content.DataSet == null)
+                    throw new LibException(Properties.FwkResourcesService.FwkExceptionRecordDataSetMissing, Properties.FwkResourcesService.FwkCaptionMissingProperty);
+
+                #endregion Validate required DataSet
+
+                if (dataRecordResponse.Content.Format.RecordTableList != null)
+                {
+                    #region Read original records
+
+                    DataSet dataSetReceived = dataRecordRequest.Content.DataSet;
+                    DataSet dataSetOriginalKeys = new DataSet();
+                    DataSet dataSetFaithfulRecords = null;
+
+                    foreach (KeyValuePair<String, FwkFormatRecordTable> formatRecordTable in dataRecordResponse.Content.Format.RecordTableList)
+                    {
+                        if (dataSetReceived.Tables.Contains(formatRecordTable.Key) == true)
+                        {
+                            #region Create DataTable original keys
+
+                            DataTable dataTableOriginalKeys = new DataTable(formatRecordTable.Key);
+                            dataSetOriginalKeys.Tables.Add(dataTableOriginalKeys);
+
+                            if (formatRecordTable.Value.RecordFields != null)
+                            {
+                                foreach (KeyValuePair<String, FwkFormatRecordField> formatRecordField in formatRecordTable.Value.RecordFields)
+                                {
+                                    if (formatRecordField.Value.Attributes.Constraint == FwkConstraintEnum.ParentKey || formatRecordField.Value.Attributes.Constraint == FwkConstraintEnum.PrimaryKey || formatRecordField.Value.Attributes.Constraint == FwkConstraintEnum.IncrementKey)
+                                        dataTableOriginalKeys.Columns.Add(formatRecordField.Key, formatRecordField.Value.Attributes.Type);
+                                }
+                            }
+
+                            #endregion Create DataTable original keys
+
+                            #region Extract DataTable original keys values
+
+                            foreach (DataRow dataRowReceived in dataSetReceived.Tables[formatRecordTable.Key].Rows)
+                            {
+                                DataRow dataRowOriginalKeys = dataTableOriginalKeys.NewRow();
+                                dataTableOriginalKeys.Rows.Add(dataRowOriginalKeys);
+
+                                foreach (DataColumn dataColumnKey in dataTableOriginalKeys.Columns)
+                                {
+                                    if (dataSetReceived.Tables[formatRecordTable.Key].Columns.Contains(dataColumnKey.ColumnName) == true)
+                                        dataRowOriginalKeys[dataColumnKey] = dataRowReceived[dataColumnKey.ColumnName];
+                                }
+                            }
+
+                            dataTableOriginalKeys.AcceptChanges();
+
+                            #endregion Extract DataTable original keys values
+                        }
+                    }
+
+                    #region Perform read original records
+
+                    String dataRecordRequestOriginalString = (String)Newtonsoft.Json.JsonConvert.SerializeObject(dataRecordRequest, dataRecordRequest.GetType(), null);
+                    FwkDataRecordRequest dataRecordRequestOriginal = (FwkDataRecordRequest)Newtonsoft.Json.JsonConvert.DeserializeObject(dataRecordRequestOriginalString, dataRecordRequest.GetType());
+                    dataRecordRequestOriginal.Content.DataSet = dataSetOriginalKeys;
+
+                    String dataRecordResponseOriginalString = (String)Newtonsoft.Json.JsonConvert.SerializeObject(dataRecordResponse, dataRecordResponse.GetType(), null);
+                    FwkDataRecordResponse dataRecordResponseOriginal = (FwkDataRecordResponse)Newtonsoft.Json.JsonConvert.DeserializeObject(dataRecordResponseOriginalString, dataRecordResponse.GetType());
+
+                    PerformValidateRead(dataRecordRequestOriginal, dataRecordResponseOriginal);
+                    PerformRead(dataRecordRequestOriginal, dataRecordResponseOriginal);
+
+                    dataSetFaithfulRecords = dataRecordResponseOriginal.Content.DataSet;
+
+                    #endregion Perform read original records
+
+                    foreach (KeyValuePair<String, FwkFormatRecordTable> formatRecordTable in dataRecordResponse.Content.Format.RecordTableList)
+                    {
+                        if (dataSetReceived.Tables.Contains(formatRecordTable.Key) == true)
+                        {
+                            foreach (DataRow dataRowReceived in dataSetReceived.Tables[formatRecordTable.Key].Rows)
+                            {
+                                #region Create record key filter
+
+                                String recordKeyFilter = String.Empty;
+                                foreach (DataColumn dataColumnKey in dataSetOriginalKeys.Tables[formatRecordTable.Key].Columns)
+                                    recordKeyFilter += dataColumnKey.ColumnName + " = '" + dataRowReceived[dataColumnKey.ColumnName] + "' and ";
+                                recordKeyFilter = recordKeyFilter.Remove(recordKeyFilter.Length - 5, 5);
+
+                                #endregion Create record key filter
+
+                                #region Select faithful record that matchs received record
+
+                                DataRow[] dataRowArray = dataSetFaithfulRecords.Tables[formatRecordTable.Key].Select(recordKeyFilter);
+
+                                if (dataRowArray.Length == 0)
+                                {
+                                    dataSetFaithfulRecords.Tables[formatRecordTable.Key].ImportRow(dataRowReceived);
+                                }
+                                else
+                                {
+                                    DataRow dataRowFaithfulRecord = dataRowArray[0];
+
+                                    #region Modify faithful record with received record changes
+
+                                    foreach (DataColumn dataColumnReceived in dataSetReceived.Tables[formatRecordTable.Key].Columns)
+                                    {
+                                        if (dataSetFaithfulRecords.Tables[formatRecordTable.Key].Columns.Contains(dataColumnReceived.ColumnName) == true)
+                                            dataRowFaithfulRecord[dataColumnReceived.ColumnName] = dataRowReceived[dataColumnReceived.ColumnName];
+                                    }
+
+                                    #endregion Modify faithful record with received record changes
+                                }
+
+                                #endregion Select faithful record that matchs received record
+                            }
+
+                            DataTable dataTableFaithful = dataSetFaithfulRecords.Tables[formatRecordTable.Key];
+                            dataSetFaithfulRecords.Tables.Remove(formatRecordTable.Key);
+                            dataSetReceived.Tables.Remove(formatRecordTable.Key);
+                            dataSetReceived.Tables.Add(dataTableFaithful);
+                        }
+                    }
+
+                    #endregion Read original records
+
+                    foreach (KeyValuePair<String, FwkFormatRecordTable> formatRecordTable in dataRecordResponse.Content.Format.RecordTableList)
+                    {
+                        if (dataRecordRequest.Content.DataSet.Tables.Contains(formatRecordTable.Key) == false)
+                        {
+                            #region Validate required table
+
+                            if (formatRecordTable.Value.Required == true)
+                                throw new LibException(Properties.FwkResourcesService.FwkExceptionRecordDataTableMissing, new Object[] { formatRecordTable.Key }, Properties.FwkResourcesService.FwkCaptionMissingProperty);
+
+                            #endregion Validate required table
+
+                            #region Create inexistence non required table
+
+                            dataRecordRequest.Content.DataSet.Tables.Add(formatRecordTable.Key);
+
+                            if (formatRecordTable.Value.RecordFields != null)
+                            {
+                                foreach (KeyValuePair<String, FwkFormatRecordField> formatRecordField in formatRecordTable.Value.RecordFields)
+                                    dataRecordRequest.Content.DataSet.Tables[formatRecordTable.Key].Columns.Add(formatRecordField.Key, formatRecordField.Value.Attributes.Type);
+                            }
+
+                            #endregion Create inexistence non required table
+                        }
+                        else
+                        {
+                            if (dataRecordRequest.Content.DataSet.Tables[formatRecordTable.Key].Rows.Count == 0)
+                            {
+                                #region Validate required table empty
+
+                                if (formatRecordTable.Value.Required == true)
+                                    throw new LibException(Properties.FwkResourcesService.FwkExceptionRecordDataTableEmpty, new Object[] { formatRecordTable.Key }, Properties.FwkResourcesService.FwkCaptionMissingData);
+
+                                #endregion Validate required table empty
+
+                                #region Create inexistence non required table key fields
+
+                                if (formatRecordTable.Value.RecordFields != null)
+                                {
+                                    foreach (KeyValuePair<String, FwkFormatRecordField> formatRecordField in formatRecordTable.Value.RecordFields)
+                                    {
+                                        if (dataRecordRequest.Content.DataSet.Tables[formatRecordTable.Key].Columns.Contains(formatRecordField.Key) == false)
+                                            dataRecordRequest.Content.DataSet.Tables[formatRecordTable.Key].Columns.Add(formatRecordField.Key, formatRecordField.Value.Attributes.Type);
+                                    }
+                                }
+
+                                #endregion Create inexistence non required table key fields
+                            }
+                            else
+                            {
+                                if (formatRecordTable.Value.RecordFields != null)
+                                {
+                                    foreach (KeyValuePair<String, FwkFormatRecordField> formatRecordField in formatRecordTable.Value.RecordFields)
+                                    {
+                                        #region Validate attributes
+
+                                        if (formatRecordField.Value.Attributes.SkipValidations == false)
+                                        {
+                                            if (formatRecordField.Value.Attributes.Constraint == FwkConstraintEnum.ParentKey || formatRecordField.Value.Attributes.Constraint == FwkConstraintEnum.PrimaryKey || formatRecordField.Value.Attributes.Constraint == FwkConstraintEnum.IncrementKey || formatRecordField.Value.Attributes.Constraint == FwkConstraintEnum.UniqueKey || formatRecordField.Value.Attributes.Nullable == FwkBooleanEnum.False)
+                                            {
+                                                #region Validate required field missing
+
+                                                if (dataRecordRequest.Content.DataSet.Tables[formatRecordTable.Key].Columns.Contains(formatRecordField.Key) == false)
+                                                    throw new LibException(Properties.FwkResourcesService.FwkExceptionRecordKeyFieldMissing, new Object[] { formatRecordField.Key }, Properties.FwkResourcesService.FwkCaptionMissingProperty);
+
+                                                #endregion Validate required field missing
+
+                                                foreach (DataRow dataRow in dataRecordRequest.Content.DataSet.Tables[formatRecordTable.Key].Rows)
+                                                {
+                                                    #region Set default values
+
+                                                    if (formatRecordField.Value.Attributes.DefaultValue != null)
+                                                    {
+                                                        if (String.IsNullOrEmpty(LazyConvert.ToString(dataRow[formatRecordField.Key], null)) == true)
+                                                            dataRow[formatRecordField.Key] = formatRecordField.Value.Attributes.DefaultValue;
+                                                    }
+
+                                                    #endregion Set default values
+
+                                                    #region Validate required field empty
+
+                                                    if (String.IsNullOrEmpty(LazyConvert.ToString(dataRow[formatRecordField.Key], null)) == true)
+                                                        throw new LibException(Properties.FwkResourcesService.FwkExceptionRecordRequiredFieldEmpty, new Object[] { formatRecordField.Key }, Properties.FwkResourcesService.FwkCaptionMissingData);
+
+                                                    #endregion Validate required field empty
+
+                                                    #region Validate non editable field
+
+                                                    if (formatRecordField.Value.Attributes.Editable == FwkBooleanEnum.False)
+                                                    {
+                                                        if (dataRow.RowState == DataRowState.Modified)
+                                                        {
+                                                            if (LazyConvert.ToString(dataRow[formatRecordField.Key], String.Empty) != LazyConvert.ToString(dataRow[formatRecordField.Key, DataRowVersion.Original], String.Empty))
+                                                                throw new LibException(Properties.FwkResourcesService.FwkExceptionRecordNonEditableFieldModified, new Object[] { formatRecordField.Key }, Properties.FwkResourcesService.FwkCaptionInvalidData);
+                                                        }
+                                                    }
+
+                                                    #endregion Validate non editable field
+                                                }
+                                            }
+                                            else
+                                            {
+                                                #region Create inexistence non required field
+
+                                                if (dataRecordRequest.Content.DataSet.Tables[formatRecordTable.Key].Columns.Contains(formatRecordField.Key) == false)
+                                                    dataRecordRequest.Content.DataSet.Tables[formatRecordTable.Key].Columns.Add(formatRecordField.Key, formatRecordField.Value.Attributes.Type);
+
+                                                #endregion Create inexistence non required field
+
+                                                foreach (DataRow dataRow in dataRecordRequest.Content.DataSet.Tables[formatRecordTable.Key].Rows)
+                                                {
+                                                    #region Set default values
+
+                                                    if (formatRecordField.Value.Attributes.DefaultValue != null)
+                                                    {
+                                                        if (String.IsNullOrEmpty(LazyConvert.ToString(dataRow[formatRecordField.Key], null)) == true)
+                                                            dataRow[formatRecordField.Key] = formatRecordField.Value.Attributes.DefaultValue;
+                                                    }
+
+                                                    #endregion Set default values
+
+                                                    #region Validate non editable field
+
+                                                    if (formatRecordField.Value.Attributes.Editable == FwkBooleanEnum.False)
+                                                    {
+                                                        if (dataRow.RowState == DataRowState.Modified)
+                                                        {
+                                                            if (LazyConvert.ToString(dataRow[formatRecordField.Key], String.Empty) != LazyConvert.ToString(dataRow[formatRecordField.Key, DataRowVersion.Original], String.Empty))
+                                                                throw new LibException(Properties.FwkResourcesService.FwkExceptionRecordNonEditableFieldModified, new Object[] { formatRecordField.Key }, Properties.FwkResourcesService.FwkCaptionInvalidData);
+                                                        }
+                                                    }
+
+                                                    #endregion Validate non editable field
+                                                }
+                                            }
+
+                                            if (formatRecordField.Value.Attributes.Constraint == FwkConstraintEnum.UniqueKey && formatRecordField.Value.Attributes.UniqueKeys != null && formatRecordField.Value.Attributes.UniqueKeys.Length > 0)
+                                            {
+                                                #region Validate unique key
+
+                                                String dataColumnUniqueKeyString = String.Empty;
+                                                List<DataColumn> dataColumnUniqueKeyList = new List<DataColumn>();
+                                                for (int i = 0; i < formatRecordField.Value.Attributes.UniqueKeys.Length; i++)
+                                                {
+                                                    dataColumnUniqueKeyString += formatRecordField.Value.Attributes.UniqueKeys[i] + ",";
+                                                    dataColumnUniqueKeyList.Add(dataRecordRequest.Content.DataSet.Tables[formatRecordTable.Key].Columns[formatRecordField.Value.Attributes.UniqueKeys[i]]);
+                                                }
+                                                dataColumnUniqueKeyString = dataColumnUniqueKeyString.Remove(dataColumnUniqueKeyString.Length - 1, 1);
+
+                                                try { dataRecordRequest.Content.DataSet.Tables[formatRecordTable.Key].PrimaryKey = dataColumnUniqueKeyList.ToArray(); }
+                                                catch { throw new LibException(Properties.FwkResourcesService.FwkExceptionRecordUniqueFieldDuplicatedRequest, new Object[] { dataColumnUniqueKeyString }, Properties.FwkResourcesService.FwkCaptionDuplicatedData); }
+
+
+
+                                                List<String> keyList = new List<String>();
+                                                List<String> primaryKeyList = new List<String>();
+                                                foreach (KeyValuePair<String, FwkFormatRecordField> formatRecordFieldPrimaryKey in formatRecordTable.Value.RecordFields)
+                                                {
+                                                    if (formatRecordFieldPrimaryKey.Value.Attributes.Constraint == FwkConstraintEnum.ParentKey || formatRecordFieldPrimaryKey.Value.Attributes.Constraint == FwkConstraintEnum.PrimaryKey || formatRecordFieldPrimaryKey.Value.Attributes.Constraint == FwkConstraintEnum.IncrementKey)
+                                                    {
+                                                        keyList.Add(formatRecordFieldPrimaryKey.Key);
+                                                        primaryKeyList.Add(formatRecordFieldPrimaryKey.Key);
+                                                    }
+                                                    else if (formatRecordFieldPrimaryKey.Value.Attributes.Constraint == FwkConstraintEnum.UniqueKey)
+                                                    {
+                                                        keyList.Add(formatRecordFieldPrimaryKey.Key);
+                                                    }
+                                                }
+
+
+
+                                                DataTable dataTableAlreadyExistingKeys = dataRecordRequest.Content.DataSet.Tables[formatRecordTable.Key].Copy();
+                                                dataTableAlreadyExistingKeys.AcceptChanges();
+                                                dataTableAlreadyExistingKeys = this.Database.SelectAll(formatRecordTable.Key, dataTableAlreadyExistingKeys, keyList.ToArray());
+
+                                                foreach (DataRow dataRowAlreadyExistingKeys in dataTableAlreadyExistingKeys.Rows)
+                                                {
+                                                    String alreadyExistingKeyFilter = String.Empty;
+                                                    foreach (DataColumn dataColumnUniqueKey in dataColumnUniqueKeyList)
+                                                        alreadyExistingKeyFilter += dataColumnUniqueKey.ColumnName + " = '" + dataRowAlreadyExistingKeys[dataColumnUniqueKey.ColumnName] + "' and ";
+                                                    alreadyExistingKeyFilter = alreadyExistingKeyFilter.Remove(alreadyExistingKeyFilter.Length - 5, 5);
+
+                                                    DataRow[] dataRow = dataRecordRequest.Content.DataSet.Tables[formatRecordTable.Key].Select(alreadyExistingKeyFilter);
+
+                                                    if (dataRow.Length > 0)
+                                                    {
+                                                        foreach (String primaryKey in primaryKeyList)
+                                                        {
+                                                            String primaryKeyValue = dataRow[0].RowState == DataRowState.Added ? LazyConvert.ToString(dataRow[0][primaryKey], String.Empty) : LazyConvert.ToString(dataRow[0][primaryKey, DataRowVersion.Original], String.Empty);
+
+                                                            if (LazyConvert.ToString(dataRowAlreadyExistingKeys[primaryKey], String.Empty) != primaryKeyValue)
+                                                            {
+                                                                String duplicatedValues = String.Empty;
+                                                                foreach (DataColumn dataColumnUniqueKey in dataColumnUniqueKeyList)
+                                                                    duplicatedValues += LazyConvert.ToString(dataRowAlreadyExistingKeys[dataColumnUniqueKey.ColumnName], String.Empty) + ",";
+                                                                duplicatedValues = duplicatedValues.Remove(duplicatedValues.Length - 1, 1);
+
+                                                                throw new LibException(Properties.FwkResourcesService.FwkExceptionRecordUniqueFieldDuplicatedDatabase, new Object[] { dataColumnUniqueKeyString, duplicatedValues }, Properties.FwkResourcesService.FwkCaptionDuplicatedData);
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+                                                #endregion Validate unique key
+                                            }
+                                        }
+
+                                        #endregion Validate attributes
+
+                                        foreach (DataRow dataRow in dataRecordRequest.Content.DataSet.Tables[formatRecordTable.Key].Rows)
+                                        {
+                                            #region Execute custom validations
+
+                                            foreach (FwkFormatRecordFieldValidation formatRecordFieldValidation in formatRecordField.Value.Validations)
+                                            {
+                                                if (formatRecordFieldValidation.Validate(dataRow[formatRecordField.Key], formatRecordField.Key) == false)
+                                                    throw new LibException(formatRecordFieldValidation.Reason, Properties.FwkResourcesService.FwkCaptionInvalidData);
+                                            }
+
+                                            #endregion Execute custom validations
+
+                                            #region Execute custom transformations
+
+                                            foreach (FwkFormatRecordFieldTransformation formatRecordFieldTransformation in formatRecordField.Value.Transformations)
+                                                dataRow[formatRecordField.Key] = formatRecordFieldTransformation.Transform(dataRow[formatRecordField.Key]);
+
+                                            #endregion Execute custom transformations
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -1708,6 +2065,8 @@ namespace Ark.Fwk.Service
                                 if (dataRowArray.Length == 0)
                                 {
                                     dataSetFaithfulRecords.Tables[formatRecordTable.Key].ImportRow(dataRowReceived);
+                                    dataSetFaithfulRecords.Tables[formatRecordTable.Key].Rows[dataSetFaithfulRecords.Tables[formatRecordTable.Key].Rows.Count - 1].AcceptChanges();
+                                    dataSetFaithfulRecords.Tables[formatRecordTable.Key].Rows[dataSetFaithfulRecords.Tables[formatRecordTable.Key].Rows.Count - 1].SetAdded();
                                 }
                                 else
                                 {
@@ -1825,8 +2184,11 @@ namespace Ark.Fwk.Service
 
                                                     if (formatRecordField.Value.Attributes.Editable == FwkBooleanEnum.False)
                                                     {
-                                                        if (LazyConvert.ToString(dataRow[formatRecordField.Key], String.Empty) != LazyConvert.ToString(dataRow[formatRecordField.Key, DataRowVersion.Original], String.Empty))
-                                                            throw new LibException(Properties.FwkResourcesService.FwkExceptionRecordNonEditableFieldModified, new Object[] { formatRecordField.Key }, Properties.FwkResourcesService.FwkCaptionInvalidData);
+                                                        if (dataRow.RowState == DataRowState.Modified)
+                                                        {
+                                                            if (LazyConvert.ToString(dataRow[formatRecordField.Key], String.Empty) != LazyConvert.ToString(dataRow[formatRecordField.Key, DataRowVersion.Original], String.Empty))
+                                                                throw new LibException(Properties.FwkResourcesService.FwkExceptionRecordNonEditableFieldModified, new Object[] { formatRecordField.Key }, Properties.FwkResourcesService.FwkCaptionInvalidData);
+                                                        }
                                                     }
 
                                                     #endregion Validate non editable field
@@ -1857,8 +2219,11 @@ namespace Ark.Fwk.Service
 
                                                     if (formatRecordField.Value.Attributes.Editable == FwkBooleanEnum.False)
                                                     {
-                                                        if (LazyConvert.ToString(dataRow[formatRecordField.Key], String.Empty) != LazyConvert.ToString(dataRow[formatRecordField.Key, DataRowVersion.Original], String.Empty))
-                                                            throw new LibException(Properties.FwkResourcesService.FwkExceptionRecordNonEditableFieldModified, new Object[] { formatRecordField.Key }, Properties.FwkResourcesService.FwkCaptionInvalidData);
+                                                        if (dataRow.RowState == DataRowState.Modified)
+                                                        {
+                                                            if (LazyConvert.ToString(dataRow[formatRecordField.Key], String.Empty) != LazyConvert.ToString(dataRow[formatRecordField.Key, DataRowVersion.Original], String.Empty))
+                                                                throw new LibException(Properties.FwkResourcesService.FwkExceptionRecordNonEditableFieldModified, new Object[] { formatRecordField.Key }, Properties.FwkResourcesService.FwkCaptionInvalidData);
+                                                        }
                                                     }
 
                                                     #endregion Validate non editable field
@@ -1917,7 +2282,9 @@ namespace Ark.Fwk.Service
                                                     {
                                                         foreach (String primaryKey in primaryKeyList)
                                                         {
-                                                            if (LazyConvert.ToString(dataRowAlreadyExistingKeys[primaryKey], String.Empty) != LazyConvert.ToString(dataRow[0][primaryKey, DataRowVersion.Original], String.Empty))
+                                                            String primaryKeyValue = dataRow[0].RowState == DataRowState.Added ? LazyConvert.ToString(dataRow[0][primaryKey], String.Empty) : LazyConvert.ToString(dataRow[0][primaryKey, DataRowVersion.Original], String.Empty);
+
+                                                            if (LazyConvert.ToString(dataRowAlreadyExistingKeys[primaryKey], String.Empty) != primaryKeyValue)
                                                             {
                                                                 String duplicatedValues = String.Empty;
                                                                 foreach (DataColumn dataColumnUniqueKey in dataColumnUniqueKeyList)
@@ -2156,6 +2523,7 @@ namespace Ark.Fwk.Service
         /// <param name="dataRecordResponse">The response data</param>
         private void AfterPerformIndate(FwkDataRecordRequest dataRecordRequest, FwkDataRecordResponse dataRecordResponse)
         {
+            dataRecordResponse.Content.Format = null;
         }
 
         /// <summary>
