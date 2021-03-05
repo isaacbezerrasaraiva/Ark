@@ -4,7 +4,7 @@
   <con:entry key="Credential" value="admin;admin"/>
   <con:entry key="Token" value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWMiOiJVc2VyOkFkbWluIiwicHJpdmF0ZSI6InF0Wk1IQkFWVU5lLy9DMlhQSHVqRlh3TUFzVVl2bTNOcDJzNmlielc0aEk9IiwibmJmIjoxNjExMjY4MjY3LCJleHAiOjE2NDEwMDU5OTksImlhdCI6MTYxMTI2ODI2N30.y1RcZ4XMxVkej72lebfa0FVvO2tIHgRfcegZkR0Gd-U"/>
   <con:entry key="Culture" value="PtBr"/>
-</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://192.168.0.20:9050</con:endpoint><con:request>{
+</xml-fragment>]]></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.0.20:9050</con:endpoint><con:request>{
 	"Scope" : {
 	},
 	"Content" : {
@@ -20,7 +20,7 @@
   <con:entry key="Credential" value="admin;admin"/>
   <con:entry key="Token" value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWMiOiJVc2VyOkFkbWluIiwicHJpdmF0ZSI6InF0Wk1IQkFWVU5lLy9DMlhQSHVqRlh3TUFzVVl2bTNOcDJzNmlielc0aEk9IiwibmJmIjoxNjExMjY4MjY3LCJleHAiOjE2NDEwMDU5OTksImlhdCI6MTYxMTI2ODI2N30.y1RcZ4XMxVkej72lebfa0FVvO2tIHgRfcegZkR0Gd-U"/>
   <con:entry key="Culture" value="EnUs"/>
-</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://192.168.0.20:9050</con:endpoint><con:request>{
+</xml-fragment>]]></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.0.20:9050</con:endpoint><con:request>{
 	"Scope" : {
 	},
 	"Content" : {
@@ -40,7 +40,7 @@
   <con:entry key="Credential" value="admin;admin"/>
   <con:entry key="Token" value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWMiOiJVc2VyOkFkbWluIiwicHJpdmF0ZSI6InF0Wk1IQkFWVU5lLy9DMlhQSHVqRlh3TUFzVVl2bTNOcDJzNmlielc0aEk9IiwibmJmIjoxNjExMjY4MjY3LCJleHAiOjE2NDEwMDU5OTksImlhdCI6MTYxMTI2ODI2N30.y1RcZ4XMxVkej72lebfa0FVvO2tIHgRfcegZkR0Gd-U"/>
   <con:entry key="Culture" value="EnUs"/>
-</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://192.168.0.20:9050</con:endpoint><con:request>{
+</xml-fragment>]]></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.0.20:9050</con:endpoint><con:request>{
 	"Scope" : {
 	},
 	"Content" : {
@@ -57,7 +57,7 @@
   <con:entry key="Credential" value="admin;admin"/>
   <con:entry key="Token" value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWMiOiJVc2VyOkFkbWluIiwicHJpdmF0ZSI6InF0Wk1IQkFWVU5lLy9DMlhQSHVqRlh3TUFzVVl2bTNOcDJzNmlielc0aEk9IiwibmJmIjoxNjExMjY4MjY3LCJleHAiOjE2NDEwMDU5OTksImlhdCI6MTYxMTI2ODI2N30.y1RcZ4XMxVkej72lebfa0FVvO2tIHgRfcegZkR0Gd-U"/>
   <con:entry key="Culture" value="EnUs"/>
-</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://192.168.0.20:9050</con:endpoint><con:request>{
+</xml-fragment>]]></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.0.20:9050</con:endpoint><con:request>{
 	"Scope" : {
 	},
 	"Content" : {
@@ -77,7 +77,7 @@
   <con:entry key="Credential" value="admin;admin"/>
   <con:entry key="Token" value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWMiOiJVc2VyOkFkbWluIiwicHJpdmF0ZSI6InF0Wk1IQkFWVU5lLy9DMlhQSHVqRlh3TUFzVVl2bTNOcDJzNmlielc0aEk9IiwibmJmIjoxNjExMjY4MjY3LCJleHAiOjE2NDEwMDU5OTksImlhdCI6MTYxMTI2ODI2N30.y1RcZ4XMxVkej72lebfa0FVvO2tIHgRfcegZkR0Gd-U"/>
   <con:entry key="Culture" value="PtBr"/>
-</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://192.168.0.20:9050</con:endpoint><con:request>{
+</xml-fragment>]]></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.0.20:9050</con:endpoint><con:request>{
 	"Scope" : {
 	},
 	"Content" : {
@@ -93,7 +93,7 @@
   <con:entry key="Credential" value="admin;admin"/>
   <con:entry key="Token" value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWMiOiJVc2VyOkFkbWluIiwicHJpdmF0ZSI6InF0Wk1IQkFWVU5lLy9DMlhQSHVqRlh3TUFzVVl2bTNOcDJzNmlielc0aEk9IiwibmJmIjoxNjExMjY4MjY3LCJleHAiOjE2NDEwMDU5OTksImlhdCI6MTYxMTI2ODI2N30.y1RcZ4XMxVkej72lebfa0FVvO2tIHgRfcegZkR0Gd-U"/>
   <con:entry key="Culture" value="EnUs"/>
-</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://192.168.0.20:9050</con:endpoint><con:request>{
+</xml-fragment>]]></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.0.20:9050</con:endpoint><con:request>{
 	"Scope" : {
 	},
 	"Content" : {
@@ -105,18 +105,18 @@
 		}
 	}
 }
-</con:request><con:originalUri>http://192.168.0.20/Ark.Sys/SysRoleServerRecord/Insert</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="(Indate) SysRoleServerRecord" path="/Ark.Sys/SysRoleServerRecord/Indate" id="8917445c-c59e-44d4-90fa-9a9899d768e6"><con:settings/><con:parameters/><con:method name="Indate" id="e3f41ddf-b33f-43d6-8222-18e92f7af450" method="PUT"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>401</con:status><con:params/><con:element xmlns:ind="http://192.168.0.20/Ark.Sys/SysRoleServerRecord/Indate">ind:Fault</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json;charset=utf-8</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:ind="http://192.168.0.20/Ark.Sys/SysRoleServerRecord/Indate">ind:Response</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType>application/problem+json; charset=utf-8</con:mediaType><con:status>400</con:status><con:params/><con:element xmlns:ind="http://192.168.0.20/Ark.Sys/SysRoleServerRecord/Indate">ind:Fault</con:element></con:representation><con:representation type="FAULT"><con:mediaType>application/json;charset=utf-8</con:mediaType><con:status>406</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType>application/problem+json</con:mediaType><con:status>400</con:status><con:params/></con:representation><con:request name="Request One" id="17ab257d-ccdb-48d4-8ae5-e1be01d3b40c" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+</con:request><con:originalUri>http://192.168.0.20/Ark.Sys/SysRoleServerRecord/Insert</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="(Indate) SysRoleServerRecord" path="/Ark.Sys/SysRoleServerRecord/Indate" id="8917445c-c59e-44d4-90fa-9a9899d768e6"><con:settings/><con:parameters/><con:method name="Indate" id="e3f41ddf-b33f-43d6-8222-18e92f7af450" method="PUT"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>401</con:status><con:params/><con:element xmlns:ind="http://192.168.0.20/Ark.Sys/SysRoleServerRecord/Indate">ind:Fault</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json;charset=utf-8</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:ind="http://192.168.0.20/Ark.Sys/SysRoleServerRecord/Indate">ind:Response</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType>application/problem+json; charset=utf-8</con:mediaType><con:status>400</con:status><con:params/><con:element xmlns:ind="http://192.168.0.20/Ark.Sys/SysRoleServerRecord/Indate">ind:Fault</con:element></con:representation><con:representation type="FAULT"><con:mediaType>application/json;charset=utf-8</con:mediaType><con:status>406</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType>application/problem+json</con:mediaType><con:status>400</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Request One" id="17ab257d-ccdb-48d4-8ae5-e1be01d3b40c" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
   <con:entry key="IdDomain" value="1"/>
   <con:entry key="Credential" value="admin;admin"/>
   <con:entry key="Token" value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWMiOiJVc2VyOkFkbWluIiwicHJpdmF0ZSI6InF0Wk1IQkFWVU5lLy9DMlhQSHVqRlh3TUFzVVl2bTNOcDJzNmlielc0aEk9IiwibmJmIjoxNjExMjY4MjY3LCJleHAiOjE2NDEwMDU5OTksImlhdCI6MTYxMTI2ODI2N30.y1RcZ4XMxVkej72lebfa0FVvO2tIHgRfcegZkR0Gd-U"/>
   <con:entry key="Culture" value="PtBr"/>
-</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://192.168.0.20:9050</con:endpoint><con:request>{
+</xml-fragment>]]></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.0.20:9050</con:endpoint><con:request>{
 	"Scope" : {
 	},
 	"Content" : {
 		"DataSet" : {
 			"FwkRole" : [
-				{ "RowState" : "Added" }, { "IdDomain" : 1, "IdRole" : 8, "Name" : "Convidada" }
+				{ "RowState" : "Added" }, { "IdDomain" : 1, "IdRole" : 46, "Name" : "Indate 46" }
 			]
 		}
 	}
@@ -132,9 +132,9 @@
 	"Content" : {
 		"DataSet" : {
 			"FwkRole" : [
-				{ "RowState" : "Added" }, { "IdDomain" : 1, "IdRole" : 9, "Name" : "Usuaria" },
-				{ "RowState" : "Added" }, { "IdDomain" : 1, "IdRole" : 10, "Name" : "Auditora" },
-				{ "RowState" : "Added" }, { "IdDomain" : 1, "IdRole" : 11, "Name" : "Diretora" }
+				{ "RowState" : "Added" }, { "IdDomain" : 1, "IdRole" : 36, "Name" : "IndateTZ 36" },
+				{ "RowState" : "Added" }, { "IdDomain" : 1, "IdRole" : 37, "Name" : "IndateTZ 37" },
+				{ "RowState" : "Added" }, { "IdDomain" : 1, "IdRole" : 43, "Name" : "IndateTT 43" }
 			]
 		}
 	}
@@ -144,7 +144,7 @@
   <con:entry key="Credential" value="admin;admin"/>
   <con:entry key="Token" value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWMiOiJVc2VyOkFkbWluIiwicHJpdmF0ZSI6InF0Wk1IQkFWVU5lLy9DMlhQSHVqRlh3TUFzVVl2bTNOcDJzNmlielc0aEk9IiwibmJmIjoxNjExMjY4MjY3LCJleHAiOjE2NDEwMDU5OTksImlhdCI6MTYxMTI2ODI2N30.y1RcZ4XMxVkej72lebfa0FVvO2tIHgRfcegZkR0Gd-U"/>
   <con:entry key="Culture" value="PtBr"/>
-</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://192.168.0.20:9050</con:endpoint><con:request>{
+</xml-fragment>]]></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.0.20:9050</con:endpoint><con:request>{
 	"Scope" : {
 	},
 	"Content" : {
@@ -166,25 +166,25 @@
 	"Content" : {
 		"DataSet" : {
 			"FwkRole" : [
-				{ "RowState" : "Modified" }, { "OriginalKey" : { "IdDomain" : 1, "IdRole" : 12 } }, { "IdDomain" : 1, "IdRole" : 12, "Name" : "Usuárias" },
-				{ "RowState" : "Modified" }, { "OriginalKey" : { "IdDomain" : 1, "IdRole" : 13 } }, { "IdDomain" : 1, "IdRole" : 13, "Name" : "Auditoras" },
-				{ "RowState" : "Modified" }, { "OriginalKey" : { "IdDomain" : 1, "IdRole" : 14 } }, { "IdDomain" : 1, "IdRole" : 14, "Name" : "Diretoras" }
+				{ "RowState" : "Modified" }, { "OriginalKey" : { "IdDomain" : 1, "IdRole" : 10 } }, { "IdDomain" : 1, "IdRole" : 10, "Name" : "Modificado 10" },
+				{ "RowState" : "Modified" }, { "OriginalKey" : { "IdDomain" : 1, "IdRole" : 33 } }, { "IdDomain" : 1, "IdRole" : 33, "Name" : "Adicionado 33" },
+				{ "RowState" : "Modified" }, { "OriginalKey" : { "IdDomain" : 1, "IdRole" : 35 } }, { "IdDomain" : 1, "IdRole" : 35, "Name" : "Adicionado 35" }
 			]
 		}
 	}
 }
-</con:request><con:originalUri>http://192.168.0.20/Ark.Sys/SysRoleServerRecord/Update</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="(Upsert) SysRoleServerRecord" path="/Ark.Sys/SysRoleServerRecord/Upsert" id="a675c37a-a0dd-4551-b2aa-66d7f81315ae"><con:settings/><con:parameters/><con:method name="Upsert" id="c3be90a5-83e7-4646-a60b-d44aaa53eef9" method="PUT"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>401</con:status><con:params/><con:element xmlns:ups="http://192.168.0.20/Ark.Sys/SysRoleServerRecord/Upsert">ups:Fault</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json;charset=utf-8</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:ups="http://192.168.0.20/Ark.Sys/SysRoleServerRecord/Upsert">ups:Response</con:element></con:representation><con:request name="Request One" id="de50cf18-ea21-405b-add0-1d4422671594" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+</con:request><con:originalUri>http://192.168.0.20/Ark.Sys/SysRoleServerRecord/Update</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="(Upsert) SysRoleServerRecord" path="/Ark.Sys/SysRoleServerRecord/Upsert" id="a675c37a-a0dd-4551-b2aa-66d7f81315ae"><con:settings/><con:parameters/><con:method name="Upsert" id="c3be90a5-83e7-4646-a60b-d44aaa53eef9" method="PUT"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>401</con:status><con:params/><con:element xmlns:ups="http://192.168.0.20/Ark.Sys/SysRoleServerRecord/Upsert">ups:Fault</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json;charset=utf-8</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:ups="http://192.168.0.20/Ark.Sys/SysRoleServerRecord/Upsert">ups:Response</con:element></con:representation><con:representation type="FAULT"><con:mediaType>application/problem+json; charset=utf-8</con:mediaType><con:status>400</con:status><con:params/><con:element xmlns:ups="http://192.168.0.20/Ark.Sys/SysRoleServerRecord/Upsert">ups:Fault</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Request One" id="de50cf18-ea21-405b-add0-1d4422671594" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
   <con:entry key="IdDomain" value="1"/>
   <con:entry key="Credential" value="admin;admin"/>
   <con:entry key="Token" value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWMiOiJVc2VyOkFkbWluIiwicHJpdmF0ZSI6InF0Wk1IQkFWVU5lLy9DMlhQSHVqRlh3TUFzVVl2bTNOcDJzNmlielc0aEk9IiwibmJmIjoxNjExMjY4MjY3LCJleHAiOjE2NDEwMDU5OTksImlhdCI6MTYxMTI2ODI2N30.y1RcZ4XMxVkej72lebfa0FVvO2tIHgRfcegZkR0Gd-U"/>
   <con:entry key="Culture" value="PtBr"/>
-</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://192.168.0.20:9050</con:endpoint><con:request>{
+</xml-fragment>]]></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.0.20:9050</con:endpoint><con:request>{
 	"Scope" : {
 	},
 	"Content" : {
 		"DataSet" : {
 			"FwkRole" : [
-				{ "RowState" : "Modified" }, { "OriginalKey" : [ { "IdDomain" : 1 }, { "IdRole" : 8 } ] }, { "IdDomain" : 1, "IdRole" : 8, "Name" : "Convidado" }
+				{ "RowState" : "Modified" }, { "OriginalKey" : { "IdDomain" : 1, "IdRole" : 47 } }, { "IdDomain" : 1, "IdRole" : 47, "Name" : "Upserted 47" }
 			]
 		}
 	}
@@ -194,15 +194,15 @@
   <con:entry key="Credential" value="admin;admin"/>
   <con:entry key="Token" value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWMiOiJVc2VyOkFkbWluIiwicHJpdmF0ZSI6InF0Wk1IQkFWVU5lLy9DMlhQSHVqRlh3TUFzVVl2bTNOcDJzNmlielc0aEk9IiwibmJmIjoxNjExMjY4MjY3LCJleHAiOjE2NDEwMDU5OTksImlhdCI6MTYxMTI2ODI2N30.y1RcZ4XMxVkej72lebfa0FVvO2tIHgRfcegZkR0Gd-U"/>
   <con:entry key="Culture" value="EnUs"/>
-</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://192.168.0.20:9050</con:endpoint><con:request>{
+</xml-fragment>]]></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.0.20:9050</con:endpoint><con:request>{
 	"Scope" : {
 	},
 	"Content" : {
 		"DataSet" : {
 			"FwkRole" : [
-				{ "RowState" : "Modified" }, { "OriginalKey" : [ { "IdDomain" : 1 }, { "IdRole" : 9 } ] }, { "IdDomain" : 1, "IdRole" : 9, "Name" : "Usuario" },
-				{ "RowState" : "Modified" }, { "OriginalKey" : [ { "IdDomain" : 1 }, { "IdRole" : 10 } ] }, { "IdDomain" : 1, "IdRole" : 10, "Name" : "Auditor" },
-				{ "RowState" : "Modified" }, { "OriginalKey" : [ { "IdDomain" : 1 }, { "IdRole" : 11 } ] }, { "IdDomain" : 1, "IdRole" : 11, "Name" : "Diretor" }
+				{ "RowState" : "Modified" }, { "OriginalKey" : { "IdDomain" : 1, "IdRole" : 36 } }, { "IdDomain" : 1, "IdRole" : 36, "Name" : "Modificado 36" },
+				{ "RowState" : "Modified" }, { "OriginalKey" : { "IdDomain" : 1, "IdRole" : 37 } }, { "IdDomain" : 1, "IdRole" : 37, "Name" : "Modificado 37" },
+				{ "RowState" : "Modified" }, { "OriginalKey" : { "IdDomain" : 1, "IdRole" : 44 } }, { "IdDomain" : 1, "IdRole" : 44, "Name" : "Adicionado 44" }
 			]
 		}
 	}
@@ -212,7 +212,7 @@
   <con:entry key="Credential" value="admin;admin"/>
   <con:entry key="Token" value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWMiOiJVc2VyOkFkbWluIiwicHJpdmF0ZSI6InF0Wk1IQkFWVU5lLy9DMlhQSHVqRlh3TUFzVVl2bTNOcDJzNmlielc0aEk9IiwibmJmIjoxNjExMjY4MjY3LCJleHAiOjE2NDEwMDU5OTksImlhdCI6MTYxMTI2ODI2N30.y1RcZ4XMxVkej72lebfa0FVvO2tIHgRfcegZkR0Gd-U"/>
   <con:entry key="Culture" value="PtBr"/>
-</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://192.168.0.20:9050</con:endpoint><con:request>{
+</xml-fragment>]]></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.0.20:9050</con:endpoint><con:request>{
 	"Scope" : {
 	},
 	"Content" : {
@@ -242,12 +242,12 @@
 		}
 	}
 }
-</con:request><con:originalUri>http://192.168.0.20/Ark.Sys/SysRoleServerRecord/Delete</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="(Format) SysRoleServerRecord" path="/Ark.Sys/SysRoleServerRecord/Format" id="c4310d9a-f0de-4ca2-a73b-529f660c6f5d"><con:settings/><con:parameters/><con:method name="Format" id="d854e411-e958-4c1f-9719-979396c9c025" method="POST"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json;charset=utf-8</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:for="http://192.168.0.20/Ark.Sys/SysRoleServerRecord/Format">for:Response</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>401</con:status><con:params/><con:element xmlns:for="http://192.168.0.20/Ark.Sys/SysRoleServerRecord/Format">for:Fault</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Request" id="c16de150-3bca-4ff5-b762-c2919d8f3387" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+</con:request><con:originalUri>http://192.168.0.20/Ark.Sys/SysRoleServerRecord/Delete</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="(Format) SysRoleServerRecord" path="/Ark.Sys/SysRoleServerRecord/Format" id="c4310d9a-f0de-4ca2-a73b-529f660c6f5d"><con:settings/><con:parameters/><con:method name="Format" id="d854e411-e958-4c1f-9719-979396c9c025" method="POST"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json;charset=utf-8</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:for="http://192.168.0.20/Ark.Sys/SysRoleServerRecord/Format">for:Response</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>401</con:status><con:params/><con:element xmlns:for="http://192.168.0.20/Ark.Sys/SysRoleServerRecord/Format">for:Fault</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType>application/problem+json; charset=utf-8</con:mediaType><con:status>400</con:status><con:params/><con:element xmlns:for="http://192.168.0.20/Ark.Sys/SysRoleServerRecord/Format">for:Fault</con:element></con:representation><con:request name="Request" id="c16de150-3bca-4ff5-b762-c2919d8f3387" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
   <con:entry key="IdDomain" value="1"/>
   <con:entry key="Credential" value="admin;admin"/>
   <con:entry key="Token" value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWMiOiJVc2VyOkFkbWluIiwicHJpdmF0ZSI6InF0Wk1IQkFWVU5lLy9DMlhQSHVqRlh3TUFzVVl2bTNOcDJzNmlielc0aEk9IiwibmJmIjoxNjExMjY4MjY3LCJleHAiOjE2NDEwMDU5OTksImlhdCI6MTYxMTI2ODI2N30.y1RcZ4XMxVkej72lebfa0FVvO2tIHgRfcegZkR0Gd-U"/>
   <con:entry key="Culture" value="PtBr"/>
-</xml-fragment>]]></con:setting></con:settings><con:endpoint>http://192.168.0.20:9050</con:endpoint><con:request>{
+</xml-fragment>]]></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.0.20:9050</con:endpoint><con:request>{
 	"Scope" : {
 	},
 	"Content" : {
