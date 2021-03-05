@@ -53,6 +53,8 @@ namespace Ark.Fts.Service
         /// <returns>The response data</returns>
         public FtsIncrementDataResponse ValidateNext(FtsIncrementDataRequest incrementDataRequest)
         {
+            this.Operation = "ValidateNext";
+
             FtsIncrementDataResponse incrementDataResponse = (FtsIncrementDataResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
             this.Database.OpenConnection();
@@ -71,6 +73,8 @@ namespace Ark.Fts.Service
         /// <returns>The response data</returns>
         public FtsIncrementDataResponse Next(FtsIncrementDataRequest incrementDataRequest)
         {
+            this.Operation = "Next";
+
             FtsIncrementDataResponse incrementDataResponse = (FtsIncrementDataResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
             this.Database.OpenConnection();
