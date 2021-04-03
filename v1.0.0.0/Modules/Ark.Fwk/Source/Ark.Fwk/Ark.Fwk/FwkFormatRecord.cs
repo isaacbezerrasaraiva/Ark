@@ -9,6 +9,7 @@
 using System;
 using System.Xml;
 using System.Data;
+using System.ComponentModel;
 using System.Collections.Generic;
 
 using Newtonsoft.Json;
@@ -192,6 +193,7 @@ namespace Ark.Fwk
         public Type Type { get; set; }
 
         [JsonProperty("Type")]
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public String TypeName { get { return Type == null ? null : Type.Name; } }
 
         public String Name { get; set; }
@@ -200,16 +202,32 @@ namespace Ark.Fwk
 
         public String Caption { get; set; }
 
+        [JsonIgnore()]
         public FwkBooleanEnum Nullable { get; set; }
 
+        [JsonProperty("Nullable")]
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        public String NullableValue { get { return Enum.GetName(typeof(FwkBooleanEnum), Nullable); } }
+
+        [JsonIgnore()]
         public FwkBooleanEnum Editable { get; set; }
 
+        [JsonProperty("Editable")]
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        public String EditableValue { get { return Enum.GetName(typeof(FwkBooleanEnum), Editable); } }
+
+        [JsonIgnore()]
         public FwkBooleanEnum Visible { get; set; }
+
+        [JsonProperty("Visible")]
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        public String VisibleValue { get { return Enum.GetName(typeof(FwkBooleanEnum), Visible); } }
 
         [JsonIgnore()]
         public FwkConstraintEnum Constraint { get; set; }
 
         [JsonProperty("Constraint")]
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public String ConstraintName { get { return Enum.GetName(typeof(FwkConstraintEnum), Constraint); } }
 
         public String[] UniqueKeys { get; set; }

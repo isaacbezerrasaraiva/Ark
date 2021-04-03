@@ -9,6 +9,7 @@
 using System;
 using System.Xml;
 using System.Data;
+using System.ComponentModel;
 using System.Collections.Generic;
 
 using Newtonsoft.Json;
@@ -193,12 +194,18 @@ namespace Ark.Fwk
 
         public String Caption { get; set; }
 
+        [JsonIgnore()]
         public FwkBooleanEnum Visible { get; set; }
+
+        [JsonProperty("Visible")]
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        public String VisibleValue { get { return Enum.GetName(typeof(FwkBooleanEnum), Visible); } }
 
         [JsonIgnore()]
         public FwkConstraintEnum Constraint { get; set; }
 
         [JsonProperty("Constraint")]
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public String ConstraintName { get { return Enum.GetName(typeof(FwkConstraintEnum), Constraint); } }
 
         #endregion Properties
