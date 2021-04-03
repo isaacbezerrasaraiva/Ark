@@ -20,5 +20,10 @@
     <FwkExceptionRecordRequiredFieldEmpty>The required field '{0}' value was not informed!</FwkExceptionRecordRequiredFieldEmpty>
     <FwkExceptionRecordUniqueFieldDuplicatedDatabase>The unique fields '{0}' informed values '{1}' already exists!</FwkExceptionRecordUniqueFieldDuplicatedDatabase>
     <FwkExceptionRecordUniqueFieldDuplicatedRequest>The unique fields '{0}' informed values are duplicated!</FwkExceptionRecordUniqueFieldDuplicatedRequest>
+    <FwkExceptionViewDataSetMissing>The DataSet of the request content was not informed!</FwkExceptionViewDataSetMissing>
+    <FwkExceptionViewDataTableEmpty>The DataTable '{0}' records was not informed!</FwkExceptionViewDataTableEmpty>
+    <FwkExceptionViewDataTableMissing>The DataTable '{0}' was not informed!</FwkExceptionViewDataTableMissing>
+    <FwkExceptionViewKeyFieldEmpty>The key field '{0}' value was not informed!</FwkExceptionViewKeyFieldEmpty>
+    <FwkExceptionViewKeyFieldMissing>The key field '{0}' was not informed!</FwkExceptionViewKeyFieldMissing>
   </Exceptions>
 </Ark.Fwk.Language.EnUs.Service>

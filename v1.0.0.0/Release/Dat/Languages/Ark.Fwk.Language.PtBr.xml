@@ -6,5 +6,6 @@
   </Messages>
   <Exceptions>
     <FwkExceptionRecordFieldValidationAllowedValues>Os valores permitidos para o campo '{0}' são '{1}'!</FwkExceptionRecordFieldValidationAllowedValues>
+    <FwkExceptionViewFieldValidationAllowedValues>Os valores permitidos para o campo '{0}' são '{1}'!</FwkExceptionViewFieldValidationAllowedValues>
   </Exceptions>
 </Ark.Fwk.Language.PtBr>
