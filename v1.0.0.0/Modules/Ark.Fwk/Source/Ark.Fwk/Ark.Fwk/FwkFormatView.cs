@@ -199,7 +199,7 @@ namespace Ark.Fwk
 
         [JsonProperty("Visible")]
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        public String VisibleValue { get { return Enum.GetName(typeof(FwkBooleanEnum), Visible); } }
+        public Boolean VisibleValue { get { return Visible == FwkBooleanEnum.True ? true : false; } }
 
         [JsonIgnore()]
         public FwkConstraintEnum Constraint { get; set; }
