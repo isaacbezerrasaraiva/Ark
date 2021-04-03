@@ -1,10 +1,10 @@
-﻿// FwkFormatRecord.cs
+﻿// FwkFormatView.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
 //
 // Created by Isaac Bezerra Saraiva
-// Created on 2021, January 28
+// Created on 2021, April 03
 
 using System;
 using System.Xml;
@@ -19,21 +19,21 @@ using Ark.Lib;
 
 namespace Ark.Fwk
 {
-    public class FwkFormatRecord
+    public class FwkFormatView
     {
         #region Variables
 
         private String currentTable;
         private String currentField;
-        private Dictionary<String, FwkFormatRecordTable> recordTableList;
+        private Dictionary<String, FwkFormatViewTable> viewTableList;
 
         #endregion Variables
 
         #region Constructors
 
-        public FwkFormatRecord()
+        public FwkFormatView()
         {
-            this.recordTableList = new Dictionary<String, FwkFormatRecordTable>();
+            this.viewTableList = new Dictionary<String, FwkFormatViewTable>();
         }
 
         #endregion Constructors
@@ -45,77 +45,70 @@ namespace Ark.Fwk
             this.currentTable = name;
             this.currentField = null;
 
-            if (this.recordTableList.ContainsKey(this.currentTable) == false)
-                this.recordTableList.Add(this.currentTable, new FwkFormatRecordTable());
+            if (this.viewTableList.ContainsKey(this.currentTable) == false)
+                this.viewTableList.Add(this.currentTable, new FwkFormatViewTable());
 
-            this.recordTableList[this.currentTable].Required = required;
+            this.viewTableList[this.currentTable].Required = required;
         }
 
         public void SetField(String name, String origin = null)
         {
             this.currentField = name;
 
-            if (this.recordTableList[this.currentTable].RecordFields.ContainsKey(this.currentField) == false)
-                this.recordTableList[this.currentTable].RecordFields.Add(this.currentField, new FwkFormatRecordField());
+            if (this.viewTableList[this.currentTable].ViewFields.ContainsKey(this.currentField) == false)
+                this.viewTableList[this.currentTable].ViewFields.Add(this.currentField, new FwkFormatViewField());
 
-            this.recordTableList[this.currentTable].RecordFields[this.currentField].Attributes.Name = name;
-            this.recordTableList[this.currentTable].RecordFields[this.currentField].Attributes.Origin = origin == null ? this.currentTable : origin;
+            this.viewTableList[this.currentTable].ViewFields[this.currentField].Attributes.Name = name;
+            this.viewTableList[this.currentTable].ViewFields[this.currentField].Attributes.Origin = origin == null ? this.currentTable : origin;
         }
 
         public void SetFieldAttributes(Type type, String caption = null,
-            FwkBooleanEnum nullable = FwkBooleanEnum.True, FwkBooleanEnum editable = FwkBooleanEnum.True,
-            FwkBooleanEnum visible = FwkBooleanEnum.True, FwkConstraintEnum constraint = FwkConstraintEnum.None,
-            String[] uniqueKeys = null, Object defaultValue = null, Boolean skipValidations = false)
+            FwkBooleanEnum visible = FwkBooleanEnum.True, FwkConstraintEnum constraint = FwkConstraintEnum.None)
         {
-            this.recordTableList[this.currentTable].RecordFields[this.currentField].Attributes.Type = type;
-            this.recordTableList[this.currentTable].RecordFields[this.currentField].Attributes.Caption = caption;
-            this.recordTableList[this.currentTable].RecordFields[this.currentField].Attributes.Nullable = nullable;
-            this.recordTableList[this.currentTable].RecordFields[this.currentField].Attributes.Editable = editable;
-            this.recordTableList[this.currentTable].RecordFields[this.currentField].Attributes.Visible = visible;
-            this.recordTableList[this.currentTable].RecordFields[this.currentField].Attributes.Constraint = constraint;
-            this.recordTableList[this.currentTable].RecordFields[this.currentField].Attributes.UniqueKeys = uniqueKeys;
-            this.recordTableList[this.currentTable].RecordFields[this.currentField].Attributes.DefaultValue = defaultValue;
-            this.recordTableList[this.currentTable].RecordFields[this.currentField].Attributes.SkipValidations = skipValidations;
+            this.viewTableList[this.currentTable].ViewFields[this.currentField].Attributes.Type = type;
+            this.viewTableList[this.currentTable].ViewFields[this.currentField].Attributes.Caption = caption;
+            this.viewTableList[this.currentTable].ViewFields[this.currentField].Attributes.Visible = visible;
+            this.viewTableList[this.currentTable].ViewFields[this.currentField].Attributes.Constraint = constraint;
         }
 
-        public void SetFieldValidation(FwkFormatRecordFieldValidation recordFieldValidation)
+        public void SetFieldValidation(FwkFormatViewFieldValidation recordFieldValidation)
         {
-            this.recordTableList[this.currentTable].RecordFields[this.currentField].Validations.Add(recordFieldValidation);
+            this.viewTableList[this.currentTable].ViewFields[this.currentField].Validations.Add(recordFieldValidation);
         }
 
-        public void SetFieldTransformation(FwkFormatRecordFieldTransformation recordFieldTransformation)
+        public void SetFieldTransformation(FwkFormatViewFieldTransformation recordFieldTransformation)
         {
-            this.recordTableList[this.currentTable].RecordFields[this.currentField].Transformations.Add(recordFieldTransformation);
+            this.viewTableList[this.currentTable].ViewFields[this.currentField].Transformations.Add(recordFieldTransformation);
         }
 
         #endregion Methods
 
         #region Properties
 
-        public Dictionary<String, FwkFormatRecordTable> RecordTableList
+        public Dictionary<String, FwkFormatViewTable> ViewTableList
         {
-            get { return this.recordTableList; }
-            set { this.recordTableList = value; }
+            get { return this.viewTableList; }
+            set { this.viewTableList = value; }
         }
 
         #endregion Properties
     }
 
-    public class FwkFormatRecordTable
+    public class FwkFormatViewTable
     {
         #region Variables
 
         private Boolean required;
-        private Dictionary<String, FwkFormatRecordField> recordFieldList;
+        private Dictionary<String, FwkFormatViewField> recordFieldList;
 
         #endregion Variables
 
         #region Constructors
 
-        public FwkFormatRecordTable()
+        public FwkFormatViewTable()
         {
             this.required = true;
-            this.recordFieldList = new Dictionary<String, FwkFormatRecordField>();
+            this.recordFieldList = new Dictionary<String, FwkFormatViewField>();
         }
 
         #endregion Constructors
@@ -131,7 +124,7 @@ namespace Ark.Fwk
             set { this.required = value; }
         }
 
-        public Dictionary<String, FwkFormatRecordField> RecordFields
+        public Dictionary<String, FwkFormatViewField> ViewFields
         {
             get { return this.recordFieldList; }
             set { this.recordFieldList = value; }
@@ -140,18 +133,18 @@ namespace Ark.Fwk
         #endregion Properties
     }
 
-    public class FwkFormatRecordField
+    public class FwkFormatViewField
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public FwkFormatRecordField()
+        public FwkFormatViewField()
         {
-            this.Attributes = new FwkFormatRecordFieldAttribute();
-            this.Validations = new List<FwkFormatRecordFieldValidation>();
-            this.Transformations = new List<FwkFormatRecordFieldTransformation>();
+            this.Attributes = new FwkFormatViewFieldAttribute();
+            this.Validations = new List<FwkFormatViewFieldValidation>();
+            this.Transformations = new List<FwkFormatViewFieldTransformation>();
         }
 
         #endregion Constructors
@@ -161,23 +154,23 @@ namespace Ark.Fwk
 
         #region Properties
 
-        public FwkFormatRecordFieldAttribute Attributes { get; set; }
+        public FwkFormatViewFieldAttribute Attributes { get; set; }
 
-        public List<FwkFormatRecordFieldValidation> Validations { get; set; }
+        public List<FwkFormatViewFieldValidation> Validations { get; set; }
 
-        public List<FwkFormatRecordFieldTransformation> Transformations { get; set; }
+        public List<FwkFormatViewFieldTransformation> Transformations { get; set; }
 
         #endregion Properties
     }
 
-    public class FwkFormatRecordFieldAttribute
+    public class FwkFormatViewFieldAttribute
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public FwkFormatRecordFieldAttribute()
+        public FwkFormatViewFieldAttribute()
         {
         }
 
@@ -200,10 +193,6 @@ namespace Ark.Fwk
 
         public String Caption { get; set; }
 
-        public FwkBooleanEnum Nullable { get; set; }
-
-        public FwkBooleanEnum Editable { get; set; }
-
         public FwkBooleanEnum Visible { get; set; }
 
         [JsonIgnore()]
@@ -212,28 +201,22 @@ namespace Ark.Fwk
         [JsonProperty("Constraint")]
         public String ConstraintName { get { return Enum.GetName(typeof(FwkConstraintEnum), Constraint); } }
 
-        public String[] UniqueKeys { get; set; }
-
-        public Object DefaultValue { get; set; }
-
-        public Boolean SkipValidations { get; set; }
-
         #endregion Properties
     }
 
-    public class FwkFormatRecordFieldValidation
+    public class FwkFormatViewFieldValidation
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public FwkFormatRecordFieldValidation()
+        public FwkFormatViewFieldValidation()
         {
             this.Culture = LibGlobalization.Culture;
         }
 
-        public FwkFormatRecordFieldValidation(LibCulture culture)
+        public FwkFormatViewFieldValidation(LibCulture culture)
         {
             this.Culture = culture;
         }
@@ -260,18 +243,18 @@ namespace Ark.Fwk
         #endregion Properties
     }
 
-    public class FwkFormatRecordFieldValidationAllowedValues : FwkFormatRecordFieldValidation
+    public class FwkFormatViewFieldValidationAllowedValues : FwkFormatViewFieldValidation
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public FwkFormatRecordFieldValidationAllowedValues()
+        public FwkFormatViewFieldValidationAllowedValues()
         {
         }
 
-        public FwkFormatRecordFieldValidationAllowedValues(LibCulture culture, Object[] allowedValues)
+        public FwkFormatViewFieldValidationAllowedValues(LibCulture culture, Object[] allowedValues)
             : base(culture)
         {
             this.AllowedValues = allowedValues;
@@ -321,7 +304,7 @@ namespace Ark.Fwk
                 allowedValuesString = allowedValuesString.Remove(allowedValuesString.Length - 2, 2);
             }
 
-            this.Reason = String.Format(LibGlobalization.GetTranslation(Properties.FwkResources.FwkExceptionRecordFieldValidationAllowedValues, this.Culture), objectName, allowedValuesString);
+            this.Reason = String.Format(LibGlobalization.GetTranslation(Properties.FwkResources.FwkExceptionViewFieldValidationAllowedValues, this.Culture), objectName, allowedValuesString);
         }
 
         #endregion Methods
@@ -333,14 +316,14 @@ namespace Ark.Fwk
         #endregion Properties
     }
 
-    public class FwkFormatRecordFieldTransformation
+    public class FwkFormatViewFieldTransformation
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public FwkFormatRecordFieldTransformation()
+        public FwkFormatViewFieldTransformation()
         {
         }
 
@@ -359,19 +342,19 @@ namespace Ark.Fwk
         #endregion Properties
     }
 
-    public class FwkFormatRecordFieldTransformationTruncate : FwkFormatRecordFieldTransformation
+    public class FwkFormatViewFieldTransformationTruncate : FwkFormatViewFieldTransformation
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public FwkFormatRecordFieldTransformationTruncate()
+        public FwkFormatViewFieldTransformationTruncate()
         {
             this.Lenght = 0;
         }
 
-        public FwkFormatRecordFieldTransformationTruncate(Int32 lenght)
+        public FwkFormatViewFieldTransformationTruncate(Int32 lenght)
         {
             this.Lenght = lenght;
         }

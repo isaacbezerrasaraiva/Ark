@@ -49,6 +49,18 @@ namespace Ark.Fwk.Server
         #region Methods
 
         [HttpPost]
+        [Route("Format")]
+        /// <summary>
+        /// Format the view
+        /// </summary>
+        /// <param name="dataRequestString">The request data string</param>
+        /// <returns>The response data string</returns>
+        public String Format([FromBody] String dataRequestString)
+        {
+            return InvokeService("Format", dataRequestString);
+        }
+
+        [HttpPost]
         [Route("ValidateRead")]
         /// <summary>
         /// Validate read the view

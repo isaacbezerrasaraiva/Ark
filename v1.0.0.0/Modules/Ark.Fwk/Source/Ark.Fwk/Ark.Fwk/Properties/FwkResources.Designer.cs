@@ -68,5 +68,14 @@ namespace Ark.Fwk.Properties {
                 return ResourceManager.GetString("FwkExceptionRecordFieldValidationAllowedValues", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Fwk.Language.{0}/Exceptions/FwkExceptionViewFieldValidationAllowedValues.
+        /// </summary>
+        public static string FwkExceptionViewFieldValidationAllowedValues {
+            get {
+                return ResourceManager.GetString("FwkExceptionViewFieldValidationAllowedValues", resourceCulture);
+            }
+        }
     }
 }

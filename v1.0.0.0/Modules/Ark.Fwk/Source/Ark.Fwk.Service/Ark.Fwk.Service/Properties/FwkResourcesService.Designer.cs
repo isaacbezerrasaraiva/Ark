@@ -194,5 +194,50 @@ namespace Ark.Fwk.Service.Properties {
                 return ResourceManager.GetString("FwkExceptionRecordUniqueFieldDuplicatedRequest", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionViewDataSetMissing.
+        /// </summary>
+        public static string FwkExceptionViewDataSetMissing {
+            get {
+                return ResourceManager.GetString("FwkExceptionViewDataSetMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionViewDataTableEmpty.
+        /// </summary>
+        public static string FwkExceptionViewDataTableEmpty {
+            get {
+                return ResourceManager.GetString("FwkExceptionViewDataTableEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionViewDataTableMissing.
+        /// </summary>
+        public static string FwkExceptionViewDataTableMissing {
+            get {
+                return ResourceManager.GetString("FwkExceptionViewDataTableMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionViewKeyFieldEmpty.
+        /// </summary>
+        public static string FwkExceptionViewKeyFieldEmpty {
+            get {
+                return ResourceManager.GetString("FwkExceptionViewKeyFieldEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionViewKeyFieldMissing.
+        /// </summary>
+        public static string FwkExceptionViewKeyFieldMissing {
+            get {
+                return ResourceManager.GetString("FwkExceptionViewKeyFieldMissing", resourceCulture);
+            }
+        }
     }
 }

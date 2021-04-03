@@ -121,4 +121,8 @@
     <value>/Ark.Fwk.Language.{0}/Exceptions/FwkExceptionRecordFieldValidationAllowedValues</value>
     <comment>The allowed values for field '{0}' are '{1}'!</comment>
   </data>
+  <data name="FwkExceptionViewFieldValidationAllowedValues" xml:space="preserve">
+    <value>/Ark.Fwk.Language.{0}/Exceptions/FwkExceptionViewFieldValidationAllowedValues</value>
+    <comment>The allowed values for field '{0}' are '{1}'!</comment>
+  </data>
 </root>

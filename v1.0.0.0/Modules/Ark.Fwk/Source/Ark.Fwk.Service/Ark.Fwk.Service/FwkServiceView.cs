@@ -263,6 +263,7 @@ namespace Ark.Fwk.Service
         /// <param name="dataViewResponse">The response data</param>
         private void BeforePerformFormat(FwkDataViewRequest dataViewRequest, FwkDataViewResponse dataViewResponse)
         {
+            dataViewResponse.Content.Format = new FwkFormatView();
         }
 
         /// <summary>
@@ -281,6 +282,119 @@ namespace Ark.Fwk.Service
         /// <param name="dataViewResponse">The response data</param>
         private void BeforePerformValidateRead(FwkDataViewRequest dataViewRequest, FwkDataViewResponse dataViewResponse)
         {
+            if (dataViewResponse.Content.Format != null)
+            {
+                #region Validate required dataset
+
+                if (dataViewRequest.Content.DataSet == null)
+                    throw new LibException(Properties.FwkResourcesService.FwkExceptionViewDataSetMissing, Properties.FwkResourcesService.FwkCaptionMissingProperty);
+
+                #endregion Validate required dataset
+
+                if (dataViewResponse.Content.Format.ViewTableList != null)
+                {
+                    foreach (KeyValuePair<String, FwkFormatViewTable> formatViewTable in dataViewResponse.Content.Format.ViewTableList)
+                    {
+                        if (dataViewRequest.Content.DataSet.Tables.Contains(formatViewTable.Key) == false)
+                        {
+                            #region Validate required table
+
+                            if (formatViewTable.Value.Required == true)
+                                throw new LibException(Properties.FwkResourcesService.FwkExceptionViewDataTableMissing, new Object[] { formatViewTable.Key }, Properties.FwkResourcesService.FwkCaptionMissingProperty);
+
+                            #endregion Validate required table
+
+                            #region Create inexistence non required table
+
+                            dataViewRequest.Content.DataSet.Tables.Add(formatViewTable.Key);
+
+                            if (formatViewTable.Value.ViewFields != null)
+                            {
+                                foreach (KeyValuePair<String, FwkFormatViewField> formatViewField in formatViewTable.Value.ViewFields)
+                                {
+                                    if (formatViewField.Value.Attributes.Constraint == FwkConstraintEnum.ParentKey)
+                                        dataViewRequest.Content.DataSet.Tables[formatViewTable.Key].Columns.Add(formatViewField.Key, formatViewField.Value.Attributes.Type);
+                                }
+                            }
+
+                            #endregion Create inexistence non required table
+                        }
+                        else
+                        {
+                            if (dataViewRequest.Content.DataSet.Tables[formatViewTable.Key].Rows.Count == 0)
+                            {
+                                #region Validate required table empty
+
+                                if (formatViewTable.Value.Required == true)
+                                    throw new LibException(Properties.FwkResourcesService.FwkExceptionViewDataTableEmpty, new Object[] { formatViewTable.Key }, Properties.FwkResourcesService.FwkCaptionMissingData);
+
+                                #endregion Validate required table empty
+
+                                #region Create inexistence non required table key fields
+
+                                if (formatViewTable.Value.ViewFields != null)
+                                {
+                                    foreach (KeyValuePair<String, FwkFormatViewField> formatViewField in formatViewTable.Value.ViewFields)
+                                    {
+                                        if (formatViewField.Value.Attributes.Constraint == FwkConstraintEnum.ParentKey)
+                                        {
+                                            if (dataViewRequest.Content.DataSet.Tables[formatViewTable.Key].Columns.Contains(formatViewField.Key) == false)
+                                                dataViewRequest.Content.DataSet.Tables[formatViewTable.Key].Columns.Add(formatViewField.Key, formatViewField.Value.Attributes.Type);
+                                        }
+                                    }
+                                }
+
+                                #endregion Create inexistence non required table key fields
+                            }
+                            else
+                            {
+                                if (formatViewTable.Value.ViewFields != null)
+                                {
+                                    foreach (KeyValuePair<String, FwkFormatViewField> formatViewField in formatViewTable.Value.ViewFields)
+                                    {
+                                        if (formatViewField.Value.Attributes.Constraint == FwkConstraintEnum.ParentKey)
+                                        {
+                                            #region Validate required key field
+
+                                            if (dataViewRequest.Content.DataSet.Tables[formatViewTable.Key].Columns.Contains(formatViewField.Key) == false)
+                                                throw new LibException(Properties.FwkResourcesService.FwkExceptionViewKeyFieldMissing, new Object[] { formatViewField.Key }, Properties.FwkResourcesService.FwkCaptionMissingProperty);
+
+                                            #endregion Validate required key field
+
+                                            foreach (DataRow dataRow in dataViewRequest.Content.DataSet.Tables[formatViewTable.Key].Rows)
+                                            {
+                                                #region Validate required key field empty
+
+                                                if (String.IsNullOrEmpty(LazyConvert.ToString(dataRow[formatViewField.Key], null)) == true)
+                                                    throw new LibException(Properties.FwkResourcesService.FwkExceptionViewKeyFieldEmpty, new Object[] { formatViewField.Key }, Properties.FwkResourcesService.FwkCaptionMissingData);
+
+                                                #endregion Validate required key field empty
+
+                                                #region Execute custom validations
+
+                                                foreach (FwkFormatViewFieldValidation formatViewFieldValidation in formatViewField.Value.Validations)
+                                                {
+                                                    if (formatViewFieldValidation.Validate(dataRow[formatViewField.Key], formatViewField.Key) == false)
+                                                        throw new LibException(formatViewFieldValidation.Reason, Properties.FwkResourcesService.FwkCaptionInvalidData);
+                                                }
+
+                                                #endregion Execute custom validations
+
+                                                #region Execute custom transformations
+
+                                                foreach (FwkFormatViewFieldTransformation formatViewFieldTransformation in formatViewField.Value.Transformations)
+                                                    dataRow[formatViewField.Key] = formatViewFieldTransformation.Transform(dataRow[formatViewField.Key]);
+
+                                                #endregion Execute custom transformations
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -308,6 +422,8 @@ namespace Ark.Fwk.Service
         /// <param name="dataViewResponse">The response data</param>
         private void AfterPerformRead(FwkDataViewRequest dataViewRequest, FwkDataViewResponse dataViewResponse)
         {
+            if (this.Operation != "Init")
+                dataViewResponse.Content.Format = null;
         }
 
         #endregion Methods

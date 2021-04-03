@@ -177,4 +177,24 @@
     <value>/Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionRecordUniqueFieldDuplicatedRequest</value>
     <comment>The unique fields '{0}' informed values are duplicated!</comment>
   </data>
+  <data name="FwkExceptionViewDataSetMissing" xml:space="preserve">
+    <value>/Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionViewDataSetMissing</value>
+    <comment>The DataSet of the request content was not informed!</comment>
+  </data>
+  <data name="FwkExceptionViewDataTableEmpty" xml:space="preserve">
+    <value>/Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionViewDataTableEmpty</value>
+    <comment>The DataTable '{0}' records was not informed!</comment>
+  </data>
+  <data name="FwkExceptionViewDataTableMissing" xml:space="preserve">
+    <value>/Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionViewDataTableMissing</value>
+    <comment>The DataTable '{0}' was not informed!</comment>
+  </data>
+  <data name="FwkExceptionViewKeyFieldEmpty" xml:space="preserve">
+    <value>/Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionViewKeyFieldEmpty</value>
+    <comment>The key field '{0}' value was not informed!</comment>
+  </data>
+  <data name="FwkExceptionViewKeyFieldMissing" xml:space="preserve">
+    <value>/Ark.Fwk.Language.{0}.Service/Exceptions/FwkExceptionViewKeyFieldMissing</value>
+    <comment>The key field '{0}' was not informed!</comment>
+  </data>
 </root>

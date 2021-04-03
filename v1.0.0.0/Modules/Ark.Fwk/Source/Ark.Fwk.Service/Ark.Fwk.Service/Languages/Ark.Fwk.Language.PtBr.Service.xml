@@ -20,5 +20,10 @@
     <FwkExceptionRecordRequiredFieldEmpty>O valor do campo requerido '{0}' não foi informado!</FwkExceptionRecordRequiredFieldEmpty>
     <FwkExceptionRecordUniqueFieldDuplicatedDatabase>Os valores dos campos únicos '{0}' informados '{1}' já existem!</FwkExceptionRecordUniqueFieldDuplicatedDatabase>
     <FwkExceptionRecordUniqueFieldDuplicatedRequest>Os valores dos campos únicos '{0}' informados estão duplicados!</FwkExceptionRecordUniqueFieldDuplicatedRequest>
+    <FwkExceptionViewDataSetMissing>O DataSet do conteúdo da requisição não foi informado!</FwkExceptionViewDataSetMissing>
+    <FwkExceptionViewDataTableEmpty>Os registros do DataTable '{0}' não foram informados!</FwkExceptionViewDataTableEmpty>
+    <FwkExceptionViewDataTableMissing>O DataTable '{0}' não foi informado!</FwkExceptionViewDataTableMissing>
+    <FwkExceptionViewKeyFieldEmpty>O valor do campo chave '{0}' não foi informado!</FwkExceptionViewKeyFieldEmpty>
+    <FwkExceptionViewKeyFieldMissing>O campo chave '{0}' não foi informado!</FwkExceptionViewKeyFieldMissing>
   </Exceptions>
 </Ark.Fwk.Language.PtBr.Service>
