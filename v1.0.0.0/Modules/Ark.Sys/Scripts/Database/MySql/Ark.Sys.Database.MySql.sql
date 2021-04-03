@@ -17,6 +17,11 @@ use Ark;
 
 insert into FwkModule (IdDomain, CodModule, Description) values (1, 'Ark.Sys', 'Ark System');
 
+insert into FwkFeature (IdDomain, CodModule, CodFeature, CodModuleBase, CodFeatureBase) values (1, 'Ark.Sys', 'SysRoleServerView', 'Ark.Fwk', 'FwkServerView');
+insert into FwkBranchRoleAction (IdDomain, IdBranch, IdRole, CodModule, CodFeature, CodAction) values (1, 1, 1, 'Ark.Sys', 'SysRoleServerView', 'Format');
+insert into FwkBranchRoleAction (IdDomain, IdBranch, IdRole, CodModule, CodFeature, CodAction) values (1, 1, 1, 'Ark.Sys', 'SysRoleServerView', 'ValidateRead');
+insert into FwkBranchRoleAction (IdDomain, IdBranch, IdRole, CodModule, CodFeature, CodAction) values (1, 1, 1, 'Ark.Sys', 'SysRoleServerView', 'Read');
+
 insert into FwkFeature (IdDomain, CodModule, CodFeature, CodModuleBase, CodFeatureBase) values (1, 'Ark.Sys', 'SysRoleServerRecord', 'Ark.Fwk', 'FwkServerRecord');
 insert into FwkBranchRoleAction (IdDomain, IdBranch, IdRole, CodModule, CodFeature, CodAction) values (1, 1, 1, 'Ark.Sys', 'SysRoleServerRecord', 'Init');
 insert into FwkBranchRoleAction (IdDomain, IdBranch, IdRole, CodModule, CodFeature, CodAction) values (1, 1, 1, 'Ark.Sys', 'SysRoleServerRecord', 'Format');
