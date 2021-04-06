@@ -176,7 +176,9 @@ namespace Ark.Sys.Service
 
                 if (dataTableUser.Rows.Count > 0)
                 {
-                    if (LazyConvert.ToString(dataTableUser.Rows[0]["Password"]) == credentialArray[1])
+                    String hashedPassword = LazySecurity.Hash.SHA384.Generate(credentialArray[1]);
+
+                    if (LazyConvert.ToString(dataTableUser.Rows[0]["Password"]) == hashedPassword)
                     {
                         Dictionary<String, String> publicPayloadDictionary = new Dictionary<String, String>();
                         Dictionary<String, String> privatePayloadDictionary = new Dictionary<String, String>();
