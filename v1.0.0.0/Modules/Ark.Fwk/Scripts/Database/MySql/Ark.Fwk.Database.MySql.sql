@@ -47,7 +47,7 @@ create table FwkUser
 	IdDomain smallint,
     IdUser integer,
     Username varchar(32),
-    Password varchar(32),
+    Password varchar(64),
     DisplayName varchar(32),
     constraint Pk_FwkUser primary key (IdDomain, IdUser)
 );
