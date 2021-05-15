@@ -3,10 +3,14 @@
   <Captions>
     <SysCaptionIdDomain>Domain Id</SysCaptionIdDomain>
     <SysCaptionIdRole>Role Id</SysCaptionIdRole>
+    <SysCaptionInvalidType>Invalid type</SysCaptionInvalidType>
     <SysCaptionName>Name</SysCaptionName>
+    <SysCaptionSuccess>Success</SysCaptionSuccess>
   </Captions>
   <Messages>
+    <SysMessageSuccess>Process executed successfully!</SysMessageSuccess>
   </Messages>
   <Exceptions>
+    <SysExceptionAutomationInvalidService>The automation service must derive from FwkServiceProcess!</SysExceptionAutomationInvalidService>
   </Exceptions>
 </Ark.Sys.Language.EnUs.Service>

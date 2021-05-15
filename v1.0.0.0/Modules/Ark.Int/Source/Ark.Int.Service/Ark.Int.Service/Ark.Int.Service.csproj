@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Version>1.0.0</Version>
+    <Authors>Isaac Bezerra Saraiva</Authors>
+    <Product>Ark</Product>
+    <Description>Ark Integration Service</Description>
+    <Copyright>Copyleft (ͻ) 2021</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RepositoryUrl>https://github.com/isaacbezerrasaraiva/Ark</RepositoryUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageOutputPath>$(SolutionDir)..\..\..\Release\.nupkg\</PackageOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\..\..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ark.Fts" Version="1.0.0" />
+    <PackageReference Include="Ark.Fts.Data" Version="1.0.0" />
+    <PackageReference Include="Ark.Fts.IPlugin" Version="1.0.0" />
+    <PackageReference Include="Ark.Fts.IService" Version="1.0.0" />
+    <PackageReference Include="Ark.Fts.Service" Version="1.0.0" />
+    <PackageReference Include="Ark.Fwk" Version="1.0.0" />
+    <PackageReference Include="Ark.Fwk.Data" Version="1.0.0" />
+    <PackageReference Include="Ark.Fwk.IPlugin" Version="1.0.0" />
+    <PackageReference Include="Ark.Fwk.IService" Version="1.0.0" />
+    <PackageReference Include="Ark.Fwk.Service" Version="1.0.0" />
+    <PackageReference Include="Ark.Int" Version="1.0.0" />
+    <PackageReference Include="Ark.Int.Data" Version="1.0.0" />
+    <PackageReference Include="Ark.Int.IPlugin" Version="1.0.0" />
+    <PackageReference Include="Ark.Int.IService" Version="1.0.0" />
+    <PackageReference Include="Ark.Lib" Version="1.0.0" />
+    <PackageReference Include="Ark.Lib.Service" Version="1.0.0" />
+    <PackageReference Include="Lazy" Version="1.0.0" />
+    <PackageReference Include="Lazy.Database" Version="1.0.0" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
+    <PostBuildEvent>
+      xcopy /y $(SolutionDir)Ark.Int.Service\Ark.Int.Service\bin\Debug\netcoreapp3.1\Ark.Int.Service.dll $(SolutionDir)..\..\..\Release\Bin\Ark.Int.Service\1.0.0\lib\netcoreapp3.1\
+      xcopy /y $(SolutionDir)Ark.Int.Service\Ark.Int.Service\bin\Debug\netcoreapp3.1\Ark.Int.Service.dll %SystemDrive%%HomePath%\.nuget\Packages\ark.int.service\1.0.0\lib\netcoreapp3.1\
+    </PostBuildEvent>
+  </PropertyGroup>
+  
+</Project>

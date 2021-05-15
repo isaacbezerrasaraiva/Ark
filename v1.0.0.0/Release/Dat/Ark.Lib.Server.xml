@@ -7,6 +7,13 @@
         <Authentication Assembly="Ark.Sys.Server.dll" Class="Ark.Sys.Server.SysAuthServer" />
         <Authorization Assembly="Ark.Sys.Server.dll" Class="Ark.Sys.Server.SysAuthServer" />
       </Security>
+      <Timer>
+        <SysAutomationServer Enabled="true" Assembly="Ark.Sys.Server.dll" Class="Ark.Sys.Server.SysAutomationServer">
+          <DefaultInstance Enabled="true" Delay="5" Interval="10" LogEnabled="false" LogPath="./Logs/Ark.Sys.Server/SysAutomationServer">
+            <Parameter>{"Scope":{},"Content":{}}</Parameter>
+          </DefaultInstance>
+        </SysAutomationServer>
+      </Timer>
     </Ark.Lib>
   </DynamicXml>
 </Ark.Lib.Server>

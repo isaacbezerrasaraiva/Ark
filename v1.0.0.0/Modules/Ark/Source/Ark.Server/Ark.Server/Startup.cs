@@ -10,7 +10,9 @@ using System;
 using System.IO;
 using System.Xml;
 using System.Data;
+using System.Threading;
 using System.Reflection;
+using System.Collections.Generic;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -43,7 +45,7 @@ namespace Ark.Server
             String[] arkServerAssemblyArray = Directory.GetFiles(LibDirectory.Root.Bin.Path, "*.Server.dll", SearchOption.AllDirectories);
             foreach (String arkServerAssembly in arkServerAssemblyArray)
                 iMvcBuilder.AddApplicationPart(Assembly.LoadFrom(arkServerAssembly));
-            
+
             // Add Mvc options
             services.AddMvc(options =>
             {
@@ -59,6 +61,9 @@ namespace Ark.Server
 
             // Add cors default policy
             services.AddCors(options => { options.AddDefaultPolicy(builder => { }); });
+
+            // Add hosted services
+            services.AddHostedService<LibServerTimerHostedService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

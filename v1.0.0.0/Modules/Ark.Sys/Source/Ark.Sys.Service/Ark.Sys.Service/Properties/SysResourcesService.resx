@@ -125,8 +125,24 @@
     <value>/Ark.Sys.Language.{0}.Service/Captions/SysCaptionIdRole</value>
     <comment>Role Id</comment>
   </data>
+  <data name="SysCaptionInvalidType" xml:space="preserve">
+    <value>/Ark.Sys.Language.{0}.Service/Captions/SysCaptionInvalidType</value>
+    <comment>Invalid type</comment>
+  </data>
   <data name="SysCaptionName" xml:space="preserve">
     <value>/Ark.Sys.Language.{0}.Service/Captions/SysCaptionName</value>
     <comment>Name</comment>
+  </data>
+  <data name="SysCaptionSuccess" xml:space="preserve">
+    <value>/Ark.Sys.Language.{0}.Service/Captions/SysCaptionSuccess</value>
+    <comment>Success</comment>
+  </data>
+  <data name="SysExceptionAutomationInvalidService" xml:space="preserve">
+    <value>/Ark.Sys.Language.{0}.Service/Exceptions/SysExceptionAutomationInvalidService</value>
+    <comment>The automation service must derive from FwkServiceProcess!</comment>
+  </data>
+  <data name="SysMessageSuccess" xml:space="preserve">
+    <value>/Ark.Sys.Language.{0}.Service/Messages/SysMessageSuccess</value>
+    <comment>Process executed successfully!</comment>
   </data>
 </root>

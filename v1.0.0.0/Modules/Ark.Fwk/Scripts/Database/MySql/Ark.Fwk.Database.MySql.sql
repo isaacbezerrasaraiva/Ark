@@ -171,7 +171,7 @@ alter table FwkBranchRoleAction
 -- ------------------------------------------------------------------------------------------------------------------------------------------
 
 insert into FwkDomain (IdDomain, CodDomain, Name) values (1, 'DMN', 'Domínio');
-insert into FwkUser (IdDomain, IdUser, Username, Password, DisplayName) values (1, 1, 'admin', 'admin', 'Admin');
+insert into FwkUser (IdDomain, IdUser, Username, Password, DisplayName) values (1, 1, 'admin', 'nKaUqQKFwDRDLJVQQht7nb1cD0tmc/BfbbzlgFK6IOQkgEGVbujJouyfECkM3AeC', 'Admin');
 insert into FwkRole (IdDomain, IdRole, Name) values (1, 1, 'Admin');
 insert into FwkBranch (IdDomain, IdBranch, CodBranch, Name) values (1, 1, 'BCH', 'Branch');
 insert into FwkBranchUser (IdDomain, IdBranch, IdUser) values (1, 1, 1);
@@ -185,6 +185,10 @@ insert into FwkFeature (IdDomain, CodModule, CodFeature, CodModuleBase, CodFeatu
 
 insert into FwkFeature (IdDomain, CodModule, CodFeature, CodModuleBase, CodFeatureBase) values (1, 'Ark.Fwk', 'FwkServerBasic', 'Ark.Fwk', 'FwkServer');
 insert into FwkFeatureAction (IdDomain, CodModule, CodFeature, CodAction, Description) values (1, 'Ark.Fwk', 'FwkServerBasic', 'Init', 'Initialize');
+
+insert into FwkFeature (IdDomain, CodModule, CodFeature, CodModuleBase, CodFeatureBase) values (1, 'Ark.Fwk', 'FwkServerProcess', 'Ark.Fwk', 'FwkServerBasic');
+insert into FwkFeatureAction (IdDomain, CodModule, CodFeature, CodAction, Description) values (1, 'Ark.Fwk', 'FwkServerProcess', 'Next', 'Next process step');
+insert into FwkFeatureAction (IdDomain, CodModule, CodFeature, CodAction, Description) values (1, 'Ark.Fwk', 'FwkServerProcess', 'Execute', 'Execute the process');
 
 insert into FwkFeature (IdDomain, CodModule, CodFeature, CodModuleBase, CodFeatureBase) values (1, 'Ark.Fwk', 'FwkServerView', 'Ark.Fwk', 'FwkServerBasic');
 insert into FwkFeatureAction (IdDomain, CodModule, CodFeature, CodAction, Description) values (1, 'Ark.Fwk', 'FwkServerView', 'Format', 'Format the view');

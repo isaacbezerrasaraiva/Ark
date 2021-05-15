@@ -3,10 +3,14 @@
   <Captions>
     <SysCaptionIdDomain>Id. Domínio</SysCaptionIdDomain>
     <SysCaptionIdRole>Id. Papel</SysCaptionIdRole>
+    <SysCaptionInvalidType>Tipo inválido</SysCaptionInvalidType>
     <SysCaptionName>Nome</SysCaptionName>
+    <SysCaptionSuccess>Sucesso</SysCaptionSuccess>
   </Captions>
   <Messages>
+    <SysMessageSuccess>Processo executado com sucesso!</SysMessageSuccess>
   </Messages>
   <Exceptions>
+    <SysExceptionAutomationInvalidService>O serviço de automação deve derivar de FwkServiceProcess!</SysExceptionAutomationInvalidService>
   </Exceptions>
 </Ark.Sys.Language.PtBr.Service>
