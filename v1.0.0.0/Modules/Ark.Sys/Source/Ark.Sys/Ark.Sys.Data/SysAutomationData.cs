@@ -94,6 +94,9 @@ namespace Ark.Sys.Data
         #endregion Methods
 
         #region Properties
+
+        public LibTimerData TimerData { get; set; }
+
         #endregion Properties
     }
 

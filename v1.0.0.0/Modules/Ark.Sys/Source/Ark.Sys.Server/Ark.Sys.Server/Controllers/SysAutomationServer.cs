@@ -59,7 +59,10 @@ namespace Ark.Sys.Server
         /// <param name="data">Timer data</param>
         public void Execute(Object data)
         {
-            InvokeService("Execute", ((LibTimerData)data).InstanceParameter, new FwkEnvironment());
+            SysAutomationDataRequest automationDataRequest = new SysAutomationDataRequest();
+            automationDataRequest.Content.TimerData = (LibTimerData)data;
+
+            InvokeService("Execute", automationDataRequest, new FwkEnvironment());
         }
 
         #endregion Methods

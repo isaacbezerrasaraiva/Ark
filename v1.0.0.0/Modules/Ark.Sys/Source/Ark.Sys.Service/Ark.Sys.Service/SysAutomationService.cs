@@ -424,8 +424,8 @@ namespace Ark.Sys.Service
 
                 #region Scheduler next execution
 
-                Double missingExecution = (((DateTime.Now - automation.NextExecution).TotalSeconds) / automation.IntervalTime);
-                DateTime dateTimeNextExecution = automation.NextExecution.AddSeconds((missingExecution * automation.IntervalTime) + automation.IntervalTime);
+                Int32 missingExecution = (Int32)Math.Floor(((DateTime.Now - automation.NextExecution).TotalSeconds) / automation.IntervalTime);
+                DateTime dateTimeNextExecution = automation.NextExecution.AddSeconds(((missingExecution * automation.IntervalTime) + automation.IntervalTime));
 
                 internalDatabase.QueryExecute(SQL_SCHEDULER_UPDATE,
                     new Object[] { dateTimeNextExecution, automation.IdDomain, automation.IdFeature },
