@@ -25,6 +25,15 @@
           <SecretVector>9cf5bfa09c864f49</SecretVector>
         </Secrets>
       </Security>
+      <Service>
+        <SysAutomationService>
+          <DefaultInstance>
+            <DatabaseAlias>
+              <Default Enabled="true" />
+            </DatabaseAlias>
+          </DefaultInstance>
+        </SysAutomationService>
+      </Service>
     </Ark.Sys>
   </DynamicXml>
 </Ark.Lib.Service>

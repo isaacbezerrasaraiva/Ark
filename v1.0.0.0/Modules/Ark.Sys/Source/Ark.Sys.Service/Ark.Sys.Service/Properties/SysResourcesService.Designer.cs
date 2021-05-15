@@ -79,11 +79,47 @@ namespace Ark.Sys.Service.Properties {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Service/Captions/SysCaptionInvalidType.
+        /// </summary>
+        public static string SysCaptionInvalidType {
+            get {
+                return ResourceManager.GetString("SysCaptionInvalidType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Service/Captions/SysCaptionName.
         /// </summary>
         public static string SysCaptionName {
             get {
                 return ResourceManager.GetString("SysCaptionName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Service/Captions/SysCaptionSuccess.
+        /// </summary>
+        public static string SysCaptionSuccess {
+            get {
+                return ResourceManager.GetString("SysCaptionSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Service/Exceptions/SysExceptionAutomationInvalidService.
+        /// </summary>
+        public static string SysExceptionAutomationInvalidService {
+            get {
+                return ResourceManager.GetString("SysExceptionAutomationInvalidService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Service/Messages/SysMessageSuccess.
+        /// </summary>
+        public static string SysMessageSuccess {
+            get {
+                return ResourceManager.GetString("SysMessageSuccess", resourceCulture);
             }
         }
     }
