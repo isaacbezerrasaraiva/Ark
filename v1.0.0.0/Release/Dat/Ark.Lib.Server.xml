@@ -9,7 +9,7 @@
       </Security>
       <Timer>
         <SysAutomationServer Enabled="true" Assembly="Ark.Sys.Server.dll" Class="Ark.Sys.Server.SysAutomationServer">
-          <DefaultInstance Enabled="true" Delay="5" Interval="10" LogEnabled="false" LogPath="./Logs/Ark.Sys.Server/SysAutomationServer">
+          <DefaultInstance Enabled="true" Delay="5" Interval="15" LogEnabled="false" LogPath="./Logs/Ark.Sys.Server/SysAutomationServer">
             <Parameter></Parameter>
           </DefaultInstance>
         </SysAutomationServer>

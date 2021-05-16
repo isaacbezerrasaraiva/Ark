@@ -94,7 +94,15 @@ namespace Ark.Lib.Server
                                 timerData.InstanceLogPath = instanceLogPath;
                                 timerData.InstanceParameter = instanceParameter;
 
-                                this.timerList.Add(new Timer(iServerTimerWorker.Execute, timerData, timerData.InstanceDelay * 1000, timerData.InstanceInterval * 1000));
+                                #region Force start at a second divisible by 5
+
+                                Int32 internalDelay = 0;
+                                while ((DateTime.Now.Second + internalDelay) % 5 != 0)
+                                    internalDelay++;
+
+                                #endregion Force start at a second divisible by 5
+
+                                this.timerList.Add(new Timer(iServerTimerWorker.Execute, timerData, (internalDelay + timerData.InstanceDelay) * 1000, timerData.InstanceInterval * 1000));
                             }
                             catch
                             {
