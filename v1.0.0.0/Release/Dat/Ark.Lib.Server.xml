@@ -4,8 +4,8 @@
     <Ark.Lib>
       <Security>
         <Preflight Assembly="Ark.Sys.Server.dll" Class="Ark.Sys.Server.SysPreflightServer" />
-        <Authentication Assembly="Ark.Sys.Server.dll" Class="Ark.Sys.Server.SysAuthServer" />
-        <Authorization Assembly="Ark.Sys.Server.dll" Class="Ark.Sys.Server.SysAuthServer" />
+        <Authentication Assembly="Ark.Sys.Server.dll" Class="Ark.Sys.Server.SysAuthenticationServer" />
+        <Authorization Assembly="Ark.Sys.Server.dll" Class="Ark.Sys.Server.SysAuthorizationServer" />
       </Security>
       <Timer>
         <SysAutomationServer Enabled="true" Assembly="Ark.Sys.Server.dll" Class="Ark.Sys.Server.SysAutomationServer">
