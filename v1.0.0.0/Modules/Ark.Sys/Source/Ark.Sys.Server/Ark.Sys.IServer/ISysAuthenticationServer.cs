@@ -1,4 +1,4 @@
-﻿// ISysAuthServer.cs
+﻿// ISysAuthenticationServer.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
@@ -24,7 +24,7 @@ using Ark.Sys.Data;
 
 namespace Ark.Sys.IServer
 {
-    public interface ISysAuthServer : IFwkServer
+    public interface ISysAuthenticationServer : IFwkServer
     {
     }
 }

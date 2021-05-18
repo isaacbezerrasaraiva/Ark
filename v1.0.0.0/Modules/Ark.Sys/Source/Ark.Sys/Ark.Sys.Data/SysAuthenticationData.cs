@@ -1,4 +1,4 @@
-﻿// SysAuthData.cs
+﻿// SysAuthenticationData.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
@@ -22,17 +22,17 @@ using Ark.Sys;
 
 namespace Ark.Sys.Data
 {
-    public class SysAuthDataRequest : FwkDataRequest
+    public class SysAuthenticationDataRequest : FwkDataRequest
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public SysAuthDataRequest()
+        public SysAuthenticationDataRequest()
         {
-            this.scope = new SysAuthDataRequestScope();
-            this.content = new SysAuthDataRequestContent();
+            this.scope = new SysAuthenticationDataRequestScope();
+            this.content = new SysAuthenticationDataRequestContent();
         }
 
         #endregion Constructors
@@ -42,29 +42,29 @@ namespace Ark.Sys.Data
 
         #region Properties
 
-        public new SysAuthDataRequestScope Scope
+        public new SysAuthenticationDataRequestScope Scope
         {
-            get { return (SysAuthDataRequestScope)this.scope; }
+            get { return (SysAuthenticationDataRequestScope)this.scope; }
             set { this.scope = value; }
         }
 
-        public new SysAuthDataRequestContent Content
+        public new SysAuthenticationDataRequestContent Content
         {
-            get { return (SysAuthDataRequestContent)this.content; }
+            get { return (SysAuthenticationDataRequestContent)this.content; }
             set { this.content = value; }
         }
 
         #endregion Properties
     }
 
-    public class SysAuthDataRequestScope : FwkDataRequestScope
+    public class SysAuthenticationDataRequestScope : FwkDataRequestScope
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public SysAuthDataRequestScope()
+        public SysAuthenticationDataRequestScope()
         {
         }
 
@@ -77,14 +77,14 @@ namespace Ark.Sys.Data
         #endregion Properties
     }
 
-    public class SysAuthDataRequestContent : FwkDataRequestContent
+    public class SysAuthenticationDataRequestContent : FwkDataRequestContent
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public SysAuthDataRequestContent()
+        public SysAuthenticationDataRequestContent()
         {
         }
 
@@ -95,24 +95,26 @@ namespace Ark.Sys.Data
 
         #region Properties
 
-        public SysAuthenticationRequest AuthenticationRequest { get; set; }
+        public String Token { get; set; }
 
-        public SysAuthorizationRequest AuthorizationRequest { get; set; }
+        public Int32 IdDomain { get; set; }
+
+        public String Credential { get; set; }
 
         #endregion Properties
     }
 
-    public class SysAuthDataResponse : FwkDataResponse
+    public class SysAuthenticationDataResponse : FwkDataResponse
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public SysAuthDataResponse()
+        public SysAuthenticationDataResponse()
         {
-            this.scope = new SysAuthDataResponseScope();
-            this.content = new SysAuthDataResponseContent();
+            this.scope = new SysAuthenticationDataResponseScope();
+            this.content = new SysAuthenticationDataResponseContent();
         }
 
         #endregion Constructors
@@ -122,29 +124,29 @@ namespace Ark.Sys.Data
 
         #region Properties
 
-        public new SysAuthDataResponseScope Scope
+        public new SysAuthenticationDataResponseScope Scope
         {
-            get { return (SysAuthDataResponseScope)this.scope; }
+            get { return (SysAuthenticationDataResponseScope)this.scope; }
             set { this.scope = value; }
         }
 
-        public new SysAuthDataResponseContent Content
+        public new SysAuthenticationDataResponseContent Content
         {
-            get { return (SysAuthDataResponseContent)this.content; }
+            get { return (SysAuthenticationDataResponseContent)this.content; }
             set { this.content = value; }
         }
 
         #endregion Properties
     }
 
-    public class SysAuthDataResponseScope : FwkDataResponseScope
+    public class SysAuthenticationDataResponseScope : FwkDataResponseScope
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public SysAuthDataResponseScope()
+        public SysAuthenticationDataResponseScope()
         {
         }
 
@@ -157,14 +159,14 @@ namespace Ark.Sys.Data
         #endregion Properties
     }
 
-    public class SysAuthDataResponseContent : FwkDataResponseContent
+    public class SysAuthenticationDataResponseContent : FwkDataResponseContent
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public SysAuthDataResponseContent()
+        public SysAuthenticationDataResponseContent()
         {
         }
 
@@ -175,9 +177,11 @@ namespace Ark.Sys.Data
 
         #region Properties
 
-        public SysAuthenticationResponse AuthenticationResponse { get; set; }
+        public Int32 IdDomain { get; set; }
 
-        public SysAuthorizationResponse AuthorizationResponse { get; set; }
+        public Int32 IdUser { get; set; }
+
+        public String Token { get; set; }
 
         #endregion Properties
     }

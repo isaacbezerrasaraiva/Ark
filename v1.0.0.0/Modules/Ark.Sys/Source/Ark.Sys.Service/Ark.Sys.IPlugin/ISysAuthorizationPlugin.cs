@@ -1,4 +1,4 @@
-﻿// ISysAuthPlugin.cs
+﻿// ISysAuthorizationPlugin.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
@@ -25,11 +25,8 @@ using Ark.Sys.Data;
 
 namespace Ark.Sys.IPlugin
 {
-    public interface ISysAuthPlugin : IFwkPlugin
+    public interface ISysAuthorizationPlugin : IFwkPlugin
     {
-        FwkPluginBeforeEventHandler AuthenticatePluginBeforeEventHandler { get; }
-        FwkPluginAfterEventHandler AuthenticatePluginAfterEventHandler { get; }
-        
         FwkPluginBeforeEventHandler AuthorizePluginBeforeEventHandler { get; }
         FwkPluginAfterEventHandler AuthorizePluginAfterEventHandler { get; }
     }

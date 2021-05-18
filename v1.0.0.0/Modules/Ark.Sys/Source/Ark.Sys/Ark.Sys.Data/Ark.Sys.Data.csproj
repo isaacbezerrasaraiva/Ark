@@ -15,6 +15,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="SysAuthenticationData.cs~RFc3912e8.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="..\..\..\..\..\..\LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>

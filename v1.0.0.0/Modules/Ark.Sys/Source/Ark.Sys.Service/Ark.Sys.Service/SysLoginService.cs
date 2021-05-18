@@ -116,15 +116,14 @@ namespace Ark.Sys.Service
         /// <param name="loginDataResponse">The response data</param>
         protected virtual void OnAuthenticate(SysLoginDataRequest loginDataRequest, SysLoginDataResponse loginDataResponse)
         {
-            SysAuthDataRequest authDataRequest = new SysAuthDataRequest();
-            authDataRequest.Content.AuthenticationRequest = new SysAuthenticationRequest();
-            authDataRequest.Content.AuthenticationRequest.IdDomain = loginDataRequest.Content.IdDomain;
-            authDataRequest.Content.AuthenticationRequest.Credential = String.Join(';', loginDataRequest.Content.Username, loginDataRequest.Content.Password);
+            SysAuthenticationDataRequest authenticationDataRequest = new SysAuthenticationDataRequest();
+            authenticationDataRequest.Content.IdDomain = loginDataRequest.Content.IdDomain;
+            authenticationDataRequest.Content.Credential = String.Join(';', loginDataRequest.Content.Username, loginDataRequest.Content.Password);
 
-            SysAuthService authService = new SysAuthService(this.Environment);
-            SysAuthDataResponse authDataResponse = authService.Authenticate(authDataRequest);
+            SysAuthenticationService authenticationService = new SysAuthenticationService(this.Environment);
+            SysAuthenticationDataResponse authenticationDataResponse = authenticationService.Authenticate(authenticationDataRequest);
 
-            loginDataResponse.Content.Token = authDataResponse.Content.AuthenticationResponse.Token;
+            loginDataResponse.Content.Token = authenticationDataResponse.Content.Token;
         }
 
         /// <summary>

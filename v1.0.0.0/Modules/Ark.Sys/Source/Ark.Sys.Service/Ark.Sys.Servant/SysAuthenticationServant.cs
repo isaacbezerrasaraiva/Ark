@@ -1,4 +1,4 @@
-﻿// SysAuthServant.cs
+﻿// SysAuthenticationServant.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
@@ -28,14 +28,14 @@ using Ark.Sys.IService;
 
 namespace Ark.Sys.Servant
 {
-    public class SysAuthServant : FwkServant, ISysAuthService
+    public class SysAuthenticationServant : FwkServant, ISysAuthenticationService
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public SysAuthServant(FwkEnvironment environment)
+        public SysAuthenticationServant(FwkEnvironment environment)
             : base(environment)
         {
         }
@@ -47,21 +47,11 @@ namespace Ark.Sys.Servant
         /// <summary>
         /// Authenticate
         /// </summary>
-        /// <param name="authDataRequest">The request data</param>
+        /// <param name="authenticationDataRequest">The request data</param>
         /// <returns>The response data</returns>
-        public SysAuthDataResponse Authenticate(SysAuthDataRequest authDataRequest)
+        public SysAuthenticationDataResponse Authenticate(SysAuthenticationDataRequest authenticationDataRequest)
         {
-            return (SysAuthDataResponse)InvokeService("Authenticate", authDataRequest);
-        }
-
-        /// <summary>
-        /// Authorize
-        /// </summary>
-        /// <param name="authDataRequest">The request data</param>
-        /// <returns>The response data</returns>
-        public SysAuthDataResponse Authorize(SysAuthDataRequest authDataRequest)
-        {
-            return (SysAuthDataResponse)InvokeService("Authorize", authDataRequest);
+            return (SysAuthenticationDataResponse)InvokeService("Authenticate", authenticationDataRequest);
         }
 
         #endregion Methods
