@@ -10,6 +10,7 @@ using System;
 using System.Xml;
 using System.Data;
 using System.Linq;
+using System.Text.Json;
 using System.Collections.Generic;
 
 using Microsoft.AspNetCore.Mvc;
@@ -81,14 +82,42 @@ namespace Ark.Sys.Server
 
                     if (authorizationDataResponse.Content.Authorized == false)
                     {
-                        context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
+                        context.Result = Unauthorize(context);
                     }
                 }
                 else
                 {
-                    context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
+                    context.Result = Unauthorize(context);
                 }
             }
+        }
+
+        private JsonResult Unauthorize(AuthorizationFilterContext context)
+        {
+            #region Initialize culture
+            
+            String culture = null;
+            if (context.HttpContext.Request.Headers.ContainsKey("Culture") == true)
+                culture = LazyConvert.ToString(context.HttpContext.Request.Headers["Culture"], null);
+            
+            LibCulture libCulture = null;
+            try { libCulture = new LibCulture(culture); }
+            catch { libCulture = LibGlobalization.Culture; }
+            
+            #endregion Initialize culture
+
+            FwkDataResponse dataResponse = new FwkDataResponse();
+
+            #region Write response scope error
+
+            dataResponse.Scope.StatusCode = LazyDecorator.GetCustomAttributeFromEnumValue(FwkScopeStatus.Error).Code;
+            dataResponse.Scope.StatusName = LazyDecorator.GetCustomAttributeFromEnumValue(FwkScopeStatus.Error).Name;
+            dataResponse.Scope.StatusCaption = LibGlobalization.GetTranslation(Properties.SysResourcesServer.SysCaptionDenied, libCulture);
+            dataResponse.Scope.StatusMessage = LibGlobalization.GetTranslation(Properties.SysResourcesServer.SysMessageUnauthorized, libCulture);
+
+            #endregion Write response scope error
+
+            return new JsonResult(dataResponse, new JsonSerializerOptions() { PropertyNamingPolicy = null }) { StatusCode = StatusCodes.Status401Unauthorized };
         }
 
         #endregion Methods

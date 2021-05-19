@@ -61,6 +61,15 @@ namespace Ark.Sys.Service.Properties {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Service/Captions/SysCaptionDenied.
+        /// </summary>
+        public static string SysCaptionDenied {
+            get {
+                return ResourceManager.GetString("SysCaptionDenied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Service/Captions/SysCaptionIdDomain.
         /// </summary>
         public static string SysCaptionIdDomain {
@@ -102,6 +111,15 @@ namespace Ark.Sys.Service.Properties {
         public static string SysCaptionSuccess {
             get {
                 return ResourceManager.GetString("SysCaptionSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Service/Exceptions/SysExceptionAuthenticationFailed.
+        /// </summary>
+        public static string SysExceptionAuthenticationFailed {
+            get {
+                return ResourceManager.GetString("SysExceptionAuthenticationFailed", resourceCulture);
             }
         }
         

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Ark.Sys.Language.PtBr.Server>
+  <Captions>
+    <SysCaptionDenied>Negado</SysCaptionDenied>
+  </Captions>
+  <Messages>
+    <SysMessageUnauthorized>Não autorizado!</SysMessageUnauthorized>
+  </Messages>
+  <Exceptions>
+  </Exceptions>
+</Ark.Sys.Language.PtBr.Server>

@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Ark.Sys.Language.EnUs.Service>
   <Captions>
+    <SysCaptionDenied>Denied</SysCaptionDenied>
     <SysCaptionIdDomain>Domain Id</SysCaptionIdDomain>
     <SysCaptionIdRole>Role Id</SysCaptionIdRole>
     <SysCaptionInvalidType>Invalid type</SysCaptionInvalidType>
@@ -11,6 +12,7 @@
     <SysMessageSuccess>Process executed successfully!</SysMessageSuccess>
   </Messages>
   <Exceptions>
+    <SysExceptionAuthenticationFailed>Authentication failed!</SysExceptionAuthenticationFailed>
     <SysExceptionAutomationInvalidService>The automation service must derive from FwkServiceProcess!</SysExceptionAutomationInvalidService>
   </Exceptions>
 </Ark.Sys.Language.EnUs.Service>

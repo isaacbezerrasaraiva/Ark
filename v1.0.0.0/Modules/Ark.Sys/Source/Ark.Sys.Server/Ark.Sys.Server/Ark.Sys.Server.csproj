@@ -41,16 +41,29 @@
     <PackageReference Include="Ark.Sys.IServer" Version="1.0.0" />
     <PackageReference Include="Ark.Sys.IService" Version="1.0.0" />
     <PackageReference Include="Lazy" Version="1.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Properties\" />
+    <Compile Update="Properties\SysResourcesServer.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SysResourcesServer.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\SysResourcesServer.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SysResourcesServer.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
     <PostBuildEvent>
       xcopy /y $(SolutionDir)Ark.Sys.Server\Ark.Sys.Server\bin\Debug\netcoreapp3.1\Ark.Sys.Server.dll $(SolutionDir)..\..\..\Release\Bin\Ark.Sys.Server\1.0.0\lib\netcoreapp3.1\
       xcopy /y $(SolutionDir)Ark.Sys.Server\Ark.Sys.Server\bin\Debug\netcoreapp3.1\Ark.Sys.Server.dll %SystemDrive%%HomePath%\.nuget\Packages\ark.sys.server\1.0.0\lib\netcoreapp3.1\
+      xcopy /y $(SolutionDir)Ark.Sys.Server\Ark.Sys.Server\Languages\* $(SolutionDir)..\..\..\Release\Dat\Languages\
     </PostBuildEvent>
   </PropertyGroup>
 

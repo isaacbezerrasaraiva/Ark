@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Ark.Sys.Language.EnUs.Server>
+  <Captions>
+    <SysCaptionDenied>Denied</SysCaptionDenied>
+  </Captions>
+  <Messages>
+    <SysMessageUnauthorized>Unauthorized!</SysMessageUnauthorized>
+  </Messages>
+  <Exceptions>
+  </Exceptions>
+</Ark.Sys.Language.EnUs.Server>

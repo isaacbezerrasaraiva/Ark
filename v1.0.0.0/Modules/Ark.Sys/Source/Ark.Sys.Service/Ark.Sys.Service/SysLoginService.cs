@@ -124,6 +124,9 @@ namespace Ark.Sys.Service
             SysAuthenticationDataResponse authenticationDataResponse = authenticationService.Authenticate(authenticationDataRequest);
 
             loginDataResponse.Content.Token = authenticationDataResponse.Content.Token;
+
+            if (loginDataResponse.Content.Token == null)
+                throw new LibException(Properties.SysResourcesService.SysExceptionAuthenticationFailed, Properties.SysResourcesService.SysCaptionDenied);
         }
 
         /// <summary>

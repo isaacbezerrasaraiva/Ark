@@ -118,39 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="SysCaptionDenied" xml:space="preserve">
-    <value>/Ark.Sys.Language.{0}.Service/Captions/SysCaptionDenied</value>
+    <value>/Ark.Sys.Language.{0}.Server/Captions/SysCaptionDenied</value>
     <comment>Denied</comment>
   </data>
-  <data name="SysCaptionIdDomain" xml:space="preserve">
-    <value>/Ark.Sys.Language.{0}.Service/Captions/SysCaptionIdDomain</value>
-    <comment>Domain Id</comment>
-  </data>
-  <data name="SysCaptionIdRole" xml:space="preserve">
-    <value>/Ark.Sys.Language.{0}.Service/Captions/SysCaptionIdRole</value>
-    <comment>Role Id</comment>
-  </data>
-  <data name="SysCaptionInvalidType" xml:space="preserve">
-    <value>/Ark.Sys.Language.{0}.Service/Captions/SysCaptionInvalidType</value>
-    <comment>Invalid type</comment>
-  </data>
-  <data name="SysCaptionName" xml:space="preserve">
-    <value>/Ark.Sys.Language.{0}.Service/Captions/SysCaptionName</value>
-    <comment>Name</comment>
-  </data>
-  <data name="SysCaptionSuccess" xml:space="preserve">
-    <value>/Ark.Sys.Language.{0}.Service/Captions/SysCaptionSuccess</value>
-    <comment>Success</comment>
-  </data>
-  <data name="SysExceptionAuthenticationFailed" xml:space="preserve">
-    <value>/Ark.Sys.Language.{0}.Service/Exceptions/SysExceptionAuthenticationFailed</value>
-    <comment>Authentication failed!</comment>
-  </data>
-  <data name="SysExceptionAutomationInvalidService" xml:space="preserve">
-    <value>/Ark.Sys.Language.{0}.Service/Exceptions/SysExceptionAutomationInvalidService</value>
-    <comment>The automation service must derive from FwkServiceProcess!</comment>
-  </data>
-  <data name="SysMessageSuccess" xml:space="preserve">
-    <value>/Ark.Sys.Language.{0}.Service/Messages/SysMessageSuccess</value>
-    <comment>Process executed successfully!</comment>
+  <data name="SysMessageUnauthorized" xml:space="preserve">
+    <value>/Ark.Sys.Language.{0}.Server/Messages/SysMessageUnauthorized</value>
+    <comment>Unauthorized!</comment>
   </data>
 </root>
