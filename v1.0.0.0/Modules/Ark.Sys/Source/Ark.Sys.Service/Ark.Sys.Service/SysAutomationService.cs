@@ -255,9 +255,9 @@ namespace Ark.Sys.Service
                                 new Object[] { System.Environment.MachineName },
                                 new String[] { "Identifier" });
 
-                            dataTableExecutionClean.PrimaryKey = new DataColumn[] { 
-                                dataTableExecutionClean.Columns["IdDomain"], 
-                                dataTableExecutionClean.Columns["IdFeature"], 
+                            dataTableExecutionClean.PrimaryKey = new DataColumn[] {
+                                dataTableExecutionClean.Columns["IdDomain"],
+                                dataTableExecutionClean.Columns["IdFeature"],
                                 dataTableExecutionClean.Columns["NextExecution"] };
 
                             if (dataTableExecutionClean.Rows.Count > 0)
@@ -597,7 +597,16 @@ namespace Ark.Sys.Service
                 }
                 catch (Exception exp)
                 {
-                    dataResponse = new FwkDataResponse();
+                    #region Create data response
+
+                    assemblyFolderName = automation.CodModule + ".Data";
+                    classFullName = automation.CodModule + ".Data." + automation.CodFeature.Replace("Server", "Data") + "Response";
+
+                    dataResponse = (FwkDataResponse)LazyActivator.Local.CreateInstance(Path.Combine(
+                        LibDirectory.Root.Bin.AssemblyFolder[assemblyFolderName].CurrentVersion.Lib.NetCoreApp31.Path, assemblyFolderName + ".dll"),
+                        classFullName);
+
+                    #endregion Create data response
 
                     #region Write response scope error
 
@@ -609,7 +618,7 @@ namespace Ark.Sys.Service
                     #endregion Write response scope error
 
                     automation.Status = 'E';
-                    automation.Response = (String)JsonConvert.SerializeObject(dataResponse, typeof(FwkDataResponse), null);
+                    automation.Response = (String)JsonConvert.SerializeObject(dataResponse, dataResponse.GetType(), null);
                 }
 
                 #endregion On execute feature
