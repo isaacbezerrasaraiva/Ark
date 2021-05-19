@@ -71,50 +71,7 @@ namespace Ark.Fwk.Server
         protected String InvokeService(String methodName, String dataRequestString, HttpContext context)
         {
             context.Response.ContentType = "application/json;charset=utf-8";
-
-            FwkEnvironment environment = CreateEnvironment(context);
-
-            try
-            {
-                IFwkService iService = CreateService(environment);
-
-                MethodInfo methodInfo = iService.GetType().GetMethod(methodName);
-                FwkDataRequest dataRequest = (FwkDataRequest)JsonConvert.DeserializeObject(dataRequestString, this.DataRequestType);
-                FwkDataResponse dataResponse = (FwkDataResponse)methodInfo.Invoke(iService, new Object[] { dataRequest });
-
-                #region Write response scope success
-
-                if (String.IsNullOrEmpty(dataResponse.Scope.StatusCode) == true)
-                    dataResponse.Scope.StatusCode = LazyDecorator.GetCustomAttributeFromEnumValue(FwkScopeStatus.Success).Code;
-
-                if (String.IsNullOrEmpty(dataResponse.Scope.StatusName) == true)
-                    dataResponse.Scope.StatusName = LazyDecorator.GetCustomAttributeFromEnumValue(FwkScopeStatus.Success).Name;
-
-                if (String.IsNullOrEmpty(dataResponse.Scope.StatusCaption) == true)
-                    dataResponse.Scope.StatusCaption = LibGlobalization.GetTranslation(Properties.FwkResourcesServer.FwkCaptionSuccess, environment.Culture);
-
-                if (String.IsNullOrEmpty(dataResponse.Scope.StatusMessage) == true)
-                    dataResponse.Scope.StatusMessage = LibGlobalization.GetTranslation(Properties.FwkResourcesServer.FwkMessageSuccess, environment.Culture);
-
-                #endregion Write response scope success
-
-                return (String)JsonConvert.SerializeObject(dataResponse, this.DataResponseType, null);
-            }
-            catch (Exception exp)
-            {
-                FwkDataResponse dataResponse = (FwkDataResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
-
-                #region Write response scope error
-
-                dataResponse.Scope.StatusCode = LazyDecorator.GetCustomAttributeFromEnumValue(FwkScopeStatus.Error).Code;
-                dataResponse.Scope.StatusName = LazyDecorator.GetCustomAttributeFromEnumValue(FwkScopeStatus.Error).Name;
-                dataResponse.Scope.StatusCaption = LibException.GetExceptionCaption(exp.InnerException == null ? exp : exp.InnerException, environment.Culture);
-                dataResponse.Scope.StatusMessage = LibException.GetExceptionMessage(exp.InnerException == null ? exp : exp.InnerException, environment.Culture);
-
-                #endregion Write response scope error
-
-                return (String)JsonConvert.SerializeObject(dataResponse, this.DataResponseType, null);
-            }
+            return InvokeService(methodName, dataRequestString, CreateEnvironment(context));
         }
 
         /// <summary>
@@ -189,48 +146,7 @@ namespace Ark.Fwk.Server
         /// <returns>The service method response data</returns>
         protected FwkDataResponse InvokeService(String methodName, FwkDataRequest dataRequest, HttpContext context)
         {
-            FwkEnvironment environment = CreateEnvironment(context);
-
-            try
-            {
-                IFwkService iService = CreateService(environment);
-
-                MethodInfo methodInfo = iService.GetType().GetMethod(methodName);
-                FwkDataResponse dataResponse = (FwkDataResponse)methodInfo.Invoke(iService, new Object[] { dataRequest });
-
-                #region Write response scope success
-
-                if (String.IsNullOrEmpty(dataResponse.Scope.StatusCode) == true)
-                    dataResponse.Scope.StatusCode = LazyDecorator.GetCustomAttributeFromEnumValue(FwkScopeStatus.Success).Code;
-
-                if (String.IsNullOrEmpty(dataResponse.Scope.StatusName) == true)
-                    dataResponse.Scope.StatusName = LazyDecorator.GetCustomAttributeFromEnumValue(FwkScopeStatus.Success).Name;
-
-                if (String.IsNullOrEmpty(dataResponse.Scope.StatusCaption) == true)
-                    dataResponse.Scope.StatusCaption = LibGlobalization.GetTranslation(Properties.FwkResourcesServer.FwkCaptionSuccess, environment.Culture);
-
-                if (String.IsNullOrEmpty(dataResponse.Scope.StatusMessage) == true)
-                    dataResponse.Scope.StatusMessage = LibGlobalization.GetTranslation(Properties.FwkResourcesServer.FwkMessageSuccess, environment.Culture);
-
-                #endregion Write response scope success
-
-                return dataResponse;
-            }
-            catch (Exception exp)
-            {
-                FwkDataResponse dataResponse = (FwkDataResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
-
-                #region Write response scope error
-
-                dataResponse.Scope.StatusCode = LazyDecorator.GetCustomAttributeFromEnumValue(FwkScopeStatus.Error).Code;
-                dataResponse.Scope.StatusName = LazyDecorator.GetCustomAttributeFromEnumValue(FwkScopeStatus.Error).Name;
-                dataResponse.Scope.StatusCaption = LibException.GetExceptionCaption(exp.InnerException == null ? exp : exp.InnerException, environment.Culture);
-                dataResponse.Scope.StatusMessage = LibException.GetExceptionMessage(exp.InnerException == null ? exp : exp.InnerException, environment.Culture);
-
-                #endregion Write response scope error
-
-                return dataResponse;
-            }
+            return InvokeService(methodName, dataRequest, CreateEnvironment(context));
         }
 
         /// <summary>
@@ -298,15 +214,8 @@ namespace Ark.Fwk.Server
             if (context.Request.Headers.ContainsKey("Culture") == true)
                 culture = LazyConvert.ToString(context.Request.Headers["Culture"], null);
 
-            if (culture == null)
-            {
-                environment.Culture = LibGlobalization.Culture;
-            }
-            else
-            {
-                try { environment.Culture = new LibCulture(culture); }
-                catch { environment.Culture = LibGlobalization.Culture; }
-            }
+            try { environment.Culture = new LibCulture(culture); }
+            catch { environment.Culture = LibGlobalization.Culture; }
 
             #endregion Initialize culture
 
