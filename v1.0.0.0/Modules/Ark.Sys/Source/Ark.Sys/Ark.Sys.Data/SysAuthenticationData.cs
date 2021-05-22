@@ -97,9 +97,13 @@ namespace Ark.Sys.Data
 
         public String Token { get; set; }
 
+        public String DatabaseAlias { get; set; }
+
         public Int32 IdDomain { get; set; }
 
-        public String Credential { get; set; }
+        public String Username { get; set; }
+
+        public String Password { get; set; }
 
         #endregion Properties
     }
@@ -176,6 +180,8 @@ namespace Ark.Sys.Data
         #endregion Methods
 
         #region Properties
+
+        public String DatabaseAlias { get; set; }
 
         public Int32 IdDomain { get; set; }
 

@@ -74,6 +74,7 @@ namespace Ark.Sys.Server
                 {
                     if (authenticationDataResponse.Content.IdDomain > -1 && authenticationDataResponse.Content.IdUser > -1)
                     {
+                        context.Items["DatabaseAlias"] = authenticationDataResponse.Content.DatabaseAlias;
                         context.Items["IdDomain"] = authenticationDataResponse.Content.IdDomain;
                         context.Items["IdUser"] = authenticationDataResponse.Content.IdUser;
                     }
@@ -81,14 +82,20 @@ namespace Ark.Sys.Server
             }
             else
             {
+                String headerDatabaseAlias = LazyConvert.ToString(context.Request.Headers["DatabaseAlias"], null);
                 Int32 headerIdDomain = LazyConvert.ToInt32(LazyConvert.ToString(context.Request.Headers["IdDomain"], "-1"), -1);
-                String headerCredential = LazyConvert.ToString(context.Request.Headers["Credential"], null);
+                String headerUsername = LazyConvert.ToString(context.Request.Headers["Username"], null);
+                String headerPassword = LazyConvert.ToString(context.Request.Headers["Password"], null);
 
-                if (headerIdDomain > -1 && String.IsNullOrEmpty(headerCredential) == false)
+                if (String.IsNullOrEmpty(headerDatabaseAlias) == false && headerIdDomain > -1 && String.IsNullOrEmpty(headerUsername) == false && String.IsNullOrEmpty(headerPassword) == false)
                 {
+                    context.Items["DatabaseAlias"] = headerDatabaseAlias;
+                    
                     SysAuthenticationDataRequest authenticationDataRequest = new SysAuthenticationDataRequest();
+                    authenticationDataRequest.Content.DatabaseAlias = headerDatabaseAlias;
                     authenticationDataRequest.Content.IdDomain = headerIdDomain;
-                    authenticationDataRequest.Content.Credential = headerCredential;
+                    authenticationDataRequest.Content.Username = headerUsername;
+                    authenticationDataRequest.Content.Password = headerPassword;
 
                     SysAuthenticationDataResponse authenticationDataResponse = (SysAuthenticationDataResponse)InvokeService("Authenticate", authenticationDataRequest, context);
 

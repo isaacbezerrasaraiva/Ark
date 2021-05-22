@@ -58,7 +58,11 @@ namespace Ark.Sys.Service
         {
             SysPreflightDataResponse preflightDataResponse = new SysPreflightDataResponse();
 
+            // this.Database.OpenConnection(); // Must remove this because in this service the inherit database object will always be null
+
             PerformPreflight(preflightDataRequest, preflightDataResponse);
+
+            // this.Database.CloseConnection(); // Must remove this because in this service the inherit database object will always be null
 
             return preflightDataResponse;
         }

@@ -66,11 +66,11 @@ namespace Ark.Sys.Service
 
             SysLoginDataResponse loginDataResponse = (SysLoginDataResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
-            this.Database.OpenConnection();
+            // this.Database.OpenConnection(); // Must remove this because in this service the inherit database object will always be null
 
             PerformAuthenticate(loginDataRequest, loginDataResponse);
 
-            this.Database.CloseConnection();
+            // this.Database.CloseConnection(); // Must remove this because in this service the inherit database object will always be null
 
             return loginDataResponse;
         }
@@ -117,9 +117,15 @@ namespace Ark.Sys.Service
         protected virtual void OnAuthenticate(SysLoginDataRequest loginDataRequest, SysLoginDataResponse loginDataResponse)
         {
             SysAuthenticationDataRequest authenticationDataRequest = new SysAuthenticationDataRequest();
+            authenticationDataRequest.Content.DatabaseAlias = loginDataRequest.Content.DatabaseAlias;
             authenticationDataRequest.Content.IdDomain = loginDataRequest.Content.IdDomain;
-            authenticationDataRequest.Content.Credential = String.Join(';', loginDataRequest.Content.Username, loginDataRequest.Content.Password);
+            authenticationDataRequest.Content.Username = loginDataRequest.Content.Username;
+            authenticationDataRequest.Content.Password = loginDataRequest.Content.Password;
 
+            if (LibConfigurationService.DynamicXml["Ark.Fwk"]["Database"].Elements.ContainsKey(loginDataRequest.Content.DatabaseAlias) == false)
+                throw new LibException(Properties.SysResourcesService.SysExceptionAuthenticationFailed, Properties.SysResourcesService.SysCaptionDenied);
+
+            this.Environment.DatabaseAlias = loginDataRequest.Content.DatabaseAlias;
             SysAuthenticationService authenticationService = new SysAuthenticationService(this.Environment);
             SysAuthenticationDataResponse authenticationDataResponse = authenticationService.Authenticate(authenticationDataRequest);
 

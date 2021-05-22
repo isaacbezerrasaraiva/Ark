@@ -66,7 +66,11 @@ namespace Ark.Sys.Service
 
             SysAuthenticationDataResponse authenticationDataResponse = new SysAuthenticationDataResponse();
 
+            // this.Database.OpenConnection(); // Must remove this because in this service the inherit database will be null when validating by token
+
             PerformAuthenticate(authenticationDataRequest, authenticationDataResponse);
+
+            // this.Database.CloseConnection(); // Must remove this because in this service the inherit database will be null when validating by token
 
             return authenticationDataResponse;
         }
@@ -117,23 +121,22 @@ namespace Ark.Sys.Service
                 Dictionary<String, String> publicPayloadDictionary = tuplePayloadDictionary.Item1;
                 Dictionary<String, String> privatePayloadDictionary = tuplePayloadDictionary.Item2;
 
+                authenticationDataResponse.Content.DatabaseAlias = privatePayloadDictionary["DatabaseAlias"];
                 authenticationDataResponse.Content.IdDomain = LazyConvert.ToInt32(privatePayloadDictionary["IdDomain"]);
                 authenticationDataResponse.Content.IdUser = LazyConvert.ToInt32(privatePayloadDictionary["IdUser"]);
             }
-            else if (authenticationDataRequest.Content.Credential != null)
+            else if (String.IsNullOrEmpty(authenticationDataRequest.Content.Username) == false && String.IsNullOrEmpty(authenticationDataRequest.Content.Password) == false)
             {
-                String[] credentialArray = authenticationDataRequest.Content.Credential.Split(';');
-
                 #region Authenticate on database
 
                 this.Database.OpenConnection();
 
                 String sql = "select IdUser, Password, DisplayName from FwkUser where IdDomain = :IdDomain and Username = :Username";
-                DataTable dataTableUser = this.Database.QueryTable(sql, "FwkUser", new Object[] { authenticationDataRequest.Content.IdDomain, credentialArray[0] });
+                DataTable dataTableUser = this.Database.QueryTable(sql, "FwkUser", new Object[] { authenticationDataRequest.Content.IdDomain, authenticationDataRequest.Content.Username });
 
                 if (dataTableUser.Rows.Count > 0)
                 {
-                    String hashedPassword = LazySecurity.Hash.SHA384.Generate(credentialArray[1]);
+                    String hashedPassword = LazySecurity.Hash.SHA384.Generate(authenticationDataRequest.Content.Password);
 
                     if (LazyConvert.ToString(dataTableUser.Rows[0]["Password"]) == hashedPassword)
                     {
@@ -143,6 +146,7 @@ namespace Ark.Sys.Service
                             new Tuple<Dictionary<String, String>, Dictionary<String, String>>(publicPayloadDictionary, privatePayloadDictionary);
 
                         publicPayloadDictionary.Add("User", LazyConvert.ToString(dataTableUser.Rows[0]["DisplayName"]));
+                        privatePayloadDictionary.Add("DatabaseAlias", authenticationDataRequest.Content.DatabaseAlias);
                         privatePayloadDictionary.Add("IdDomain", LazyConvert.ToString(authenticationDataRequest.Content.IdDomain));
                         privatePayloadDictionary.Add("IdUser", LazyConvert.ToString(dataTableUser.Rows[0]["IdUser"]));
 

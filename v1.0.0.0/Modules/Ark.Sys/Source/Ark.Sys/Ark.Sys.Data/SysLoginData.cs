@@ -95,6 +95,8 @@ namespace Ark.Sys.Data
 
         #region Properties
 
+        public String DatabaseAlias { get; set; }
+
         public Int16 IdDomain { get; set; }
 
         public String Username { get; set; }

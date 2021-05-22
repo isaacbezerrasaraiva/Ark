@@ -66,7 +66,11 @@ namespace Ark.Sys.Service
 
             SysAuthorizationDataResponse authorizationDataResponse = new SysAuthorizationDataResponse();
 
+            this.Database.OpenConnection();
+
             PerformAuthorize(authorizationDataRequest, authorizationDataResponse);
+
+            this.Database.CloseConnection();
 
             return authorizationDataResponse;
         }
@@ -130,8 +134,6 @@ namespace Ark.Sys.Service
 
             #endregion Authorization Query
 
-            this.Database.OpenConnection();
-
             authorizationDataResponse.Content.Authorized =
                 this.Database.QueryFind(sqlAuthorization, new Object[] {
                     authorizationDataRequest.Content.IdDomain,
@@ -139,8 +141,6 @@ namespace Ark.Sys.Service
                     authorizationDataRequest.Content.CodModule,
                     authorizationDataRequest.Content.CodFeature,
                     authorizationDataRequest.Content.CodAction });
-
-            this.Database.CloseConnection();
         }
 
         #endregion Methods

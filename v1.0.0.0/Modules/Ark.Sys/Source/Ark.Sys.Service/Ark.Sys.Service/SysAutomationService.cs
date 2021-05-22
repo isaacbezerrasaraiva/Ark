@@ -65,11 +65,11 @@ namespace Ark.Sys.Service
 
             SysAutomationDataResponse automationDataResponse = (SysAutomationDataResponse)LazyActivator.Local.CreateInstance(this.DataResponseType);
 
-            // this.Database.OpenConnection(); // Must remove this because in this service the inherit database object is useless
+            // this.Database.OpenConnection(); // Must remove this because in this service the inherit database object will always be null
 
             PerformExecute(automationDataRequest, automationDataResponse);
 
-            // this.Database.CloseConnection(); // Must remove this because in this service the inherit database object is useless
+            // this.Database.CloseConnection(); // Must remove this because in this service the inherit database object will always be null
 
             return automationDataResponse;
         }
@@ -313,7 +313,7 @@ namespace Ark.Sys.Service
 
                                     if (dataRowExecutionArray.Length > 0)
                                     {
-                                        PrepareAutomationWorker(dataRowWorker, dataRowExecutionArray[0], internalDatabase);
+                                        PrepareAutomationWorker(dataRowWorker, dataRowExecutionArray[0], dynamicXmlElementDatabaseAlias.Key, internalDatabase);
                                         dataTableExecutions.Rows.Remove(dataRowExecutionArray[0]);
                                     }
                                     else
@@ -327,7 +327,7 @@ namespace Ark.Sys.Service
 
                                             if (dataRowExecutionArray.Length > 0)
                                             {
-                                                PrepareAutomationWorker(dataRowWorker, dataRowExecutionArray[0], internalDatabase);
+                                                PrepareAutomationWorker(dataRowWorker, dataRowExecutionArray[0], dynamicXmlElementDatabaseAlias.Key, internalDatabase);
                                                 dataTableExecutions.Rows.Remove(dataRowExecutionArray[0]);
                                             }
                                         }
@@ -342,7 +342,7 @@ namespace Ark.Sys.Service
 
                                     if (dataRowExecutionArray.Length > 0)
                                     {
-                                        PrepareAutomationWorker(dataRowWorker, dataRowExecutionArray[0], internalDatabase);
+                                        PrepareAutomationWorker(dataRowWorker, dataRowExecutionArray[0], dynamicXmlElementDatabaseAlias.Key, internalDatabase);
                                         dataTableExecutions.Rows.Remove(dataRowExecutionArray[0]);
                                     }
                                 }
@@ -390,7 +390,7 @@ namespace Ark.Sys.Service
         /// <param name="dataRowExecution">The execution datarow</param>
         /// <param name="databaseType">The database type</param>
         /// <param name="connectionString">The database connection string</param>
-        private void PrepareAutomationWorker(DataRow dataRowWorker, DataRow dataRowExecution, LazyDatabase internalDatabase)
+        private void PrepareAutomationWorker(DataRow dataRowWorker, DataRow dataRowExecution, String databaseAlias, LazyDatabase internalDatabase)
         {
             #region Queries
 
@@ -435,6 +435,7 @@ namespace Ark.Sys.Service
 
                 Dictionary<String, Object> threadDataDictionary = new Dictionary<String, Object>();
                 threadDataDictionary.Add("Automation", automation);
+                threadDataDictionary.Add("DatabaseAlias", databaseAlias);
                 threadDataDictionary.Add("DatabaseType", internalDatabase.GetType());
                 threadDataDictionary.Add("ConnectionString", internalDatabase.ConnectionString);
 
@@ -479,6 +480,7 @@ namespace Ark.Sys.Service
             {
                 Dictionary<String, Object> threadDataDictionary = (Dictionary<String, Object>)data;
                 SysAutomation automation = (SysAutomation)threadDataDictionary["Automation"];
+                String databaseAlias = (String)threadDataDictionary["DatabaseAlias"];
                 LazyDatabase threadDatabase = (LazyDatabase)LazyActivator.Local.CreateInstance(
                     (Type)threadDataDictionary["DatabaseType"], new Object[] { (String)threadDataDictionary["ConnectionString"] });
 
@@ -528,6 +530,7 @@ namespace Ark.Sys.Service
                     #region Create environment
 
                     environment = new FwkEnvironment();
+                    environment.DatabaseAlias = databaseAlias;
                     environment.Domain = new FwkDomain();
                     environment.Domain.IdDomain = automation.IdDomain;
                     environment.User = new FwkUser();
