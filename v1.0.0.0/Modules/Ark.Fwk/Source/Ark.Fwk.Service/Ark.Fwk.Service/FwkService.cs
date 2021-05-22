@@ -44,20 +44,21 @@ namespace Ark.Fwk.Service
 
             #region Initialize database
 
-            String databaseAlias = "Default";
+            if (String.IsNullOrEmpty(environment.DatabaseAlias) == false)
+            {
+                LibDynamicXmlElement dynXmlElementDatabaseSettings = LibConfigurationService.DynamicXml["Ark.Fwk"]["Database"][environment.DatabaseAlias]["Settings"];
 
-            LibDynamicXmlElement dynXmlElementDatabaseSettings = LibConfigurationService.DynamicXml["Ark.Fwk"]["Database"][databaseAlias]["Settings"];
+                //String databaseDbms = dynXmlElementDatabaseSettings.Attribute["Dbms"];
+                String databaseAssembly = dynXmlElementDatabaseSettings.Attribute["Assembly"];
+                String databaseClass = dynXmlElementDatabaseSettings.Attribute["Class"];
+                String databaseVersion = dynXmlElementDatabaseSettings.Attribute["Version"];
+                String databaseConnectionString = dynXmlElementDatabaseSettings["ConnectionString"].Text;
+                String databaseAssemblyFolderName = databaseAssembly.Replace(".dll", String.Empty);
 
-            String databaseDbms = dynXmlElementDatabaseSettings.Attribute["Dbms"];
-            String databaseAssembly = dynXmlElementDatabaseSettings.Attribute["Assembly"];
-            String databaseClass = dynXmlElementDatabaseSettings.Attribute["Class"];
-            String databaseVersion = dynXmlElementDatabaseSettings.Attribute["Version"];
-            String databaseConnectionString = dynXmlElementDatabaseSettings["ConnectionString"].Text;
-            String assemblyFolderName = databaseAssembly.Replace(".dll", String.Empty);
-
-            this.database = (LazyDatabase)LazyActivator.Local.CreateInstance(Path.Combine(
-                LibDirectory.Root.Bin.AssemblyFolder[assemblyFolderName].Version[databaseVersion].Lib.NetCoreApp31.Path, databaseAssembly),
-                databaseClass, new Object[] { databaseConnectionString });
+                this.database = (LazyDatabase)LazyActivator.Local.CreateInstance(Path.Combine(
+                    LibDirectory.Root.Bin.AssemblyFolder[databaseAssemblyFolderName].Version[databaseVersion].Lib.NetCoreApp31.Path, databaseAssembly),
+                    databaseClass, new Object[] { databaseConnectionString });
+            }
 
             #endregion Initialize database
 
@@ -122,7 +123,7 @@ namespace Ark.Fwk.Service
 
             #region Initialize data response type
 
-            assemblyFolderName = this.GetType().Namespace.Replace("Service", "Data");
+            String assemblyFolderName = this.GetType().Namespace.Replace("Service", "Data");
             String classFullName = this.GetType().FullName.Replace("Service", "Data") + "Response";
 
             this.dataResponseType = LazyActivator.Local.GetType(Path.Combine(

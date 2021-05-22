@@ -219,6 +219,13 @@ namespace Ark.Fwk.Server
 
             #endregion Initialize culture
 
+            #region Initialize database alias
+
+            if (context.Items.ContainsKey("DatabaseAlias") == true)
+                environment.DatabaseAlias = LazyConvert.ToString(context.Items["DatabaseAlias"]);
+
+            #endregion Initialize database alias
+
             if (context.Items.ContainsKey("IdDomain") == true)
             {
                 #region Initialize domain

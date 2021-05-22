@@ -36,6 +36,8 @@ namespace Ark.Fwk
         
         public LibCulture Culture { get; set; }
 
+        public String DatabaseAlias { get; set; }
+
         public FwkDomain Domain { get; set; }
 
         public FwkUser User { get; set; }
