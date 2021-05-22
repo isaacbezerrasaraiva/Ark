@@ -50,20 +50,20 @@ namespace Ark.Server
             services.AddMvc(options =>
             {
                 // Add Filters
-                options.Filters.Add(typeof(LibServerAuthorization));
+                options.Filters.Add(typeof(LibAuthorizationServer));
 
                 // Add InputFormatters
-                options.InputFormatters.Insert(0, new LibServerInputFormatter());
+                options.InputFormatters.Insert(0, new LibFormattersInputServer());
 
                 // Add OutputFormatters
-                options.OutputFormatters.Insert(0, new LibServerOutputFormatter());
+                options.OutputFormatters.Insert(0, new LibFormattersOutputServer());
             });
 
             // Add cors default policy
             services.AddCors(options => { options.AddDefaultPolicy(builder => { }); });
 
             // Add hosted services
-            services.AddHostedService<LibServerTimerHostedService>();
+            services.AddHostedService<LibTimedHostedServer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,10 +79,10 @@ namespace Ark.Server
             app.UseRouting();
 
             // Add Preflight to the pipeline
-            app.UseMiddleware<LibServerPreflight>();
+            app.UseMiddleware<LibPreflightServer>();
 
             // Add authentication to the pipeline
-            app.UseMiddleware<LibServerAuthentication>();
+            app.UseMiddleware<LibAuthenticationServer>();
 
             // Enabled cors
             app.UseCors();
