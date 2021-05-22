@@ -40,10 +40,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Languages\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="Properties\FtsResourcesServer.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
