@@ -1,4 +1,4 @@
-﻿// LibServerTimerHostedService.cs
+﻿// LibTimedHostedServer.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
@@ -22,7 +22,7 @@ using Ark.Lib;
 
 namespace Ark.Lib.Server
 {
-    public class LibServerTimerHostedService : IHostedService, IDisposable
+    public class LibTimedHostedServer : IHostedService, IDisposable
     {
         #region Variables
 
@@ -32,7 +32,7 @@ namespace Ark.Lib.Server
 
         #region Constructors
 
-        public LibServerTimerHostedService()
+        public LibTimedHostedServer()
         {
             this.timerList = new List<Timer>();
         }
@@ -43,7 +43,7 @@ namespace Ark.Lib.Server
 
         public Task StartAsync(CancellationToken stoppingToken)
         {
-            foreach (KeyValuePair<String, LibDynamicXmlElement> dynamicXmlElementServer in LibServerConfiguration.DynamicXml.Modules["Ark.Lib"]["Timer"].Elements)
+            foreach (KeyValuePair<String, LibDynamicXmlElement> dynamicXmlElementServer in LibConfigurationServer.DynamicXml.Modules["Ark.Lib"]["Timer"].Elements)
             {
                 Boolean serverEnabled = dynamicXmlElementServer.Value.Attribute["Enabled"].ToLower() == "true" ? true : false;
 
@@ -77,22 +77,22 @@ namespace Ark.Lib.Server
 
                             try
                             {
-                                ILibServerTimerWorker iServerTimerWorker = (ILibServerTimerWorker)LazyActivator.Local.CreateInstance(Path.Combine(
+                                ILibTimedWorkerServer iTimedWorkerServer = (ILibTimedWorkerServer)LazyActivator.Local.CreateInstance(Path.Combine(
                                     LibDirectory.Root.Bin.AssemblyFolder[serverAssemblyFolderName].CurrentVersion.Lib.NetCoreApp31.Path, serverAssemblyFileName),
                                     serverClassFullName);
 
-                                LibTimerData timerData = new LibTimerData();
-                                timerData.ServerEnabled = serverEnabled;
-                                timerData.ServerName = dynamicXmlElementServer.Key;
-                                timerData.ServerAssembly = serverAssemblyFileName;
-                                timerData.ServerClass = serverClassFullName;
-                                timerData.InstanceEnabled = instanceEnabled;
-                                timerData.InstanceName = dynamicXmlElementInstance.Key;
-                                timerData.InstanceDelay = LazyConvert.ToInt32(instanceDelay, 5);
-                                timerData.InstanceInterval = LazyConvert.ToInt32(instanceInterval, 300);
-                                timerData.InstanceLogEnabled = instanceLogEnabled;
-                                timerData.InstanceLogPath = instanceLogPath;
-                                timerData.InstanceParameter = instanceParameter;
+                                LibTimedWorkerData timedWorkerData = new LibTimedWorkerData();
+                                timedWorkerData.ServerEnabled = serverEnabled;
+                                timedWorkerData.ServerName = dynamicXmlElementServer.Key;
+                                timedWorkerData.ServerAssembly = serverAssemblyFileName;
+                                timedWorkerData.ServerClass = serverClassFullName;
+                                timedWorkerData.InstanceEnabled = instanceEnabled;
+                                timedWorkerData.InstanceName = dynamicXmlElementInstance.Key;
+                                timedWorkerData.InstanceDelay = LazyConvert.ToInt32(instanceDelay, 5);
+                                timedWorkerData.InstanceInterval = LazyConvert.ToInt32(instanceInterval, 300);
+                                timedWorkerData.InstanceLogEnabled = instanceLogEnabled;
+                                timedWorkerData.InstanceLogPath = instanceLogPath;
+                                timedWorkerData.InstanceParameter = instanceParameter;
 
                                 #region Force start at a second divisible by 5
 
@@ -102,7 +102,7 @@ namespace Ark.Lib.Server
 
                                 #endregion Force start at a second divisible by 5
 
-                                this.timerList.Add(new Timer(iServerTimerWorker.Execute, timerData, (internalDelay + timerData.InstanceDelay) * 1000, timerData.InstanceInterval * 1000));
+                                this.timerList.Add(new Timer(iTimedWorkerServer.Execute, timedWorkerData, (internalDelay + timedWorkerData.InstanceDelay) * 1000, timedWorkerData.InstanceInterval * 1000));
                             }
                             catch
                             {

@@ -1,16 +1,14 @@
-﻿// ILibServerAuthorization.cs
+﻿// ILibTimedWorkerServer.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
 //
 // Created by Isaac Bezerra Saraiva
-// Created on 2020, November 22
+// Created on 2021, April 17
 
 using System;
 using System.Xml;
 using System.Data;
-
-using Microsoft.AspNetCore.Mvc.Filters;
 
 using Lazy;
 
@@ -18,8 +16,8 @@ using Ark.Lib;
 
 namespace Ark.Lib.Server
 {
-    public interface ILibServerAuthorization
+    public interface ILibTimedWorkerServer
     {
-        void Authorize(AuthorizationFilterContext context);
+        void Execute(Object data);
     }
 }

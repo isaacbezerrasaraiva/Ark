@@ -1,10 +1,10 @@
-﻿// LibServerOutputFormatter.cs
+﻿// LibFormattersInputServer.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
 //
 // Created by Isaac Bezerra Saraiva
-// Created on 2021, January 10
+// Created on 2021, January 07
 
 using System;
 using System.IO;
@@ -22,14 +22,14 @@ using Ark.Lib;
 
 namespace Ark.Lib.Server
 {
-    public class LibServerOutputFormatter : OutputFormatter
+    public class LibFormattersInputServer : InputFormatter
     {
-        public LibServerOutputFormatter()
+        public LibFormattersInputServer()
         {
             SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/json"));
         }
         
-        public override Boolean CanWriteResult(OutputFormatterCanWriteContext context)
+        public override Boolean CanRead(InputFormatterContext context)
         {
             if (String.IsNullOrEmpty(context.HttpContext.Request.ContentType) || context.HttpContext.Request.ContentType.ToLower() == "application/json;charset=utf-8")
                 return true;
@@ -37,9 +37,13 @@ namespace Ark.Lib.Server
             return false;
         }
         
-        public override Task WriteResponseBodyAsync(OutputFormatterWriteContext context)
+        public override async Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context)
         {
-            return context.HttpContext.Response.WriteAsync(context.Object.ToString());
+            using (StreamReader streamReader = new StreamReader(context.HttpContext.Request.Body, System.Text.Encoding.UTF8))
+            {
+                String content = await streamReader.ReadToEndAsync();
+                return await InputFormatterResult.SuccessAsync(content);
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿// LibServiceConfiguration.cs
+﻿// LibConfigurationService.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
@@ -18,7 +18,7 @@ using Ark.Lib;
 
 namespace Ark.Lib.Service
 {
-    public static class LibServiceConfiguration
+    public static class LibConfigurationService
     {
         #region Consts
 

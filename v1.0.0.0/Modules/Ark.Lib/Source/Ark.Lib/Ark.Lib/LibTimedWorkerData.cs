@@ -1,4 +1,4 @@
-﻿// LibTimerData.cs
+﻿// LibTimedWorkerData.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
@@ -17,14 +17,14 @@ using Lazy;
 
 namespace Ark.Lib
 {
-    public class LibTimerData
+    public class LibTimedWorkerData
     {
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public LibTimerData()
+        public LibTimedWorkerData()
         {
         }
 

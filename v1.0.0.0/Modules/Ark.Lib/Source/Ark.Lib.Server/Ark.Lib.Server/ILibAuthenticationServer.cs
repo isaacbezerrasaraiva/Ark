@@ -1,4 +1,4 @@
-﻿// ILibServerAuthentication.cs
+﻿// ILibAuthenticationServer.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
@@ -18,7 +18,7 @@ using Ark.Lib;
 
 namespace Ark.Lib.Server
 {
-    public interface ILibServerAuthentication
+    public interface ILibAuthenticationServer
     {
         void Authenticate(HttpContext context);
     }

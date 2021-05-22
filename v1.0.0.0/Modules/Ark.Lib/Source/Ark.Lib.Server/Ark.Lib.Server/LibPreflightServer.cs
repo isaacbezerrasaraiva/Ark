@@ -1,4 +1,4 @@
-﻿// LibServerPreflight.cs
+﻿// LibPreflightServer.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
@@ -21,30 +21,30 @@ using Ark.Lib;
 
 namespace Ark.Lib.Server
 {
-    public class LibServerPreflight
+    public class LibPreflightServer
     {
         #region Variables
 
         private readonly RequestDelegate next;
-        private static ILibServerPreflight iServerPreflight;
+        private static ILibPreflightServer iPreflightServer;
 
         #endregion Variables
 
         #region Constructors
 
-        public LibServerPreflight(RequestDelegate next)
+        public LibPreflightServer(RequestDelegate next)
         {
             this.next = next;
 
-            if (iServerPreflight == null)
+            if (iPreflightServer == null)
             {
-                String assemblyFolderName = LibServerConfiguration.DynamicXml["Ark.Lib"]["Security"]["Preflight"].Attribute["Assembly"].Replace(".dll", String.Empty);
-                String assemblyFileName = LibServerConfiguration.DynamicXml["Ark.Lib"]["Security"]["Preflight"].Attribute["Assembly"];
-                String classFullName = LibServerConfiguration.DynamicXml["Ark.Lib"]["Security"]["Preflight"].Attribute["Class"];
+                String assemblyFolderName = LibConfigurationServer.DynamicXml["Ark.Lib"]["Security"]["Preflight"].Attribute["Assembly"].Replace(".dll", String.Empty);
+                String assemblyFileName = LibConfigurationServer.DynamicXml["Ark.Lib"]["Security"]["Preflight"].Attribute["Assembly"];
+                String classFullName = LibConfigurationServer.DynamicXml["Ark.Lib"]["Security"]["Preflight"].Attribute["Class"];
 
                 if (String.IsNullOrEmpty(assemblyFileName) == false && String.IsNullOrEmpty(classFullName) == false)
                 {
-                    iServerPreflight = (ILibServerPreflight)LazyActivator.Local.CreateInstance(Path.Combine(
+                    iPreflightServer = (ILibPreflightServer)LazyActivator.Local.CreateInstance(Path.Combine(
                         LibDirectory.Root.Bin.AssemblyFolder[assemblyFolderName].CurrentVersion.Lib.NetCoreApp31.Path, assemblyFileName),
                         classFullName);
                 }
@@ -57,8 +57,8 @@ namespace Ark.Lib.Server
 
         public async Task Invoke(HttpContext context)
         {
-            if (iServerPreflight != null)
-                iServerPreflight.Preflight(context);
+            if (iPreflightServer != null)
+                iPreflightServer.Preflight(context);
 
             await this.next(context);
         }

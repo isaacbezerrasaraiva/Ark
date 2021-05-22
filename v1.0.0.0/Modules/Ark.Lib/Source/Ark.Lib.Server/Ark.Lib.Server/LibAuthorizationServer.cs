@@ -1,4 +1,4 @@
-﻿// LibServerAuthorization.cs
+﻿// LibAuthorizationServer.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
@@ -21,27 +21,27 @@ using Ark.Lib;
 namespace Ark.Lib.Server
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-    public class LibServerAuthorization : Attribute, IAuthorizationFilter
+    public class LibAuthorizationServer : Attribute, IAuthorizationFilter
     {
         #region Variables
 
-        private static ILibServerAuthorization iServerAuthorization;
+        private static ILibAuthorizationServer iAuthorizationServer;
 
         #endregion Variables
 
         #region Constructors
 
-        public LibServerAuthorization()
+        public LibAuthorizationServer()
         {
-            if (iServerAuthorization == null)
+            if (iAuthorizationServer == null)
             {
-                String assemblyFolderName = LibServerConfiguration.DynamicXml["Ark.Lib"]["Security"]["Authorization"].Attribute["Assembly"].Replace(".dll", String.Empty);
-                String assemblyFileName = LibServerConfiguration.DynamicXml["Ark.Lib"]["Security"]["Authorization"].Attribute["Assembly"];
-                String classFullName = LibServerConfiguration.DynamicXml["Ark.Lib"]["Security"]["Authorization"].Attribute["Class"];
+                String assemblyFolderName = LibConfigurationServer.DynamicXml["Ark.Lib"]["Security"]["Authorization"].Attribute["Assembly"].Replace(".dll", String.Empty);
+                String assemblyFileName = LibConfigurationServer.DynamicXml["Ark.Lib"]["Security"]["Authorization"].Attribute["Assembly"];
+                String classFullName = LibConfigurationServer.DynamicXml["Ark.Lib"]["Security"]["Authorization"].Attribute["Class"];
 
                 if (String.IsNullOrEmpty(assemblyFileName) == false && String.IsNullOrEmpty(classFullName) == false)
                 {
-                    iServerAuthorization = (ILibServerAuthorization)LazyActivator.Local.CreateInstance(Path.Combine(
+                    iAuthorizationServer = (ILibAuthorizationServer)LazyActivator.Local.CreateInstance(Path.Combine(
                         LibDirectory.Root.Bin.AssemblyFolder[assemblyFolderName].CurrentVersion.Lib.NetCoreApp31.Path, assemblyFileName),
                         classFullName);
                 }
@@ -54,8 +54,8 @@ namespace Ark.Lib.Server
 
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            if (iServerAuthorization != null)
-                iServerAuthorization.Authorize(context);
+            if (iAuthorizationServer != null)
+                iAuthorizationServer.Authorize(context);
         }
 
         #endregion Methods

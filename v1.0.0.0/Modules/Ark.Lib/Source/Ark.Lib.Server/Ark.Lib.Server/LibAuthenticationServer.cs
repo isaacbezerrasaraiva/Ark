@@ -1,4 +1,4 @@
-﻿// LibServerAuthentication.cs
+﻿// LibAuthenticationServer.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
@@ -21,30 +21,30 @@ using Ark.Lib;
 
 namespace Ark.Lib.Server
 {
-    public class LibServerAuthentication
+    public class LibAuthenticationServer
     {
         #region Variables
 
         private readonly RequestDelegate next;
-        private static ILibServerAuthentication iServerAuthentication;
+        private static ILibAuthenticationServer iAuthenticationServer;
 
         #endregion Variables
 
         #region Constructors
 
-        public LibServerAuthentication(RequestDelegate next)
+        public LibAuthenticationServer(RequestDelegate next)
         {
             this.next = next;
 
-            if (iServerAuthentication == null)
+            if (iAuthenticationServer == null)
             {
-                String assemblyFolderName = LibServerConfiguration.DynamicXml["Ark.Lib"]["Security"]["Authentication"].Attribute["Assembly"].Replace(".dll", String.Empty);
-                String assemblyFileName = LibServerConfiguration.DynamicXml["Ark.Lib"]["Security"]["Authentication"].Attribute["Assembly"];
-                String classFullName = LibServerConfiguration.DynamicXml["Ark.Lib"]["Security"]["Authentication"].Attribute["Class"];
+                String assemblyFolderName = LibConfigurationServer.DynamicXml["Ark.Lib"]["Security"]["Authentication"].Attribute["Assembly"].Replace(".dll", String.Empty);
+                String assemblyFileName = LibConfigurationServer.DynamicXml["Ark.Lib"]["Security"]["Authentication"].Attribute["Assembly"];
+                String classFullName = LibConfigurationServer.DynamicXml["Ark.Lib"]["Security"]["Authentication"].Attribute["Class"];
 
                 if (String.IsNullOrEmpty(assemblyFileName) == false && String.IsNullOrEmpty(classFullName) == false)
                 {
-                    iServerAuthentication = (ILibServerAuthentication)LazyActivator.Local.CreateInstance(Path.Combine(
+                    iAuthenticationServer = (ILibAuthenticationServer)LazyActivator.Local.CreateInstance(Path.Combine(
                         LibDirectory.Root.Bin.AssemblyFolder[assemblyFolderName].CurrentVersion.Lib.NetCoreApp31.Path, assemblyFileName),
                         classFullName);
                 }
@@ -57,8 +57,8 @@ namespace Ark.Lib.Server
 
         public async Task Invoke(HttpContext context)
         {
-            if (iServerAuthentication != null)
-                iServerAuthentication.Authenticate(context);
+            if (iAuthenticationServer != null)
+                iAuthenticationServer.Authenticate(context);
 
             await this.next(context);
         }
