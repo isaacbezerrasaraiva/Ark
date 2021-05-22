@@ -31,10 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Languages\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="Properties\LibResourcesServer.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

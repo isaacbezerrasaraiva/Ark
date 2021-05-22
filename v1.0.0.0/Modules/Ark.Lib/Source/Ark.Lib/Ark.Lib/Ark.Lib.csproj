@@ -24,11 +24,7 @@
   <ItemGroup>
     <PackageReference Include="Lazy" Version="1.0.0" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Languages\" />
-  </ItemGroup>
-
+  
   <ItemGroup>
     <Compile Update="Properties\LibResources.Designer.cs">
       <DesignTime>True</DesignTime>
