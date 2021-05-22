@@ -39,7 +39,7 @@ using Ark.Sys.IService;
 
 namespace Ark.Sys.Server
 {
-    public class SysAuthorizationServer : FwkServer, ISysAuthorizationServer, ILibServerAuthorization
+    public class SysAuthorizationServer : FwkServer, ISysAuthorizationServer, ILibAuthorizationServer
     {
         #region Variables
         #endregion Variables

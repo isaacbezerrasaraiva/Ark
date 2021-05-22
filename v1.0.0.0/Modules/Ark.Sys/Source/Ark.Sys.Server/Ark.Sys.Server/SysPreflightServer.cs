@@ -36,7 +36,7 @@ using Ark.Sys.IService;
 
 namespace Ark.Sys.Server
 {
-    public class SysPreflightServer : FwkServer, ISysPreflightServer, ILibServerPreflight
+    public class SysPreflightServer : FwkServer, ISysPreflightServer, ILibPreflightServer
     {
         #region Variables
         #endregion Variables

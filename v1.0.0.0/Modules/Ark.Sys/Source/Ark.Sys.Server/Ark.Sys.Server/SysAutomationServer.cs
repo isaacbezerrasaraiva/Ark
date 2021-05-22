@@ -36,7 +36,7 @@ using Ark.Sys.IService;
 
 namespace Ark.Sys.Server
 {
-    public class SysAutomationServer : FwkServer, ISysAutomationServer, ILibServerTimerWorker
+    public class SysAutomationServer : FwkServer, ISysAutomationServer, ILibTimedWorkerServer
     {
         #region Variables
         #endregion Variables
@@ -60,7 +60,7 @@ namespace Ark.Sys.Server
         public void Execute(Object data)
         {
             SysAutomationDataRequest automationDataRequest = new SysAutomationDataRequest();
-            automationDataRequest.Content.TimerData = (LibTimerData)data;
+            automationDataRequest.Content.TimedWorkerData = (LibTimedWorkerData)data;
 
             InvokeService("Execute", automationDataRequest, new FwkEnvironment());
         }

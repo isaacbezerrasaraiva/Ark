@@ -95,7 +95,7 @@ namespace Ark.Sys.Data
 
         #region Properties
 
-        public LibTimerData TimerData { get; set; }
+        public LibTimedWorkerData TimedWorkerData { get; set; }
 
         #endregion Properties
     }

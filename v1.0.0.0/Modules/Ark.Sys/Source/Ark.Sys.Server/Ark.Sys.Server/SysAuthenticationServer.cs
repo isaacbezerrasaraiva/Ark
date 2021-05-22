@@ -38,7 +38,7 @@ using Ark.Sys.IService;
 
 namespace Ark.Sys.Server
 {
-    public class SysAuthenticationServer : FwkServer, ISysAuthenticationServer, ILibServerAuthentication
+    public class SysAuthenticationServer : FwkServer, ISysAuthenticationServer, ILibAuthenticationServer
     {
         #region Variables
         #endregion Variables
