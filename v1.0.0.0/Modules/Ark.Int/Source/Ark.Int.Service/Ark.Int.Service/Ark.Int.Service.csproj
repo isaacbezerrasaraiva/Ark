@@ -42,6 +42,25 @@
     <PackageReference Include="Lazy.Database" Version="1.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Languages\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\IntResourcesService.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IntResourcesService.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\IntResourcesService.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IntResourcesService.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
     <PostBuildEvent>
       xcopy /y $(SolutionDir)Ark.Int.Service\Ark.Int.Service\bin\Debug\netcoreapp3.1\Ark.Int.Service.dll $(SolutionDir)..\..\..\Release\Bin\Ark.Int.Service\1.0.0\lib\netcoreapp3.1\

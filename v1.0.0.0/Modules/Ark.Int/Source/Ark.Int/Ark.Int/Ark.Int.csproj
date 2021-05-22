@@ -27,6 +27,25 @@
     <PackageReference Include="Ark.Lib" Version="1.0.0" />
     <PackageReference Include="Lazy" Version="1.0.0" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Languages\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\IntResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IntResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\IntResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IntResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
     <PostBuildEvent>
