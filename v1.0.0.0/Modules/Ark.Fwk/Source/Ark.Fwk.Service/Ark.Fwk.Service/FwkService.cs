@@ -46,7 +46,7 @@ namespace Ark.Fwk.Service
 
             String databaseAlias = "Default";
 
-            LibDynamicXmlElement dynXmlElementDatabaseSettings = LibServiceConfiguration.DynamicXml["Ark.Fwk"]["Database"][databaseAlias]["Settings"];
+            LibDynamicXmlElement dynXmlElementDatabaseSettings = LibConfigurationService.DynamicXml["Ark.Fwk"]["Database"][databaseAlias]["Settings"];
 
             String databaseDbms = dynXmlElementDatabaseSettings.Attribute["Dbms"];
             String databaseAssembly = dynXmlElementDatabaseSettings.Attribute["Assembly"];
