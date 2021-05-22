@@ -27,11 +27,7 @@
     <PackageReference Include="Ark.Lib" Version="1.0.0" />
     <PackageReference Include="Lazy" Version="1.0.0" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Languages\" />
-  </ItemGroup>
-
+  
   <ItemGroup>
     <Compile Update="Properties\IntResources.Designer.cs">
       <DesignTime>True</DesignTime>
