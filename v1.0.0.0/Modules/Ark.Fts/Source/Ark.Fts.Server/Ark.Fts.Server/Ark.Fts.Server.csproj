@@ -9,6 +9,7 @@
     <Copyright>Copyleft (ͻ) 2021</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <RepositoryUrl>https://github.com/isaacbezerrasaraiva/Ark</RepositoryUrl>
+    <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageOutputPath>$(SolutionDir)..\..\..\Release\.nupkg\</PackageOutputPath>
@@ -39,7 +40,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Properties\" />
+    <Folder Include="Languages\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\FtsResourcesServer.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FtsResourcesServer.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\FtsResourcesServer.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FtsResourcesServer.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
