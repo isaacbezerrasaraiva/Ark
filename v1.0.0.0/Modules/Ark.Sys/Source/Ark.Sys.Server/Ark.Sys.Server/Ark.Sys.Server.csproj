@@ -9,6 +9,7 @@
     <Copyright>Copyleft (ͻ) 2021</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <RepositoryUrl>https://github.com/isaacbezerrasaraiva/Ark</RepositoryUrl>
+    <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageOutputPath>$(SolutionDir)..\..\..\Release\.nupkg\</PackageOutputPath>

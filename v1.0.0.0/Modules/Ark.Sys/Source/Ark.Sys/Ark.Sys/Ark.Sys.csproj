@@ -28,6 +28,25 @@
     <PackageReference Include="Lazy" Version="1.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Languages\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\SysResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SysResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\SysResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SysResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
     <PostBuildEvent>
       xcopy /y $(SolutionDir)Ark.Sys\Ark.Sys\bin\Debug\netcoreapp3.1\Ark.Sys.dll $(SolutionDir)..\..\..\Release\Bin\Ark.Sys\1.0.0\lib\netcoreapp3.1\
