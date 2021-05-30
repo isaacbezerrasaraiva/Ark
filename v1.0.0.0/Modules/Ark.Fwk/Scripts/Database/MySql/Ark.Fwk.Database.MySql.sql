@@ -116,6 +116,17 @@ create table FwkBranchRoleAction
     constraint Pk_FwkBranchRoleAction primary key (IdDomain, IdBranch, IdRole, CodModule, CodFeature, CodAction)
 );
 
+create table FwkServicePlugin
+(
+	IdDomain smallint,
+    ServiceClass varchar(64),
+    PluginClass varchar(64),
+    MajorPriority smallint,
+    MinorPriority smallint,
+    Enabled char(1),
+    constraint Pk_FwkServicePlugin primary key (IdDomain, ServiceClass, PluginClass)
+);
+
 
 
 -- Add constraints section ------------------------------------------------------------------------------------------------------------------
@@ -164,6 +175,9 @@ alter table FwkBranchRoleUser
 alter table FwkBranchRoleAction 
 	add constraint Fk_FwkBranchRoleAction1 foreign key (IdDomain, IdBranch, IdRole) references FwkBranchRole (IdDomain, IdBranch, IdRole), 
     add constraint Fk_FwkBranchRoleAction2 foreign key (IdDomain, CodModule, CodFeature) references FwkFeature (IdDomain, CodModule, CodFeature);
+    
+alter table FwkServicePlugin 
+	add constraint Fk_FwkServicePlugin1 foreign key (IdDomain) references FwkDomain (IdDomain);
 
 
 

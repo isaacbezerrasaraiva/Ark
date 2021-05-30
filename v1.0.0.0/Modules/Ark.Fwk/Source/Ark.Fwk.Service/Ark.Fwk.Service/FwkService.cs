@@ -42,10 +42,10 @@ namespace Ark.Fwk.Service
         {
             this.environment = environment;
 
-            #region Initialize database
-
-            if (String.IsNullOrEmpty(environment.DatabaseAlias) == false)
+            if (this.environment != null && String.IsNullOrEmpty(this.environment.DatabaseAlias) == false)
             {
+                #region Initialize database
+
                 LibDynamicXmlElement dynXmlElementDatabaseSettings = LibConfigurationService.DynamicXml["Ark.Fwk"]["Database"][environment.DatabaseAlias]["Settings"];
 
                 //String databaseDbms = dynXmlElementDatabaseSettings.Attribute["Dbms"];
@@ -58,69 +58,98 @@ namespace Ark.Fwk.Service
                 this.database = (LazyDatabase)LazyActivator.Local.CreateInstance(Path.Combine(
                     LibDirectory.Root.Bin.AssemblyFolder[databaseAssemblyFolderName].Version[databaseVersion].Lib.NetCoreApp31.Path, databaseAssembly),
                     databaseClass, new Object[] { databaseConnectionString });
-            }
 
-            #endregion Initialize database
+                #endregion Initialize database
 
-            #region Initialize environment
-
-            String sql = null;
-            DataTable dataTable = null;
-
-            if (this.environment.Domain != null)
-            {
-                this.database.OpenConnection();
-
-                #region Initialize domain
-
-                sql = "select CodDomain, Name from FwkDomain where IdDomain = :IdDomain";
-                dataTable = this.database.QueryTable(sql, "FwkDomain", new Object[] { this.environment.Domain.IdDomain });
-
-                if (dataTable.Rows.Count > 0)
+                if (this.environment.Domain != null)
                 {
-                    this.environment.Domain.CodDomain = LazyConvert.ToString(dataTable.Rows[0]["CodDomain"]);
-                    this.environment.Domain.Name = LazyConvert.ToString(dataTable.Rows[0]["Name"]);
-                }
+                    String sql = null;
+                    DataTable dataTable = null;
 
-                #endregion Initialize domain
+                    this.database.OpenConnection();
 
-                if (this.environment.User != null)
-                {
-                    #region Initialize user
+                    #region Initialize environment
 
-                    sql = "select Username, DisplayName from FwkUser where IdDomain = :IdDomain and IdUser = :IdUser";
-                    dataTable = this.database.QueryTable(sql, "FwkUser", new Object[] { this.environment.User.IdDomain, this.environment.User.IdUser });
+                    #region Initialize domain
+
+                    sql = "select CodDomain, Name from FwkDomain where IdDomain = :IdDomain";
+                    dataTable = this.database.QueryTable(sql, "FwkDomain", new Object[] { this.environment.Domain.IdDomain });
 
                     if (dataTable.Rows.Count > 0)
                     {
-                        this.environment.User.Username = LazyConvert.ToString(dataTable.Rows[0]["Username"]);
-                        this.environment.User.DisplayName = LazyConvert.ToString(dataTable.Rows[0]["DisplayName"]);
+                        this.environment.Domain.CodDomain = LazyConvert.ToString(dataTable.Rows[0]["CodDomain"]);
+                        this.environment.Domain.Name = LazyConvert.ToString(dataTable.Rows[0]["Name"]);
                     }
 
-                    #endregion Initialize user
+                    #endregion Initialize domain
 
-                    #region Initialize user context
-
-                    sql = "select Field, ValueInt16, ValueInt32, ValueString from FwkUserContext where IdDomain = :IdDomain and IdUser = :IdUser";
-                    dataTable = this.database.QueryTable(sql, "FwkUserContext", new Object[] { this.environment.User.IdDomain, this.environment.User.IdUser });
-
-                    foreach (DataRow dataRow in dataTable.Rows)
+                    if (this.environment.User != null)
                     {
-                        String field = LazyConvert.ToString(dataRow["Field"]);
+                        #region Initialize user
 
-                        this.environment.UserContext[field].ValueInt16 = LazyConvert.ToInt16(dataRow["ValueInt16"], 0);
-                        this.environment.UserContext[field].ValueInt32 = LazyConvert.ToInt32(dataRow["ValueInt32"], 0);
-                        this.environment.UserContext[field].ValueString = LazyConvert.ToString(dataRow["ValueString"], null);
+                        sql = "select Username, DisplayName from FwkUser where IdDomain = :IdDomain and IdUser = :IdUser";
+                        dataTable = this.database.QueryTable(sql, "FwkUser", new Object[] { this.environment.User.IdDomain, this.environment.User.IdUser });
+
+                        if (dataTable.Rows.Count > 0)
+                        {
+                            this.environment.User.Username = LazyConvert.ToString(dataTable.Rows[0]["Username"]);
+                            this.environment.User.DisplayName = LazyConvert.ToString(dataTable.Rows[0]["DisplayName"]);
+                        }
+
+                        #endregion Initialize user
+
+                        #region Initialize user context
+
+                        sql = "select Field, ValueInt16, ValueInt32, ValueString from FwkUserContext where IdDomain = :IdDomain and IdUser = :IdUser";
+                        dataTable = this.database.QueryTable(sql, "FwkUserContext", new Object[] { this.environment.User.IdDomain, this.environment.User.IdUser });
+
+                        foreach (DataRow dataRow in dataTable.Rows)
+                        {
+                            String field = LazyConvert.ToString(dataRow["Field"]);
+
+                            this.environment.UserContext[field].ValueInt16 = LazyConvert.ToInt16(dataRow["ValueInt16"], 0);
+                            this.environment.UserContext[field].ValueInt32 = LazyConvert.ToInt32(dataRow["ValueInt32"], 0);
+                            this.environment.UserContext[field].ValueString = LazyConvert.ToString(dataRow["ValueString"], null);
+                        }
+
+                        #endregion Initialize user context
                     }
 
-                    #endregion Initialize user context
+                    #endregion Initialize environment
+
+                    #region Initialize plugins
+                    
+                    sql = "select PluginClass from FwkServicePlugin where IdDomain = :IdDomain and ServiceClass = :ServiceClass and Enabled = '1' order by MajorPriority, MinorPriority";
+                    dataTable = this.database.QueryTable(sql, "FwkServicePlugin", new Object[] { this.environment.Domain.IdDomain, this.GetType().FullName });
+
+                    if (dataTable.Rows.Count > 0)
+                        this.iPluginList = new List<IFwkPlugin>();
+
+                    foreach (DataRow dataRowPlugin in dataTable.Rows)
+                    {
+                        try
+                        {
+                            String pluginClass = LazyConvert.ToString(dataRowPlugin["PluginClass"]);
+                            String pluginFolderName = pluginClass.Substring(0, pluginClass.LastIndexOf('.'));
+
+                            IFwkPlugin iPlugin = (IFwkPlugin)LazyActivator.Local.CreateInstance(Path.Combine(
+                                LibDirectory.Root.Bin.AssemblyFolder[pluginFolderName].CurrentVersion.Lib.NetCoreApp31.Path, pluginFolderName + ".dll"),
+                                pluginClass);
+
+                            this.iPluginList.Add(iPlugin);
+                        }
+                        catch
+                        {
+                            /* Nothing to do here yet */
+                        }
+                    }
+
+                    #endregion Initialize plugins
+
+                    this.database.CloseConnection();
                 }
-
-                this.database.CloseConnection();
             }
-
-            #endregion Initialize environment
-
+            
             #region Initialize data response type
 
             String assemblyFolderName = this.GetType().Namespace.Replace("Service", "Data");
