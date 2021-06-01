@@ -15,10 +15,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="IntIntegrationData.cs~RFccf795d4.TMP" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="..\..\..\..\..\..\LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
