@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>[arkNetFramework]</TargetFramework>
+    <Version>[arkVersion]</Version>
+    <Authors>[arkAuthor]</Authors>
+    <Product>[arkProduct]</Product>
+    <Description>[arkProjectDescriptionIService]</Description>
+    <Copyright>Copyleft (ͻ) [arkYear]</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RepositoryUrl>[arkRepository]</RepositoryUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageOutputPath>$(SolutionDir)..\..\..\Release\.nupkg\</PackageOutputPath>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <None Include="..\..\..\..\..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ark.Fts" Version="[arkVersion]" />
+    <PackageReference Include="Ark.Fts.Data" Version="[arkVersion]" />
+    <PackageReference Include="Ark.Fts.IService" Version="[arkVersion]" />
+    <PackageReference Include="Ark.Fwk" Version="[arkVersion]" />
+    <PackageReference Include="Ark.Fwk.Data" Version="[arkVersion]" />
+    <PackageReference Include="Ark.Fwk.IService" Version="[arkVersion]" />
+    <PackageReference Include="[arkProjectNameBase]" Version="[arkVersion]" />
+    <PackageReference Include="[arkProjectNameData]" Version="[arkVersion]" />
+    <PackageReference Include="Ark.Lib" Version="[arkVersion]" />
+    <PackageReference Include="Lazy" Version="[arkVersion]" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == '[arkNetFramework]'">
+    <PostBuildEvent>
+      xcopy /y $(SolutionDir)[arkSolutionFolderNameService]\[arkProjectFolderNameIService]\bin\Debug\[arkNetFramework]\[arkProjectNameIService].dll $(SolutionDir)..\..\..\Release\Bin\[arkProjectNameIService]\[arkVersion]\lib\[arkNetFramework]\
+      xcopy /y $(SolutionDir)[arkSolutionFolderNameService]\[arkProjectFolderNameIService]\bin\Debug\[arkNetFramework]\[arkProjectNameIService].dll %SystemDrive%%HomePath%\.nuget\Packages\[arkProjectNameIService-LowerCase]\[arkVersion]\lib\[arkNetFramework]\
+    </PostBuildEvent>
+  </PropertyGroup>
+  
+</Project>

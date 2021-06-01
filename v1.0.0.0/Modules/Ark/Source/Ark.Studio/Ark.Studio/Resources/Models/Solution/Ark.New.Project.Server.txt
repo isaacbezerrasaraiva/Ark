@@ -1,0 +1,69 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>[arkNetFramework]</TargetFramework>
+    <Version>[arkVersion]</Version>
+    <Authors>[arkAuthor]</Authors>
+    <Product>[arkProduct]</Product>
+    <Description>[arkProjectDescriptionServer]</Description>
+    <Copyright>Copyleft (ͻ) [arkYear]</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RepositoryUrl>[arkRepository]</RepositoryUrl>
+    <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageOutputPath>$(SolutionDir)..\..\..\Release\.nupkg\</PackageOutputPath>
+    <IsPackable>true</IsPackable>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\..\..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ark.Fts" Version="[arkVersion]" />
+    <PackageReference Include="Ark.Fts.Data" Version="[arkVersion]" />
+    <PackageReference Include="Ark.Fts.IServer" Version="[arkVersion]" />
+    <PackageReference Include="Ark.Fts.IService" Version="[arkVersion]" />
+    <PackageReference Include="Ark.Fts.Server" Version="[arkVersion]" />
+    <PackageReference Include="Ark.Fwk" Version="[arkVersion]" />
+    <PackageReference Include="Ark.Fwk.Data" Version="[arkVersion]" />
+    <PackageReference Include="Ark.Fwk.IServer" Version="[arkVersion]" />
+    <PackageReference Include="Ark.Fwk.IService" Version="[arkVersion]" />
+    <PackageReference Include="Ark.Fwk.Server" Version="[arkVersion]" />
+    <PackageReference Include="[arkProjectNameBase]" Version="[arkVersion]" />
+    <PackageReference Include="[arkProjectNameData]" Version="[arkVersion]" />
+    <PackageReference Include="[arkProjectNameIServer]" Version="[arkVersion]" />
+    <PackageReference Include="[arkProjectNameIService]" Version="[arkVersion]" />
+    <PackageReference Include="Ark.Lib" Version="[arkVersion]" />
+    <PackageReference Include="Ark.Lib.Server" Version="[arkVersion]" />
+    <PackageReference Include="Lazy" Version="[arkVersion]" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Update="Properties\[arkAcronym]ResourcesServer.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>[arkAcronym]ResourcesServer.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\[arkAcronym]ResourcesServer.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>[arkAcronym]ResourcesServer.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  
+  <PropertyGroup Condition="'$(TargetFramework)' == '[arkNetFramework]'">
+    <PostBuildEvent>
+      xcopy /y $(SolutionDir)[arkSolutionFolderNameServer]\[arkProjectFolderNameServer]\bin\Debug\[arkNetFramework]\[arkProjectNameServer].dll $(SolutionDir)..\..\..\Release\Bin\[arkProjectNameServer]\[arkVersion]\lib\[arkNetFramework]\
+      xcopy /y $(SolutionDir)[arkSolutionFolderNameServer]\[arkProjectFolderNameServer]\bin\Debug\[arkNetFramework]\[arkProjectNameServer].dll %SystemDrive%%HomePath%\.nuget\Packages\[arkProjectNameServer-LowerCase]\[arkVersion]\lib\[arkNetFramework]\
+    </PostBuildEvent>
+  </PropertyGroup>
+  
+</Project>

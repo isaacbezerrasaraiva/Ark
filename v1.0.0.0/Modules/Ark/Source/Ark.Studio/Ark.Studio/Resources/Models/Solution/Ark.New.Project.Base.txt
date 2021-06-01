@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>[arkNetFramework]</TargetFramework>
+    <Version>[arkVersion]</Version>
+    <Authors>[arkAuthor]</Authors>
+    <Product>[arkProduct]</Product>
+    <Description>[arkProjectDescriptionBase]</Description>
+    <Copyright>Copyleft (ͻ) [arkYear]</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RepositoryUrl>[arkRepository]</RepositoryUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageOutputPath>$(SolutionDir)..\..\..\Release\.nupkg\</PackageOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\..\..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ark.Fts" Version="[arkVersion]" />
+    <PackageReference Include="Ark.Fwk" Version="[arkVersion]" />
+    <PackageReference Include="Ark.Lib" Version="[arkVersion]" />
+    <PackageReference Include="Lazy" Version="[arkVersion]" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Update="Properties\[arkAcronym]Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>[arkAcronym]Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\[arkAcronym]Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>[arkAcronym]Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  
+  <PropertyGroup Condition="'$(TargetFramework)' == '[arkNetFramework]'">
+    <PostBuildEvent>
+      xcopy /y $(SolutionDir)[arkSolutionFolderNameBase]\[arkProjectFolderNameBase]\bin\Debug\[arkNetFramework]\[arkProjectNameBase].dll $(SolutionDir)..\..\..\Release\Bin\[arkProjectNameBase]\[arkVersion]\lib\[arkNetFramework]\
+      xcopy /y $(SolutionDir)[arkSolutionFolderNameBase]\[arkProjectFolderNameBase]\bin\Debug\[arkNetFramework]\[arkProjectNameBase].dll %SystemDrive%%HomePath%\.nuget\Packages\[arkProjectNameBase-LowerCase]\[arkVersion]\lib\[arkNetFramework]\
+    </PostBuildEvent>
+  </PropertyGroup>
+  
+</Project>

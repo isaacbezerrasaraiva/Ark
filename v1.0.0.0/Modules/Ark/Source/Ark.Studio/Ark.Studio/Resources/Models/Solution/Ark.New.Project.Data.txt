@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>[arkNetFramework]</TargetFramework>
+    <Version>[arkVersion]</Version>
+    <Authors>[arkAuthor]</Authors>
+    <Product>[arkProduct]</Product>
+    <Description>[arkProjectDescriptionData]</Description>
+    <Copyright>Copyleft (ͻ) [arkYear]</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RepositoryUrl>[arkRepository]</RepositoryUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageOutputPath>$(SolutionDir)..\..\..\Release\.nupkg\</PackageOutputPath>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <None Include="..\..\..\..\..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ark.Fts" Version="[arkVersion]" />
+    <PackageReference Include="Ark.Fts.Data" Version="[arkVersion]" />
+    <PackageReference Include="Ark.Fwk" Version="[arkVersion]" />
+    <PackageReference Include="Ark.Fwk.Data" Version="[arkVersion]" />
+    <PackageReference Include="[arkProjectNameBase]" Version="[arkVersion]" />
+    <PackageReference Include="Ark.Lib" Version="[arkVersion]" />
+    <PackageReference Include="Lazy" Version="[arkVersion]" />
+  </ItemGroup>
+  
+  <PropertyGroup Condition="'$(TargetFramework)' == '[arkNetFramework]'">
+    <PostBuildEvent>
+      xcopy /y $(SolutionDir)[arkSolutionFolderNameBase]\[arkProjectFolderNameData]\bin\Debug\[arkNetFramework]\[arkProjectNameData].dll $(SolutionDir)..\..\..\Release\Bin\[arkProjectNameData]\[arkVersion]\lib\[arkNetFramework]\
+      xcopy /y $(SolutionDir)[arkSolutionFolderNameBase]\[arkProjectFolderNameData]\bin\Debug\[arkNetFramework]\[arkProjectNameData].dll %SystemDrive%%HomePath%\.nuget\Packages\[arkProjectNameData-LowerCase]\[arkVersion]\lib\[arkNetFramework]\
+    </PostBuildEvent>
+  </PropertyGroup>
+  
+</Project>

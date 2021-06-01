@@ -1,0 +1,115 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "[arkSolutionFolderNameBase]", "[arkSolutionFolderNameBase]", "{[arkSolutionFolderGuidBase]}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "[arkProjectNameBase]", "[arkSolutionFolderNameBase]\[arkProjectFolderNameBase]\[arkProjectNameBase].csproj", "{[arkProjectGuidBase]}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "[arkProjectNameData]", "[arkSolutionFolderNameBase]\[arkProjectFolderNameData]\[arkProjectNameData].csproj", "{[arkProjectGuidData]}"
+	ProjectSection(ProjectDependencies) = postProject
+		{[arkProjectGuidBase]} = {[arkProjectGuidBase]}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "[arkSolutionFolderNameServer]", "[arkSolutionFolderNameServer]", "{[arkSolutionFolderGuidServer]}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "[arkProjectNameIServer]", "[arkSolutionFolderNameServer]\[arkProjectFolderNameIServer]\[arkProjectNameIServer].csproj", "{[arkProjectGuidIServer]}"
+	ProjectSection(ProjectDependencies) = postProject
+		{[arkProjectGuidData]} = {[arkProjectGuidData]}
+		{[arkProjectGuidBase]} = {[arkProjectGuidBase]}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "[arkProjectNameServer]", "[arkSolutionFolderNameServer]\[arkProjectFolderNameServer]\[arkProjectNameServer].csproj", "{[arkProjectGuidServer]}"
+	ProjectSection(ProjectDependencies) = postProject
+		{[arkProjectGuidIServer]} = {[arkProjectGuidIServer]}
+		{[arkProjectGuidData]} = {[arkProjectGuidData]}
+		{[arkProjectGuidBase]} = {[arkProjectGuidBase]}
+		{[arkProjectGuidIService]} = {[arkProjectGuidIService]}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "[arkSolutionFolderNameService]", "[arkSolutionFolderNameService]", "{[arkSolutionFolderGuidService]}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "[arkProjectNameIPlugin]", "[arkSolutionFolderNameService]\[arkProjectFolderNameIPlugin]\[arkProjectNameIPlugin].csproj", "{[arkProjectGuidIPlugin]}"
+	ProjectSection(ProjectDependencies) = postProject
+		{[arkProjectGuidData]} = {[arkProjectGuidData]}
+		{[arkProjectGuidBase]} = {[arkProjectGuidBase]}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "[arkProjectNameIService]", "[arkSolutionFolderNameService]\[arkProjectFolderNameIService]\[arkProjectNameIService].csproj", "{[arkProjectGuidIService]}"
+	ProjectSection(ProjectDependencies) = postProject
+		{[arkProjectGuidData]} = {[arkProjectGuidData]}
+		{[arkProjectGuidBase]} = {[arkProjectGuidBase]}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "[arkProjectNameServant]", "[arkSolutionFolderNameService]\[arkProjectFolderNameServant]\[arkProjectNameServant].csproj", "{[arkProjectGuidServant]}"
+	ProjectSection(ProjectDependencies) = postProject
+		{[arkProjectGuidData]} = {[arkProjectGuidData]}
+		{[arkProjectGuidBase]} = {[arkProjectGuidBase]}
+		{[arkProjectGuidIService]} = {[arkProjectGuidIService]}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "[arkProjectNameService]", "[arkSolutionFolderNameService]\[arkProjectFolderNameService]\[arkProjectNameService].csproj", "{[arkProjectGuidService]}"
+	ProjectSection(ProjectDependencies) = postProject
+		{[arkProjectGuidIPlugin]} = {[arkProjectGuidIPlugin]}
+		{[arkProjectGuidData]} = {[arkProjectGuidData]}
+		{[arkProjectGuidBase]} = {[arkProjectGuidBase]}
+		{[arkProjectGuidIService]} = {[arkProjectGuidIService]}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{[arkProjectGuidBase]}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{[arkProjectGuidBase]}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{[arkProjectGuidBase]}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{[arkProjectGuidBase]}.Release|Any CPU.Build.0 = Release|Any CPU
+		{[arkProjectGuidData]}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{[arkProjectGuidData]}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{[arkProjectGuidData]}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{[arkProjectGuidData]}.Release|Any CPU.Build.0 = Release|Any CPU
+		{[arkProjectGuidIServer]}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{[arkProjectGuidIServer]}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{[arkProjectGuidIServer]}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{[arkProjectGuidIServer]}.Release|Any CPU.Build.0 = Release|Any CPU
+		{[arkProjectGuidServer]}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{[arkProjectGuidServer]}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{[arkProjectGuidServer]}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{[arkProjectGuidServer]}.Release|Any CPU.Build.0 = Release|Any CPU
+		{[arkProjectGuidIPlugin]}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{[arkProjectGuidIPlugin]}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{[arkProjectGuidIPlugin]}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{[arkProjectGuidIPlugin]}.Release|Any CPU.Build.0 = Release|Any CPU
+		{[arkProjectGuidIService]}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{[arkProjectGuidIService]}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{[arkProjectGuidIService]}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{[arkProjectGuidIService]}.Release|Any CPU.Build.0 = Release|Any CPU
+		{[arkProjectGuidServant]}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{[arkProjectGuidServant]}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{[arkProjectGuidServant]}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{[arkProjectGuidServant]}.Release|Any CPU.Build.0 = Release|Any CPU
+		{[arkProjectGuidService]}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{[arkProjectGuidService]}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{[arkProjectGuidService]}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{[arkProjectGuidService]}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{[arkProjectGuidBase]} = {[arkSolutionFolderGuidBase]}
+		{[arkProjectGuidData]} = {[arkSolutionFolderGuidBase]}
+		{[arkProjectGuidIServer]} = {[arkSolutionFolderGuidServer]}
+		{[arkProjectGuidServer]} = {[arkSolutionFolderGuidServer]}
+		{[arkProjectGuidIPlugin]} = {[arkSolutionFolderGuidService]}
+		{[arkProjectGuidIService]} = {[arkSolutionFolderGuidService]}
+		{[arkProjectGuidServant]} = {[arkSolutionFolderGuidService]}
+		{[arkProjectGuidService]} = {[arkSolutionFolderGuidService]}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {[arkSolutionGuid]}
+	EndGlobalSection
+EndGlobal
