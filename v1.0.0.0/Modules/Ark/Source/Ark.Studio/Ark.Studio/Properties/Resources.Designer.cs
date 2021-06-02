@@ -22,7 +22,7 @@ namespace Ark.Studio.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Ark.Studio.Properties {
         ///   Retorna a instância de ResourceManager armazenada em cache usada por essa classe.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ark.Studio.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace Ark.Studio.Properties {
         ///   pesquisas de recursos que usam essa classe de recurso de tipo de alta segurança.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -75,7 +75,7 @@ namespace Ark.Studio.Properties {
         ///    &lt;GeneratePackageOnBuild&gt;true&lt;/GeneratePackageOnBuild&gt;
         ///    &lt;Package [o restante da cadeia de caracteres foi truncado]&quot;;.
         /// </summary>
-        internal static string Ark_New_Project_Base {
+        public static string Ark_New_Project_Base {
             get {
                 return ResourceManager.GetString("Ark_New_Project_Base", resourceCulture);
             }
@@ -96,7 +96,7 @@ namespace Ark.Studio.Properties {
         ///    &lt;GeneratePackageOnBuild&gt;true&lt;/GeneratePackageOnBuild&gt;
         ///    &lt;Package [o restante da cadeia de caracteres foi truncado]&quot;;.
         /// </summary>
-        internal static string Ark_New_Project_Data {
+        public static string Ark_New_Project_Data {
             get {
                 return ResourceManager.GetString("Ark_New_Project_Data", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace Ark.Studio.Properties {
         ///    &lt;GeneratePackageOnBuild&gt;true&lt;/GeneratePackageOnBuild&gt;
         ///    &lt;Pack [o restante da cadeia de caracteres foi truncado]&quot;;.
         /// </summary>
-        internal static string Ark_New_Project_IPlugin {
+        public static string Ark_New_Project_IPlugin {
             get {
                 return ResourceManager.GetString("Ark_New_Project_IPlugin", resourceCulture);
             }
@@ -138,7 +138,7 @@ namespace Ark.Studio.Properties {
         ///    &lt;GeneratePackageOnBuild&gt;true&lt;/GeneratePackageOnBuild&gt;
         ///    &lt;Pack [o restante da cadeia de caracteres foi truncado]&quot;;.
         /// </summary>
-        internal static string Ark_New_Project_IServer {
+        public static string Ark_New_Project_IServer {
             get {
                 return ResourceManager.GetString("Ark_New_Project_IServer", resourceCulture);
             }
@@ -159,7 +159,7 @@ namespace Ark.Studio.Properties {
         ///    &lt;GeneratePackageOnBuild&gt;true&lt;/GeneratePackageOnBuild&gt;
         ///    &lt;Pac [o restante da cadeia de caracteres foi truncado]&quot;;.
         /// </summary>
-        internal static string Ark_New_Project_IService {
+        public static string Ark_New_Project_IService {
             get {
                 return ResourceManager.GetString("Ark_New_Project_IService", resourceCulture);
             }
@@ -180,7 +180,7 @@ namespace Ark.Studio.Properties {
         ///    &lt;GeneratePackageOnBuild&gt;true&lt;/GeneratePackageOnBuild&gt;
         ///    &lt;Pack [o restante da cadeia de caracteres foi truncado]&quot;;.
         /// </summary>
-        internal static string Ark_New_Project_Servant {
+        public static string Ark_New_Project_Servant {
             get {
                 return ResourceManager.GetString("Ark_New_Project_Servant", resourceCulture);
             }
@@ -200,7 +200,7 @@ namespace Ark.Studio.Properties {
         ///    &lt;RepositoryUrl&gt;[arkRepository]&lt;/RepositoryUrl&gt;
         ///    &lt;NoDefaultLaunchSettingsFile&gt;true&lt;/NoDefaultLaunchSettingsFil [o restante da cadeia de caracteres foi truncado]&quot;;.
         /// </summary>
-        internal static string Ark_New_Project_Server {
+        public static string Ark_New_Project_Server {
             get {
                 return ResourceManager.GetString("Ark_New_Project_Server", resourceCulture);
             }
@@ -221,7 +221,7 @@ namespace Ark.Studio.Properties {
         ///    &lt;GeneratePackageOnBuild&gt;true&lt;/GeneratePackageOnBuild&gt;
         ///    &lt;Pack [o restante da cadeia de caracteres foi truncado]&quot;;.
         /// </summary>
-        internal static string Ark_New_Project_Service {
+        public static string Ark_New_Project_Service {
             get {
                 return ResourceManager.GetString("Ark_New_Project_Service", resourceCulture);
             }
@@ -237,7 +237,7 @@ namespace Ark.Studio.Properties {
         ///EndProject
         ///Project(&quot;{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}&quot;) = &quot;[arkProjectNameBase]&quot;, &quot;[arkSolutionFolderNameBase]\[arkProjectFolderNameBase]\[arkProjectNameBase].csproj&quot;, &quot;{[arkProjectGuidBa [o restante da cadeia de caracteres foi truncado]&quot;;.
         /// </summary>
-        internal static string Ark_New_Solution {
+        public static string Ark_New_Solution {
             get {
                 return ResourceManager.GetString("Ark_New_Solution", resourceCulture);
             }
@@ -246,7 +246,7 @@ namespace Ark.Studio.Properties {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Std.Language.{0}/Captions/StdCaptionCancel.
         /// </summary>
-        internal static string StdCaptionCancel {
+        public static string StdCaptionCancel {
             get {
                 return ResourceManager.GetString("StdCaptionCancel", resourceCulture);
             }
@@ -255,7 +255,7 @@ namespace Ark.Studio.Properties {
         /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Std.Language.{0}/Messages/StdMessageCancelCurrentEdition.
         /// </summary>
-        internal static string StdMessageCancelCurrentEdition {
+        public static string StdMessageCancelCurrentEdition {
             get {
                 return ResourceManager.GetString("StdMessageCancelCurrentEdition", resourceCulture);
             }
