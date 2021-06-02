@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Ark.Std.Language.EnUs>
+  <Captions>
+    <StdCaptionCancel>Cancel</StdCaptionCancel>
+  </Captions>
+  <Messages>
+    <StdMessageCancelCurrentEdition>Do you really want to cancel current edition?</StdMessageCancelCurrentEdition>
+  </Messages>
+  <Exceptions>
+  </Exceptions>
+</Ark.Std.Language.EnUs>

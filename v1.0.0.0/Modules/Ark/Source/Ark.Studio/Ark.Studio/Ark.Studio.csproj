@@ -39,12 +39,18 @@
     <Folder Include="Resources\Models\Solution\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Ark.Lib" Version="1.0.0" />
+    <PackageReference Include="Lazy" Version="1.0.0" />
+  </ItemGroup>
+
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
     <PostBuildEvent>
       copy $(SolutionDir)Ark.Studio\Ark.Studio\bin\Debug\netcoreapp3.1\Ark.Studio.dll $(SolutionDir)..\..\..\Release\
       copy $(SolutionDir)Ark.Studio\Ark.Studio\bin\Debug\netcoreapp3.1\Ark.Studio.exe $(SolutionDir)..\..\..\Release\
       copy $(SolutionDir)Ark.Studio\Ark.Studio\bin\Debug\netcoreapp3.1\Ark.Studio.deps.json $(SolutionDir)..\..\..\Release\
       copy $(SolutionDir)Ark.Studio\Ark.Studio\Ark.Studio.runtimeconfig.json $(SolutionDir)..\..\..\Release\
+      xcopy /y $(SolutionDir)Ark.Studio\Ark.Studio\Languages\* $(SolutionDir)..\..\..\Release\Dat\Languages\
     </PostBuildEvent>
   </PropertyGroup>
 

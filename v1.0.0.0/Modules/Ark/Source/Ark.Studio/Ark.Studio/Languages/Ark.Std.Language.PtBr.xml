@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Ark.Std.Language.PtBr>
+  <Captions>
+    <StdCaptionCancel>Cancelar</StdCaptionCancel>
+  </Captions>
+  <Messages>
+    <StdMessageCancelCurrentEdition>Deseja cancelar a edição atual?</StdMessageCancelCurrentEdition>
+  </Messages>
+  <Exceptions>
+  </Exceptions>
+</Ark.Std.Language.PtBr>

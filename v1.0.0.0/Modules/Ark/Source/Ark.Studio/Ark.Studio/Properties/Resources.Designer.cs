@@ -242,5 +242,23 @@ namespace Ark.Studio.Properties {
                 return ResourceManager.GetString("Ark_New_Solution", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Std.Language.{0}/Captions/StdCaptionCancel.
+        /// </summary>
+        internal static string StdCaptionCancel {
+            get {
+                return ResourceManager.GetString("StdCaptionCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Std.Language.{0}/Messages/StdMessageCancelCurrentEdition.
+        /// </summary>
+        internal static string StdMessageCancelCurrentEdition {
+            get {
+                return ResourceManager.GetString("StdMessageCancelCurrentEdition", resourceCulture);
+            }
+        }
     }
 }
