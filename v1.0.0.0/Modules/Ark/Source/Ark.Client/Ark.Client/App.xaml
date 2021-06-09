@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:Ark.Client"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary Source="themes/Generics.xaml"/>
     </Application.Resources>
 </Application>
