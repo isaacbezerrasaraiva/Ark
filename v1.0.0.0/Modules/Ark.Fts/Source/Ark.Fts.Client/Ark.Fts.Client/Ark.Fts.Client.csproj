@@ -1,0 +1,67 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <UseWindowsForms>true</UseWindowsForms>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Version>1.0.0</Version>
+    <Authors>Isaac Bezerra Saraiva</Authors>
+    <Product>Ark</Product>
+    <Description>Ark Facilities Client</Description>
+    <Copyright>Copyleft (ͻ) 2021</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RepositoryUrl>https://github.com/isaacbezerrasaraiva/Ark</RepositoryUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageOutputPath>$(SolutionDir)..\..\..\Release\.nupkg\</PackageOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\..\..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Components\Controls\" />
+    <Folder Include="Components\UserControls\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ark.Fts" Version="1.0.0" />
+    <PackageReference Include="Ark.Fts.Data" Version="1.0.0" />
+    <PackageReference Include="Ark.Fts.IServer" Version="1.0.0" />
+    <PackageReference Include="Ark.Fwk" Version="1.0.0" />
+    <PackageReference Include="Ark.Fwk.Client" Version="1.0.0" />
+    <PackageReference Include="Ark.Fwk.Data" Version="1.0.0" />
+    <PackageReference Include="Ark.Fwk.IServer" Version="1.0.0" />
+    <PackageReference Include="Ark.Lib" Version="1.0.0" />
+    <PackageReference Include="Ark.Lib.Client" Version="1.0.0" />
+    <PackageReference Include="Lazy" Version="1.0.0" />
+    <PackageReference Include="Lazy.Forms.Win" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\FtsResourcesClient.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FtsResourcesClient.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\FtsResourcesClient.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FtsResourcesClient.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
+    <PostBuildEvent>
+      xcopy /y $(SolutionDir)Ark.Fts.Client\Ark.Fts.Client\bin\Debug\netcoreapp3.1\Ark.Fts.Client.dll $(SolutionDir)..\..\..\Release\Bin\Ark.Fts.Client\1.0.0\lib\netcoreapp3.1\
+      xcopy /y $(SolutionDir)Ark.Fts.Client\Ark.Fts.Client\bin\Debug\netcoreapp3.1\Ark.Fts.Client.dll %SystemDrive%%HomePath%\.nuget\Packages\ark.fts.client\1.0.0\lib\netcoreapp3.1\
+      xcopy /y $(SolutionDir)Ark.Fts.Client\Ark.Fts.Client\Languages\* $(SolutionDir)..\..\..\Release\Dat\Languages\
+    </PostBuildEvent>
+  </PropertyGroup>
+
+</Project>
