@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <UseWindowsForms>true</UseWindowsForms>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Version>1.0.0</Version>
+    <Authors>Isaac Bezerra Saraiva</Authors>
+    <Product>Ark</Product>
+    <Description>Ark Client</Description>
+    <Copyright>Copyleft (ͻ) 2021</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RepositoryUrl>https://github.com/isaacbezerrasaraiva/Ark</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\..\..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ark.Fwk" Version="1.0.0" />
+    <PackageReference Include="Ark.Fwk.Client" Version="1.0.0" />
+    <PackageReference Include="Ark.Fwk.Data" Version="1.0.0" />
+    <PackageReference Include="Ark.Fwk.IServer" Version="1.0.0" />
+    <PackageReference Include="Ark.Lib" Version="1.0.0" />
+    <PackageReference Include="Ark.Lib.Client" Version="1.0.0" />
+    <PackageReference Include="Lazy" Version="1.0.0" />
+    <PackageReference Include="Lazy.Forms.Win" Version="1.0.0" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
+    <PostBuildEvent>
+      copy $(SolutionDir)Ark.Client\Ark.Client\bin\Debug\netcoreapp3.1\Ark.Client.dll $(SolutionDir)..\..\..\Release\
+      copy $(SolutionDir)Ark.Client\Ark.Client\bin\Debug\netcoreapp3.1\Ark.Client.exe $(SolutionDir)..\..\..\Release\
+      copy $(SolutionDir)Ark.Client\Ark.Client\bin\Debug\netcoreapp3.1\Ark.Client.deps.json $(SolutionDir)..\..\..\Release\
+      copy $(SolutionDir)Ark.Client\Ark.Client\Ark.Client.runtimeconfig.json $(SolutionDir)..\..\..\Release\
+    </PostBuildEvent>
+  </PropertyGroup>
+
+</Project>
