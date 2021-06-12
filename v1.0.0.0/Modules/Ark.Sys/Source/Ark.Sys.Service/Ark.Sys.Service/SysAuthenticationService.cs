@@ -125,14 +125,27 @@ namespace Ark.Sys.Service
                 authenticationDataResponse.Content.IdDomain = LazyConvert.ToInt32(privatePayloadDictionary["IdDomain"]);
                 authenticationDataResponse.Content.IdUser = LazyConvert.ToInt32(privatePayloadDictionary["IdUser"]);
             }
-            else if (String.IsNullOrEmpty(authenticationDataRequest.Content.Username) == false && String.IsNullOrEmpty(authenticationDataRequest.Content.Password) == false)
+            else if (String.IsNullOrEmpty(authenticationDataRequest.Content.DomainCode) == false && String.IsNullOrEmpty(authenticationDataRequest.Content.Username) == false && String.IsNullOrEmpty(authenticationDataRequest.Content.Password) == false)
             {
                 #region Authenticate on database
 
                 this.Database.OpenConnection();
 
-                String sql = "select IdUser, Password, DisplayName from FwkUser where IdDomain = :IdDomain and Username = :Username";
-                DataTable dataTableUser = this.Database.QueryTable(sql, "FwkUser", new Object[] { authenticationDataRequest.Content.IdDomain, authenticationDataRequest.Content.Username });
+                String sql = @"
+                    select 
+	                    FwkDomain.IdDomain, 
+                        FwkUser.IdUser, 
+                        FwkUser.Password, 
+                        FwkUser.DisplayName 
+                    from FwkDomain 
+	                    inner join FwkUser 
+		                    on FwkDomain.IdDomain = FwkUser.IdDomain 
+                    where FwkDomain.CodDomain = :CodDomain 
+	                    and FwkUser.Username = :Username ";
+
+                DataTable dataTableUser = this.Database.QueryTable(sql, "FwkUser", 
+                    new Object[] { authenticationDataRequest.Content.DomainCode, authenticationDataRequest.Content.Username }, 
+                    new String[] { "CodDomain", "Username" });
 
                 if (dataTableUser.Rows.Count > 0)
                 {
@@ -147,10 +160,10 @@ namespace Ark.Sys.Service
 
                         publicPayloadDictionary.Add("User", LazyConvert.ToString(dataTableUser.Rows[0]["DisplayName"]));
                         privatePayloadDictionary.Add("DatabaseAlias", authenticationDataRequest.Content.DatabaseAlias);
-                        privatePayloadDictionary.Add("IdDomain", LazyConvert.ToString(authenticationDataRequest.Content.IdDomain));
+                        privatePayloadDictionary.Add("IdDomain", LazyConvert.ToString(dataTableUser.Rows[0]["IdDomain"]));
                         privatePayloadDictionary.Add("IdUser", LazyConvert.ToString(dataTableUser.Rows[0]["IdUser"]));
 
-                        authenticationDataResponse.Content.IdDomain = authenticationDataRequest.Content.IdDomain;
+                        authenticationDataResponse.Content.IdDomain = LazyConvert.ToInt32(dataTableUser.Rows[0]["IdDomain"]);
                         authenticationDataResponse.Content.IdUser = LazyConvert.ToInt32(dataTableUser.Rows[0]["IdUser"]);
                         authenticationDataResponse.Content.Token = EncryptTokenJWT(tuplePayloadDictionary);
                     }

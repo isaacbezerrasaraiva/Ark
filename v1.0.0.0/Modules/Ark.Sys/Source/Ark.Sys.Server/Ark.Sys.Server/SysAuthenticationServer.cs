@@ -83,17 +83,17 @@ namespace Ark.Sys.Server
             else
             {
                 String headerDatabaseAlias = LazyConvert.ToString(context.Request.Headers["DatabaseAlias"], null);
-                Int32 headerIdDomain = LazyConvert.ToInt32(LazyConvert.ToString(context.Request.Headers["IdDomain"], "-1"), -1);
+                String headerDomainCode = LazyConvert.ToString(context.Request.Headers["DomainCode"], null);
                 String headerUsername = LazyConvert.ToString(context.Request.Headers["Username"], null);
                 String headerPassword = LazyConvert.ToString(context.Request.Headers["Password"], null);
 
-                if (String.IsNullOrEmpty(headerDatabaseAlias) == false && headerIdDomain > -1 && String.IsNullOrEmpty(headerUsername) == false && String.IsNullOrEmpty(headerPassword) == false)
+                if (String.IsNullOrEmpty(headerDatabaseAlias) == false && String.IsNullOrEmpty(headerDomainCode) == false && String.IsNullOrEmpty(headerUsername) == false && String.IsNullOrEmpty(headerPassword) == false)
                 {
                     context.Items["DatabaseAlias"] = headerDatabaseAlias;
-                    
+
                     SysAuthenticationDataRequest authenticationDataRequest = new SysAuthenticationDataRequest();
                     authenticationDataRequest.Content.DatabaseAlias = headerDatabaseAlias;
-                    authenticationDataRequest.Content.IdDomain = headerIdDomain;
+                    authenticationDataRequest.Content.DomainCode = headerDomainCode;
                     authenticationDataRequest.Content.Username = headerUsername;
                     authenticationDataRequest.Content.Password = headerPassword;
 

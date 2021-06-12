@@ -97,7 +97,7 @@ namespace Ark.Sys.Data
 
         public String DatabaseAlias { get; set; }
 
-        public Int16 IdDomain { get; set; }
+        public String DomainCode { get; set; }
 
         public String Username { get; set; }
 

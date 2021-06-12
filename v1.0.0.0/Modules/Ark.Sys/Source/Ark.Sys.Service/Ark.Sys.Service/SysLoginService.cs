@@ -118,7 +118,7 @@ namespace Ark.Sys.Service
         {
             SysAuthenticationDataRequest authenticationDataRequest = new SysAuthenticationDataRequest();
             authenticationDataRequest.Content.DatabaseAlias = loginDataRequest.Content.DatabaseAlias;
-            authenticationDataRequest.Content.IdDomain = loginDataRequest.Content.IdDomain;
+            authenticationDataRequest.Content.DomainCode = loginDataRequest.Content.DomainCode;
             authenticationDataRequest.Content.Username = loginDataRequest.Content.Username;
             authenticationDataRequest.Content.Password = loginDataRequest.Content.Password;
 
