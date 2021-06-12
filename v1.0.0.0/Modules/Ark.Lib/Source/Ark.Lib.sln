@@ -21,6 +21,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ark.Lib.Server", "Ark.Lib.S
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ark.Lib.Service", "Ark.Lib.Service", "{D5DF00C0-D9CB-4C91-AA86-F33A43ED2106}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ark.Lib.Client", "Ark.Lib.Client\Ark.Lib.Client\Ark.Lib.Client.csproj", "{EB31FA10-5D68-4E7B-B8F1-4BA2C78CCD40}"
+	ProjectSection(ProjectDependencies) = postProject
+		{284E9AED-3004-41AF-8854-2C993FC3064F} = {284E9AED-3004-41AF-8854-2C993FC3064F}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ark.Lib.Client", "Ark.Lib.Client", "{FCEE4741-971A-49CA-8090-D9DCF7F0DA7B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +46,10 @@ Global
 		{62A0D179-4F75-4E08-95EB-C81EBDE7BA86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62A0D179-4F75-4E08-95EB-C81EBDE7BA86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62A0D179-4F75-4E08-95EB-C81EBDE7BA86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB31FA10-5D68-4E7B-B8F1-4BA2C78CCD40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB31FA10-5D68-4E7B-B8F1-4BA2C78CCD40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB31FA10-5D68-4E7B-B8F1-4BA2C78CCD40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB31FA10-5D68-4E7B-B8F1-4BA2C78CCD40}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -47,6 +58,7 @@ Global
 		{284E9AED-3004-41AF-8854-2C993FC3064F} = {AE3769C2-4812-4FA9-997C-B4D0CA7BCF5E}
 		{43AD3F16-B828-43E3-9CF1-388078602E72} = {27F8CD42-F02F-4FCF-93D2-C4C2D5759761}
 		{62A0D179-4F75-4E08-95EB-C81EBDE7BA86} = {D5DF00C0-D9CB-4C91-AA86-F33A43ED2106}
+		{EB31FA10-5D68-4E7B-B8F1-4BA2C78CCD40} = {FCEE4741-971A-49CA-8090-D9DCF7F0DA7B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {79495E35-60E3-45DE-AC19-BB32BBBF82A4}
