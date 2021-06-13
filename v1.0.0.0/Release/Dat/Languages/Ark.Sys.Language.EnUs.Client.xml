@@ -1,6 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Ark.Sys.Language.EnUs.Client>
   <Captions>
+    <SysCaptionAccess>Access</SysCaptionAccess>
+    <SysCaptionEnvironment>Environment</SysCaptionEnvironment>
+    <SysCaptionPassword>Password</SysCaptionPassword>
+    <SysCaptionUsername>Username</SysCaptionUsername>
   </Captions>
   <Messages>
   </Messages>

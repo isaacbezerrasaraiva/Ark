@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Ark.Lib.Client>
+  <DynamicXml>
+    <Ark.Lib>
+      <Launcher>
+        <Client Assembly="Ark.Sys.Client.dll" Class="Ark.Sys.Client.SysLauncherClient" />
+        <WindowState>Maximized</WindowState>
+      </Launcher>
+      <Settings>
+        <Environments>
+          <Default>
+            <Server Url="http://localhost:9050" />
+            <Database Alias="Default" />
+            <Domain Code="DMN"/>
+          </Default>
+        </Environments>
+      </Settings>
+    </Ark.Lib>
+  </DynamicXml>
+</Ark.Lib.Client>

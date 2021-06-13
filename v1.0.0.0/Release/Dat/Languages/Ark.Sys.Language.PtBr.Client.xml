@@ -1,6 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Ark.Sys.Language.PtBr.Client>
   <Captions>
+    <SysCaptionAccess>Acessar</SysCaptionAccess>
+    <SysCaptionEnvironment>Ambiente</SysCaptionEnvironment>
+    <SysCaptionPassword>Senha</SysCaptionPassword>
+    <SysCaptionUsername>Usuário</SysCaptionUsername>
   </Captions>
   <Messages>
   </Messages>
