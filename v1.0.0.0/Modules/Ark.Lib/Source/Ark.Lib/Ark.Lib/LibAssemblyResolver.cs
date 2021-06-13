@@ -1,4 +1,4 @@
-﻿// LibAssemblyResolve.cs
+﻿// LibAssemblyResolver.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
@@ -18,7 +18,7 @@ using Lazy;
 
 namespace Ark.Lib
 {
-    public static class LibAssemblyResolve
+    public static class LibAssemblyResolver
     {
         #region Variables
         #endregion Variables
