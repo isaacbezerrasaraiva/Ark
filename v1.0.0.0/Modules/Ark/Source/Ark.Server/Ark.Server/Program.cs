@@ -24,7 +24,7 @@ namespace Ark.Server
     {
         public static void Main(string[] args)
         {
-            AppDomain.CurrentDomain.AssemblyResolve += LibAssemblyResolve.Resolve;
+            AppDomain.CurrentDomain.AssemblyResolve += LibAssemblyResolver.Resolve;
 
             CreateHostBuilder(args).Build().Run();
         }
