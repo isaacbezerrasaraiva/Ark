@@ -8,9 +8,23 @@
 
 using System;
 using System.IO;
+using System.Xml;
+using System.Text;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
+using System.ComponentModel;
+using System.Collections.Generic;
+
+using Lazy;
+using Lazy.Forms.Win;
+
+using Ark.Lib;
+using Ark.Lib.Client;
+using Ark.Fwk;
+using Ark.Fwk.Data;
+using Ark.Fwk.Client;
+using Ark.Fwk.IServer;
 
 namespace Ark.Client
 {
