@@ -117,20 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="SysCaptionAccess" xml:space="preserve">
-    <value>/Ark.Sys.Language.{0}.Client/Captions/SysCaptionAccess</value>
-    <comment>Access</comment>
-  </data>
-  <data name="SysCaptionEnvironment" xml:space="preserve">
-    <value>/Ark.Sys.Language.{0}.Client/Captions/SysCaptionEnvironment</value>
-    <comment>Environment</comment>
-  </data>
-  <data name="SysCaptionPassword" xml:space="preserve">
-    <value>/Ark.Sys.Language.{0}.Client/Captions/SysCaptionPassword</value>
-    <comment>Password</comment>
-  </data>
-  <data name="SysCaptionUsername" xml:space="preserve">
-    <value>/Ark.Sys.Language.{0}.Client/Captions/SysCaptionUsername</value>
-    <comment>Username</comment>
-  </data>
 </root>

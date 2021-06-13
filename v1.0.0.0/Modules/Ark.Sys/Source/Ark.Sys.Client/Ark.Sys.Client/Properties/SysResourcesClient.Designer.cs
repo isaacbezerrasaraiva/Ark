@@ -59,5 +59,41 @@ namespace Ark.Sys.Client.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Client/Captions/SysCaptionAccess.
+        /// </summary>
+        public static string SysCaptionAccess {
+            get {
+                return ResourceManager.GetString("SysCaptionAccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Client/Captions/SysCaptionEnvironment.
+        /// </summary>
+        public static string SysCaptionEnvironment {
+            get {
+                return ResourceManager.GetString("SysCaptionEnvironment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Client/Captions/SysCaptionPassword.
+        /// </summary>
+        public static string SysCaptionPassword {
+            get {
+                return ResourceManager.GetString("SysCaptionPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Client/Captions/SysCaptionUsername.
+        /// </summary>
+        public static string SysCaptionUsername {
+            get {
+                return ResourceManager.GetString("SysCaptionUsername", resourceCulture);
+            }
+        }
     }
 }
