@@ -24,39 +24,9 @@ namespace Ark.Server
     {
         public static void Main(string[] args)
         {
-            AppDomain.CurrentDomain.AssemblyResolve += ArkAssemblyResolve;
+            AppDomain.CurrentDomain.AssemblyResolve += LibAssemblyResolve.Resolve;
 
             CreateHostBuilder(args).Build().Run();
-        }
-
-        private static Assembly ArkAssemblyResolve(Object sender, ResolveEventArgs args)
-        {
-            String assemblyFolderName = args.Name.Substring(0, args.Name.IndexOf(','));
-            String assemblyVersion = args.Name.Substring(args.Name.IndexOf("Version=") + 8);
-            assemblyVersion = assemblyVersion.Substring(0, assemblyVersion.IndexOf(','));
-            assemblyVersion = assemblyVersion.Substring(0, assemblyVersion.LastIndexOf('.'));
-            String assemblyPath = null;
-
-            if (Directory.Exists(Path.Combine(LibDirectory.Root.Bin.Path, assemblyFolderName)) == true)
-            {
-                assemblyPath = Path.Combine(LibDirectory.Root.Bin.AssemblyFolder[assemblyFolderName].Version[assemblyVersion].Lib.NetCoreApp31.Path, assemblyFolderName) + ".dll";
-
-                if (File.Exists(assemblyPath) == true)
-                {
-                    return Assembly.LoadFrom(assemblyPath);
-                }
-                else
-                {
-                    assemblyPath = Path.Combine(LibDirectory.Root.Bin.AssemblyFolder[assemblyFolderName].Version[assemblyVersion].Lib.NetStandard20.Path, assemblyFolderName) + ".dll";
-
-                    if (File.Exists(assemblyPath) == true)
-                    {
-                        return Assembly.LoadFrom(assemblyPath);
-                    }
-                }
-            }
-
-            return null;
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args)

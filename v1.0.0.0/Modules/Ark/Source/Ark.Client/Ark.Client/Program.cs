@@ -33,6 +33,8 @@ namespace Ark.Client
         [STAThread]
         static void Main()
         {
+            AppDomain.CurrentDomain.AssemblyResolve += LibAssemblyResolve.Resolve;
+
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
