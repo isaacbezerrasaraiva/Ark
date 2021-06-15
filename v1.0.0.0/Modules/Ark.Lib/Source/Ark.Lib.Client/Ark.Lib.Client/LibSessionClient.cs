@@ -27,8 +27,12 @@ namespace Ark.Lib.Client
         #endregion Methods
 
         #region Properties
+        
+        public static String Provider { get; set; }
 
-        public static String Environment { get; set; }
+        public static String Username { get; set; }
+
+        public static String Password { get; set; }
 
         public static String Token { get; set; }
 
