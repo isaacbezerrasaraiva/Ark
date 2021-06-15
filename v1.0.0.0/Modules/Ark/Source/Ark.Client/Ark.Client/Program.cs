@@ -39,9 +39,9 @@ namespace Ark.Client
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            String assemblyFolderName = LibConfigurationClient.DynamicXml["Ark.Lib"]["Launcher"]["Client"].Attribute["Assembly"].Replace(".dll", String.Empty);
-            String assemblyFileName = LibConfigurationClient.DynamicXml["Ark.Lib"]["Launcher"]["Client"].Attribute["Assembly"];
-            String classFullName = LibConfigurationClient.DynamicXml["Ark.Lib"]["Launcher"]["Client"].Attribute["Class"];
+            String assemblyFolderName = LibConfigurationClient.DynamicXml["Ark"]["Launcher"]["Client"].Attribute["Assembly"].Replace(".dll", String.Empty);
+            String assemblyFileName = LibConfigurationClient.DynamicXml["Ark"]["Launcher"]["Client"].Attribute["Assembly"];
+            String classFullName = LibConfigurationClient.DynamicXml["Ark"]["Launcher"]["Client"].Attribute["Class"];
 
             if (String.IsNullOrEmpty(assemblyFileName) == false && String.IsNullOrEmpty(classFullName) == false)
             {
@@ -54,7 +54,7 @@ namespace Ark.Client
                     launcherClient.Dock = DockStyle.Fill;
 
                     FormWindowState windowState = FormWindowState.Normal;
-                    if (Enum.TryParse<FormWindowState>(LibConfigurationClient.DynamicXml["Ark.Lib"]["Settings"]["Initialization"]["WindowState"].Text, true, out windowState) == false)
+                    if (Enum.TryParse<FormWindowState>(LibConfigurationClient.DynamicXml["Ark"]["Launcher"]["WindowState"].Text, true, out windowState) == false)
                         windowState = FormWindowState.Maximized;
 
                     FormMain formMain = new FormMain();
