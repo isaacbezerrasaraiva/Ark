@@ -1,10 +1,10 @@
-﻿// SysLoginClient.cs
+﻿// SysUserControlMainExplorerLeft.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
 //
 // Created by Isaac Bezerra Saraiva
-// Created on 2021, June 12
+// Created on 2021, June 15
 
 using System;
 using System.IO;
@@ -12,7 +12,6 @@ using System.Xml;
 using System.Text;
 using System.Data;
 using System.Drawing;
-using System.Net.Http;
 using System.Windows.Forms;
 using System.ComponentModel;
 using System.Collections.Generic;
@@ -32,20 +31,14 @@ using Ark.Sys.IServer;
 
 namespace Ark.Sys.Client
 {
-    public partial class SysLoginClient : FwkClient
+    public partial class SysUserControlMainExplorerLeft : FwkClient
     {
-        #region Events
-
-        public event EventHandler LoginSuccess;
-
-        #endregion Events
-
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public SysLoginClient()
+        public SysUserControlMainExplorerLeft()
         {
             InitializeComponent();
         }
@@ -53,17 +46,6 @@ namespace Ark.Sys.Client
         #endregion Constructors
 
         #region Methods
-
-        public SysLoginDataResponse Authenticate(SysLoginDataRequest loginDataRequest)
-        {
-            return (SysLoginDataResponse)InvokeServer("/Ark.Sys/SysLoginServer/Authenticate", loginDataRequest, HttpMethod.Post);
-        }
-
-        private void OnButtonAccessClick(Object sender, EventArgs e)
-        {
-            this.LoginSuccess?.Invoke(this, new EventArgs());
-        }
-
         #endregion Methods
 
         #region Properties

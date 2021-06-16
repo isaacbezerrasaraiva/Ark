@@ -29,57 +29,67 @@ namespace Ark.Sys.Client
         /// </summary>
         private void InitializeComponent()
         {
+            this.labelProvider = new Lazy.Forms.Win.LazyLabel();
+            this.comboBoxProvider = new Lazy.Forms.Win.LazyComboBox();
             this.labelUsername = new Lazy.Forms.Win.LazyLabel();
             this.textBoxUsername = new Lazy.Forms.Win.LazyTextBox();
-            this.comboBoxEnvironments = new Lazy.Forms.Win.LazyComboBox();
             this.labelPassword = new Lazy.Forms.Win.LazyLabel();
             this.textBoxPassword = new Lazy.Forms.Win.LazyTextBox();
             this.buttonAccess = new Lazy.Forms.Win.LazyButton();
-            this.labelEnvironment = new Lazy.Forms.Win.LazyLabel();
             this.SuspendLayout();
+            // 
+            // labelProvider
+            // 
+            this.labelProvider.AutoSize = true;
+            this.labelProvider.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelProvider.Location = new System.Drawing.Point(98, 27);
+            this.labelProvider.Name = "labelProvider";
+            this.labelProvider.Size = new System.Drawing.Size(69, 21);
+            this.labelProvider.TabIndex = 0;
+            this.labelProvider.Text = "Provider";
+            // 
+            // comboBoxProvider
+            // 
+            this.comboBoxProvider.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxProvider.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.comboBoxProvider.FormattingEnabled = true;
+            this.comboBoxProvider.Location = new System.Drawing.Point(103, 51);
+            this.comboBoxProvider.Name = "comboBoxProvider";
+            this.comboBoxProvider.Size = new System.Drawing.Size(275, 29);
+            this.comboBoxProvider.TabIndex = 1;
             // 
             // labelUsername
             // 
             this.labelUsername.AutoSize = true;
-            this.labelUsername.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelUsername.Location = new System.Drawing.Point(103, 81);
+            this.labelUsername.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelUsername.Location = new System.Drawing.Point(98, 83);
             this.labelUsername.Name = "labelUsername";
-            this.labelUsername.Size = new System.Drawing.Size(71, 19);
+            this.labelUsername.Size = new System.Drawing.Size(81, 21);
             this.labelUsername.TabIndex = 2;
             this.labelUsername.Text = "Username";
             // 
             // textBoxUsername
             // 
             this.textBoxUsername.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxUsername.Location = new System.Drawing.Point(103, 103);
+            this.textBoxUsername.Location = new System.Drawing.Point(103, 107);
             this.textBoxUsername.Name = "textBoxUsername";
             this.textBoxUsername.Size = new System.Drawing.Size(275, 29);
             this.textBoxUsername.TabIndex = 3;
             // 
-            // comboBoxEnvironments
-            // 
-            this.comboBoxEnvironments.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxEnvironments.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.comboBoxEnvironments.FormattingEnabled = true;
-            this.comboBoxEnvironments.Location = new System.Drawing.Point(103, 49);
-            this.comboBoxEnvironments.Name = "comboBoxEnvironments";
-            this.comboBoxEnvironments.Size = new System.Drawing.Size(275, 29);
-            this.comboBoxEnvironments.TabIndex = 1;
-            // 
             // labelPassword
             // 
             this.labelPassword.AutoSize = true;
-            this.labelPassword.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelPassword.Location = new System.Drawing.Point(103, 135);
+            this.labelPassword.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelPassword.Location = new System.Drawing.Point(98, 139);
             this.labelPassword.Name = "labelPassword";
-            this.labelPassword.Size = new System.Drawing.Size(67, 19);
+            this.labelPassword.Size = new System.Drawing.Size(76, 21);
             this.labelPassword.TabIndex = 4;
             this.labelPassword.Text = "Password";
             // 
             // textBoxPassword
             // 
             this.textBoxPassword.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxPassword.Location = new System.Drawing.Point(103, 157);
+            this.textBoxPassword.Location = new System.Drawing.Point(103, 163);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(275, 29);
             this.textBoxPassword.TabIndex = 5;
@@ -88,36 +98,25 @@ namespace Ark.Sys.Client
             // buttonAccess
             // 
             this.buttonAccess.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonAccess.Location = new System.Drawing.Point(193, 207);
+            this.buttonAccess.Location = new System.Drawing.Point(178, 216);
             this.buttonAccess.Name = "buttonAccess";
-            this.buttonAccess.Size = new System.Drawing.Size(95, 32);
+            this.buttonAccess.Size = new System.Drawing.Size(125, 29);
             this.buttonAccess.TabIndex = 6;
             this.buttonAccess.Text = "Access";
             this.buttonAccess.UseVisualStyleBackColor = true;
             this.buttonAccess.Click += new System.EventHandler(this.OnButtonAccessClick);
             // 
-            // labelEnvironment
-            // 
-            this.labelEnvironment.AutoSize = true;
-            this.labelEnvironment.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelEnvironment.Location = new System.Drawing.Point(103, 27);
-            this.labelEnvironment.Name = "labelEnvironment";
-            this.labelEnvironment.Size = new System.Drawing.Size(87, 19);
-            this.labelEnvironment.TabIndex = 0;
-            this.labelEnvironment.Text = "Environment";
-            // 
             // SysLoginClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.labelEnvironment);
             this.Controls.Add(this.buttonAccess);
             this.Controls.Add(this.textBoxPassword);
             this.Controls.Add(this.labelPassword);
-            this.Controls.Add(this.comboBoxEnvironments);
             this.Controls.Add(this.textBoxUsername);
             this.Controls.Add(this.labelUsername);
-            this.KeepCenteredToParent = true;
+            this.Controls.Add(this.comboBoxProvider);
+            this.Controls.Add(this.labelProvider);
             this.Name = "SysLoginClient";
             this.Size = new System.Drawing.Size(480, 270);
             this.ResumeLayout(false);
@@ -127,12 +126,12 @@ namespace Ark.Sys.Client
 
         #endregion
 
+        private Lazy.Forms.Win.LazyLabel labelProvider;
+        private Lazy.Forms.Win.LazyComboBox comboBoxProvider;
         private Lazy.Forms.Win.LazyLabel labelUsername;
         private Lazy.Forms.Win.LazyTextBox textBoxUsername;
-        private Lazy.Forms.Win.LazyComboBox comboBoxEnvironments;
         private Lazy.Forms.Win.LazyLabel labelPassword;
         private Lazy.Forms.Win.LazyTextBox textBoxPassword;
         private Lazy.Forms.Win.LazyButton buttonAccess;
-        private Lazy.Forms.Win.LazyLabel labelEnvironment;
     }
 }

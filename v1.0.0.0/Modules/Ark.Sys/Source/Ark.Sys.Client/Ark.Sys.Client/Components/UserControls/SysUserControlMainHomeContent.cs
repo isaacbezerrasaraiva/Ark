@@ -1,10 +1,10 @@
-﻿// SysLoginClient.cs
+﻿// SysUserControlMainHomeContent.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
 //
 // Created by Isaac Bezerra Saraiva
-// Created on 2021, June 12
+// Created on 2021, June 15
 
 using System;
 using System.IO;
@@ -12,7 +12,6 @@ using System.Xml;
 using System.Text;
 using System.Data;
 using System.Drawing;
-using System.Net.Http;
 using System.Windows.Forms;
 using System.ComponentModel;
 using System.Collections.Generic;
@@ -32,12 +31,13 @@ using Ark.Sys.IServer;
 
 namespace Ark.Sys.Client
 {
-    public partial class SysLoginClient : FwkClient
+    public partial class SysUserControlMainHomeContent : FwkClient
     {
         #region Events
 
-        public event EventHandler LoginSuccess;
-
+        public event EventHandler Logout;
+        public event EventHandler Lock;
+        
         #endregion Events
 
         #region Variables
@@ -45,7 +45,7 @@ namespace Ark.Sys.Client
 
         #region Constructors
 
-        public SysLoginClient()
+        public SysUserControlMainHomeContent()
         {
             InitializeComponent();
         }
@@ -54,14 +54,14 @@ namespace Ark.Sys.Client
 
         #region Methods
 
-        public SysLoginDataResponse Authenticate(SysLoginDataRequest loginDataRequest)
+        private void OnButtonLogoutClick(Object sender, EventArgs e)
         {
-            return (SysLoginDataResponse)InvokeServer("/Ark.Sys/SysLoginServer/Authenticate", loginDataRequest, HttpMethod.Post);
+            this.Logout?.Invoke(sender, e);
         }
 
-        private void OnButtonAccessClick(Object sender, EventArgs e)
+        private void OnButtonLockClick(Object sender, EventArgs e)
         {
-            this.LoginSuccess?.Invoke(this, new EventArgs());
+            this.Lock?.Invoke(sender, e);
         }
 
         #endregion Methods

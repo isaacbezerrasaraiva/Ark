@@ -12,6 +12,7 @@ using System.Xml;
 using System.Text;
 using System.Data;
 using System.Drawing;
+using System.Net.Http;
 using System.Windows.Forms;
 using System.ComponentModel;
 using System.Collections.Generic;
@@ -33,15 +34,11 @@ namespace Ark.Sys.Client
 {
     public partial class SysLauncherClient : FwkClient
     {
-        #region Clients
-        
+        #region Variables
+
         private SysLoginClient loginClient;
         private SysMainClient mainClient;
-        private SysSettingsClient settingsClient;
 
-        #endregion Clients
-
-        #region Variables
         #endregion Variables
 
         #region Constructors
@@ -50,7 +47,47 @@ namespace Ark.Sys.Client
         {
             InitializeComponent();
 
+            InitializeDynamicComponent();
+        }
+
+        private void InitializeDynamicComponent()
+        {
             this.loginClient = new SysLoginClient();
+            this.loginClient.DockOnCenter = true;
+            this.loginClient.LoginSuccess += OnLoginClientLoginSuccess;
+
+            this.panelContent.Controls.Add(this.loginClient);
+        }
+
+        private void OnLoginClientLoginSuccess(Object sender, EventArgs e)
+        {
+            if (this.mainClient == null)
+            {
+                this.mainClient = new SysMainClient();
+                this.mainClient.Dock = DockStyle.Fill;
+                this.mainClient.Logout += OnMainClientLogout;
+                this.mainClient.Lock += OnMainClientLock;
+            }
+            
+            this.PanelTop.Visible = false;
+            this.panelContent.Controls.Remove(this.loginClient);
+            this.panelContent.Controls.Add(this.mainClient);
+        }
+
+        private void OnMainClientLogout(Object sender, EventArgs e)
+        {
+            this.PanelTop.Visible = true;
+            this.panelContent.Controls.Remove(this.mainClient);
+            this.panelContent.Controls.Add(this.loginClient);
+
+            this.mainClient.Dispose();
+            this.mainClient = null;
+        }
+
+        private void OnMainClientLock(Object sender, EventArgs e)
+        {
+            this.PanelTop.Visible = true;
+            this.panelContent.Controls.Remove(this.mainClient);
             this.panelContent.Controls.Add(this.loginClient);
         }
 
