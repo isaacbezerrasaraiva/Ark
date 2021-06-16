@@ -29,15 +29,8 @@ namespace Ark.Fwk.Client
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // FwkClient
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "FwkClient";
-            this.ResumeLayout(false);
-
         }
 
         #endregion
