@@ -43,10 +43,8 @@ namespace Ark.Sys.Client
 
         #region Variables
 
-        private SysUserControlMainHomeTop userControlMainHomeTop;
-        private SysUserControlMainHomeContent userControlMainHomeContent;
-        private SysUserControlMainExplorerLeft userControlMainExplorerLeft;
-        private SysUserControlMainExplorerContent userControlMainExplorerContent;
+        private SysUserControlMainHome userControlMainHome;
+        private SysUserControlMainExplorer userControlMainExplorer;
 
         #endregion Variables
 
@@ -61,62 +59,45 @@ namespace Ark.Sys.Client
 
         private void InitializeDynamicComponent()
         {
-            this.userControlMainHomeTop = new SysUserControlMainHomeTop();
-            this.userControlMainHomeTop.Dock = DockStyle.Top;
-            this.userControlMainHomeTop.MouseClick += OnMouseClick; // **** REMOVER
+            this.userControlMainHome = new SysUserControlMainHome();
+            this.userControlMainHome.Dock = DockStyle.Fill;
+            this.userControlMainHome.ExplorerRequested += OnUserControlMainHomeExplorerRequested;
+            this.userControlMainHome.LogoutRequested += OnUserControlMainLogoutRequested;
+            this.userControlMainHome.LockRequested += OnUserControlMainLockRequested;
 
-            this.userControlMainHomeContent = new SysUserControlMainHomeContent();
-            this.userControlMainHomeContent.Dock = DockStyle.Fill;
-            this.userControlMainHomeContent.MouseClick += OnMouseClick; // **** REMOVER
-            this.userControlMainHomeContent.Logout += OnUserControlMainHomeContentLogout;
-            this.userControlMainHomeContent.Lock += OnUserControlMainHomeContentLock;
+            this.userControlMainExplorer = new SysUserControlMainExplorer();
+            this.userControlMainExplorer.Dock = DockStyle.Fill;
+            this.userControlMainExplorer.HomeRequested += OnUserControlMainExplorerHomeRequested;
+            this.userControlMainExplorer.LogoutRequested += OnUserControlMainLogoutRequested;
+            this.userControlMainExplorer.LockRequested += OnUserControlMainLockRequested;
 
-            this.userControlMainExplorerLeft = new SysUserControlMainExplorerLeft();
-            this.userControlMainExplorerLeft.Dock = DockStyle.Left;
-            this.userControlMainExplorerLeft.MouseClick += OnMouseClick; // **** REMOVER
-
-            this.userControlMainExplorerContent = new SysUserControlMainExplorerContent();
-            this.userControlMainExplorerContent.Dock = DockStyle.Fill;
-            this.userControlMainExplorerContent.MouseClick += OnMouseClick; // **** REMOVER
-            this.userControlMainExplorerContent.Logout += OnUserControlMainHomeContentLogout;
-            this.userControlMainExplorerContent.Lock += OnUserControlMainHomeContentLock;
-
-            this.Controls.Add(this.userControlMainHomeContent);
-            this.Controls.Add(this.userControlMainHomeTop);
+            this.Controls.Add(this.userControlMainHome);
         }
 
         #endregion Constructors
 
         #region Methods
-        
-        private void OnUserControlMainHomeContentLogout(Object sender, EventArgs e)
+
+        private void OnUserControlMainHomeExplorerRequested(Object sender, EventArgs e)
+        {
+            this.Controls.Remove(this.userControlMainHome);
+            this.Controls.Add(this.userControlMainExplorer);
+        }
+
+        private void OnUserControlMainExplorerHomeRequested(Object sender, EventArgs e)
+        {
+            this.Controls.Remove(this.userControlMainExplorer);
+            this.Controls.Add(this.userControlMainHome);
+        }
+
+        private void OnUserControlMainLogoutRequested(Object sender, EventArgs e)
         {
             this.Logout?.Invoke(sender, e);
         }
 
-        private void OnUserControlMainHomeContentLock(Object sender, EventArgs e)
+        private void OnUserControlMainLockRequested(Object sender, EventArgs e)
         {
             this.Lock?.Invoke(sender, e);
-        }
-
-        private void OnMouseClick(Object Sender, MouseEventArgs e)
-        {
-            base.OnMouseClick(e);
-
-            if (e.Button == MouseButtons.Left)
-            {
-                this.Controls.Remove(this.userControlMainHomeContent);
-                this.Controls.Remove(this.userControlMainHomeTop);
-                this.Controls.Add(this.userControlMainExplorerContent);
-                this.Controls.Add(this.userControlMainExplorerLeft);
-            }
-            else if (e.Button == MouseButtons.Right)
-            {
-                this.Controls.Remove(this.userControlMainExplorerContent);
-                this.Controls.Remove(this.userControlMainExplorerLeft);
-                this.Controls.Add(this.userControlMainHomeContent);
-                this.Controls.Add(this.userControlMainHomeTop);
-            }
         }
 
         #endregion Methods

@@ -16,18 +16,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="SysLauncherClient.resx~RFcd28dfc.TMP" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="..\..\..\..\..\..\LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Components\Controls\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,4 +1,4 @@
-﻿// SysUserControlMainExplorerLeft.cs
+﻿// SysUserControlMainHome.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
@@ -31,21 +31,47 @@ using Ark.Sys.IServer;
 
 namespace Ark.Sys.Client
 {
-    public partial class SysUserControlMainExplorerLeft : FwkClient
+    public partial class SysUserControlMainHome : LazyUserControl
     {
+        #region Events
+
+        public event EventHandler ExplorerRequested;
+        public event EventHandler LogoutRequested;
+        public event EventHandler LockRequested;
+
+        #endregion Events
+
         #region Variables
         #endregion Variables
 
         #region Constructors
 
-        public SysUserControlMainExplorerLeft()
+        public SysUserControlMainHome()
         {
             InitializeComponent();
+
+            this.textBoxSearch.Click += OnExplorerRequested; // ******* REMOVER
         }
 
         #endregion Constructors
 
         #region Methods
+
+        private void OnExplorerRequested(Object sender, EventArgs e)
+        {
+            this.ExplorerRequested?.Invoke(sender, e);
+        }
+
+        private void OnButtonLogoutClick(Object sender, EventArgs e)
+        {
+            this.LogoutRequested?.Invoke(sender, e);
+        }
+
+        private void OnButtonLockClick(Object sender, EventArgs e)
+        {
+            this.LockRequested?.Invoke(sender, e);
+        }
+
         #endregion Methods
 
         #region Properties

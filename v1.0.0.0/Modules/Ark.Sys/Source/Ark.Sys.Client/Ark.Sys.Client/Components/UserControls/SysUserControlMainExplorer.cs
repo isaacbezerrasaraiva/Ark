@@ -1,4 +1,4 @@
-﻿// SysUserControlMainHomeContent.cs
+﻿// SysUserControlMainExplorer.cs
 //
 // This file is integrated part of Ark project
 // Licensed under "Gnu General Public License Version 3"
@@ -31,13 +31,14 @@ using Ark.Sys.IServer;
 
 namespace Ark.Sys.Client
 {
-    public partial class SysUserControlMainHomeContent : FwkClient
+    public partial class SysUserControlMainExplorer : LazyUserControl
     {
         #region Events
-
-        public event EventHandler Logout;
-        public event EventHandler Lock;
         
+        public event EventHandler HomeRequested;
+        public event EventHandler LogoutRequested;
+        public event EventHandler LockRequested;
+
         #endregion Events
 
         #region Variables
@@ -45,23 +46,36 @@ namespace Ark.Sys.Client
 
         #region Constructors
 
-        public SysUserControlMainHomeContent()
+        public SysUserControlMainExplorer()
         {
             InitializeComponent();
+
+            this.buttonHome.Thumbnail = Image.FromFile(@"C:\Users\isaac\Downloads\home.png");
+            this.buttonBack.Thumbnail = Image.FromFile(@"C:\Users\isaac\Downloads\back.png");
         }
 
         #endregion Constructors
 
         #region Methods
 
+        private void OnButtonHomeClick(Object sender, EventArgs e)
+        {
+            this.HomeRequested?.Invoke(sender, e);
+        }
+
+        private void OnButtonBackClick(Object sender, EventArgs e)
+        {
+            this.HomeRequested?.Invoke(sender, e);
+        }
+
         private void OnButtonLogoutClick(Object sender, EventArgs e)
         {
-            this.Logout?.Invoke(sender, e);
+            this.LogoutRequested?.Invoke(sender, e);
         }
 
         private void OnButtonLockClick(Object sender, EventArgs e)
         {
-            this.Lock?.Invoke(sender, e);
+            this.LockRequested?.Invoke(sender, e);
         }
 
         #endregion Methods
