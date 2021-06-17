@@ -49,9 +49,6 @@ namespace Ark.Sys.Client
         public SysUserControlMainExplorer()
         {
             InitializeComponent();
-
-            this.buttonHome.Thumbnail = Image.FromFile(@"C:\Users\isaac\Downloads\home.png");
-            this.buttonBack.Thumbnail = Image.FromFile(@"C:\Users\isaac\Downloads\back.png");
         }
 
         #endregion Constructors
