@@ -67,11 +67,11 @@ namespace Ark.Lib
 
             if (languageDictionary[module][culture.Code].ContainsKey(file) == false)
             {
-                if (File.Exists(Path.Combine(LibDirectory.Root.Dat.Language.Path, fileName)) == false)
+                if (File.Exists(Path.Combine(LibDirectory.Root.Res.Languages.Path, fileName)) == false)
                     return xPath;
 
                 LazyXml xmlFile = new LazyXml();
-                try { xmlFile.Open(Path.Combine(LibDirectory.Root.Dat.Language.Path, fileName)); }
+                try { xmlFile.Open(Path.Combine(LibDirectory.Root.Res.Languages.Path, fileName)); }
                 catch { return xPath; }
 
                 languageDictionary[module][culture.Code].Add(file, xmlFile);

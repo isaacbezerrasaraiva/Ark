@@ -98,10 +98,28 @@ namespace Ark.Lib
                 }
 
                 #endregion Properties
+            }
+
+            public static class Res
+            {
+                #region Variables
+                #endregion Variables
+
+                #region Methods
+                #endregion Methods
+
+                #region Properties
+
+                public static String Path
+                {
+                    get { return System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Res"); }
+                }
+
+                #endregion Properties
 
                 #region InternalClass
-                
-                public static class Language
+
+                public static class Languages
                 {
                     #region Variables
                     #endregion Variables
@@ -113,7 +131,7 @@ namespace Ark.Lib
 
                     public static String Path
                     {
-                        get { return System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Dat", "Languages"); }
+                        get { return System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Res", "Languages"); }
                     }
 
                     #endregion Properties
@@ -121,7 +139,28 @@ namespace Ark.Lib
                     #region InternalClass
                     #endregion InternalClass
                 }
-                
+
+                public static class Media
+                {
+                    #region Variables
+                    #endregion Variables
+
+                    #region Methods
+                    #endregion Methods
+
+                    #region Properties
+
+                    public static String Path
+                    {
+                        get { return System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Res", "Media"); }
+                    }
+
+                    #endregion Properties
+
+                    #region InternalClass
+                    #endregion InternalClass
+                }
+
                 #endregion InternalClass
             }
 

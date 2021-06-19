@@ -52,7 +52,7 @@
     <PostBuildEvent>
       xcopy /y $(SolutionDir)Ark.Lib.Client\Ark.Lib.Client\bin\Debug\netcoreapp3.1\Ark.Lib.Client.dll $(SolutionDir)..\..\..\Release\Bin\Ark.Lib.Client\1.0.0\lib\netcoreapp3.1\
       xcopy /y $(SolutionDir)Ark.Lib.Client\Ark.Lib.Client\bin\Debug\netcoreapp3.1\Ark.Lib.Client.dll %SystemDrive%%HomePath%\.nuget\Packages\ark.lib.client\1.0.0\lib\netcoreapp3.1\
-      xcopy /y $(SolutionDir)Ark.Lib.Client\Ark.Lib.Client\Languages\* $(SolutionDir)..\..\..\Release\Dat\Languages\
+      xcopy /y $(SolutionDir)Ark.Lib.Client\Ark.Lib.Client\Resources\Languages\* $(SolutionDir)..\..\..\Release\Res\Languages\
     </PostBuildEvent>
   </PropertyGroup>
 
