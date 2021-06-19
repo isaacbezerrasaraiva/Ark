@@ -152,7 +152,7 @@ namespace Ark.Lib
 
                     public static String Path
                     {
-                        get { return System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Res", "Media"); }
+                        get { return System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Res", "Medias"); }
                     }
 
                     #endregion Properties
