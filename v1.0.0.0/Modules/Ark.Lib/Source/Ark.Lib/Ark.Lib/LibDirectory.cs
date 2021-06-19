@@ -140,7 +140,7 @@ namespace Ark.Lib
                     #endregion InternalClass
                 }
 
-                public static class Media
+                public static class Medias
                 {
                     #region Variables
                     #endregion Variables
