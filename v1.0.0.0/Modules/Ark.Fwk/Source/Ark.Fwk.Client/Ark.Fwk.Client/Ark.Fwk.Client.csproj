@@ -56,7 +56,7 @@
     <PostBuildEvent>
       xcopy /y $(SolutionDir)Ark.Fwk.Client\Ark.Fwk.Client\bin\Debug\netcoreapp3.1\Ark.Fwk.Client.dll $(SolutionDir)..\..\..\Release\Bin\Ark.Fwk.Client\1.0.0\lib\netcoreapp3.1\
       xcopy /y $(SolutionDir)Ark.Fwk.Client\Ark.Fwk.Client\bin\Debug\netcoreapp3.1\Ark.Fwk.Client.dll %SystemDrive%%HomePath%\.nuget\Packages\ark.fwk.client\1.0.0\lib\netcoreapp3.1\
-      xcopy /y $(SolutionDir)Ark.Fwk.Client\Ark.Fwk.Client\Languages\* $(SolutionDir)..\..\..\Release\Dat\Languages\
+      xcopy /y $(SolutionDir)Ark.Fwk.Client\Ark.Fwk.Client\Resources\Languages\* $(SolutionDir)..\..\..\Release\Res\Languages\
     </PostBuildEvent>
   </PropertyGroup>
 
