@@ -42,6 +42,9 @@ namespace Ark.Sys.Client
         #endregion Events
 
         #region Variables
+
+        private SysControlMainHomeQuickLauncher controlMainHomeQuickLauncher;
+
         #endregion Variables
 
         #region Constructors
@@ -50,12 +53,34 @@ namespace Ark.Sys.Client
         {
             InitializeComponent();
 
-            this.textBoxSearch.Click += OnExplorerRequested; // ******* REMOVER
+            InitializeComponentDynamic();
+
+            InitializeComponentData();
+        }
+
+        private void InitializeComponentDynamic()
+        {
+            this.controlMainHomeQuickLauncher = new SysControlMainHomeQuickLauncher();
+            this.controlMainHomeQuickLauncher.Dock = DockStyle.Right;
+            this.controlMainHomeQuickLauncher.ItemSize = new Size(175, 175);
+            this.controlMainHomeQuickLauncher.RemoveItemRequested += OnControlMainHomeQuickLauncherRemoveItemRequested;
+
+            this.panelTopQuickLauncher.Controls.Add(this.controlMainHomeQuickLauncher);
+        }
+
+        private void InitializeComponentData()
+        {
+            this.buttonLogout.Image = Properties.SysResourcesClient.Shutdown_01_Black_x024;
+            this.buttonLock.Image = Properties.SysResourcesClient.Lock_01_Black_x024;
         }
 
         #endregion Constructors
 
         #region Methods
+
+        private void OnControlMainHomeQuickLauncherRemoveItemRequested(Object sender, EventArgs e)
+        {
+        }
 
         private void OnExplorerRequested(Object sender, EventArgs e)
         {

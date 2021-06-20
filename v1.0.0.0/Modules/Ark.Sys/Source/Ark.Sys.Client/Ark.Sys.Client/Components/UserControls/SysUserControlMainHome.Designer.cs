@@ -37,6 +37,9 @@ namespace Ark.Sys.Client
             this.buttonLogout = new Lazy.Forms.Win.LazyButton();
             this.panelSearch = new Lazy.Forms.Win.LazyPanel();
             this.textBoxSearch = new Lazy.Forms.Win.LazyTextBox();
+            this.panelTopProfile = new Lazy.Forms.Win.LazyPanel();
+            this.panelTopQuickLauncher = new Lazy.Forms.Win.LazyPanel();
+            this.panelTop.SuspendLayout();
             this.panelContent.SuspendLayout();
             this.panelBottom.SuspendLayout();
             this.panelSearch.SuspendLayout();
@@ -45,6 +48,8 @@ namespace Ark.Sys.Client
             // panelTop
             // 
             this.panelTop.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panelTop.Controls.Add(this.panelTopQuickLauncher);
+            this.panelTop.Controls.Add(this.panelTopProfile);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
             this.panelTop.Name = "panelTop";
@@ -88,7 +93,6 @@ namespace Ark.Sys.Client
             this.buttonLock.Name = "buttonLock";
             this.buttonLock.Size = new System.Drawing.Size(35, 35);
             this.buttonLock.TabIndex = 3;
-            this.buttonLock.Text = "LK";
             this.buttonLock.UseVisualStyleBackColor = true;
             this.buttonLock.Click += new System.EventHandler(this.OnButtonLockClick);
             // 
@@ -100,7 +104,6 @@ namespace Ark.Sys.Client
             this.buttonLogout.Name = "buttonLogout";
             this.buttonLogout.Size = new System.Drawing.Size(35, 35);
             this.buttonLogout.TabIndex = 2;
-            this.buttonLogout.Text = "EX";
             this.buttonLogout.UseVisualStyleBackColor = true;
             this.buttonLogout.Click += new System.EventHandler(this.OnButtonLogoutClick);
             // 
@@ -125,6 +128,22 @@ namespace Ark.Sys.Client
             this.textBoxSearch.Text = "Search for resource";
             this.textBoxSearch.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // panelTopProfile
+            // 
+            this.panelTopProfile.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelTopProfile.Location = new System.Drawing.Point(0, 0);
+            this.panelTopProfile.Name = "panelTopProfile";
+            this.panelTopProfile.Size = new System.Drawing.Size(320, 175);
+            this.panelTopProfile.TabIndex = 0;
+            // 
+            // panelTopQuickLauncher
+            // 
+            this.panelTopQuickLauncher.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelTopQuickLauncher.Location = new System.Drawing.Point(320, 0);
+            this.panelTopQuickLauncher.Name = "panelTopQuickLauncher";
+            this.panelTopQuickLauncher.Size = new System.Drawing.Size(480, 175);
+            this.panelTopQuickLauncher.TabIndex = 1;
+            // 
             // SysUserControlMainHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -133,6 +152,7 @@ namespace Ark.Sys.Client
             this.Controls.Add(this.panelTop);
             this.Name = "SysUserControlMainHome";
             this.Size = new System.Drawing.Size(800, 410);
+            this.panelTop.ResumeLayout(false);
             this.panelContent.ResumeLayout(false);
             this.panelBottom.ResumeLayout(false);
             this.panelSearch.ResumeLayout(false);
@@ -151,5 +171,7 @@ namespace Ark.Sys.Client
         private Lazy.Forms.Win.LazyPanel panelBottom;
         private Lazy.Forms.Win.LazyButton buttonLock;
         private Lazy.Forms.Win.LazyButton buttonLogout;
+        private Lazy.Forms.Win.LazyPanel panelTopProfile;
+        private Lazy.Forms.Win.LazyPanel panelTopQuickLauncher;
     }
 }

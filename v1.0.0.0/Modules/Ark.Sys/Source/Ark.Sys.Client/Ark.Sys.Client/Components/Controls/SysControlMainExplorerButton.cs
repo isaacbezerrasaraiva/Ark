@@ -62,7 +62,7 @@ namespace Ark.Sys.Client
             this.labelTitle = new Label();
             this.labelTitle.Text = "Button";
             this.labelTitle.AutoSize = true;
-            this.labelTitle.Font = new Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelTitle.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             this.labelTitle.Location = new Point(5 + this.pictureBoxThumbnail.Width + 5, (this.Height / 2) - (this.labelTitle.Height / 2));
             this.labelTitle.MouseEnter += OnMouseEnter;
             this.labelTitle.MouseLeave += OnMouseLeave;
@@ -118,7 +118,7 @@ namespace Ark.Sys.Client
             set { this.pictureBoxThumbnail.Image = value; }
         }
 
-        public override string Text
+        public override String Text
         {
             get { return this.labelTitle.Text; }
             set { this.labelTitle.Text = value; }

@@ -2,8 +2,9 @@
 <Ark.Sys.Language.EnUs.Client>
   <Captions>
     <SysCaptionAccess>Access</SysCaptionAccess>
-    <SysCaptionEnvironment>Environment</SysCaptionEnvironment>
     <SysCaptionPassword>Password</SysCaptionPassword>
+    <SysCaptionProvider>Provider</SysCaptionProvider>
+    <SysCaptionRemove>Remove</SysCaptionRemove>
     <SysCaptionUsername>Username</SysCaptionUsername>
   </Captions>
   <Messages>

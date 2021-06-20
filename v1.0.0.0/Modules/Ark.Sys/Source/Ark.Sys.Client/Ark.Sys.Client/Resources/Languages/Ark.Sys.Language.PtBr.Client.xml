@@ -2,8 +2,9 @@
 <Ark.Sys.Language.PtBr.Client>
   <Captions>
     <SysCaptionAccess>Acessar</SysCaptionAccess>
-    <SysCaptionEnvironment>Ambiente</SysCaptionEnvironment>
     <SysCaptionPassword>Senha</SysCaptionPassword>
+    <SysCaptionProvider>Provedor</SysCaptionProvider>
+    <SysCaptionRemove>Remover</SysCaptionRemove>
     <SysCaptionUsername>Usuário</SysCaptionUsername>
   </Captions>
   <Messages>

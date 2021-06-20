@@ -48,6 +48,16 @@ namespace Ark.Sys.Client
         public SysLoginClient()
         {
             InitializeComponent();
+
+            InitializeComponentData();
+        }
+
+        private void InitializeComponentData()
+        {
+            this.labelProvider.Text = LibGlobalization.GetTranslation(Properties.SysResourcesClient.SysCaptionProvider);
+            this.labelUsername.Text = LibGlobalization.GetTranslation(Properties.SysResourcesClient.SysCaptionUsername);
+            this.labelPassword.Text = LibGlobalization.GetTranslation(Properties.SysResourcesClient.SysCaptionPassword);
+            this.buttonAccess.Text = LibGlobalization.GetTranslation(Properties.SysResourcesClient.SysCaptionAccess);
         }
 
         #endregion Constructors

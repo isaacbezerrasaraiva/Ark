@@ -146,7 +146,7 @@ namespace Ark.Sys.Client
             this.buttonLock.Name = "buttonLock";
             this.buttonLock.Size = new System.Drawing.Size(35, 35);
             this.buttonLock.TabIndex = 5;
-            this.buttonLock.Text = "LK";
+            this.buttonLock.Text = "";
             this.buttonLock.UseVisualStyleBackColor = true;
             this.buttonLock.Click += new System.EventHandler(this.OnButtonLockClick);
             // 
@@ -158,7 +158,7 @@ namespace Ark.Sys.Client
             this.buttonLogout.Name = "buttonLogout";
             this.buttonLogout.Size = new System.Drawing.Size(35, 35);
             this.buttonLogout.TabIndex = 4;
-            this.buttonLogout.Text = "EX";
+            this.buttonLogout.Text = "";
             this.buttonLogout.UseVisualStyleBackColor = true;
             this.buttonLogout.Click += new System.EventHandler(this.OnButtonLogoutClick);
             // 

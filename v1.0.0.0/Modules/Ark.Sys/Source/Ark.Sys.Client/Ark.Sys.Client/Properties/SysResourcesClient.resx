@@ -117,17 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ArrowLeft_01_Black_Light_x016" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\medias\icons\metro\png\x016\arrowleft_01_black_light_x016.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ArrowLeft_01_Black_x016" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\medias\icons\metro\png\x016\arrowleft_01_black_x016.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ArrowRight_01_Black_Light_x016" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\medias\icons\metro\png\x016\arrowright_01_black_light_x016.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ArrowRight_01_Black_x016" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\medias\icons\metro\png\x016\arrowright_01_black_x016.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Back_01_Black_x016" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\medias\icons\metro\png\x016\back_01_black_x016.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Home_01_Black_x016" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\medias\icons\metro\png\x016\home_01_black_x016.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Lock_01_Black_x024" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\medias\icons\metro\png\x024\lock_01_black_x024.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Remove_01_Black_x016" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\medias\icons\metro\png\x016\remove_01_black_x016.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Remove_01_Red_x016" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\medias\icons\metro\png\x016\remove_01_red_x016.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Shutdown_01_Black_x024" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\medias\icons\metro\png\x024\shutdown_01_black_x024.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="SysCaptionAccess" xml:space="preserve">
     <value>/Ark.Sys.Language.{0}.Client/Captions/SysCaptionAccess</value>
     <comment>Access</comment>
   </data>
-  <data name="SysCaptionEnvironment" xml:space="preserve">
-    <value>/Ark.Sys.Language.{0}.Client/Captions/SysCaptionEnvironment</value>
-    <comment>Environment</comment>
-  </data>
   <data name="SysCaptionPassword" xml:space="preserve">
     <value>/Ark.Sys.Language.{0}.Client/Captions/SysCaptionPassword</value>
     <comment>Password</comment>
+  </data>
+  <data name="SysCaptionProvider" xml:space="preserve">
+    <value>/Ark.Sys.Language.{0}.Client/Captions/SysCaptionProvider</value>
+    <comment>Provider</comment>
+  </data>
+  <data name="SysCaptionRemove" xml:space="preserve">
+    <value>/Ark.Sys.Language.{0}.Client/Captions/SysCaptionRemove</value>
+    <comment>Remove</comment>
   </data>
   <data name="SysCaptionUsername" xml:space="preserve">
     <value>/Ark.Sys.Language.{0}.Client/Captions/SysCaptionUsername</value>

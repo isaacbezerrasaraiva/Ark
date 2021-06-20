@@ -49,6 +49,16 @@ namespace Ark.Sys.Client
         public SysUserControlMainExplorer()
         {
             InitializeComponent();
+
+            InitializeComponentData();
+        }
+
+        private void InitializeComponentData()
+        {
+            this.buttonHome.Thumbnail = Properties.SysResourcesClient.Home_01_Black_x016;
+            this.buttonBack.Thumbnail = Properties.SysResourcesClient.Back_01_Black_x016;
+            this.buttonLogout.Image = Properties.SysResourcesClient.Shutdown_01_Black_x024;
+            this.buttonLock.Image = Properties.SysResourcesClient.Lock_01_Black_x024;
         }
 
         #endregion Constructors

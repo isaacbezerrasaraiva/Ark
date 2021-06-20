@@ -61,6 +61,106 @@ namespace Ark.Sys.Client.Properties {
         }
         
         /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap ArrowLeft_01_Black_Light_x016 {
+            get {
+                object obj = ResourceManager.GetObject("ArrowLeft_01_Black_Light_x016", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap ArrowLeft_01_Black_x016 {
+            get {
+                object obj = ResourceManager.GetObject("ArrowLeft_01_Black_x016", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap ArrowRight_01_Black_Light_x016 {
+            get {
+                object obj = ResourceManager.GetObject("ArrowRight_01_Black_Light_x016", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap ArrowRight_01_Black_x016 {
+            get {
+                object obj = ResourceManager.GetObject("ArrowRight_01_Black_x016", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Back_01_Black_x016 {
+            get {
+                object obj = ResourceManager.GetObject("Back_01_Black_x016", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Home_01_Black_x016 {
+            get {
+                object obj = ResourceManager.GetObject("Home_01_Black_x016", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Lock_01_Black_x024 {
+            get {
+                object obj = ResourceManager.GetObject("Lock_01_Black_x024", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Remove_01_Black_x016 {
+            get {
+                object obj = ResourceManager.GetObject("Remove_01_Black_x016", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Remove_01_Red_x016 {
+            get {
+                object obj = ResourceManager.GetObject("Remove_01_Red_x016", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Shutdown_01_Black_x024 {
+            get {
+                object obj = ResourceManager.GetObject("Shutdown_01_Black_x024", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Client/Captions/SysCaptionAccess.
         /// </summary>
         public static string SysCaptionAccess {
@@ -70,20 +170,29 @@ namespace Ark.Sys.Client.Properties {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Client/Captions/SysCaptionEnvironment.
-        /// </summary>
-        public static string SysCaptionEnvironment {
-            get {
-                return ResourceManager.GetString("SysCaptionEnvironment", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Client/Captions/SysCaptionPassword.
         /// </summary>
         public static string SysCaptionPassword {
             get {
                 return ResourceManager.GetString("SysCaptionPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Client/Captions/SysCaptionProvider.
+        /// </summary>
+        public static string SysCaptionProvider {
+            get {
+                return ResourceManager.GetString("SysCaptionProvider", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Client/Captions/SysCaptionRemove.
+        /// </summary>
+        public static string SysCaptionRemove {
+            get {
+                return ResourceManager.GetString("SysCaptionRemove", resourceCulture);
             }
         }
         
