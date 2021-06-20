@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ark.Server", "Ark.Server\Ar
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ark.Server", "Ark.Server", "{D3249B4A-DA73-4A45-A005-D457A7FC7F95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ark.Client", "Ark.Client\Ark.Client\Ark.Client.csproj", "{E930CD8D-574D-4344-AB74-01300DAD93B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ark.Client", "Ark.Client\Ark.Client\Ark.Client.csproj", "{E930CD8D-574D-4344-AB74-01300DAD93B2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ark.Client", "Ark.Client", "{1F5E1CB9-ECD2-462E-BF14-4DC52F099A1B}"
 EndProject

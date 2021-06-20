@@ -52,7 +52,7 @@
       copy $(SolutionDir)Ark.Client\Ark.Client\bin\Debug\netcoreapp3.1\Ark.Client.exe $(SolutionDir)..\..\..\Release\
       copy $(SolutionDir)Ark.Client\Ark.Client\bin\Debug\netcoreapp3.1\Ark.Client.deps.json $(SolutionDir)..\..\..\Release\
       copy $(SolutionDir)Ark.Client\Ark.Client\Ark.Client.runtimeconfig.json $(SolutionDir)..\..\..\Release\
-      xcopy /y $(SolutionDir)Ark.Client\Ark.Client\Languages\* $(SolutionDir)..\..\..\Release\Dat\Languages\
+      xcopy /y $(SolutionDir)Ark.Client\Ark.Client\Resources\Languages\* $(SolutionDir)..\..\..\Release\Res\Languages\
     </PostBuildEvent>
   </PropertyGroup>
 
