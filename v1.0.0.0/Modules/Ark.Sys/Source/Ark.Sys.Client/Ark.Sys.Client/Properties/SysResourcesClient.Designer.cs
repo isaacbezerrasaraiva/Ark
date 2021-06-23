@@ -170,6 +170,15 @@ namespace Ark.Sys.Client.Properties {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Client/Captions/SysCaptionAddQuickLauncher.
+        /// </summary>
+        public static string SysCaptionAddQuickLauncher {
+            get {
+                return ResourceManager.GetString("SysCaptionAddQuickLauncher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Client/Captions/SysCaptionPassword.
         /// </summary>
         public static string SysCaptionPassword {

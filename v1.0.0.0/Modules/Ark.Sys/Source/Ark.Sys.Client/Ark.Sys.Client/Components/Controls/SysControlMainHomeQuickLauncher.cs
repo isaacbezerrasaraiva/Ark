@@ -35,6 +35,7 @@ namespace Ark.Sys.Client
     {
         #region Events
 
+        public event EventHandler ParentSizeChanged;
         public event EventHandler RemoveItemRequested;
 
         #endregion Events
@@ -46,6 +47,8 @@ namespace Ark.Sys.Client
         private PictureBox pictureBoxLeft;
         private PictureBox pictureBoxRight;
         private Panel panelContent;
+
+        private Object lastParent;
 
         #endregion Variables
 
@@ -80,6 +83,9 @@ namespace Ark.Sys.Client
             this.Controls.Add(this.pictureBoxLeft);
             this.Controls.Add(this.pictureBoxRight);
 
+            this.ParentChanged += OnParentChanged;
+            this.ParentSizeChanged += OnParentSizeChanged;
+
             base.Size = new Size(this.pictureBoxLeft.Width + this.pictureBoxRight.Width, this.itemSize.Height);
         }
 
@@ -93,73 +99,139 @@ namespace Ark.Sys.Client
             control.MouseWheel += OnQuickLauncherItemMouseWheel;
             control.MouseClick += OnQuickLauncherItemMouseClick;
 
-            if (this.panelContent.Controls.Count == 0)
-            {
-                control.Location = new Point(0, 0);
+            this.panelContent.Controls.Add(control);
 
-                base.Size = new Size(base.Size.Width + this.itemSize.Width, base.Size.Height);
-                this.Location = new Point(this.Location.X - this.itemSize.Width, this.Location.Y);
-            }
-            else
+            if (this.Parent != null)
             {
-                if (this.Parent != null)
+                Int32 parentAvailableWidth = this.Parent.Width - this.pictureBoxLeft.Width - this.pictureBoxRight.Width;
+
+                // if total items width is lower than parent available width
+                if ((this.panelContent.Controls.Count * this.itemSize.Width) < parentAvailableWidth)
                 {
-                    if ((this.Size.Width + this.itemSize.Width) < this.Parent.Width)
+                    if (this.panelContent.Controls.Count == 1)
                     {
-                        control.Location = new Point(this.panelContent.Controls[this.panelContent.Controls.Count - 1].Location.X + this.itemSize.Width, this.panelContent.Controls[this.panelContent.Controls.Count - 1].Location.Y);
+                        control.Location = new Point(0, 0);
 
-                        base.Size = new Size(base.Size.Width + this.itemSize.Width, base.Size.Height);
-                        this.Location = new Point(this.Location.X - this.itemSize.Width, this.Location.Y);
+                        base.Size = new Size((this.panelContent.Controls.Count * this.itemSize.Width) + this.pictureBoxLeft.Width + this.pictureBoxRight.Width, base.Height);
+                        this.Location = new Point(this.Parent.Width - base.Width, this.Location.Y);
                     }
                     else
                     {
-                        foreach (Control existingControl in this.panelContent.Controls)
-                            existingControl.Location = new Point(existingControl.Location.X - this.itemSize.Width, existingControl.Location.Y);
+                        control.Location = new Point(this.panelContent.Controls[this.panelContent.Controls.Count - 2].Location.X + this.itemSize.Width, this.panelContent.Controls[this.panelContent.Controls.Count - 2].Location.Y);
 
-                        control.Location = new Point(this.panelContent.Controls[this.panelContent.Controls.Count - 1].Location.X + this.itemSize.Width, this.panelContent.Controls[this.panelContent.Controls.Count - 1].Location.Y);
+                        base.Size = new Size((this.panelContent.Controls.Count * this.itemSize.Width) + this.pictureBoxLeft.Width + this.pictureBoxRight.Width, base.Height);
+                        this.Location = new Point(this.Parent.Width - base.Width, this.Location.Y);
                     }
                 }
-            }
+                else // if total items width is higher or equals than parent available width
+                {
+                    foreach (Control existingControl in this.panelContent.Controls)
+                        existingControl.Location = new Point(existingControl.Location.X - this.itemSize.Width + (this.Parent.Width - base.Width), existingControl.Location.Y);
 
-            this.panelContent.Controls.Add(control);
+                    control.Location = new Point(this.panelContent.Controls[this.panelContent.Controls.Count - 2].Location.X + this.itemSize.Width, this.panelContent.Controls[this.panelContent.Controls.Count - 2].Location.Y);
+
+                    base.Size = new Size(this.Parent.Width, base.Height);
+                    this.Location = new Point(this.Parent.Width - base.Width, this.Location.Y);
+                }
+            }
         }
 
         public void RemoveItem(Control control)
         {
             if (this.panelContent.Controls.Count > 0)
             {
-                Int32 controlToRemoveIndex = 0;
-                foreach (Control controlToRemove in this.panelContent.Controls)
+                Int32 controlIndex = this.panelContent.Controls.IndexOf(control);
+
+                if (controlIndex >= 0)
                 {
-                    if (controlToRemove != control)
+                    this.panelContent.Controls.Remove(control);
+
+                    Int32 parentAvailableWidth = this.Parent.Width - this.pictureBoxLeft.Width - this.pictureBoxRight.Width;
+
+                    // if total items width is lower than parent available width
+                    if ((this.panelContent.Controls.Count * this.itemSize.Width) < parentAvailableWidth)
                     {
-                        controlToRemoveIndex++;
-                        continue;
+                        base.Size = new Size((this.panelContent.Controls.Count * this.itemSize.Width) + this.pictureBoxLeft.Width + this.pictureBoxRight.Width, base.Height);
+                        this.Location = new Point(this.Parent.Width - base.Width, this.Location.Y);
+
+                        for (int i = 0; i < this.panelContent.Controls.Count; i++)
+                            this.panelContent.Controls[i].Location = new Point(this.itemSize.Width * i, this.panelContent.Controls[i].Location.Y);
                     }
-
-                    this.panelContent.Controls.Remove(controlToRemove);
-
-                    // if total itens count lower than available space for itens
-                    if (this.panelContent.Controls.Count < (this.panelContent.Width / this.itemSize.Width))
-                    {
-                        base.Size = new Size(base.Size.Width - this.itemSize.Width, base.Size.Height);
-                        this.Location = new Point(this.Location.X + this.itemSize.Width, this.Location.Y);
-
-                        for (int i = controlToRemoveIndex; i < this.panelContent.Controls.Count; i++)
-                            this.panelContent.Controls[i].Location = new Point(this.panelContent.Controls[i].Location.X - this.itemSize.Width, this.panelContent.Controls[i].Location.Y);
-                    }
-                    else // if total itens count higher or equals than available space for itens
+                    else
                     {
                         if (this.panelContent.Controls[0].Location.X >= 0)
                         {
-                            for (int i = controlToRemoveIndex; i < this.panelContent.Controls.Count; i++)
+                            for (int i = controlIndex; i < this.panelContent.Controls.Count; i++)
                                 this.panelContent.Controls[i].Location = new Point(this.panelContent.Controls[i].Location.X - this.itemSize.Width, this.panelContent.Controls[i].Location.Y);
                         }
                         else
                         {
-                            for (int i = 0; i < controlToRemoveIndex; i++)
+                            for (int i = 0; i < controlIndex; i++)
                                 this.panelContent.Controls[i].Location = new Point(this.panelContent.Controls[i].Location.X + this.itemSize.Width, this.panelContent.Controls[i].Location.Y);
                         }
+                    }
+                }
+            }
+        }
+
+
+        private void OnParentChanged(Object sender, EventArgs args)
+        {
+            if (this.lastParent != null)
+            {
+                if (this.lastParent != this.Parent)
+                {
+                    if (this.lastParent is Form)
+                        ((Form)this.lastParent).SizeChanged -= this.ParentSizeChanged;
+                    else if (this.lastParent is Control)
+                        ((Control)this.lastParent).SizeChanged -= this.ParentSizeChanged;
+                }
+            }
+
+            if (this.Parent != null)
+            {
+                this.Parent.SizeChanged += this.ParentSizeChanged;
+                this.ParentSizeChanged(this, new EventArgs());
+            }
+
+            this.lastParent = this.Parent;
+        }
+
+        private void OnParentSizeChanged(Object sender, EventArgs e)
+        {
+            if (this.panelContent.Controls.Count > 0)
+            {
+                Int32 parentAvailableWidth = this.Parent.Width - this.pictureBoxLeft.Width - this.pictureBoxRight.Width;
+
+                // if total items width is lower than parent available width
+                if ((this.panelContent.Controls.Count * this.itemSize.Width) < parentAvailableWidth)
+                {
+                    if (this.panelContent.Controls.Count == 1)
+                    {
+                        base.Size = new Size(this.itemSize.Width + this.pictureBoxLeft.Width + this.pictureBoxRight.Width, base.Height);
+                        this.Location = new Point(this.Parent.Width - base.Width, this.Location.Y);
+                    }
+                    else
+                    {
+                        base.Size = new Size((this.panelContent.Controls.Count * this.itemSize.Width) + this.pictureBoxLeft.Width + this.pictureBoxRight.Width, base.Height);
+                        this.Location = new Point(this.Parent.Width - base.Width, this.Location.Y);
+
+                        if ((this.panelContent.Controls[this.panelContent.Controls.Count - 1].Location.X + this.itemSize.Width) < this.panelContent.Width)
+                        {
+                            for (int i = 0; i < this.panelContent.Controls.Count; i++)
+                                this.panelContent.Controls[i].Location = new Point(this.itemSize.Width * i, this.panelContent.Controls[i].Location.Y);
+                        }
+                    }
+                }
+                else // if total items width is higher or equals than parent available width
+                {
+                    base.Size = new Size(this.Parent.Width, base.Height);
+                    this.Location = new Point(this.Parent.Width - base.Width, this.Location.Y);
+
+                    if ((this.panelContent.Controls[this.panelContent.Controls.Count - 1].Location.X + this.itemSize.Width) < this.panelContent.Width)
+                    {
+                        for (int i = (this.panelContent.Controls.Count - 1); i >= 0; i--)
+                            this.panelContent.Controls[i].Location = new Point(this.panelContent.Width - (this.itemSize.Width * ((this.panelContent.Controls.Count - 1) - i)) - this.itemSize.Width, this.panelContent.Controls[i].Location.Y);
                     }
                 }
             }
@@ -229,8 +301,13 @@ namespace Ark.Sys.Client
             {
                 if (this.panelContent.Controls[0].Location.X < 0)
                 {
+                    Int32 leftSideRemainWidth = this.panelContent.Controls[0].Location.X + this.itemSize.Width;
+
+                    if (leftSideRemainWidth < 0)
+                        leftSideRemainWidth = 0;
+
                     foreach (Control control in this.panelContent.Controls)
-                        control.Location = new Point(control.Location.X + this.itemSize.Width, control.Location.Y);
+                        control.Location = new Point(control.Location.X + this.itemSize.Width - leftSideRemainWidth, control.Location.Y);
                 }
             }
         }
@@ -249,10 +326,15 @@ namespace Ark.Sys.Client
         {
             if (this.panelContent.Controls.Count > 0)
             {
-                if (this.panelContent.Controls[this.panelContent.Controls.Count - 1].Location.X >= this.panelContent.Width)
+                if ((this.panelContent.Controls[this.panelContent.Controls.Count - 1].Location.X + this.itemSize.Width) > this.panelContent.Width)
                 {
+                    Int32 rightSideRemainWidth = this.panelContent.Width - this.panelContent.Controls[this.panelContent.Controls.Count - 1].Location.X;
+
+                    if (rightSideRemainWidth < 0)
+                        rightSideRemainWidth = 0;
+
                     foreach (Control control in this.panelContent.Controls)
-                        control.Location = new Point(control.Location.X - this.itemSize.Width, control.Location.Y);
+                        control.Location = new Point(control.Location.X - this.itemSize.Width + rightSideRemainWidth, control.Location.Y);
                 }
             }
         }

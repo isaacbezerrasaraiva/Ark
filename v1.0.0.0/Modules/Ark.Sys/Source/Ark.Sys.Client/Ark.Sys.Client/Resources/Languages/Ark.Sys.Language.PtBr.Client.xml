@@ -2,6 +2,7 @@
 <Ark.Sys.Language.PtBr.Client>
   <Captions>
     <SysCaptionAccess>Acessar</SysCaptionAccess>
+    <SysCaptionAddQuickLauncher>Adicionar ao lançador rápido</SysCaptionAddQuickLauncher>
     <SysCaptionPassword>Senha</SysCaptionPassword>
     <SysCaptionProvider>Provedor</SysCaptionProvider>
     <SysCaptionRemove>Remover</SysCaptionRemove>

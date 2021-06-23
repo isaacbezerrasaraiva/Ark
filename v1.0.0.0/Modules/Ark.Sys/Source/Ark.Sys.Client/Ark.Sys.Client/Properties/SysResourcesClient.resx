@@ -152,6 +152,10 @@
     <value>/Ark.Sys.Language.{0}.Client/Captions/SysCaptionAccess</value>
     <comment>Access</comment>
   </data>
+  <data name="SysCaptionAddQuickLauncher" xml:space="preserve">
+    <value>/Ark.Sys.Language.{0}.Client/Captions/SysCaptionAddQuickLauncher</value>
+    <comment>Add to quick launcher</comment>
+  </data>
   <data name="SysCaptionPassword" xml:space="preserve">
     <value>/Ark.Sys.Language.{0}.Client/Captions/SysCaptionPassword</value>
     <comment>Password</comment>

@@ -78,6 +78,39 @@ namespace Ark.Sys.Client
 
         #region Methods
 
+        private void OnPanelMenuItemMouseClick(Object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                ToolStripMenuItem toolStripMenuItemAddQuickLauncher = new ToolStripMenuItem();
+                toolStripMenuItemAddQuickLauncher.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+                toolStripMenuItemAddQuickLauncher.Text = LibGlobalization.GetTranslation(Properties.SysResourcesClient.SysCaptionAddQuickLauncher);
+                toolStripMenuItemAddQuickLauncher.Image = Properties.SysResourcesClient.Remove_01_Black_x016;
+                toolStripMenuItemAddQuickLauncher.Tag = sender;
+                toolStripMenuItemAddQuickLauncher.MouseEnter += OnToolStripMenuItemAddQuickLauncherMouseEnter;
+                toolStripMenuItemAddQuickLauncher.MouseLeave += OnToolStripMenuItemAddQuickLauncherMouseLeave;
+                toolStripMenuItemAddQuickLauncher.Click += OnToolStripMenuItemAddQuickLauncherClick;
+
+                ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
+                contextMenuStrip.Items.Add(toolStripMenuItemAddQuickLauncher);
+                contextMenuStrip.Show((Control)sender, e.Location);
+            }
+        }
+
+        private void OnToolStripMenuItemAddQuickLauncherMouseEnter(Object sender, EventArgs e)
+        {
+            ((ToolStripMenuItem)sender).Image = Properties.SysResourcesClient.Remove_01_Red_x016;
+        }
+
+        private void OnToolStripMenuItemAddQuickLauncherMouseLeave(Object sender, EventArgs e)
+        {
+            ((ToolStripMenuItem)sender).Image = Properties.SysResourcesClient.Remove_01_Black_x016;
+        }
+
+        private void OnToolStripMenuItemAddQuickLauncherClick(Object sender, EventArgs e)
+        {
+        }
+
         private void OnControlMainHomeQuickLauncherRemoveItemRequested(Object sender, EventArgs e)
         {
         }
