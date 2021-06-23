@@ -2,6 +2,7 @@
 <Ark.Sys.Language.EnUs.Client>
   <Captions>
     <SysCaptionAccess>Access</SysCaptionAccess>
+    <SysCaptionAddQuickLauncher>Add to quick launcher</SysCaptionAddQuickLauncher>
     <SysCaptionPassword>Password</SysCaptionPassword>
     <SysCaptionProvider>Provider</SysCaptionProvider>
     <SysCaptionRemove>Remove</SysCaptionRemove>
