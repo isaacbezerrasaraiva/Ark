@@ -62,7 +62,6 @@ namespace Ark.Sys.Client
             this.pictureBoxLeft.Dock = DockStyle.Left;
             this.pictureBoxLeft.Size = new Size(17, this.itemSize.Height);
             this.pictureBoxLeft.SizeMode = PictureBoxSizeMode.CenterImage;
-            this.pictureBoxLeft.Image = Properties.SysResourcesClient.ArrowLeft_01_Black_Light_x016;
             this.pictureBoxLeft.Click += OnPictureBoxLeftClick;
             this.pictureBoxLeft.MouseEnter += OnPictureBoxLeftMouseEnter;
             this.pictureBoxLeft.MouseLeave += OnPictureBoxLeftMouseLeave;
@@ -71,7 +70,6 @@ namespace Ark.Sys.Client
             this.pictureBoxRight.Dock = DockStyle.Right;
             this.pictureBoxRight.Size = new Size(17, this.itemSize.Height);
             this.pictureBoxRight.SizeMode = PictureBoxSizeMode.CenterImage;
-            this.pictureBoxRight.Image = Properties.SysResourcesClient.ArrowRight_01_Black_Light_x016;
             this.pictureBoxRight.Click += OnPictureBoxRightClick;
             this.pictureBoxRight.MouseEnter += OnPictureBoxRightMouseEnter;
             this.pictureBoxRight.MouseLeave += OnPictureBoxRightMouseLeave;
@@ -112,11 +110,12 @@ namespace Ark.Sys.Client
                     {
                         control.Location = new Point(0, 0);
 
-                        base.Size = new Size((this.panelContent.Controls.Count * this.itemSize.Width) + this.pictureBoxLeft.Width + this.pictureBoxRight.Width, base.Height);
+                        base.Size = new Size(this.itemSize.Width + this.pictureBoxLeft.Width + this.pictureBoxRight.Width, base.Height);
                         this.Location = new Point(this.Parent.Width - base.Width, this.Location.Y);
                     }
                     else
                     {
+                        // The last control on panel is the control that's being added now, so must use as reference the control that was added before this (this.panelContent.Controls.Count - 2)
                         control.Location = new Point(this.panelContent.Controls[this.panelContent.Controls.Count - 2].Location.X + this.itemSize.Width, this.panelContent.Controls[this.panelContent.Controls.Count - 2].Location.Y);
 
                         base.Size = new Size((this.panelContent.Controls.Count * this.itemSize.Width) + this.pictureBoxLeft.Width + this.pictureBoxRight.Width, base.Height);
@@ -125,9 +124,13 @@ namespace Ark.Sys.Client
                 }
                 else // if total items width is higher or equals than parent available width
                 {
-                    foreach (Control existingControl in this.panelContent.Controls)
-                        existingControl.Location = new Point(existingControl.Location.X - this.itemSize.Width + (this.Parent.Width - base.Width), existingControl.Location.Y);
+                    ShowArrows();
 
+                    // Move all controls to the left, except the control that's being added now
+                    for (int i = 0; i < (this.panelContent.Controls.Count - 1); i++)
+                        this.panelContent.Controls[i].Location = new Point(this.panelContent.Controls[i].Location.X - this.itemSize.Width + (this.Parent.Width - base.Width), this.panelContent.Controls[i].Location.Y);
+
+                    // The last control on panel is the control that's being added now, so must use as reference the control that was added before this (this.panelContent.Controls.Count - 2)
                     control.Location = new Point(this.panelContent.Controls[this.panelContent.Controls.Count - 2].Location.X + this.itemSize.Width, this.panelContent.Controls[this.panelContent.Controls.Count - 2].Location.Y);
 
                     base.Size = new Size(this.Parent.Width, base.Height);
@@ -151,6 +154,8 @@ namespace Ark.Sys.Client
                     // if total items width is lower than parent available width
                     if ((this.panelContent.Controls.Count * this.itemSize.Width) < parentAvailableWidth)
                     {
+                        HideArrows();
+
                         base.Size = new Size((this.panelContent.Controls.Count * this.itemSize.Width) + this.pictureBoxLeft.Width + this.pictureBoxRight.Width, base.Height);
                         this.Location = new Point(this.Parent.Width - base.Width, this.Location.Y);
 
@@ -174,6 +179,20 @@ namespace Ark.Sys.Client
             }
         }
 
+        private void ShowArrows()
+        {
+            if (this.pictureBoxLeft.Image == null)
+                this.pictureBoxLeft.Image = Properties.SysResourcesClient.ArrowLeft_01_Black_Light_x016;
+
+            if (this.pictureBoxRight.Image == null)
+                this.pictureBoxRight.Image = Properties.SysResourcesClient.ArrowRight_01_Black_Light_x016;
+        }
+
+        private void HideArrows()
+        {
+            this.pictureBoxLeft.Image = null;
+            this.pictureBoxRight.Image = null;
+        }
 
         private void OnParentChanged(Object sender, EventArgs args)
         {
@@ -191,7 +210,7 @@ namespace Ark.Sys.Client
             if (this.Parent != null)
             {
                 this.Parent.SizeChanged += this.ParentSizeChanged;
-                this.ParentSizeChanged(this, new EventArgs());
+                this.ParentSizeChanged(this, null);
             }
 
             this.lastParent = this.Parent;
@@ -206,6 +225,8 @@ namespace Ark.Sys.Client
                 // if total items width is lower than parent available width
                 if ((this.panelContent.Controls.Count * this.itemSize.Width) < parentAvailableWidth)
                 {
+                    HideArrows();
+
                     if (this.panelContent.Controls.Count == 1)
                     {
                         base.Size = new Size(this.itemSize.Width + this.pictureBoxLeft.Width + this.pictureBoxRight.Width, base.Height);
@@ -225,6 +246,8 @@ namespace Ark.Sys.Client
                 }
                 else // if total items width is higher or equals than parent available width
                 {
+                    ShowArrows();
+
                     base.Size = new Size(this.Parent.Width, base.Height);
                     this.Location = new Point(this.Parent.Width - base.Width, this.Location.Y);
 
@@ -287,12 +310,14 @@ namespace Ark.Sys.Client
 
         private void OnPictureBoxLeftMouseEnter(Object sender, EventArgs e)
         {
-            this.pictureBoxLeft.Image = Properties.SysResourcesClient.ArrowLeft_01_Black_x016;
+            if (this.pictureBoxLeft.Image != null)
+                this.pictureBoxLeft.Image = Properties.SysResourcesClient.ArrowLeft_01_Black_x016;
         }
 
         private void OnPictureBoxLeftMouseLeave(Object sender, EventArgs e)
         {
-            this.pictureBoxLeft.Image = Properties.SysResourcesClient.ArrowLeft_01_Black_Light_x016;
+            if (this.pictureBoxLeft.Image != null)
+                this.pictureBoxLeft.Image = Properties.SysResourcesClient.ArrowLeft_01_Black_Light_x016;
         }
 
         private void OnPictureBoxLeftClick(Object sender, EventArgs e)
@@ -314,12 +339,14 @@ namespace Ark.Sys.Client
 
         private void OnPictureBoxRightMouseEnter(Object sender, EventArgs e)
         {
-            this.pictureBoxRight.Image = Properties.SysResourcesClient.ArrowRight_01_Black_x016;
+            if (this.pictureBoxRight.Image != null)
+                this.pictureBoxRight.Image = Properties.SysResourcesClient.ArrowRight_01_Black_x016;
         }
 
         private void OnPictureBoxRightMouseLeave(Object sender, EventArgs e)
         {
-            this.pictureBoxRight.Image = Properties.SysResourcesClient.ArrowRight_01_Black_Light_x016;
+            if (this.pictureBoxRight.Image != null)
+                this.pictureBoxRight.Image = Properties.SysResourcesClient.ArrowRight_01_Black_Light_x016;
         }
 
         private void OnPictureBoxRightClick(Object sender, EventArgs e)
