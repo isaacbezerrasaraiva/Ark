@@ -55,8 +55,12 @@ namespace Ark.Sys.Client
 
         private void InitializeComponentData()
         {
+            this.buttonHome.Text = LibGlobalization.GetTranslation(Properties.SysResourcesClient.SysCaptionHome);
             this.buttonHome.Thumbnail = Properties.SysResourcesClient.Home_01_Black_x016;
+
+            this.buttonBack.Text = LibGlobalization.GetTranslation(Properties.SysResourcesClient.SysCaptionBack);
             this.buttonBack.Thumbnail = Properties.SysResourcesClient.Back_01_Black_x016;
+
             this.buttonLogout.Image = Properties.SysResourcesClient.Shutdown_01_Black_x024;
             this.buttonLock.Image = Properties.SysResourcesClient.Lock_01_Black_x024;
         }

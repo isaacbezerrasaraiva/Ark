@@ -118,6 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Add_01_Black_x016" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\medias\icons\metro\png\x016\add_01_black_x016.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Add_01_Green_x016" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\medias\icons\metro\png\x016\add_01_green_x016.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="ArrowLeft_01_Black_Light_x016" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\medias\icons\metro\png\x016\arrowleft_01_black_light_x016.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -158,6 +164,14 @@
   <data name="SysCaptionAddQuickLauncher" xml:space="preserve">
     <value>/Ark.Sys.Language.{0}.Client/Captions/SysCaptionAddQuickLauncher</value>
     <comment>Add to quick launcher</comment>
+  </data>
+  <data name="SysCaptionBack" xml:space="preserve">
+    <value>/Ark.Sys.Language.{0}.Client/Captions/SysCaptionBack</value>
+    <comment>Back</comment>
+  </data>
+  <data name="SysCaptionHome" xml:space="preserve">
+    <value>/Ark.Sys.Language.{0}.Client/Captions/SysCaptionHome</value>
+    <comment>Home</comment>
   </data>
   <data name="SysCaptionPassword" xml:space="preserve">
     <value>/Ark.Sys.Language.{0}.Client/Captions/SysCaptionPassword</value>

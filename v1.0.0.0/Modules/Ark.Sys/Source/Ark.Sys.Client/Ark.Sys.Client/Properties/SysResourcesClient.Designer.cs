@@ -63,6 +63,26 @@ namespace Ark.Sys.Client.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap Add_01_Black_x016 {
+            get {
+                object obj = ResourceManager.GetObject("Add_01_Black_x016", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Add_01_Green_x016 {
+            get {
+                object obj = ResourceManager.GetObject("Add_01_Green_x016", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap ArrowLeft_01_Black_Light_x016 {
             get {
                 object obj = ResourceManager.GetObject("ArrowLeft_01_Black_Light_x016", resourceCulture);
@@ -185,6 +205,24 @@ namespace Ark.Sys.Client.Properties {
         public static string SysCaptionAddQuickLauncher {
             get {
                 return ResourceManager.GetString("SysCaptionAddQuickLauncher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Client/Captions/SysCaptionBack.
+        /// </summary>
+        public static string SysCaptionBack {
+            get {
+                return ResourceManager.GetString("SysCaptionBack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a /Ark.Sys.Language.{0}.Client/Captions/SysCaptionHome.
+        /// </summary>
+        public static string SysCaptionHome {
+            get {
+                return ResourceManager.GetString("SysCaptionHome", resourceCulture);
             }
         }
         
