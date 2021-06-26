@@ -113,6 +113,16 @@ namespace Ark.Sys.Client.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap Feature_01_Black_x044 {
+            get {
+                object obj = ResourceManager.GetObject("Feature_01_Black_x044", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Home_01_Black_x016 {
             get {
                 object obj = ResourceManager.GetObject("Home_01_Black_x016", resourceCulture);

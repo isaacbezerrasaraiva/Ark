@@ -133,6 +133,9 @@
   <data name="Back_01_Black_x016" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\medias\icons\metro\png\x016\back_01_black_x016.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Feature_01_Black_x044" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\medias\icons\metro\png\x044\feature_01_black_x044.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Home_01_Black_x016" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\medias\icons\metro\png\x016\home_01_black_x016.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
