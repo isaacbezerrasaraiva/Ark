@@ -36,6 +36,7 @@ namespace Ark.Sys.Client
         #region Events
 
         public event EventHandler ParentSizeChanged;
+        public event EventHandler LaunchItemRequested;
         public event EventHandler RemoveItemRequested;
 
         #endregion Events
@@ -274,7 +275,11 @@ namespace Ark.Sys.Client
 
         private void OnQuickLauncherItemMouseClick(Object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Left)
+            {
+                this.LaunchItemRequested?.Invoke(sender, e);
+            }
+            else if (e.Button == MouseButtons.Right)
             {
                 ToolStripMenuItem toolStripMenuItemRemove = new ToolStripMenuItem();
                 toolStripMenuItemRemove.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
