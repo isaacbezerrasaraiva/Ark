@@ -63,6 +63,7 @@ namespace Ark.Sys.Client
             this.controlMainHomeQuickLauncher = new SysControlMainHomeQuickLauncher();
             this.controlMainHomeQuickLauncher.Dock = DockStyle.Right;
             this.controlMainHomeQuickLauncher.ItemSize = new Size(175, 175);
+            this.controlMainHomeQuickLauncher.LaunchItemRequested += OnControlMainHomeQuickLauncherLaunchItemRequested;
             this.controlMainHomeQuickLauncher.RemoveItemRequested += OnControlMainHomeQuickLauncherRemoveItemRequested;
 
             this.panelTopQuickLauncher.Controls.Add(this.controlMainHomeQuickLauncher);
@@ -85,11 +86,11 @@ namespace Ark.Sys.Client
                 ToolStripMenuItem toolStripMenuItemAddQuickLauncher = new ToolStripMenuItem();
                 toolStripMenuItemAddQuickLauncher.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
                 toolStripMenuItemAddQuickLauncher.Text = LibGlobalization.GetTranslation(Properties.SysResourcesClient.SysCaptionAddQuickLauncher);
-                toolStripMenuItemAddQuickLauncher.Image = Properties.SysResourcesClient.Remove_01_Black_x016;
+                toolStripMenuItemAddQuickLauncher.Image = Properties.SysResourcesClient.Add_01_Black_x016;
                 toolStripMenuItemAddQuickLauncher.Tag = sender;
                 toolStripMenuItemAddQuickLauncher.MouseEnter += OnToolStripMenuItemAddQuickLauncherMouseEnter;
                 toolStripMenuItemAddQuickLauncher.MouseLeave += OnToolStripMenuItemAddQuickLauncherMouseLeave;
-                toolStripMenuItemAddQuickLauncher.Click += OnToolStripMenuItemAddQuickLauncherClick;
+                toolStripMenuItemAddQuickLauncher.MouseUp += OnToolStripMenuItemAddQuickLauncherMouseUp;
 
                 ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
                 contextMenuStrip.Items.Add(toolStripMenuItemAddQuickLauncher);
@@ -99,25 +100,28 @@ namespace Ark.Sys.Client
 
         private void OnToolStripMenuItemAddQuickLauncherMouseEnter(Object sender, EventArgs e)
         {
-            ((ToolStripMenuItem)sender).Image = Properties.SysResourcesClient.Remove_01_Red_x016;
+            ((ToolStripMenuItem)sender).Image = Properties.SysResourcesClient.Add_01_Green_x016;
         }
 
         private void OnToolStripMenuItemAddQuickLauncherMouseLeave(Object sender, EventArgs e)
         {
-            ((ToolStripMenuItem)sender).Image = Properties.SysResourcesClient.Remove_01_Black_x016;
+            ((ToolStripMenuItem)sender).Image = Properties.SysResourcesClient.Add_01_Black_x016;
         }
 
-        private void OnToolStripMenuItemAddQuickLauncherClick(Object sender, EventArgs e)
+        private void OnToolStripMenuItemAddQuickLauncherMouseUp(Object sender, MouseEventArgs e)
         {
+            if (e.Button == MouseButtons.Left)
+            {
+            }
+        }
+
+        private void OnControlMainHomeQuickLauncherLaunchItemRequested(Object sender, EventArgs e)
+        {
+            this.ExplorerRequested?.Invoke(sender, e);
         }
 
         private void OnControlMainHomeQuickLauncherRemoveItemRequested(Object sender, EventArgs e)
         {
-        }
-
-        private void OnExplorerRequested(Object sender, EventArgs e)
-        {
-            this.ExplorerRequested?.Invoke(sender, e);
         }
 
         private void OnButtonLogoutClick(Object sender, EventArgs e)

@@ -288,7 +288,7 @@ namespace Ark.Sys.Client
                 toolStripMenuItemRemove.Tag = sender;
                 toolStripMenuItemRemove.MouseEnter += OnToolStripMenuItemRemoveMouseEnter;
                 toolStripMenuItemRemove.MouseLeave += OnToolStripMenuItemRemoveMouseLeave;
-                toolStripMenuItemRemove.Click += OnToolStripMenuItemRemoveClick;
+                toolStripMenuItemRemove.MouseUp += OnToolStripMenuItemRemoveMouseUp;
 
                 ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
                 contextMenuStrip.Items.Add(toolStripMenuItemRemove);
@@ -306,11 +306,14 @@ namespace Ark.Sys.Client
             ((ToolStripMenuItem)sender).Image = Properties.SysResourcesClient.Remove_01_Black_x016;
         }
 
-        private void OnToolStripMenuItemRemoveClick(Object sender, EventArgs e)
+        private void OnToolStripMenuItemRemoveMouseUp(Object sender, MouseEventArgs e)
         {
-            RemoveItem((Control)((ToolStripMenuItem)sender).Tag);
+            if (e.Button == MouseButtons.Left)
+            {
+                RemoveItem((Control)((ToolStripMenuItem)sender).Tag);
 
-            this.RemoveItemRequested?.Invoke((Control)((ToolStripMenuItem)sender).Tag, e);
+                this.RemoveItemRequested?.Invoke((Control)((ToolStripMenuItem)sender).Tag, e);
+            }
         }
 
         private void OnPictureBoxLeftMouseEnter(Object sender, EventArgs e)
